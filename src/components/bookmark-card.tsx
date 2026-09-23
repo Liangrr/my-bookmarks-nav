@@ -33,7 +33,7 @@ export function BookmarkCard({
       href={fullUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group relative rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 overflow-hidden ${sizeClass}`}
+      className={`group relative rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-0.5 ${sizeClass}`}
       style={{
         background: "var(--bg-card)",
         border: "1px solid var(--border)",
@@ -42,10 +42,12 @@ export function BookmarkCard({
       onMouseEnter={(e) => {
         e.currentTarget.style.background = "var(--bg-card-hover)";
         e.currentTarget.style.borderColor = "var(--border-hover)";
+        e.currentTarget.style.boxShadow = "var(--shadow-hover)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.background = "var(--bg-card)";
         e.currentTarget.style.borderColor = "var(--border)";
+        e.currentTarget.style.boxShadow = "none";
       }}
     >
       {/* 顶部彩色条 */}
@@ -54,52 +56,50 @@ export function BookmarkCard({
         style={{ background: categoryColor || "var(--accent)" }}
       />
 
-      <div className="flex flex-col h-full justify-between">
-        {/* 头部：图标 + 标题 */}
+      {/* 分类标签 */}
+      {categoryName && (
+        <span
+          className="absolute top-4 right-4 text-[11px] px-2.5 py-0.5 rounded-full"
+          style={{
+            background: "var(--bg-glass)",
+            color: "var(--text-tertiary)",
+          }}
+        >
+          {categoryName}
+        </span>
+      )}
+
+      <div className="flex items-start gap-3">
+        <div
+          className="w-[42px] h-[42px] rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0"
+          style={{
+            background: categoryColor
+              ? `linear-gradient(135deg, ${categoryColor}33, ${categoryColor}14)`
+              : "var(--bg-glass)",
+            color: categoryColor || "var(--text-primary)",
+          }}
+        >
+          {icon || title.charAt(0)}
+        </div>
         <div>
-          <div className="flex items-start gap-3 mb-2">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold flex-shrink-0"
-              style={{
-                background: categoryColor
-                  ? `${categoryColor}20`
-                  : "var(--accent-glow)",
-                color: categoryColor || "var(--accent-light)",
-              }}
-            >
-              {icon || title.charAt(0)}
-            </div>
-            {categoryName && (
-              <span
-                className="absolute top-4 right-4 text-xs px-2 py-0.5 rounded-full"
-                style={{
-                  background: "var(--bg-glass)",
-                  color: "var(--text-tertiary)",
-                }}
-              >
-                {categoryName}
-              </span>
-            )}
-          </div>
-          <h3 className="font-semibold text-base truncate">{title}</h3>
-          <p
-            className="text-xs mt-0.5 truncate"
+          <div className="text-[15px] font-semibold mb-0.5">{title}</div>
+          <div
+            className="text-xs"
             style={{ color: "var(--text-tertiary)" }}
           >
             {url}
-          </p>
+          </div>
         </div>
-
-        {/* 描述 */}
-        {description && (
-          <p
-            className="text-xs line-clamp-2 mt-3"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            {description}
-          </p>
-        )}
       </div>
+
+      {description && (
+        <div
+          className="text-[13px] leading-relaxed mt-2.5 line-clamp-3"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          {description}
+        </div>
+      )}
     </a>
   );
 }

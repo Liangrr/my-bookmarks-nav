@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         <div className="bg-glow" />
         <NavBar />
-        <main className="relative z-10">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );
