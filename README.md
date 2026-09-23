@@ -1,76 +1,36 @@
-# 我的收藏夹 - 个人网站导航
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-纯静态个人网站导航，基于 Bento Grid 设计风格，深色模式优先。
+## Getting Started
 
-## 快速部署到 Vercel
-
-### 方式一：Git 仓库 + Vercel 自动部署（推荐）
-
-1. **把项目推到 GitHub 仓库**
-   ```bash
-   cd bookmark-nav-site
-   git init
-   git add .
-   git commit -m "init: personal bookmark nav"
-   git remote add origin https://github.com/你的用户名/你的仓库名.git
-   git push -u origin main
-   ```
-
-2. **Vercel 导入部署**
-   - 打开 [vercel.com](https://vercel.com)，用 GitHub 账号登录
-   - 点击 **Add New Project** → 选择你的仓库
-   - Framework Preset 选 **Other**
-   - Build Command 留空，Output Directory 留空（纯静态）
-   - 点击 **Deploy**，等待 10 秒即可上线
-
-3. **后续更新**
-   - 每次 `git push` 到 main 分支，Vercel 会自动重新部署
-
-### 方式二：Vercel CLI 直接部署
+First, run the development server:
 
 ```bash
-# 安装 Vercel CLI
-npm i -g vercel
-
-# 登录
-vercel login
-
-# 部署（当前目录直接部署）
-vercel --prod
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## 如何添加/修改网站
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-编辑 `index.html`，找到 `bookmarks` 数组，按格式添加：
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```js
-{ title: '网站名称', url: 'example.com', desc: '一句话描述', category: '分类id', icon: '首字母', size: 'large/wide/tall（可选）' }
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-**分类 ID 对应：**
-- `video` - 影视娱乐
-- `dev` - 开发工具
-- `design` - 设计灵感
-- `tool` - 实用工具
-- `other` - 其他
+## Learn More
 
-**卡片大小：**
-- 不填 - 普通小卡片
-- `large` - 大卡片（占 2x2 格）
-- `wide` - 宽卡片（占 2x1 格）
-- `tall` - 高卡片（占 1x2 格）
+To learn more about Next.js, take a look at the following resources:
 
-## 功能特性
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- Bento Grid 便当盒布局，大小卡片错落有致
-- 深色/浅色主题一键切换，自动记忆偏好
-- 即时搜索，输入即过滤
-- 分类标签快速筛选
-- 完全响应式，手机平板桌面完美适配
-- 纯静态，加载极快，Vercel 全球 CDN 加速
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## 技术栈
+## Deploy on Vercel
 
-- 原生 HTML + CSS + JavaScript
-- 零依赖，零构建
-- 部署到 Vercel 免费版即可（个人项目完全够用）
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
