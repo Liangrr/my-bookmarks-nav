@@ -14,7 +14,7 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loginType, setLoginType] = useState<"email" | "username">("email");
+  const [loginType, setLoginType] = useState<"email" | "username">("username");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -170,23 +170,6 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
           }}
         >
           <button
-            onClick={() => setLoginType("email")}
-            style={{
-              flex: 1,
-              padding: "8px",
-              borderRadius: "var(--radius-sm)",
-              border: "none",
-              background: loginType === "email" ? "var(--accent)" : "transparent",
-              color: loginType === "email" ? "white" : "var(--text-secondary)",
-              fontSize: "13px",
-              cursor: "pointer",
-              fontFamily: "inherit",
-              transition: "var(--transition)",
-            }}
-          >
-            邮箱
-          </button>
-          <button
             onClick={() => setLoginType("username")}
             style={{
               flex: 1,
@@ -202,6 +185,23 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
             }}
           >
             用户名
+          </button>
+          <button
+            onClick={() => setLoginType("email")}
+            style={{
+              flex: 1,
+              padding: "8px",
+              borderRadius: "var(--radius-sm)",
+              border: "none",
+              background: loginType === "email" ? "var(--accent)" : "transparent",
+              color: loginType === "email" ? "white" : "var(--text-secondary)",
+              fontSize: "13px",
+              cursor: "pointer",
+              fontFamily: "inherit",
+              transition: "var(--transition)",
+            }}
+          >
+            邮箱
           </button>
         </div>
 
