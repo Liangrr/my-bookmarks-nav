@@ -21,9 +21,9 @@ export function BookmarkCard({
 }: BookmarkCardProps) {
   const sizeClass = {
     normal: "",
-    large: "md:col-span-2 md:row-span-2",
-    wide: "md:col-span-2",
-    tall: "md:row-span-2",
+    large: "sm:col-span-2 sm:row-span-2",
+    wide: "sm:col-span-2",
+    tall: "sm:row-span-2",
   }[size];
 
   const fullUrl = url.startsWith("http") ? url : `https://${url}`;
