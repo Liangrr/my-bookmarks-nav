@@ -31,11 +31,8 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
   }, [onClose]);
 
   const getAuthEmail = () => {
-    if (mode === "signup" && loginType === "username") {
+    if (loginType === "username") {
       return `${username}@bookmark-nav.local`;
-    }
-    if (mode === "login" && loginType === "username") {
-      return `${email}@bookmark-nav.local`;
     }
     return email;
   };
