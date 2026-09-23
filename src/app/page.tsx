@@ -69,48 +69,65 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-6 py-10 relative z-10">
       {/* Hero 区域 */}
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold mb-4">Asuria精选网站收藏</h1>
-        <p className="text-lg" style={{ color: "var(--text-secondary)" }}>
+      <div className="text-center mb-8 pt-5">
+        <h1
+          className="text-4xl md:text-[42px] font-extrabold mb-3 tracking-tight"
+          style={{
+            background: "linear-gradient(135deg, var(--foreground) 0%, var(--accent-light) 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          Asuria精选网站收藏
+        </h1>
+        <p
+          className="text-base md:text-base max-w-xl mx-auto"
+          style={{ color: "var(--text-secondary)" }}
+        >
           影视、开发、设计、实用工具 —— 日常在用的优质网站，都在这里
         </p>
       </div>
 
       {/* 搜索框 */}
-      <div className="max-w-2xl mx-auto mb-8">
-        <div
-          className="relative rounded-2xl"
+      <div className="max-w-xl mx-auto mb-6 relative">
+        <input
+          type="text"
+          placeholder="搜索网站名称或关键词..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full px-6 py-3.5 pl-12 rounded-2xl outline-none text-base transition-all"
           style={{
             background: "var(--bg-card)",
             border: "1px solid var(--border)",
+            color: "var(--foreground)",
           }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = "var(--accent)";
+            e.currentTarget.style.boxShadow = "0 0 0 4px var(--accent-glow)";
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "var(--border)";
+            e.currentTarget.style.boxShadow = "none";
+          }}
+        />
+        <span
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-base"
+          style={{ color: "var(--text-tertiary)" }}
         >
-          <input
-            type="text"
-            placeholder="搜索网站名称或关键词..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-6 py-4 bg-transparent outline-none rounded-2xl text-lg"
-            style={{ color: "var(--foreground)" }}
-          />
-          <span
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-xl"
-            style={{ color: "var(--text-tertiary)" }}
-          >
-            🔍
-          </span>
-        </div>
+          🔍
+        </span>
       </div>
 
       {/* 分类筛选 */}
-      <div className="flex flex-wrap justify-center gap-2 mb-12">
+      <div className="flex flex-wrap justify-center gap-2 mb-8">
         {categories.map((category) => (
           <button
             key={category.slug}
             onClick={() => setActiveCategory(category.slug)}
-            className="px-5 py-2 rounded-full text-sm font-medium transition-all hover:scale-105"
+            className="px-4 py-1.5 rounded-full text-sm font-medium transition-all"
             style={{
               background:
                 activeCategory === category.slug
@@ -122,6 +139,9 @@ export default function Home() {
                   ? category.color
                   : "var(--border)"
               }`,
+              boxShadow: activeCategory === category.slug
+                ? "0 4px 16px var(--accent-glow)"
+                : "none",
             }}
           >
             {category.name}
@@ -130,12 +150,18 @@ export default function Home() {
       </div>
 
       {/* 结果计数 */}
-      <p className="text-center text-sm mb-8" style={{ color: "var(--text-tertiary)" }}>
+      <p
+        className="text-center text-sm mb-6"
+        style={{ color: "var(--text-tertiary)" }}
+      >
         共 {filteredBookmarks.length} 个网站
       </p>
 
       {/* 书签网格 - Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-min">
+      <div
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        style={{ gridAutoRows: "120px" }}
+      >
         {filteredBookmarks.map((bookmark, index) => (
           <BookmarkCard
             key={`${bookmark.title}-${index}`}
@@ -152,8 +178,8 @@ export default function Home() {
 
       {/* 空状态 */}
       {filteredBookmarks.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-4xl mb-4">🔍</p>
+        <div className="text-center py-16">
+          <p className="text-4xl mb-4 opacity-50">🔍</p>
           <p style={{ color: "var(--text-secondary)" }}>没有找到匹配的网站</p>
         </div>
       )}
