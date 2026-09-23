@@ -24,10 +24,10 @@ export default function RootLayout({
           href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap"
         />
       </head>
-      <body className="min-h-screen">
-        <div className="bg-glow" />
+      <body>
+        <div className="bg-glow"></div>
         <NavBar />
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   );
