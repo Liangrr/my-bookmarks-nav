@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的收藏夹 - 设计方案与原型</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔖</text></svg>">
+<style>
+/* ========== 设计系统 Token ========== */
+:root {
+  /* 深色主题（默认） */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+  --bg-glass: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.16);
+  --text-primary: #f0f0f5;
+  --text-secondary: #9a9aae;
+  --text-tertiary: #6b6b80;
+  --accent: #8b5cf6;
+  --accent-light: #a78bfa;
+  --accent-glow: rgba(139, 92, 246, 0.3);
+  --accent-blue: #3b82f6;
+  --accent-pink: #ec4899;
+  --accent-green: #10b981;
+  --accent-orange: #f59e0b;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8f9fc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(0, 0, 0, 0.03);
+  --bg-card-hover: rgba(0, 0, 0, 0.06);
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.16);
+  --text-primary: #1a1a2e;
+  --text-secondary: #5a5a70;
+  --text-tertiary: #9a9aae;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Noto Sans SC", "PingFang SC", sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ========== 背景装饰 ========== */
+.bg-glow {
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 600px;
+  background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+}
+
+/* ========== 导航栏 ========== */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.nav-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover { background: var(--bg-card-hover); transform: rotate(15deg); }
+
+/* ========== 主容器 ========== */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== Hero 区 ========== */
+.hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ========== 搜索栏 ========== */
+.search-bar {
+  max-width: 640px;
+  margin: 32px auto;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 24px 16px 56px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 16px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.search-input::placeholder { color: var(--text-tertiary); }
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  font-size: 18px;
+}
+
+/* ========== 分类标签 ========== */
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.tab {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.tab:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+
+.tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+/* ========== Bento Grid 布局 ========== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 140px;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
+.bookmark-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.bookmark-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--accent));
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.bookmark-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.bookmark-card:hover::before { opacity: 1; }
+
+/* Bento 大小变体 */
+.card-large { grid-column: span 2; grid-row: span 2; }
+.card-wide { grid-column: span 2; }
+.card-tall { grid-row: span 2; }
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.card-url {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
+.card-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--bg-glass);
+  color: var(--text-tertiary);
+}
+
+/* 分类颜色 */
+.cat-video .card-icon { background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.1)); }
+.cat-video { --card-accent: var(--accent-pink); }
+
+.cat-dev .card-icon { background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1)); }
+.cat-dev { --card-accent: var(--accent-blue); }
+
+.cat-design .card-icon { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1)); }
+.cat-design { --card-accent: var(--accent); }
+
+.cat-tool .card-icon { background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1)); }
+.cat-tool { --card-accent: var(--accent-green); }
+
+.cat-other .card-icon { background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1)); }
+.cat-other { --card-accent: var(--accent-orange); }
+
+/* ========== 设计说明区 ========== */
+.design-section {
+  margin-top: 80px;
+  padding-top: 60px;
+  border-top: 1px solid var(--border);
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.design-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.design-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.design-card h3 .num {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.color-palette {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.color-swatch {
+  text-align: center;
+}
+
+.color-block {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+}
+
+.color-name {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.feature-list {
+  list-style: none;
+}
+
+.feature-list li {
+  padding: 8px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.feature-list li::before {
+  content: '✓';
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 1024px) {
+  .bento-grid { grid-template-columns: repeat(3, 1fr); }
+  .design-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 120px; }
+  .card-large { grid-column: span 2; }
+  .hero h1 { font-size: 32px; }
+  .container { padding: 24px 16px; }
+  .nav-bar { padding: 12px 16px; }
+}
+
+@media (max-width: 480px) {
+  .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  .card-large, .card-wide, .card-tall { grid-column: span 1; grid-row: span 1; }
+}
+
+/* ========== 无结果状态 ========== */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-tertiary);
+  display: none;
+}
+
+.no-results.show { display: block; }
+
+/* ========== 页脚 ========== */
+.footer {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-tertiary);
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- 导航栏 -->
+<nav class="nav-bar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">★</div>
+    <span>我的收藏夹</span>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">🌙</button>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- Hero 区 -->
+  <div class="hero">
+    <h1>精选网站收藏</h1>
+    <p>影视、开发、设计、实用工具 —— 我日常在用的优质网站，都在这里</p>
+  </div>
+
+  <!-- 搜索栏 -->
+  <div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="搜索网站名称或关键词..." oninput="filterBookmarks()">
+  </div>
+
+  <!-- 分类标签 -->
+  <div class="category-tabs">
+    <button class="tab active" data-cat="all" onclick="filterCategory('all', this)">全部</button>
+    <button class="tab" data-cat="video" onclick="filterCategory('video', this)">影视娱乐</button>
+    <button class="tab" data-cat="dev" onclick="filterCategory('dev', this)">开发工具</button>
+    <button class="tab" data-cat="design" onclick="filterCategory('design', this)">设计灵感</button>
+    <button class="tab" data-cat="tool" onclick="filterCategory('tool', this)">实用工具</button>
+    <button class="tab" data-cat="other" onclick="filterCategory('other', this)">其他</button>
+  </div>
+
+  <!-- Bento Grid 书签卡片 -->
+  <div class="bento-grid" id="bookmarkGrid">
+    <!-- 影视类 - 大卡片 -->
+    <div class="bookmark-card card-large cat-video" data-cat="video" data-name="Netflix 奈飞 流媒体 影视">
+      <span class="card-tag">影视</span>
+      <div class="card-header">
+        <div class="card-icon">🎬</div>
+        <div>
+          <div class="card-title">Netflix</div>
+          <div class="card-url">netflix.com</div>
+        </div>
+      </div>
+      <div class="card-desc">全球流媒体巨头，海量电影剧集，4K 画质，原创内容质量极高。追剧首选平台。</div>
+    </div>
+
+    <div class="bookmark-card card-wide cat-video" data-cat="video" data-name="B站 哔哩哔哩 动画 番剧">
+      <span class="card-tag">影视</span>
+      <div class="card-header">
+        <div class="card-icon">📺</div>
+        <div>
+          <div class="card-title">哔哩哔哩</div>
+          <div class="card-url">bilibili.com</div>
+        </div>
+      </div>
+      <div class="card-desc">国内最大的年轻人文化社区，番剧、纪录片、知识区内容丰富</div>
+    </div>
+
+    <div class="bookmark-card cat-video" data-cat="video" data-name="YouTube 油管 视频">
+      <span class="card-tag">影视</span>
+      <div class="card-header">
+        <div class="card-icon">▶️</div>
+        <div>
+          <div class="card-title">YouTube</div>
+          <div class="card-url">youtube.com</div>
+        </div>
+      </div>
+      <div class="card-desc">全球最大视频平台</div>
+    </div>
+
+    <div class="bookmark-card cat-video" data-cat="video" data-name="豆瓣 电影 评分">
+      <span class="card-tag">影视</span>
+      <div class="card-header">
+        <div class="card-icon">📚</div>
+        <div>
+          <div class="card-title">豆瓣电影</div>
+          <div class="card-url">movie.douban.com</div>
+        </div>
+      </div>
+      <div class="card-desc">电影评分与影评</div>
+    </div>
+
+    <!-- 开发类 - GitHub 相关 -->
+    <div class="bookmark-card card-large cat-dev" data-cat="dev" data-name="GitHub 代码仓库 开源">
+      <span class="card-tag">开发</span>
+      <div class="card-header">
+        <div class="card-icon">🐙</div>
+        <div>
+          <div class="card-title">GitHub</div>
+          <div class="card-url">github.com</div>
+        </div>
+      </div>
+      <div class="card-desc">全球最大的代码托管平台，开源项目聚集地。Star、Fork、PR 开发者日常必备。Trending 页面每天都有新宝藏项目。</div>
+    </div>
+
+    <div class="bookmark-card card-wide cat-dev" data-cat="dev" data-name="GitHub Trending 热门项目">
+      <span class="card-tag">开发</span>
+      <div class="card-header">
+        <div class="card-icon">🔥</div>
+        <div>
+          <div class="card-title">GitHub Trending</div>
+          <div class="card-url">github.com/trending</div>
+        </div>
+      </div>
+      <div class="card-desc">每日/每周热门开源项目榜单，发现新工具新框架的最佳入口</div>
+    </div>
+
+    <div class="bookmark-card cat-dev" data-cat="dev" data-name="Stack Overflow 问答">
+      <span class="card-tag">开发</span>
+      <div class="card-header">
+        <div class="card-icon">💬</div>
+        <div>
+          <div class="card-title">Stack Overflow</div>
+          <div class="card-url">stackoverflow.com</div>
+        </div>
+      </div>
+      <div class="card-desc">程序员问答社区</div>
+    </div>
+
+    <div class="bookmark-card cat-dev" data-cat="dev" data-name="V2EX 社区 开发者">
+      <span class="card-tag">开发</span>
+      <div class="card-header">
+        <div class="card-icon">💻</div>
+        <div>
+          <div class="card-title">V2EX</div>
+          <div class="card-url">v2ex.com</div>
+        </div>
+      </div>
+      <div class="card-desc">创意工作者社区</div>
+    </div>
+
+    <!-- 设计类 -->
+    <div class="bookmark-card card-tall cat-design" data-cat="design" data-name="Dribbble 设计 灵感">
+      <span class="card-tag">设计</span>
+      <div class="card-header">
+        <div class="card-icon">🎨</div>
+        <div>
+          <div class="card-title">Dribbble</div>
+          <div class="card-url">dribbble.com</div>
+        </div>
+      </div>
+      <div class="card-desc">全球设计师作品展示社区，UI/UX、插画、品牌设计灵感宝库。每天刷一刷，灵感不枯竭。</div>
+    </div>
+
+    <div class="bookmark-card cat-design" data-cat="design" data-name="Behance 作品 设计">
+      <span class="card-tag">设计</span>
+      <div class="card-header">
+        <div class="card-icon">✨</div>
+        <div>
+          <div class="card-title">Behance</div>
+          <div class="card-url">behance.net</div>
+        </div>
+      </div>
+      <div class="card-desc">Adobe 旗下作品集平台</div>
+    </div>
+
+    <div class="bookmark-card cat-design" data-cat="design" data-name="Figma 设计工具 协作">
+      <span class="card-tag">设计</span>
+      <div class="card-header">
+        <div class="card-icon">🖌️</div>
+        <div>
+          <div class="card-title">Figma</div>
+          <div class="card-url">figma.com</div>
+        </div>
+      </div>
+      <div class="card-desc">在线协作设计工具</div>
+    </div>
+
+    <div class="bookmark-card cat-design" data-cat="design" data-name="Mobbin 移动端 UI 设计参考">
+      <span class="card-tag">设计</span>
+      <div class="card-header">
+        <div class="card-icon">📱</div>
+        <div>
+          <div class="card-title">Mobbin</div>
+          <div class="card-url">mobbin.com</div>
+        </div>
+      </div>
+      <div class="card-desc">移动端 UI 模式库</div>
+    </div>
+
+    <!-- 工具类 -->
+    <div class="bookmark-card card-wide cat-tool" data-cat="tool" data-name="Notion 笔记 知识库">
+      <span class="card-tag">工具</span>
+      <div class="card-header">
+        <div class="card-icon">📝</div>
+        <div>
+          <div class="card-title">Notion</div>
+          <div class="card-url">notion.so</div>
+        </div>
+      </div>
+      <div class="card-desc">全能笔记与知识库工具，文档、数据库、项目管理一站搞定</div>
+    </div>
+
+    <div class="bookmark-card cat-tool" data-cat="tool" data-name="Figma 设计工具">
+      <span class="card-tag">工具</span>
+      <div class="card-header">
+        <div class="card-icon">🔧</div>
+        <div>
+          <div class="card-title">TinyPNG</div>
+          <div class="card-url">tinypng.com</div>
+        </div>
+      </div>
+      <div class="card-desc">图片压缩工具</div>
+    </div>
+
+    <div class="bookmark-card cat-tool" data-cat="tool" data-name="Canva 可画 设计">
+      <span class="card-tag">工具</span>
+      <div class="card-header">
+        <div class="card-icon">🎭</div>
+        <div>
+          <div class="card-title">Canva</div>
+          <div class="card-url">canva.com</div>
+        </div>
+      </div>
+      <div class="card-desc">在线平面设计</div>
+    </div>
+
+    <!-- 其他类 -->
+    <div class="bookmark-card card-wide cat-other" data-cat="other" data-name="少数派 高效 数字生活">
+      <span class="card-tag">其他</span>
+      <div class="card-header">
+        <div class="card-icon">🗂️</div>
+        <div>
+          <div class="card-title">少数派</div>
+          <div class="card-url">sspai.com</div>
+        </div>
+      </div>
+      <div class="card-desc">高品质数字消费指南与效率工具分享，发现好用的 App 和工作流</div>
+    </div>
+
+    <div class="bookmark-card cat-other" data-cat="other" data-name="知乎 问答 知识">
+      <span class="card-tag">其他</span>
+      <div class="card-header">
+        <div class="card-icon">💡</div>
+        <div>
+          <div class="card-title">知乎</div>
+          <div class="card-url">zhihu.com</div>
+        </div>
+      </div>
+      <div class="card-desc">中文问答社区</div>
+    </div>
+
+    <div class="bookmark-card cat-other" data-cat="other" data-name="微博 热搜">
+      <span class="card-tag">其他</span>
+      <div class="card-header">
+        <div class="card-icon">📰</div>
+        <div>
+          <div class="card-title">微博</div>
+          <div class="card-url">weibo.com</div>
+        </div>
+      </div>
+      <div class="card-desc">社交媒体热点</div>
+    </div>
+  </div>
+
+  <!-- 无结果 -->
+  <div class="no-results" id="noResults">
+    <div style="font-size: 48px; margin-bottom: 16px;">🔍</div>
+    <p style="font-size: 16px;">没有找到匹配的网站</p>
+    <p style="font-size: 14px; margin-top: 8px;">试试其他关键词吧</p>
+  </div>
+
+  <!-- ========== 设计方案说明 ========== -->
+  <div class="design-section">
+    <h2 class="section-title">设计方案说明</h2>
+    <p class="section-subtitle">基于 2026 年最流行的 Bento Grid 设计语言，打造个人收藏导航站</p>
+
+    <div class="design-grid">
+      <!-- 设计风格 -->
+      <div class="design-card">
+        <h3><span class="num">1</span> 设计风格与趋势</h3>
+        <ul class="feature-list">
+          <li><strong>Bento Grid 布局</strong>：便当盒网格，大小不一的卡片组合，视觉丰富且有节奏感，2026 年最火设计趋势</li>
+          <li><strong>深色模式优先</strong>：深色背景让网站图标和内容更突出，科技感更强，OLED 屏幕更省电</li>
+          <li><strong>玻璃态质感</strong>：毛玻璃效果 + 微妙渐变，现代感十足，提升整体质感</li>
+          <li><strong>分类色彩编码</strong>：不同分类用不同强调色，一眼识别网站类型</li>
+          <li><strong>微交互动效</strong>：卡片悬浮提升 + 顶部彩色线条渐显，反馈细腻不花哨</li>
+        </ul>
+      </div>
+
+      <!-- 配色方案 -->
+      <div class="design-card">
+        <h3><span class="num">2</span> 配色系统</h3>
+        <div class="color-palette">
+          <div class="color-swatch">
+            <div class="color-block" style="background: #0a0a0f;"></div>
+            <div class="color-name">背景主色</div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-block" style="background: #12121a;"></div>
+            <div class="color-name">卡片背景</div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-block" style="background: #8b5cf6;"></div>
+            <div class="color-name">品牌紫</div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-block" style="background: #ec4899;"></div>
+            <div class="color-name">影视粉</div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-block" style="background: #3b82f6;"></div>
+            <div class="color-name">开发蓝</div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-block" style="background: #10b981;"></div>
+            <div class="color-name">工具绿</div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-block" style="background: #f59e0b;"></div>
+            <div class="color-name">其他橙</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 功能特性 -->
+      <div class="design-card">
+        <h3><span class="num">3</span> 核心功能</h3>
+        <ul class="feature-list">
+          <li><strong>即时搜索</strong>：输入即过滤，快速找到收藏的网站</li>
+          <li><strong>分类筛选</strong>：按影视/开发/设计/工具/其他分类切换</li>
+          <li><strong>深浅色切换</strong>：一键切换深色/浅色主题，自动记忆偏好</li>
+          <li><strong>响应式布局</strong>：桌面平板手机完美适配</li>
+          <li><strong>一键直达</strong>：点击卡片直接跳转目标网站</li>
+        </ul>
+      </div>
+
+      <!-- 技术方案 -->
+      <div class="design-card">
+        <h3><span class="num">4</span> 技术选型建议</h3>
+        <ul class="feature-list">
+          <li><strong>纯静态部署</strong>：GitHub Pages / Vercel / Cloudflare Pages 免费托管</li>
+          <li><strong>数据驱动</strong>：书签数据存 JSON 文件，修改无需改代码</li>
+          <li><strong>自动图标抓取</strong>：自动获取网站 favicon，不用手动上传</li>
+          <li><strong>SEO 友好</strong>：静态生成，加载速度快，利于搜索引擎收录</li>
+          <li><strong>后续可扩展</strong>：如需后台管理可升级为 Astro / Next.js 全栈方案</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+  我的收藏夹 · 个人网站导航设计方案 · 2026
+</footer>
+
+<script>
+// 主题切换
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.querySelector('.theme-toggle').textContent = next === 'light' ? '☀️' : '🌙';
+}
+
+// 初始化主题
+(function() {
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.querySelector('.theme-toggle').textContent = saved === 'light' ? '☀️' : '🌙';
+})();
+
+// 当前分类
+let currentCategory = 'all';
+
+// 分类筛选
+function filterCategory(cat, el) {
+  currentCategory = cat;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  applyFilters();
+}
+
+// 搜索筛选
+function filterBookmarks() {
+  applyFilters();
+}
+
+// 应用筛选
+function applyFilters() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const cards = document.querySelectorAll('.bookmark-card');
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const cat = card.dataset.cat;
+    const name = (card.dataset.name || '').toLowerCase();
+    const desc = card.querySelector('.card-desc')?.textContent.toLowerCase() || '';
+
+    const matchCat = currentCategory === 'all' || cat === currentCategory;
+    const matchSearch = !query || name.includes(query) || desc.includes(query);
+
+    if (matchCat && matchSearch) {
+      card.style.display = '';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  document.getElementById('noResults').classList.toggle('show', visibleCount === 0);
+}
+
+// 卡片点击跳转（示例：这里可以替换为真实链接）
+document.querySelectorAll('.bookmark-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const title = card.querySelector('.card-title').textContent;
+    const url = card.querySelector('.card-url').textContent;
+    // 实际部署时替换为真实链接
+    window.open('https://' + url, '_blank');
+  });
+});
+</script>
+
+</body>
+</html>
