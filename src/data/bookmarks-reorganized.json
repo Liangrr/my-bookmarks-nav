@@ -1,0 +1,1762 @@
+[
+  {
+    "title": "百度一下，你就知道",
+    "url": "https://www.baidu.com/",
+    "category": "常用网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ECharts · Doc",
+    "url": "https://echarts.baidu.com/echarts2/doc/doc.html#SeriesWordCloud",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "echarts - cdnjs.com - 用于加速网站加速的网络相关图书馆的最佳FOSS CDN！",
+    "url": "https://cdnjs.com/libraries/echarts",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ECharts演示",
+    "url": "https://echarts.baidu.com/examples/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "jQuery API 中文文档 | jQuery API 中文在线手册 | jquery api 下载 | jquery api chm",
+    "url": "http://jquery.cuishifeng.cn/index.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ECMAScript 6 入门 - ECMAScript 6入门",
+    "url": "http://es6.ruanyifeng.com/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "wangEditor - 轻量级web富文本编辑器",
+    "url": "http://www.wangeditor.com/index.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "layer弹层组件开发文档 - layui",
+    "url": "https://www.layui.com/doc/modules/layer.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "什么是 FreeMarker? - FreeMarker 中文官方参考手册",
+    "url": "http://freemarker.foofun.cn/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "发布到微信小游戏 · GitBook",
+    "url": "http://docs.cocos.com/creator/manual/zh/publish/publish-wechatgame.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "组件 | vue-amap",
+    "url": "https://elemefe.github.io/vue-amap/#/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "lodash.flattenDeep | Lodash 中文网",
+    "url": "https://www.lodashjs.com/docs/lodash.flattenDeep",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "GraphQL | 一种为你的 API 而生的查询语言",
+    "url": "https://graphql.cn/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "在 Markdown 中 使用 Vue | VuePress",
+    "url": "https://vuepress.vuejs.org/zh/guide/using-vue.html#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-api-%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "电鸭社区-专注远程工作招聘交流-远程工作，从电鸭开始",
+    "url": "https://eleduck.com/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "HTML（超文本标记语言） | MDN",
+    "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTML",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "第一步 | NestJS 中文文档 | NestJS 中文网",
+    "url": "https://nestjs.bootcss.com/first-steps.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "拦截器 | Axios Docs",
+    "url": "https://axios-http.com/zh/docs/interceptors",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "TypeORM | Midway",
+    "url": "https://midwayjs.org/docs/extensions/orm",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Node.js — Introduction to Node.js",
+    "url": "https://nodejs.org/zh-cn/learn/getting-started/introduction-to-nodejs",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Ventusky - 天气预报、雷达和风力图",
+    "url": "https://www.ventusky.com/?p=21.0;113.7;4&l=temperature-2m",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Remove Paywalls from News Articles Instantly | PaywallBuster",
+    "url": "https://paywallbuster.com/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "快图设计-帮助企业快速搭建在线设计工具",
+    "url": "https://pro.kuaitu.cc/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "@fa-cli/language - npm",
+    "url": "https://www.npmjs.com/package/@fa-cli/language",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "介绍 | Vue JSON Schema Form",
+    "url": "https://vue-json-schema-form.lljj.me/zh/guide/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Three.js教程",
+    "url": "http://www.webgl3d.cn/Three.js/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "API | Hexo",
+    "url": "https://hexo.io/zh-cn/api/index.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "lodash.debounce | Lodash 中文网",
+    "url": "https://www.lodashjs.com/docs/lodash.debounce",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "介绍 - v-charts",
+    "url": "https://v-charts.js.org/#/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "JavaScript | MDN",
+    "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Animate.css",
+    "url": "https://daneden.github.io/animate.css/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Mock.js",
+    "url": "http://mockjs.com/0.1/#capitalize",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Widgets 目录 - Flutter中文网",
+    "url": "https://flutterchina.club/widgets/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "API 文档 | Node.js 中文网",
+    "url": "http://nodejs.cn/api/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "蚂蚁数据可视化 - AntV",
+    "url": "http://antv.alipay.com/zh-cn/index.html#__products",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Moment.js | Home",
+    "url": "https://momentjs.com/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "程序员导航-CXY521",
+    "url": "https://cxy521.com/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Word转HTML——免费在线Word转网页",
+    "url": "http://www.docpe.com/word/word-to-html.aspx",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Formily",
+    "url": "http://formilyjs.org/#/0yTeT0/wWuyuJc6fO",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "geojson.io",
+    "url": "http://geojson.io/#map=2/20.0/0.0",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "RGB颜色值与十六进制颜色码转换工具",
+    "url": "https://www.sioe.cn/yingyong/yanse-rgb-16/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "JSON Schema 生成器 | Vue Json schema form",
+    "url": "https://form.lljj.me/schema-generator.html#/index",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Nintex Login",
+    "url": "https://nintex-portal.auth0.com/login?state=g6Fo2SBHM1B3andqRUl2RmdDaHhoT2ZpOGoyXzhZZ1drMmRmdqN0aWTZIEY0RUdwNlM5aGl4RXI0RGZqVXF6MmxuTXlhZkR2bTFwo2NpZNkgODkxU0NCU3NNT2V4YWgxZ1NJNmJWN282NXN1TTRPWDg&client=891SCBSsMOexah1gSI6bV7o65suM4OX8&protocol=oauth2&prompt=select_account&audience=https%3A%2F%2Fnintex.io&response_type=code&redirect_uri=https%3A%2F%2Fzldzt-347083.workflowcloud.com%2Foidccallback&scope=openid%20profile%20email%20tenant_name_zldzt-347083",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "密钥和凭据 – Google 地图平台 – 我的第一个项目 – Google Cloud 控制台 --- Keys & Credentials – Google Maps Platform – My First Project – Google Cloud console",
+    "url": "https://console.cloud.google.com/google/maps-apis/credentials?hl=en&project=eco-world-438711-b5",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "事件  |  Maps JavaScript API  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation/javascript/events?hl=zh-cn",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Google Maps Platform 文档  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation?hl=zh-cn#places",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "使用 API 密钥  |  Maps JavaScript API  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation/javascript/get-api-key?hl=zh-cn",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "使用 Places API 和地理编码服务来设置边界的数据驱动型样式  |  Maps JavaScript API  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation/javascript/dds-boundaries/dds-use-maps-places-apis?hl=zh-cn",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "迁移到地点详情（新）  |  Places API  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation/places/web-service/migrate-details?hl=zh-cn",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "允许未经身份验证的访客使用API密钥访问您的应用程序 - Amazon Location Service",
+    "url": "https://docs.aws.amazon.com/zh_cn/location/latest/developerguide/using-apikeys.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Bootstrap 标签页Tab插件的事件_歪脖先生的博客-CSDN博客",
+    "url": "https://blog.csdn.net/ixygj197875/article/details/79549903",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "广州市三地信息技术有限公司",
+    "url": "http://mail.sandi.com.cn/cgi-bin/frame_html?sid=zE-n4Nejbtm4eVQL,2&sign_type=&r=1ba0ff591bc4f600265f6668731db62b",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "RuoYi 若依官方网站 |后台管理系统|权限管理系统|快速开发框架|企业管理系统|开源框架|微服务框架|前后端分离框架|开源后台系统|RuoYi|RuoYi-Vue|RuoYi-Cloud|RuoYi框架|RuoYi开源|RuoYi视频|若依视频|RuoYi开发文档|若依开发文档|Java开源框架|Java|SpringBoot|SrpingBoot2.0|SrpingCloud|Alibaba|MyBatis|Shiro|OAuth2.0|Thymeleaf|BootStrap|Vue|Element-UI||www.ruoyi.vip",
+    "url": "http://ruoyi.vip/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "03 导航栏--搜索无结果 - 蓝湖",
+    "url": "https://lanhuapp.com/web/#/item/project/board/detail?pid=a56a5afc-3b6d-4ad5-9f9f-24b29aef564c&project_id=a56a5afc-3b6d-4ad5-9f9f-24b29aef564c&image_id=3d86d8e4-fae3-470e-a3d2-0ab91b195e75",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "欧朋Opera手机浏览器官方网站|手机浏览器下载|安卓手机浏览器下载|智能手机浏览器免费下载|欧朋浏览器下载|欧朋流量宝下载|Opera桌面浏览器下载|PC浏览器下载|苹果浏览器下载",
+    "url": "http://www.oupeng.com/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "小红书_标记我的生活",
+    "url": "https://www.xiaohongshu.com/protocols/news",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "荔枝【官方APP下载】",
+    "url": "https://www.lizhi.fm/about/download.html",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "jQuery视差插件ImageScroll",
+    "url": "http://www.jq22.com/jquery-info300",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "luckin coffee",
+    "url": "http://www.luckincoffee.com/about",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新视觉门户网站APP下载页面|网页|门户/社交|川先森哟 - 原创作品 - 站酷 (ZCOOL)",
+    "url": "https://www.zcool.com.cn/work/ZMjM2NDI1NzY=.html",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "【网站app下载页面】|网页|专题/活动|大杨丹 - 原创作品 - 站酷 (ZCOOL)",
+    "url": "https://www.zcool.com.cn/work/ZMTI2ODY5OTI=.html",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "WeX5简介 - Docs",
+    "url": "http://docs.wex5.com/wex5-introduction/?from=groupmessage&isappinstalled=0",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "SCSS 在线编译工具 - JSRUN 工具箱",
+    "url": "http://jsrun.pro/app/scss",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "来画-短视频智能创作营销平台-MG动画视频制作工具-来画视频",
+    "url": "https://www.laihua.com/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "前端项目经验 - 代码狂魔2019 - 博客园",
+    "url": "https://www.cnblogs.com/zhuxinpeng-looking/p/11311502.html",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "环球雅途集团",
+    "url": "http://mail.hqyatu.com/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "投诉建议开发",
+    "url": "http://www.jgdev.com/h5/complaints.html?region=9510822",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "智慧旅游监管系统开发",
+    "url": "http://www.jgdev.com/login.action",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "导游导览webchat新地址",
+    "url": "https://agt.jznews.net.cn/webchat/#/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "广元生产",
+    "url": "http://www.zhlyjg.com/main.action",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "jQuery WEUI",
+    "url": "http://jqweui.com/download",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "魔学院移动学习平台-企业培训系统_线上培训平台_企业培训软件",
+    "url": "https://www.moxueyuan.com/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "腾讯企业邮箱 - 收件箱",
+    "url": "https://exmail.qq.com/cgi-bin/frame_html?sid=FW_zOq-sU1nPIwxT,7&sign_type=&r=524b68f2f7c10ae6c7334cb9a8d7bcd7",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "缺陷-维卓BPM重构版本-TAPD平台",
+    "url": "https://www.tapd.cn/61969009/bugtrace/bugreports/my_view",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "线上wezonet-bpm",
+    "url": "http://crm.wezobpm.com/#/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "项目管理全流程2.0",
+    "url": "https://tp4qh5.axshare.com/#id=j3j62v&p=%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E5%85%A8%E6%B5%81%E7%A8%8B2_0",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "一份热乎的前端面经（已拿字节、蚂蚁、拼多多 Offer）",
+    "url": "https://mp.weixin.qq.com/s/X-xCZ2yfk_j0rFCTg2WEng",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Promise必备知识汇总和面试情况",
+    "url": "https://mp.weixin.qq.com/s/S5QzW9RfnjcDyoDxYWhRfA",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Git - Book",
+    "url": "https://git-scm.com/book/zh/v2",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "(……) 【Node】搭建一个静态资源服务器 - SegmentFault 思否",
+    "url": "https://segmentfault.com/a/1190000019222794",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OKee Design-轻量、可靠的 Vue 组件库",
+    "url": "https://okee.oceanengine.com/mobile/vue/#/zh-CN/collapse",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "题库 - 力扣 (LeetCode) 全球极客挚爱的技术成长平台",
+    "url": "https://leetcode-cn.com/problemset/all/?difficulty=EASY",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Ts高手篇：22个示例深入讲解Ts最晦涩难懂的高级类型工具",
+    "url": "https://juejin.cn/post/6994102811218673700",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "JavaScript高级程序设计（第4版）-马特·弗里斯比-微信读书",
+    "url": "https://weread.qq.com/web/reader/751326d0720befab7514782k8e232ec02198e296a067180",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "带你深度解锁Webpack系列(优化篇) - 掘金",
+    "url": "https://juejin.cn/post/6844904093463347208#heading-0",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "近 20 人爆肝数周，写给初中级前端的万字高级进阶指南 - 掘金",
+    "url": "https://juejin.cn/post/7017645909483716615?utm_source=gold_browser_extension",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Python教程 - 廖雪峰的官方网站",
+    "url": "https://www.liaoxuefeng.com/wiki/1016959663602400",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "标签 - Postbird - 猫既吾命",
+    "url": "http://www.ptbird.cn/tags.html",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "下载地址链接转换工具 - 在线工具",
+    "url": "https://tool.lu/urlconvert/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Frontend / magic-pipeline · GitLab",
+    "url": "http://gitlab-server.magic.com/web/magic-pipeline",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Rust 程序设计语言",
+    "url": "https://www.rust-lang.org/zh-CN/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "React lingu翻译基础 - 前端团队 - Confluence",
+    "url": "http://confluence.magic.com/pages/viewpage.action?pageId=111575082",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Magic Factor",
+    "url": "http://factor.magic.com/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "BehaviorSubject | RxJS 中文文档",
+    "url": "https://cn.rx.js.org/class/es6/BehaviorSubject.js~BehaviorSubject.html",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "电子发票合并打印整理专家 - 发票大师",
+    "url": "https://fapiao.bangnimang.net/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "iconfont-阿里巴巴矢量图标库",
+    "url": "https://www.iconfont.cn/manage/index?manage_type=myprojects&projectId=4431223",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "弹性方向 - Tailwind CSS 中文网",
+    "url": "https://tailwind.nodejs.cn/docs/flex-direction",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Best Practices | Cypress Documentation",
+    "url": "https://docs.cypress.io/guides/references/best-practices#Cypress-and-Testing-Library",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "3Q影视-qqq影视",
+    "url": "https://qqqys.com/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "模板中心 | 腾讯云 CloudBase",
+    "url": "https://tcb.cloud.tencent.com/dev?envId=asuria-1gt755jpb6706918#/cloud-template/detail?tplId=tpl-1uW91La1W47z66&appName=ai_ecom_app&source=tcb",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "生产-渠道-菜单配置--HZERO平台验证环境",
+    "url": "https://channel-admin-gl.qponmobile.com/hiam/menu",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "简历制作_在线制作简历_全民简历",
+    "url": "https://www.qmjianli.com/cv/edit/?resumeId=25526Z4Y1DV2UHR",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Framer x Motion — overrides, workshop, components | Motion",
+    "url": "https://motion.dev/docs/react-layout-animations",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "joi.dev - 17.13.3 API Reference",
+    "url": "https://joi.dev/api/?v=17.13.3",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Inspect with Chrome Developer Tools",
+    "url": "chrome://inspect/#devices",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "MySQL :: Download MySQL Community Server",
+    "url": "https://dev.mysql.com/downloads/mysql/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "未命名绘图 - draw.io",
+    "url": "https://app.diagrams.net/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Xiaomi MiMo 开放平台",
+    "url": "https://platform.xiaomimimo.com/#/docs/integration/cline-kilo-roo",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "前端开发工程师 - 豆包",
+    "url": "https://www.doubao.com/chat/38415550198312194",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "管理系统后台白屏卡顿排查优化 - 豆包",
+    "url": "https://www.doubao.com/chat/38415969788857602",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "react的生命周期需要知道的。 - 一直在寻 - 博客园",
+    "url": "https://www.cnblogs.com/faith3/p/9216165.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "原始数据类型 · TypeScript 入门教程",
+    "url": "https://ts.xcatliu.com/basics/primitive-data-types.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "高级类型 · TypeScript中文网 · TypeScript——JavaScript的超集",
+    "url": "https://www.tslang.cn/docs/handbook/advanced-types.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "起步 · TypeScript——JavaScript的超集",
+    "url": "https://www.tslang.cn/samples/index.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "React – 用于构建用户界面的 JavaScript 库",
+    "url": "https://react.docschina.org/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Taro UI | O2Team",
+    "url": "https://taro-ui.jd.com/#/docs/introduction",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Getting Started with Redux | Redux",
+    "url": "https://redux.js.org/introduction/getting-started#redux-toolkit",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "拖拽组件：React-DnD用法及源码解析 - 掘金",
+    "url": "https://juejin.cn/post/6885511137236877325",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "React",
+    "url": "https://react.dev/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "快速上手 - ahooks 3.0",
+    "url": "https://ahooks.pages.dev/zh-CN/hooks/use-request/index",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue Element+Node.js开发企业通用管理后台系统_课程",
+    "url": "https://coding.imooc.com/learn/list/401.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "小慕读书",
+    "url": "http://www.youbaobao.xyz/admin/#/login?redirect=%2Fdashboard",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "「小慕读书」管理后台",
+    "url": "https://www.youbaobao.xyz/admin-docs/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "开始 | Vite 官方中文文档",
+    "url": "https://cn.vitejs.dev/guide/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vant - 轻量、可靠的移动端 Vue 组件库",
+    "url": "https://youzan.github.io/vant/#/zh-CN/intro",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vant Weapp - 轻量、可靠的小程序 UI 组件库",
+    "url": "https://youzan.github.io/vant-weapp/#/cell",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "首页 - Vue Element Admin",
+    "url": "https://panjiachen.gitee.io/vue-element-admin/#/dashboard",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "介绍 | vue-element-admin",
+    "url": "https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue.js · Fundebug文档 - 一行代码搞定BUG监控 - 网站错误监控|JS错误监控|资源加载错误|网络请求错误|小程序错误监控|Java异常监控|监控报警|Source Map|用户行为|可视化重现",
+    "url": "https://docs.fundebug.com/notifier/javascript/framework/vuejs.html",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue-Treeselect | Vue-Treeselect 中文网",
+    "url": "https://www.vue-treeselect.cn/#customize-value-label",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "输入框 Input - Ant Design Vue",
+    "url": "https://www.antdv.com/components/input-cn/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Home | Pinia 中文文档",
+    "url": "https://pinia.web3doc.top/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue3",
+    "url": "https://vue3js.cn/",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "组件 | Element",
+    "url": "https://element.eleme.cn/2.0/#/zh-CN/component/quickstart",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "安装 - iView",
+    "url": "https://www.iviewui.com/docs/guide/install",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue hooks plus",
+    "url": "https://inhiblabcore.github.io/vue-hooks-plus/zh/guide/introduction",
+    "category": "前端开发",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "构建性能 | webpack 中文文档",
+    "url": "https://webpack.docschina.org/guides/build-performance/#incremental-builds",
+    "category": "常用网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "百度翻译",
+    "url": "https://fanyi.baidu.com/?aldtype=85#zh/en/",
+    "category": "常用网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Cloud - Ollama",
+    "url": "https://docs.ollama.com/cloud#javascript",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Quickstart - Docs by LangChain",
+    "url": "https://docs.langchain.com/oss/python/langchain/quickstart",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "langchain-ai/langchain: 🦜🔗 The platform for reliable agents.",
+    "url": "https://github.com/langchain-ai/langchain",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "asuria | Unsplash --- asuria | Unsplash",
+    "url": "https://unsplash.com/oauth/applications/856114",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "api.unsplash.com/search/photos?query=beijing&per_page=1&client_id=lDLXXJQ0ztc-J1HMfv6MJOf6vQQbzsc3DUdiUlJOXTI",
+    "url": "https://api.unsplash.com/search/photos?query=beijing&per_page=1&client_id=lDLXXJQ0ztc-J1HMfv6MJOf6vQQbzsc3DUdiUlJOXTI",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "CAMEL - Build Multi-Agent AI Systems",
+    "url": "https://docs.camel-ai.org/cookbooks/applications/customer_service_Discord_bot_with_agentic_RAG",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Download ngrok for macOS",
+    "url": "https://ngrok.com/download/mac-os",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Postgres.app Downloads",
+    "url": "https://postgresapp.com/downloads.html",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "下载 - Cursor Agent",
+    "url": "https://agent.92xx.vip/download.html",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "为 RAG 生成测试集 - Ragas 框架",
+    "url": "https://docs.ragas.org.cn/en/stable/concepts/test_data_generation/rag/#example",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Arco Design Vue",
+    "url": "https://arco.design/vue/component/button",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Agent World — The Parallel Web",
+    "url": "https://world.coze.site/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Agent Skills 市场 - Claude、Codex 和 ChatGPT Skills | SkillsMP",
+    "url": "https://skillsmp.com/zh",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "world.coze.site/skill.md",
+    "url": "https://world.coze.site/skill.md",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Stitch - Projects",
+    "url": "https://stitch.withgoogle.com/projects/5858164342862301130?pli=1",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ChatGPT",
+    "url": "https://chatgpt.com/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "收件箱 - asuria008@gmail.com - Gmail",
+    "url": "https://mail.google.com/mail/u/0/#inbox",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Temporal",
+    "url": "https://cloud.temporal.io/login",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "最近解码 - 草料二维码解码器",
+    "url": "https://cli.im/deqr/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Stitch - Design with AI",
+    "url": "https://stitch.withgoogle.com/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "AG-UI and A2UI: Understanding the Differences | CopilotKit",
+    "url": "https://www.copilotkit.ai/ag-ui-and-a2ui",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "第 1 章：提示词链 | Agentic Design Patterns",
+    "url": "https://adp.xindoo.xyz/chapters/Chapter%201_%20Prompt%20Chaining/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "CC Switch 官方网站 - AI 编程工具统一管理平台",
+    "url": "https://ccswitch.io/zh/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "登录 | 和风天气",
+    "url": "https://id.qweather.com/#/login?redirect=https%3A%2F%2Fconsole.qweather.com%2Ferror&lang=zh",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "uni.getEnterOptionsSync() | uni-app官网",
+    "url": "https://uniapp.dcloud.net.cn/api/getEnterOptionsSync.html",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程",
+    "url": "https://modao.cc/proto/zLM7sv5nt2pqk4r6iMXm0O/sharing?view_mode=device&screen=rbpV0o5941LZarfVR&canvasId=rcVCgjyfVECOZ8wFo4z9OK",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "文字提示 Tooltip - Ant Design Vue",
+    "url": "https://1x.antdv.com/components/tooltip-cn/#components-tooltip-demo-placement",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "卓元生产地址",
+    "url": "https://zone.exceam.com/#/system/workOrder/system/workOrder/search?_t=1775014307567",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程系统 · Teambition",
+    "url": "https://www.teambition.com/project/69a820f36cb8d6136c533cb1/gantt/view/69c4de909faf92246f8d8bf7",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "卓元测试",
+    "url": "https://zonetest.exceam.com/",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "首页 | 卓元开发环境",
+    "url": "http://202.105.142.243:8828/web/#/welcome",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Feature/20260326 download (!4) · Merge requests · FCTW / code / frontweb / fwfctw · GitLab",
+    "url": "http://zpjk.ql-msx.com:8082/fctw/code/frontweb/fwfctw/-/merge_requests/4",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "HirebyAigent - 智能招聘管理平台",
+    "url": "https://hirebyaigent.com/c/h9cnsos6",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "登录/注册 - Teambition 帐号",
+    "url": "https://account.teambition.com/login?next_url=https%3A%2F%2Fwww.teambition.com%2Fproject%2F69a820f36cb8d6136c533cb1%2Fbug%2Fsection%2Fall",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "团队文件 - 蓝湖",
+    "url": "https://lanhuapp.com/dashboard/#/item?tid=be000fcf-f89c-4472-8ee5-524ba789490f",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "​‬﻿﻿⁢​⁣‍‬‌﻿⁢⁢﻿﻿‬⁡⁡⁣⁣‌﻿‌‌⁡⁡‌‬‬‬⁢‌‌﻿‌‍⁡⁡‌‬‬‌‌‌⁡​⁡⁡‍‬‍‬﻿‍⁢‌​⁣⁡​‌‌⁣‬⁢​‍‍‌⁡前端监控方案 · 钉钉文档",
+    "url": "https://alidocs.dingtalk.com/i/nodes/Exel2BLV5znPKMjzfPKjnvOGJgk9rpMq?utm_scene=team_space&iframeQuery=anchorId%3Duu_mqhhbmb7rk9dne1n8bi%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E7%9A%84%E5%9F%8B%E7%82%B9%E7%9B%91%E6%8E%A7%E8%A1%A8%E7%BB%93%E6%9E%84%EF%BC%8C%E8%BF%98%E6%9C%89%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E6%88%91%E9%83%BD%E6%94%BE%E6%96%87%E6%A1%A3%E9%87%8C%E4%BA%86%E5%93%88",
+    "category": "工作项目",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "M4A to MP3 | CloudConvert",
+    "url": "https://cloudconvert.com/m4a-to-mp3",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "快马加编【站外爆款奖】内容提交链接",
+    "url": "https://wj.toutiao.com/q/v2/7637735572287979555/98VFG983/816f/#/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "AI音乐创作台_一键免费生成专属歌曲 - 妙响（抖音音乐创作实验室）",
+    "url": "https://music.douyin.com/studio/create",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "快速了解 FastGPT | FastGPT",
+    "url": "https://doc.fastgpt.io/zh-CN/guide/getting-started",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "1c7/chinese-independent-developer: 👩🏿‍💻👨🏾‍💻👩🏼‍💻👨🏽‍💻👩🏻‍💻中国独立开发者项目列表 -- 分享大家都在做什么",
+    "url": "https://github.com/1c7/chinese-independent-developer",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "shiyu-coder/Kronos: Kronos: A Foundation Model for the Language of Financial Markets",
+    "url": "https://github.com/shiyu-coder/Kronos",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "msitarzewski/agency-agents：触手可及的完整人工智能代理机构——从前端高手到 Reddit 社区达人，从创意注入者到现实检验者。每位代理都是拥有独特个性、流程和可靠成果的专业人士。 --- msitarzewski/agency-agents: A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
+    "url": "https://github.com/msitarzewski/agency-agents",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Anspire",
+    "url": "https://open.anspire.cn/cus/gift",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "‌​​‬⁡⁢‌​​‌‌​‍⁡⁤⁣﻿﻿‬⁣⁤⁤​﻿﻿⁤‬⁢﻿⁣⁣‬‍⁡⁤⁢⁢​‌⁤​​⁤⁡⁣​⁣⁢​​【T1-学习文档-商业化案例】掌纹运势小程序 MVP可行性方案 - 飞书云文档",
+    "url": "https://vcnvmnln7wit.feishu.cn/wiki/QQW5wcwX2iWZs2kLF4icM2dznmf",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ZhuLinsen/daily_stock_analysis: LLM驱动的 A/H/美股智能分析：多数据源行情 + 实时新闻 + LLM决策仪表盘 + 多渠道推送，零成本定时运行，纯白嫖. LLM-powered stock analysis system for A/H/US markets.",
+    "url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "HKUDS/Vibe-Trading: \"Vibe-Trading: Your Personal Trading Agent\"",
+    "url": "https://github.com/HKUDS/Vibe-Trading",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Claude Code 如何工作 | 菜鸟教程",
+    "url": "https://www.runoob.com/claude-code/claude-code-how-it-work.html",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Emails · Resend",
+    "url": "https://resend.com/emails",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Agnes",
+    "url": "https://platform.agnes-ai.com/settings/apiKeys",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Tushare数据",
+    "url": "https://tushare.pro/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "租用 Unt. Kingdom 号码 — 物理 SIM（非 VoIP）与虚拟 | SMS/OTP",
+    "url": "https://smspva.com/cn/rent/country/united-kingdom",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "硬核指南 - 够高清才是真硬核！",
+    "url": "https://yinghezhinan.com/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "X",
+    "url": "https://x.com/home",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "(21) 路飞 🏴‍☠️ AI 研究员🧐 on X: \"一个 AI 美女账号，9.4 万粉，每月赚 2.8 万人民币\" / X",
+    "url": "https://x.com/0xluffy_eth/status/2071440964829466983",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "注册 | 三毛机场",
+    "url": "https://g-1.xn--ehqx7tcnnope.com/#/register",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Skill商店_OpenClaw Skill技能下载_CocoLoop更安全的Skill市场",
+    "url": "https://hub.cocoloop.cn/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "数字平台域名 --- DigitalPlat Domains",
+    "url": "https://dash.domain.digitalplat.org/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ESTKme: Best eSIM adapter card for your phone, tablet, any mobile devices.",
+    "url": "https://store.estk.me/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "simonlin1212/global-stock-data: US stock market data for AI coding assistants — zero-auth, official sources. CBOE options with full Greeks + 0DTE flow, FINRA market-wide short volume, SEC EDGAR filing stream, and a free market-wide screener. 13 layers, 30+ endpoints, 11 sources. Every source labeled with its compliance tier.",
+    "url": "https://github.com/simonlin1212/global-stock-data",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "JCodesMore/ai-website-cloner-template: Clone any website with one command using AI coding agents",
+    "url": "https://github.com/JCodesMore/ai-website-cloner-template",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "元衡 API",
+    "url": "https://cn.meta-api.vip/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "API 密钥 - 圣路易斯联邦储备银行 --- API Keys - St. Louis Fed",
+    "url": "https://fredaccount.stlouisfed.org/apikeys",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Grok",
+    "url": "https://grok.com/build",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Google Gemini",
+    "url": "https://gemini.google.com/app",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "微信云托管",
+    "url": "https://cloud.weixin.qq.com/cloudrun/service/flask-px99",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "prompts.chat - AI Prompts Community",
+    "url": "https://prompts.chat/",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Login – Vercel",
+    "url": "https://vercel.com/login",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "API Keys (Legacy) | Settings | Asuria | Supabase",
+    "url": "https://supabase.com/dashboard/project/vvseqfvuxvfqokzsydfa/settings/api-keys/legacy",
+    "category": "AI工具箱",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "TechCrunch | Startup and Technology News",
+    "url": "https://techcrunch.com/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "The Verge",
+    "url": "https://www.theverge.com/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "WIRED - The Latest in Technology, Science, Culture and Business | WIRED",
+    "url": "https://www.wired.com/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "MIT Technology Review",
+    "url": "https://www.technologyreview.com/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Science and Math News | Quanta Magazine",
+    "url": "https://www.quantamagazine.org/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "spectrum.ieee.org",
+    "url": "https://spectrum.ieee.org/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Visual Capitalist",
+    "url": "https://www.visualcapitalist.com/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Semafor - An intelligent, transparent global news platform for breaking stories, analysis and video",
+    "url": "https://www.semafor.com/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ProPublica — Investigative Journalism and News in the Public Interest",
+    "url": "https://www.propublica.org/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "MIT OpenCourseWare | Free Online Course Materials",
+    "url": "https://ocw.mit.edu/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OpenStax",
+    "url": "https://openstax.org/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Free eBooks | Project Gutenberg",
+    "url": "https://www.gutenberg.org/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Arts & Letters Daily - ideas, criticism, debate",
+    "url": "https://www.aldaily.com/",
+    "category": "科技资讯",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  }
+]

@@ -1,0 +1,2970 @@
+[
+  {
+    "title": "百度一下，你就知道",
+    "url": "https://www.baidu.com/",
+    "category": "书签栏",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ECharts · Doc",
+    "url": "https://echarts.baidu.com/echarts2/doc/doc.html#SeriesWordCloud",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "echarts - cdnjs.com - 用于加速网站加速的网络相关图书馆的最佳FOSS CDN！",
+    "url": "https://cdnjs.com/libraries/echarts",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ECharts演示",
+    "url": "https://echarts.baidu.com/examples/",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "jQuery API 中文文档 | jQuery API 中文在线手册 | jquery api 下载 | jquery api chm",
+    "url": "http://jquery.cuishifeng.cn/index.html",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ECMAScript 6 入门 - ECMAScript 6入门",
+    "url": "http://es6.ruanyifeng.com/",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "wangEditor - 轻量级web富文本编辑器",
+    "url": "http://www.wangeditor.com/index.html",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "layer弹层组件开发文档 - layui",
+    "url": "https://www.layui.com/doc/modules/layer.html",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "什么是 FreeMarker? - FreeMarker 中文官方参考手册",
+    "url": "http://freemarker.foofun.cn/",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "发布到微信小游戏 · GitBook",
+    "url": "http://docs.cocos.com/creator/manual/zh/publish/publish-wechatgame.html",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "组件 | vue-amap",
+    "url": "https://elemefe.github.io/vue-amap/#/",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "lodash.flattenDeep | Lodash 中文网",
+    "url": "https://www.lodashjs.com/docs/lodash.flattenDeep",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "GraphQL | 一种为你的 API 而生的查询语言",
+    "url": "https://graphql.cn/",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "在 Markdown 中 使用 Vue | VuePress",
+    "url": "https://vuepress.vuejs.org/zh/guide/using-vue.html#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-api-%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "电鸭社区-专注远程工作招聘交流-远程工作，从电鸭开始",
+    "url": "https://eleduck.com/",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "HTML（超文本标记语言） | MDN",
+    "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTML",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "第一步 | NestJS 中文文档 | NestJS 中文网",
+    "url": "https://nestjs.bootcss.com/first-steps.html",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "拦截器 | Axios Docs",
+    "url": "https://axios-http.com/zh/docs/interceptors",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "TypeORM | Midway",
+    "url": "https://midwayjs.org/docs/extensions/orm",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Node.js — Introduction to Node.js",
+    "url": "https://nodejs.org/zh-cn/learn/getting-started/introduction-to-nodejs",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Ventusky - 天气预报、雷达和风力图",
+    "url": "https://www.ventusky.com/?p=21.0;113.7;4&l=temperature-2m",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Remove Paywalls from News Articles Instantly | PaywallBuster",
+    "url": "https://paywallbuster.com/",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "快图设计-帮助企业快速搭建在线设计工具",
+    "url": "https://pro.kuaitu.cc/",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "@fa-cli/language - npm",
+    "url": "https://www.npmjs.com/package/@fa-cli/language",
+    "category": "书签栏/技术网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "介绍 | Vue JSON Schema Form",
+    "url": "https://vue-json-schema-form.lljj.me/zh/guide/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Three.js教程",
+    "url": "http://www.webgl3d.cn/Three.js/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "API | Hexo",
+    "url": "https://hexo.io/zh-cn/api/index.html",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "lodash.debounce | Lodash 中文网",
+    "url": "https://www.lodashjs.com/docs/lodash.debounce",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "介绍 - v-charts",
+    "url": "https://v-charts.js.org/#/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "JavaScript | MDN",
+    "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ECharts演示",
+    "url": "https://echarts.baidu.com/examples/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Animate.css",
+    "url": "https://daneden.github.io/animate.css/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Mock.js",
+    "url": "http://mockjs.com/0.1/#capitalize",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ECMAScript 6 入门 - ECMAScript 6入门",
+    "url": "http://es6.ruanyifeng.com/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "wangEditor - 轻量级web富文本编辑器",
+    "url": "http://www.wangeditor.com/index.html",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Widgets 目录 - Flutter中文网",
+    "url": "https://flutterchina.club/widgets/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "jQuery API 中文文档 | jQuery API 中文在线手册 | jquery api 下载 | jquery api chm",
+    "url": "http://jquery.cuishifeng.cn/index.html",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "什么是 FreeMarker? - FreeMarker 中文官方参考手册",
+    "url": "http://freemarker.foofun.cn/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "API 文档 | Node.js 中文网",
+    "url": "http://nodejs.cn/api/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "蚂蚁数据可视化 - AntV",
+    "url": "http://antv.alipay.com/zh-cn/index.html#__products",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Moment.js | Home",
+    "url": "https://momentjs.com/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "程序员导航-CXY521",
+    "url": "https://cxy521.com/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Word转HTML——免费在线Word转网页",
+    "url": "http://www.docpe.com/word/word-to-html.aspx",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Formily",
+    "url": "http://formilyjs.org/#/0yTeT0/wWuyuJc6fO",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "geojson.io",
+    "url": "http://geojson.io/#map=2/20.0/0.0",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "RGB颜色值与十六进制颜色码转换工具",
+    "url": "https://www.sioe.cn/yingyong/yanse-rgb-16/",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "JSON Schema 生成器 | Vue Json schema form",
+    "url": "https://form.lljj.me/schema-generator.html#/index",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Nintex Login",
+    "url": "https://nintex-portal.auth0.com/login?state=g6Fo2SBHM1B3andqRUl2RmdDaHhoT2ZpOGoyXzhZZ1drMmRmdqN0aWTZIEY0RUdwNlM5aGl4RXI0RGZqVXF6MmxuTXlhZkR2bTFwo2NpZNkgODkxU0NCU3NNT2V4YWgxZ1NJNmJWN282NXN1TTRPWDg&client=891SCBSsMOexah1gSI6bV7o65suM4OX8&protocol=oauth2&prompt=select_account&audience=https%3A%2F%2Fnintex.io&response_type=code&redirect_uri=https%3A%2F%2Fzldzt-347083.workflowcloud.com%2Foidccallback&scope=openid%20profile%20email%20tenant_name_zldzt-347083",
+    "category": "书签栏/技术网站/各种插件官网",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "密钥和凭据 – Google 地图平台 – 我的第一个项目 – Google Cloud 控制台 --- Keys & Credentials – Google Maps Platform – My First Project – Google Cloud console",
+    "url": "https://console.cloud.google.com/google/maps-apis/credentials?hl=en&project=eco-world-438711-b5",
+    "category": "书签栏/技术网站/google地图",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "事件  |  Maps JavaScript API  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation/javascript/events?hl=zh-cn",
+    "category": "书签栏/技术网站/google地图",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Google Maps Platform 文档  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation?hl=zh-cn#places",
+    "category": "书签栏/技术网站/google地图",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "使用 API 密钥  |  Maps JavaScript API  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation/javascript/get-api-key?hl=zh-cn",
+    "category": "书签栏/技术网站/google地图",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "使用 Places API 和地理编码服务来设置边界的数据驱动型样式  |  Maps JavaScript API  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation/javascript/dds-boundaries/dds-use-maps-places-apis?hl=zh-cn",
+    "category": "书签栏/技术网站/google地图",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "迁移到地点详情（新）  |  Places API  |  Google for Developers",
+    "url": "https://developers.google.com/maps/documentation/places/web-service/migrate-details?hl=zh-cn",
+    "category": "书签栏/技术网站/google地图",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "允许未经身份验证的访客使用API密钥访问您的应用程序 - Amazon Location Service",
+    "url": "https://docs.aws.amazon.com/zh_cn/location/latest/developerguide/using-apikeys.html",
+    "category": "书签栏/技术网站/google地图/aws地图",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "服务主任业绩目标",
+    "url": "https://acs.infinitus.com.cn/runAs?userId=12432",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Bootstrap 标签页Tab插件的事件_歪脖先生的博客-CSDN博客",
+    "url": "https://blog.csdn.net/ixygj197875/article/details/79549903",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "李锦记健康集团-统一登录平台",
+    "url": "https://adfs-test.infinitus-int.com/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fadfs-test.infinitus-int.com%3a8000%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252flogin.aspx%253fa%253dD8%2526r%253dhttp%253a%252f%252f172.20.56.145%253a32676%252fblade-auth%252foauth%252fcallback%252fadfs%253fredirect_uri%253dhttp%253a%252f%252flocalhost%253a8080%252flogin&wct=2020-09-14T01%3a23%3a57Z&wreply=https%3a%2f%2fadfs-test.infinitus-int.com%3a8000%2fWebForm2.aspx",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "首页-Saber企业级开发平台",
+    "url": "http://172.20.56.145:30103/#/login",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "登录沟通辅助系统",
+    "url": "https://acs.infinitus.com.cn/login",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "接口文档-Saber企业级开发平台",
+    "url": "http://172.20.56.145:30103/#/myiframe/urlPath?name=%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3&src=http%3A%2F%2F172.20.56.145%3A32676%2Fdoc.html",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "广州市三地信息技术有限公司",
+    "url": "http://mail.sandi.com.cn/cgi-bin/frame_html?sid=zE-n4Nejbtm4eVQL,2&sign_type=&r=1ba0ff591bc4f600265f6668731db62b",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "我的地盘 - 禅道",
+    "url": "https://zentao.infinitus.com.cn/zentao/my/",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Browse 数据应用平台 / dap-acs-frontend - Infinitus' Git",
+    "url": "https://git.infinitus.com.cn/projects/DAP/repos/dap-acs-frontend/browse?at=refs%2Fheads%2Frelease%2Fdevelop",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Index of /axure/da/业务数递",
+    "url": "http://axure-dev.infinitus.com.cn/axure/da/%e4%b8%9a%e5%8a%a1%e6%95%b0%e9%80%92/",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "RuoYi 若依官方网站 |后台管理系统|权限管理系统|快速开发框架|企业管理系统|开源框架|微服务框架|前后端分离框架|开源后台系统|RuoYi|RuoYi-Vue|RuoYi-Cloud|RuoYi框架|RuoYi开源|RuoYi视频|若依视频|RuoYi开发文档|若依开发文档|Java开源框架|Java|SpringBoot|SrpingBoot2.0|SrpingCloud|Alibaba|MyBatis|Shiro|OAuth2.0|Thymeleaf|BootStrap|Vue|Element-UI||www.ruoyi.vip",
+    "url": "http://ruoyi.vip/",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Index of /axure/da/服务主任沟通辅助系统",
+    "url": "http://axure-dev.infinitus.com.cn/axure/da/%e6%9c%8d%e5%8a%a1%e4%b8%bb%e4%bb%bb%e6%b2%9f%e9%80%9a%e8%be%85%e5%8a%a9%e7%b3%bb%e7%bb%9f/",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "03 导航栏--搜索无结果 - 蓝湖",
+    "url": "https://lanhuapp.com/web/#/item/project/board/detail?pid=a56a5afc-3b6d-4ad5-9f9f-24b29aef564c&project_id=a56a5afc-3b6d-4ad5-9f9f-24b29aef564c&image_id=3d86d8e4-fae3-470e-a3d2-0ab91b195e75",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Swagger UI",
+    "url": "http://192.168.137.1:8155/swagger-ui.html#/",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "容器云管理平台",
+    "url": "https://ccp.infinitus.com.cn/overview?cid=user-f532a3-20200706025616-515",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Index of /axure/da",
+    "url": "http://axure-dev.infinitus.com.cn/axure/da/",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Swagger UI",
+    "url": "http://192.168.137.1:8155/swagger-ui.html#/%E6%8A%A5%E8%A1%A8%E6%8E%A5%E5%8F%A3/listUsingGET_1",
+    "category": "书签栏/company/三地",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "欧朋Opera手机浏览器官方网站|手机浏览器下载|安卓手机浏览器下载|智能手机浏览器免费下载|欧朋浏览器下载|欧朋流量宝下载|Opera桌面浏览器下载|PC浏览器下载|苹果浏览器下载",
+    "url": "http://www.oupeng.com/",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "小红书_标记我的生活",
+    "url": "https://www.xiaohongshu.com/protocols/news",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "荔枝【官方APP下载】",
+    "url": "https://www.lizhi.fm/about/download.html",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "jQuery视差插件ImageScroll",
+    "url": "http://www.jq22.com/jquery-info300",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "luckin coffee",
+    "url": "http://www.luckincoffee.com/about",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Mock.js",
+    "url": "http://mockjs.com/0.1/#capitalize",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新视觉门户网站APP下载页面|网页|门户/社交|川先森哟 - 原创作品 - 站酷 (ZCOOL)",
+    "url": "https://www.zcool.com.cn/work/ZMjM2NDI1NzY=.html",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "【网站app下载页面】|网页|专题/活动|大杨丹 - 原创作品 - 站酷 (ZCOOL)",
+    "url": "https://www.zcool.com.cn/work/ZMTI2ODY5OTI=.html",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "WeX5简介 - Docs",
+    "url": "http://docs.wex5.com/wex5-introduction/?from=groupmessage&isappinstalled=0",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "SCSS 在线编译工具 - JSRUN 工具箱",
+    "url": "http://jsrun.pro/app/scss",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "localhost:8080/x5/UI2/v_/schoolmate/index.w?userid=0571ce5f41aa4c7c835c5cbb4f1799d9#!main",
+    "url": "http://localhost:8080/x5/UI2/v_/schoolmate/index.w?userid=0571ce5f41aa4c7c835c5cbb4f1799d9#!main",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "WeX5简介 - Docs",
+    "url": "http://docs.wex5.com/wex5-introduction/",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "来画-短视频智能创作营销平台-MG动画视频制作工具-来画视频",
+    "url": "https://www.laihua.com/",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "localhost:8080/x5/UI2/v_/schoolmate/index.w?userid=523eb61f158a4ee08dc42c6f3fe0cedb#!main",
+    "url": "http://localhost:8080/x5/UI2/v_/schoolmate/index.w?userid=523eb61f158a4ee08dc42c6f3fe0cedb#!main",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "xyltest.mychwn.com/v-BbeQza-zh_CN-/schoolmate/register/stuMainActivity.w?userid=523eb61f158a4ee08dc42c6f3fe0cedb&signature=8518535edfd20a945f2ec2f25d44a847#!content3",
+    "url": "http://xyltest.mychwn.com/v-BbeQza-zh_CN-/schoolmate/register/stuMainActivity.w?userid=523eb61f158a4ee08dc42c6f3fe0cedb&signature=8518535edfd20a945f2ec2f25d44a847#!content3",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "前端项目经验 - 代码狂魔2019 - 博客园",
+    "url": "https://www.cnblogs.com/zhuxinpeng-looking/p/11311502.html",
+    "category": "书签栏/company/blue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "环球雅途集团",
+    "url": "http://mail.hqyatu.com/",
+    "category": "书签栏/company/环球雅途/文件",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "环球雅途内部信息平台",
+    "url": "http://192.168.80.249/",
+    "category": "书签栏/company/环球雅途/文件",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工作中心",
+    "url": "http://192.168.80.246/personalized",
+    "category": "书签栏/company/环球雅途/文件",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "投诉建议测试",
+    "url": "http://testimg.yilvbao.cn/h5/complaints.html?region=9510822",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "投诉建议开发",
+    "url": "http://www.jgdev.com/h5/complaints.html?region=9510822",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "智慧旅游监管系统测试",
+    "url": "http://testimg.yilvbao.cn/login.action",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "智慧旅游监管系统开发",
+    "url": "http://www.jgdev.com/login.action",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "园博园开发",
+    "url": "http://yby.zhlyjg.cn/login.action",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "导游导览",
+    "url": "https://agt.yilvbao.cn/system/#/login",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "用户登录 - 禅道",
+    "url": "http://192.168.80.51/zentao/user-login-L3plbnRhby9idWctYnJvd3NlLTIuaHRtbA==.html",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "园博园测试",
+    "url": "http://yby.zhlyjg.cn/system/login.action",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "导游导览地址",
+    "url": "https://agt.yilvbao.cn/webchat/#/",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "导游导览webchat新地址",
+    "url": "https://agt.jznews.net.cn/webchat/#/",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新版生产荆州园博园数字管控平台",
+    "url": "http://yby.zhlyjg.cn/#/login?redirect=%2Fservice",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新版测试荆州园博园数字管控平台",
+    "url": "http://ybytest.zhlyjg.cn/#/login?redirect=%2Fservice",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "广元生产",
+    "url": "http://www.zhlyjg.com/main.action",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "广元-准生产",
+    "url": "http://www.zhlyjg.cn/main.action",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "荆州园博园数字管控平台",
+    "url": "http://localhost:8080/#/decision/",
+    "category": "书签栏/company/环球雅途/开发地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "jQuery WEUI",
+    "url": "http://jqweui.com/download",
+    "category": "书签栏/company/环球雅途/weui母婴",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "jQuery WEUI",
+    "url": "http://jqweui.com/",
+    "category": "书签栏/company/环球雅途/weui母婴",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "智慧母婴室 - 管理中心",
+    "url": "http://my.yilvbao.cn/mcms-web/merchantLogin",
+    "category": "书签栏/company/环球雅途/weui母婴",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "母婴室地图",
+    "url": "http://mcmstest.yilvbao.cn/maternal-webApp/views/MaPage/index.html#",
+    "category": "书签栏/company/环球雅途/weui母婴",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "魔学院移动学习平台-企业培训系统_线上培训平台_企业培训软件",
+    "url": "https://www.moxueyuan.com/",
+    "category": "书签栏/company/维卓",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "腾讯企业邮箱 - 收件箱",
+    "url": "https://exmail.qq.com/cgi-bin/frame_html?sid=FW_zOq-sU1nPIwxT,7&sign_type=&r=524b68f2f7c10ae6c7334cb9a8d7bcd7",
+    "category": "书签栏/company/维卓",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "缺陷-维卓BPM重构版本-TAPD平台",
+    "url": "https://www.tapd.cn/61969009/bugtrace/bugreports/my_view",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "线上wezonet-bpm",
+    "url": "http://crm.wezobpm.com/#/",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "测试wezonet-bpm",
+    "url": "http://192.168.1.18/#/",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "测试Swagger UI",
+    "url": "http://192.168.1.18/bpm/swagger-ui.html#",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "李孝远 / wezonet-bpm · GitLab",
+    "url": "http://192.168.1.10:8090/LiXiaoyuan/wezonet-bpm",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Projects · Dashboard · GitLab",
+    "url": "http://192.168.1.10:8090/?nav_source=navbar",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "测试媒介管家",
+    "url": "http://test-media.adamroi.cn/login",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ADAM",
+    "url": "https://test-adamroi.com/login",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新BPM - 蓝湖",
+    "url": "https://lanhuapp.com/web/#/item/project/board?pid=35af4e55-7e65-4206-afd0-24c4cb92c9d7",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "项目管理全流程2.0",
+    "url": "https://tp4qh5.axshare.com/#id=j3j62v&p=%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E5%85%A8%E6%B5%81%E7%A8%8B2_0",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新BPM",
+    "url": "https://lanhuapp.com/web/#/item/project/product?pid=35af4e55-7e65-4206-afd0-24c4cb92c9d7&docId=ddaa3b1e-739e-46d6-9b01-80b5a72c222c&image_id=ddaa3b1e-739e-46d6-9b01-80b5a72c222c&docType=axure&pageId=bae162bc7a444ac5abc24b3866e464dc&parentId=544926390f5f4ec68f6e0f00014e5afa",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ADAM",
+    "url": "https://www.adamroi.com/login",
+    "category": "书签栏/company/维卓/项目地址",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "wezonet-bpm",
+    "url": "http://crm.wezobpm.com/#/#reloaded",
+    "category": "书签栏/company/维卓",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新BPM-蓝湖",
+    "url": "https://lanhuapp.com/web/#/item/project/product?tid=e5246fac-7ea4-4c72-8ac7-99cc77591d62&pid=35af4e55-7e65-4206-afd0-24c4cb92c9d7&versionId=21b79b20-214e-434f-82b9-249ca365a8fe&docId=985048c0-8ba3-4ee8-b9a7-fe7ce9080ff1&docType=axure&pageId=d4ab1f167dfb4ab09cd7092e03a9e242&image_id=985048c0-8ba3-4ee8-b9a7-fe7ce9080ff1&parentId=3c7d6be2-d7c6-46e2-b51b-aab7b2773a44",
+    "category": "书签栏/company/维卓",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ES6 入门教程 - ECMAScript 6入门",
+    "url": "https://es6.ruanyifeng.com/?search=%23&x=0&y=0",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "一份热乎的前端面经（已拿字节、蚂蚁、拼多多 Offer）",
+    "url": "https://mp.weixin.qq.com/s/X-xCZ2yfk_j0rFCTg2WEng",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Promise必备知识汇总和面试情况",
+    "url": "https://mp.weixin.qq.com/s/S5QzW9RfnjcDyoDxYWhRfA",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Git - Book",
+    "url": "https://git-scm.com/book/zh/v2",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "(……) 【Node】搭建一个静态资源服务器 - SegmentFault 思否",
+    "url": "https://segmentfault.com/a/1190000019222794",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OKee Design-轻量、可靠的 Vue 组件库",
+    "url": "https://okee.oceanengine.com/mobile/vue/#/zh-CN/collapse",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "题库 - 力扣 (LeetCode) 全球极客挚爱的技术成长平台",
+    "url": "https://leetcode-cn.com/problemset/all/?difficulty=EASY",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Ts高手篇：22个示例深入讲解Ts最晦涩难懂的高级类型工具",
+    "url": "https://juejin.cn/post/6994102811218673700",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "JavaScript高级程序设计（第4版）-马特·弗里斯比-微信读书",
+    "url": "https://weread.qq.com/web/reader/751326d0720befab7514782k8e232ec02198e296a067180",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "带你深度解锁Webpack系列(优化篇) - 掘金",
+    "url": "https://juejin.cn/post/6844904093463347208#heading-0",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "近 20 人爆肝数周，写给初中级前端的万字高级进阶指南 - 掘金",
+    "url": "https://juejin.cn/post/7017645909483716615?utm_source=gold_browser_extension",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Python教程 - 廖雪峰的官方网站",
+    "url": "https://www.liaoxuefeng.com/wiki/1016959663602400",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "标签 - Postbird - 猫既吾命",
+    "url": "http://www.ptbird.cn/tags.html",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "下载地址链接转换工具 - 在线工具",
+    "url": "https://tool.lu/urlconvert/",
+    "category": "书签栏/company/xiaorui",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Frontend / magic-pipeline · GitLab",
+    "url": "http://gitlab-server.magic.com/web/magic-pipeline",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "401 Authorization Required",
+    "url": "http://58.250.17.148:8909/download/tools/VPN.exe",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Rust 程序设计语言",
+    "url": "https://www.rust-lang.org/zh-CN/",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "昆山农商银行",
+    "url": "http://192.168.1.157:29262/mm/mmm/zh-CN/login?from=401",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "模型管理系统",
+    "url": "http://192.168.1.113:3000/mm/mmm/zh-CN/login?from=noToken",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "React lingu翻译基础 - 前端团队 - Confluence",
+    "url": "http://confluence.magic.com/pages/viewpage.action?pageId=111575082",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Magic Factor",
+    "url": "http://factor.magic.com/",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "昆山农商银行",
+    "url": "http://192.168.1.80/mm/mmm/zh-CN/workspaces/1/plat_project",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "魔数充电站 - 魔数充电站 - Confluence",
+    "url": "http://confluence.magic.com/pages/viewpage.action?pageId=27406437",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "BehaviorSubject | RxJS 中文文档",
+    "url": "https://cn.rx.js.org/class/es6/BehaviorSubject.js~BehaviorSubject.html",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "电子发票合并打印整理专家 - 发票大师",
+    "url": "https://fapiao.bangnimang.net/",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "iconfont-阿里巴巴矢量图标库",
+    "url": "https://www.iconfont.cn/manage/index?manage_type=myprojects&projectId=4431223",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "弹性方向 - Tailwind CSS 中文网",
+    "url": "https://tailwind.nodejs.cn/docs/flex-direction",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Best Practices | Cypress Documentation",
+    "url": "https://docs.cypress.io/guides/references/best-practices#Cypress-and-Testing-Library",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "192.168.1.180:3000/mm/mmm/zh-CN/login?from=401",
+    "url": "http://192.168.1.180:3000/mm/mmm/zh-CN/login?from=401",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Magic Engine",
+    "url": "http://192.168.1.205:3000/mm/mmm/zh-CN/dashboard/approval_list",
+    "category": "书签栏/company/魔数",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "版本 - 持续集成 - digital-food-front-platform-client - OPPO云-云智一体 赋能终端",
+    "url": "https://test-console.cloud.oppoer.me/pipeline/app/versions?uniqCodeKey=all&paasZoneCode=all&azCode=all&k8sClusterCode=all&psaId=152705&cloudLayout=serviceTree&serverId=130321",
+    "category": "书签栏/company/OPPO/C端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "流水线 - 持续集成 - digital-food-front-platform - OPPO云-云智一体 赋能终端",
+    "url": "https://test-console.cloud.oppoer.me/pipeline/app/pipeline/execute?uniqCodeKey=all&paasZoneCode=all&azCode=all&k8sClusterCode=all&psaId=151320&cloudLayout=serviceTree&serverId=130321&latestWorkflowId=7886763",
+    "category": "书签栏/company/OPPO/C端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "联调C端h5",
+    "url": "http://h5-cndg-test02.wanyol.com/",
+    "category": "书签栏/company/OPPO/C端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "QponMerchant-cn-test03",
+    "url": "https://dgf-h5-cn-test03.wanyol.com/digital-ssr-static-test/tmpdir/dist/index.html#/home",
+    "category": "书签栏/company/OPPO/B端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "QponMerchant-sg-test01",
+    "url": "https://dgf-h5-sg-test01.wanyol.com/digital-ssr-static-test/tmpdir/dist/index.html#/login",
+    "category": "书签栏/company/OPPO/B端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "test02",
+    "url": "https://dgf-h5-cn-test02.wanyol.com/digital-ssr-static-test/tmpdir/dist/index.html#/login",
+    "category": "书签栏/company/OPPO/B端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "02Qpon 商家 --- QponMerchant",
+    "url": "https://dgf-h5-cn-test02.wanyol.com/merchant/TeamVerification",
+    "category": "书签栏/company/OPPO/B端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "01QponMerchant",
+    "url": "https://dgf-h5-sg-test01.wanyol.com/merchant/login",
+    "category": "书签栏/company/OPPO/B端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "商家b端app域名整理",
+    "url": "https://odocs.myoas.com/docs/MC99tuqJzPUIwzk4?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/B端",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "test03最新商家营销管理后台",
+    "url": "https://admin-cndg-test03.wanyol.com/",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "test02新域名商家营销管理后台",
+    "url": "https://admin-cndg-test02.wanyol.com/",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "test01最新商家营销管理后台",
+    "url": "https://admin-cndg-test01.wanyol.com/",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "CookUI",
+    "url": "https://cook-ui.oppoer.me/component/steps",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "预发布商家营销管理后台",
+    "url": "https://pre-qpon-admin.oppoer.me/",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "正式qpon-admin.oppoer.me",
+    "url": "https://qpon-admin.oppoer.me/",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "测试环境发布 - 持续集成 - digital-food-admin",
+    "url": "https://test-console.cloud.oppoer.me/pipeline/app/versions?uniqCodeKey=all&paasZoneCode=all&azCode=all&k8sClusterCode=all&psaId=130438&cloudLayout=serviceTree&serverId=130321",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "VUE3-测试发布 - 持续集成 - digital-food-admin-vue3",
+    "url": "https://test-console.cloud.oppoer.me/pipeline/app/versions?uniqCodeKey=all&paasZoneCode=all&azCode=all&k8sClusterCode=all&psaId=162492&cloudLayout=serviceTree&serverId=130321",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "vue2后管正式预发部署-云原生应用平台AppStack - OPPO云",
+    "url": "https://v2-cloud.oppoer.me/app-stack/app/deploy-group/group-list?appId=130438&env=prod",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "管理后台权限控制",
+    "url": "https://odocs.myoas.com/sheets/8Nk6MxWW4lT5PWqL/vIt1r?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "商家营销管理后台组件文档",
+    "url": "https://odocs.myoas.com/docs/Qg5c2SxnRVEYAaYf",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "正式-配菜单-统一身份管理平台",
+    "url": "https://sso.myoas.com/sim/main.do#PERM_ENTLMANAGEMODEL",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新版后管vue2测试流水线",
+    "url": "https://devops.cloud.oppoer.me/micro-app/ci-na/app/versions?psaId=130438&serverId=130321",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新版后管vue3测试流水线",
+    "url": "https://devops.cloud.oppoer.me/micro-app/ci-na/app/versions?psaId=162492&serverId=130321",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "正式发布-应用变更-OPPO研发云",
+    "url": "https://devops.cloud.oppoer.me/micro-app/client-deploy-change/changeList?projectId=2095821&projectType=3",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "鉴权迁移测试-商家营销管理后台",
+    "url": "https://mch-admin-cndg-test01.wanyol.com/",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "后管版本分支管理",
+    "url": "https://odocs.myoas.com/sheets/R13j89PELgIPDGk5/MODOC?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/后管",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "test01测试新营销中台",
+    "url": "https://market-admin-cndg-test01.wanyol.com/platformManageCenterHome?rightName=%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "test02联调新版中台",
+    "url": "https://market-admin-cndg-test02.wanyol.com/",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "test04回归新营销中台",
+    "url": "https://market-admin-cndg-test04.wanyol.com/platformManageCenterHome?rightName=%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "营销中台预发布",
+    "url": "http://dgf-market-admin-pre.oppoer.me/",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "营销中台正式",
+    "url": "http://dgf-market-admin.oppoer.me/",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "中台测试发布 - 持续集成 - digital-food-market-admin",
+    "url": "https://test-console.cloud.oppoer.me/pipeline/app/versions?uniqCodeKey=all&paasZoneCode=all&azCode=all&k8sClusterCode=all&psaId=158416&cloudLayout=serviceTree&serverId=130321",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "中台线上发布-云原生应用平台 AppStack - OPPO云",
+    "url": "https://v2-cloud.oppoer.me/app-stack/app/deploy-group/group-list?appId=158416&env=prod",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "营销中台-项目文档",
+    "url": "https://odocs.myoas.com/docs/BgVW9WgoR84Rexro",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "远古-营销中台",
+    "url": "https://uc-market-admin-test.wanyol.com/growthMarket/smart/realTimeHotList?rightId=147245&from=oneStop&businessId=1&routeCount=5&goOneStop=true",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "新版中台测试流水线发布",
+    "url": "https://devops.cloud.oppoer.me/micro-app/ci-na/app/versions?psaId=158416&serverId=130321",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "3Q影视-qqq影视",
+    "url": "https://qqqys.com/",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "迁移--暂用--测试--营销中台",
+    "url": "https://mkt-admin-cndg-test01.wanyol.com/growthMarket/home",
+    "category": "书签栏/company/OPPO/营销中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "女娲建站系统",
+    "url": "https://nvwa.wanyol.com/all-sites",
+    "category": "书签栏/company/OPPO/女娲中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "🎡 女娲建站组件开发文档",
+    "url": "https://odocs.myoas.com/docs/16q8Mm6eNNH6Q8k7",
+    "category": "书签栏/company/OPPO/女娲中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OPPO研发云",
+    "url": "https://devops.cloud.oppoer.me/micro-app/ocode-na/nvwa/nvwa-components/overview?tt_token=APPURLWITHTICKET3a8ae7f91ac98c0f3473a8bed88c5fba",
+    "category": "书签栏/company/OPPO/女娲中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "组件总览 | @nvwa/ui",
+    "url": "https://titan-test.wanyol.com/sp/nvwa/zh-CN/component/overview.html",
+    "category": "书签栏/company/OPPO/女娲中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "女娲开发到部署流水线文档",
+    "url": "https://odocs.myoas.com/docs/Y8XBNgD5k8UnYgjA",
+    "category": "书签栏/company/OPPO/女娲中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "版本 - 持续集成 - nvwa-components - OPPO云-云智一体 赋能终端",
+    "url": "https://test-console.cloud.oppoer.me/pipeline/app/versions?uniqCodeKey=all&paasZoneCode=all&azCode=all&k8sClusterCode=all&psaId=154753&cloudLayout=serviceTree&serverId=153870",
+    "category": "书签栏/company/OPPO/女娲中台",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "接入服务 - digital-food - OPPO云-云智一体 赋能终端",
+    "url": "https://test-console.cloud.oppoer.me/gateway/home/APIGateway?uniqCodeKey=CN-S01-DG11_CN-S01-DGTEST01_dg01-test001&paasZoneCode=CN-S01-DGTEST01&azCode=CN-S01-DG11&k8sClusterCode=dg01-test001&psaId=129869&cloudLayout=serviceTree",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "实例-云原生应用平台AppStack",
+    "url": "https://v2-cloud.oppoer.me/app-stack/app/deploy-group/group-list?appId=130438&env=test",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "短信验证码 - 效率平台",
+    "url": "https://food-admin-cn-test.wanyol.com/tools/sms",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "效率平台测试",
+    "url": "https://effi-cndg-test.wanyol.com/",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "前端线上监控与定位 - 效率平台",
+    "url": "https://qpon-efficient-admin.oppoer.me/onlineOperations/monitoring",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "日志查询 - 日志服务 - digital-food - OPPO云-云智一体 赋能终端",
+    "url": "https://prod-console.cloud.oppoer.me/log-monitor/log/serviceTree/logServe?cloudLayout=serviceTree&uniqCodeKey=ID-SW01-CGK-ALICLOUD-A_INA-ALI_cgk01-prod001&paasZoneCode=INA-ALI&azCode=ID-SW01-CGK-ALICLOUD-A&k8sClusterCode=cgk01-prod001&newLogServe=1&psaId=129869",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OPPO云-坚如磐石 自由计算",
+    "url": "https://prod-console.cloud.oppoer.me/cloud-observation/traceDetail?timestamp=1737336200&trace_id=17373362003880a5d6bc200004242616&span_id=714bdd4c4b3213cd&trace_service=digital-food-gateway-client&spaceId=dfc88646-248b-424e-8067-b0b413bea119&k8sClusterCode=cgk01-prod001&paasZoneCode=INA-ALI&uniqCodeKey=ID-SW01-CGK-ALICLOUD-A_INA-ALI_cgk01-prod001&psaId=129869&azCode=ID-SW01-CGK-ALICLOUD-A&cloudLayout=serviceTree",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "日志查询 - 日志服务 - digital-food - OPPO云-云智一体 赋能终端",
+    "url": "https://prod-console.cloud.oppoer.me/log-monitor/log/serviceTree/logServe?uniqCodeKey=ID-SW01-CGK-ALICLOUD-A_INA-ALI_cgk01-prod001&paasZoneCode=INA-ALI&azCode=ID-SW01-CGK-ALICLOUD-A&k8sClusterCode=cgk01-prod001&psaId=129869&cloudLayout=serviceTree&newLogServe=1",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Dataland - Singapore",
+    "url": "https://sg-dl.oppoer.me/analysis/data-mining/offline-query?projectId=214&projectName=digitalfood_developer",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "环境信息汇总",
+    "url": "https://odocs.myoas.com/sheets/Ee32M7w99RSB7A2J/MODOC?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "安全漏洞管理系统",
+    "url": "http://sdl.sec.oppoer.me/iastweb/sourceCodeScan",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "模板中心 | 腾讯云 CloudBase",
+    "url": "https://tcb.cloud.tencent.com/dev?envId=asuria-1gt755jpb6706918#/cloud-template/detail?tplId=tpl-1uW91La1W47z66&appName=ai_ecom_app&source=tcb",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "鉴权迁移生产部署服务器信息",
+    "url": "https://odocs.myoas.com/docs/Ee32MJ7WEphnBA2J?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "oppo npm",
+    "url": "https://admin.npm.oppoer.me/",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Qpon-npm",
+    "url": "https://qpon-npm.wanyol.com/",
+    "category": "书签栏/company/OPPO/监控排查问题相关",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "测试--渠道--业务后管菜单配置--BSP业务结算平台",
+    "url": "https://bd-cndg-test01.wanyol.com/oauth/login",
+    "category": "书签栏/company/OPPO/渠道",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "预发-渠道-BSP业务结算平台",
+    "url": "https://pre-qpon-bd-gl.qponmobile.com/oauth/login",
+    "category": "书签栏/company/OPPO/渠道",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "生产-渠道-菜单配置--HZERO平台验证环境",
+    "url": "https://channel-admin-gl.qponmobile.com/hiam/menu",
+    "category": "书签栏/company/OPPO/渠道",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "渠道后台&渠道APP--操作指导文档",
+    "url": "https://odocs.myoas.com/docs/loqeW09BrdixrOAn?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/渠道",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "简历制作_在线制作简历_全民简历",
+    "url": "https://www.qmjianli.com/cv/edit/?resumeId=25526Z4Y1DV2UHR",
+    "category": "书签栏/company/OPPO/渠道",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Framer x Motion — overrides, workshop, components | Motion",
+    "url": "https://motion.dev/docs/react-layout-animations",
+    "category": "书签栏/company/OPPO/渠道",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "2025-09-28 生产测试环境域名信息",
+    "url": "https://odocs.myoas.com/sheets/gXqmeoDwKah855qo/MODOC?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/前端手册",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "前端新员工上手文档",
+    "url": "https://odocs.myoas.com/docs/m5kv9RvwYRT80EqX?lang=zh-CN",
+    "category": "书签栏/company/OPPO/前端手册",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "前端部署测试及发版流程",
+    "url": "https://odocs.myoas.com/docs/473QyY19D1COEw3w?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/前端手册",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "分支管理规范",
+    "url": "https://odocs.myoas.com/docs/sddW3mjszlobVpES?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/前端手册",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "开发研发云规范使用说明",
+    "url": "https://odocs.myoas.com/docs/wNM9IANF7FIy2P3g/?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/前端手册",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "websee接入文档",
+    "url": "https://odocs.myoas.com/docs/Wr3DVZ4KxyCmP7kJ?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/前端手册",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "前端文档汇总",
+    "url": "https://odocs.myoas.com/docs/9030Mm9rOlIZoXqw?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO/前端手册",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OMS外包管理系统",
+    "url": "https://oms.myoas.com/",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "统一身份管理平台-黑猫权限",
+    "url": "http://test-4a.wanyol.com/sim/main.do",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "域名 - 可观测平台 - digital-food - OPPO云-云智一体 赋能终端",
+    "url": "https://prod-console.cloud.oppoer.me/cloud-observation/domainPerformance/domain/detail?serviceType=detail&service=qpon-food-gl.qponmobile.com&spaceId=dfc88646-248b-424e-8067-b0b413bea119&uniqCodeKey=ID-SW01-CGK-ALICLOUD-A_INA-ALI_cgk01-prod001&paasZoneCode=INA-ALI&azCode=ID-SW01-CGK-ALICLOUD-A&k8sClusterCode=cgk01-prod001&psaId=129869&cloudLayout=serviceTree",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "上线历史 - 持续部署 - digital-food - OPPO云-云智一体 赋能终端",
+    "url": "https://test-console.cloud.oppoer.me/deploy/deployment/productOnlineManage?uniqCodeKey=SG-C01-SIN-AWS-A_SIG-AWS-TEST_sin01-test001&paasZoneCode=SIG-AWS-TEST&azCode=SG-C01-SIN-AWS-A&k8sClusterCode=sin01-test001&psaId=129869&cloudLayout=serviceTree",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "UPM权限自助中心",
+    "url": "https://upm.myoas.com/",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "需求发布单",
+    "url": "https://devops.cloud.oppoer.me/micro-app/client-deploy-change/AddChangeServer?planId=&projectId=2095821&projectType=3",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OPPO研发云",
+    "url": "https://devops.cloud.oppoer.me/micro-app/ocode/dashboard/projects?outerProjectId=2095821&projectType=3",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "joi.dev - 17.13.3 API Reference",
+    "url": "https://joi.dev/api/?v=17.13.3",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "控制台 - ODC - digital-food - OPPO云-云智一体 赋能终端",
+    "url": "https://test-console.cloud.oppoer.me/odc/public-content/console?uniqCodeKey=CN-S01-DG11_CN-S01-DGTEST01_dg01-test001&paasZoneCode=CN-S01-DGTEST01&azCode=CN-S01-DG11&k8sClusterCode=dg01-test001&psaId=129869&cloudLayout=serviceTree&clusterName=&instanceMark=&id=2fd0e515-3efe-4e50-ad66-7828a2aef587&name=food-user-zk-test&resultName=food-user-zk-test&dbType=1&type=rds",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Inspect with Chrome Developer Tools",
+    "url": "chrome://inspect/#devices",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "MySQL :: Download MySQL Community Server",
+    "url": "https://dev.mysql.com/downloads/mysql/",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OPPO全球资产管理系统",
+    "url": "https://geam.myoas.com/main.html",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "innerEye 查询更快，决策更聪明",
+    "url": "https://innereye.oppoer.me/DashboardCockpit?from=common&level2Id=170359&menuId=171894&dashboardId=64104",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "未命名绘图 - draw.io",
+    "url": "https://app.diagrams.net/",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "4A个人中心",
+    "url": "https://upm.myoas.com/account-self/account-asset/account-disable?lang=zh",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工时看板",
+    "url": "https://devops.cloud.oppoer.me/micro-app/noah-coteam/manage-view/member",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "开发吞吐率 - innerEye",
+    "url": "https://innereye.oppoer.me/DashboardCockpit?from=common&level2Id=95652&menuId=171894&dashboardId=64104&lang=zh-CN&lang=zh-CN&lang=zh-CN&tt_lang=zh-CN&tt_lang=zh-CN&tt_lang=zh-CN&zone=%2B8&zone=%2B8&zone=%2B8&tt_zone=%2B8&tt_zone=%2B8&tt_zone=%2B8&tt_control=666666&tt_control=666666&tt_control=666666&tt_versionCode=800&tt_versionCode=800&tt_versionCode=800&new_client=1&new_client=1&new_client=1&client_id=100254&client_id=100254&client_id=100254&expire_time=1748268322713&expire_time=1749472202436&expire_time=1763979806227&mobileMsgShowStyle=1&mobileMsgShowStyle=1&mobileMsgShowStyle=1&pcMsgShowStyle=1&pcMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Xiaomi MiMo 开放平台",
+    "url": "https://platform.xiaomimimo.com/#/docs/integration/cline-kilo-roo",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "2025-09-28 生产测试环境域名信息",
+    "url": "https://odocs.myoas.com/sheets/gXqmeoDwKah855qo/MODOC?lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1&lang=zh-CN&zone=%2B8&tt_versionCode=800&mobileMsgShowStyle=1&pcMsgShowStyle=1",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "前端开发工程师 - 豆包",
+    "url": "https://www.doubao.com/chat/38415550198312194",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "管理系统后台白屏卡顿排查优化 - 豆包",
+    "url": "https://www.doubao.com/chat/38415969788857602",
+    "category": "书签栏/company/OPPO",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "react的生命周期需要知道的。 - 一直在寻 - 博客园",
+    "url": "https://www.cnblogs.com/faith3/p/9216165.html",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "原始数据类型 · TypeScript 入门教程",
+    "url": "https://ts.xcatliu.com/basics/primitive-data-types.html",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "高级类型 · TypeScript中文网 · TypeScript——JavaScript的超集",
+    "url": "https://www.tslang.cn/docs/handbook/advanced-types.html",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "起步 · TypeScript——JavaScript的超集",
+    "url": "https://www.tslang.cn/samples/index.html",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "React – 用于构建用户界面的 JavaScript 库",
+    "url": "https://react.docschina.org/",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Taro UI | O2Team",
+    "url": "https://taro-ui.jd.com/#/docs/introduction",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Getting Started with Redux | Redux",
+    "url": "https://redux.js.org/introduction/getting-started#redux-toolkit",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "拖拽组件：React-DnD用法及源码解析 - 掘金",
+    "url": "https://juejin.cn/post/6885511137236877325",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "React",
+    "url": "https://react.dev/",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "快速上手 - ahooks 3.0",
+    "url": "https://ahooks.pages.dev/zh-CN/hooks/use-request/index",
+    "category": "书签栏/react",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue Element+Node.js开发企业通用管理后台系统_课程",
+    "url": "https://coding.imooc.com/learn/list/401.html",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "小慕读书",
+    "url": "http://www.youbaobao.xyz/admin/#/login?redirect=%2Fdashboard",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "「小慕读书」管理后台",
+    "url": "https://www.youbaobao.xyz/admin-docs/",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "开始 | Vite 官方中文文档",
+    "url": "https://cn.vitejs.dev/guide/",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vant - 轻量、可靠的移动端 Vue 组件库",
+    "url": "https://youzan.github.io/vant/#/zh-CN/intro",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vant Weapp - 轻量、可靠的小程序 UI 组件库",
+    "url": "https://youzan.github.io/vant-weapp/#/cell",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "首页 - Vue Element Admin",
+    "url": "https://panjiachen.gitee.io/vue-element-admin/#/dashboard",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "介绍 | vue-element-admin",
+    "url": "https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue.js · Fundebug文档 - 一行代码搞定BUG监控 - 网站错误监控|JS错误监控|资源加载错误|网络请求错误|小程序错误监控|Java异常监控|监控报警|Source Map|用户行为|可视化重现",
+    "url": "https://docs.fundebug.com/notifier/javascript/framework/vuejs.html",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue-Treeselect | Vue-Treeselect 中文网",
+    "url": "https://www.vue-treeselect.cn/#customize-value-label",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "输入框 Input - Ant Design Vue",
+    "url": "https://www.antdv.com/components/input-cn/",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Home | Pinia 中文文档",
+    "url": "https://pinia.web3doc.top/",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue3",
+    "url": "https://vue3js.cn/",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "组件 | Element",
+    "url": "https://element.eleme.cn/2.0/#/zh-CN/component/quickstart",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "安装 - iView",
+    "url": "https://www.iviewui.com/docs/guide/install",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Vue hooks plus",
+    "url": "https://inhiblabcore.github.io/vue-hooks-plus/zh/guide/introduction",
+    "category": "书签栏/vue",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "构建性能 | webpack 中文文档",
+    "url": "https://webpack.docschina.org/guides/build-performance/#incremental-builds",
+    "category": "书签栏",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "百度翻译",
+    "url": "https://fanyi.baidu.com/?aldtype=85#zh/en/",
+    "category": "书签栏",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Cloud - Ollama",
+    "url": "https://docs.ollama.com/cloud#javascript",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Quickstart - Docs by LangChain",
+    "url": "https://docs.langchain.com/oss/python/langchain/quickstart",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "langchain-ai/langchain: 🦜🔗 The platform for reliable agents.",
+    "url": "https://github.com/langchain-ai/langchain",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "asuria | Unsplash --- asuria | Unsplash",
+    "url": "https://unsplash.com/oauth/applications/856114",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "api.unsplash.com/search/photos?query=beijing&per_page=1&client_id=lDLXXJQ0ztc-J1HMfv6MJOf6vQQbzsc3DUdiUlJOXTI",
+    "url": "https://api.unsplash.com/search/photos?query=beijing&per_page=1&client_id=lDLXXJQ0ztc-J1HMfv6MJOf6vQQbzsc3DUdiUlJOXTI",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "CAMEL - Build Multi-Agent AI Systems",
+    "url": "https://docs.camel-ai.org/cookbooks/applications/customer_service_Discord_bot_with_agentic_RAG",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Download ngrok for macOS",
+    "url": "https://ngrok.com/download/mac-os",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Postgres.app Downloads",
+    "url": "https://postgresapp.com/downloads.html",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "下载 - Cursor Agent",
+    "url": "https://agent.92xx.vip/download.html",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "为 RAG 生成测试集 - Ragas 框架",
+    "url": "https://docs.ragas.org.cn/en/stable/concepts/test_data_generation/rag/#example",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Arco Design Vue",
+    "url": "https://arco.design/vue/component/button",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Agent World — The Parallel Web",
+    "url": "https://world.coze.site/",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Agent Skills 市场 - Claude、Codex 和 ChatGPT Skills | SkillsMP",
+    "url": "https://skillsmp.com/zh",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "world.coze.site/skill.md",
+    "url": "https://world.coze.site/skill.md",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Xiaomi MiMo 开放平台",
+    "url": "https://platform.xiaomimimo.com/token-plan",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Stitch - Projects",
+    "url": "https://stitch.withgoogle.com/projects/5858164342862301130?pli=1",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ChatGPT",
+    "url": "https://chatgpt.com/",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "收件箱 - asuria008@gmail.com - Gmail",
+    "url": "https://mail.google.com/mail/u/0/#inbox",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Temporal",
+    "url": "https://cloud.temporal.io/login",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "最近解码 - 草料二维码解码器",
+    "url": "https://cli.im/deqr/",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Stitch - Design with AI",
+    "url": "https://stitch.withgoogle.com/",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "AG-UI and A2UI: Understanding the Differences | CopilotKit",
+    "url": "https://www.copilotkit.ai/ag-ui-and-a2ui",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "第 1 章：提示词链 | Agentic Design Patterns",
+    "url": "https://adp.xindoo.xyz/chapters/Chapter%201_%20Prompt%20Chaining/",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "CC Switch 官方网站 - AI 编程工具统一管理平台",
+    "url": "https://ccswitch.io/zh/",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "登录 | 和风天气",
+    "url": "https://id.qweather.com/#/login?redirect=https%3A%2F%2Fconsole.qweather.com%2Ferror&lang=zh",
+    "category": "书签栏/AI知识库链接",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "数据后台-蓝湖",
+    "url": "https://lanhuapp.com/web/#/item/project/stage?tid=be000fcf-f89c-4472-8ee5-524ba789490f&pid=ee12f7e3-00bb-4cb1-a0d6-c8a7fb4e36d7",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "uni.getEnterOptionsSync() | uni-app官网",
+    "url": "https://uniapp.dcloud.net.cn/api/getEnterOptionsSync.html",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程",
+    "url": "https://modao.cc/proto/zLM7sv5nt2pqk4r6iMXm0O/sharing?view_mode=device&screen=rbpV0o5941LZarfVR&canvasId=rcVCgjyfVECOZ8wFo4z9OK",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "文字提示 Tooltip - Ant Design Vue",
+    "url": "https://1x.antdv.com/components/tooltip-cn/#components-tooltip-demo-placement",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "卓元生产地址",
+    "url": "https://zone.exceam.com/#/system/workOrder/system/workOrder/search?_t=1775014307567",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "RocketMq-console-ng",
+    "url": "http://172.20.20.27:8080/#/topic",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程系统 · Teambition",
+    "url": "https://www.teambition.com/project/69a820f36cb8d6136c533cb1/gantt/view/69c4de909faf92246f8d8bf7",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程",
+    "url": "https://app.apifox.com/project/8039302",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "卓元测试",
+    "url": "https://zonetest.exceam.com/",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "首页 | 卓元开发环境",
+    "url": "http://202.105.142.243:8828/web/#/welcome",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Feature/20260326 download (!4) · Merge requests · FCTW / code / frontweb / fwfctw · GitLab",
+    "url": "http://zpjk.ql-msx.com:8082/fctw/code/frontweb/fwfctw/-/merge_requests/4",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "HirebyAigent - 智能招聘管理平台",
+    "url": "https://hirebyaigent.com/c/h9cnsos6",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Spug",
+    "url": "http://192.168.0.100/deploy/repository",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程系统 · Teambition",
+    "url": "https://www.teambition.com/project/69a820f36cb8d6136c533cb1/bug/section/all",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "登录/注册 - Teambition 帐号",
+    "url": "https://account.teambition.com/login?next_url=https%3A%2F%2Fwww.teambition.com%2Fproject%2F69a820f36cb8d6136c533cb1%2Fbug%2Fsection%2Fall",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程",
+    "url": "https://modao.cc/proto/zLM7sv5nt2pqk4r6iMXm0O/sharing?view_mode=device&screen=rbpVFgtdlqGXeA90m&canvasId=rcVEkDcBVI4HPA3Cvj0CTg",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "最近解码 - 草料二维码解码器",
+    "url": "https://cli.im/deqr",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程",
+    "url": "https://modao.cc/proto/zLM7sv5nt2pqk4r6iMXm0O/sharing?view_mode=read_only",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "工单全流程",
+    "url": "https://modao.cc/abar/share/fzWfFImPtdhfq3lHv3GK2w?subCid=ztmnykcswo1m6y7p",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "数据后台-蓝湖",
+    "url": "https://lanhuapp.com/web/#/item/project/stage?pid=ee12f7e3-00bb-4cb1-a0d6-c8a7fb4e36d7&tid=be000fcf-f89c-4472-8ee5-524ba789490f&see=all",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "团队文件 - 蓝湖",
+    "url": "https://lanhuapp.com/dashboard/#/item?tid=be000fcf-f89c-4472-8ee5-524ba789490f",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "​‬﻿﻿⁢​⁣‍‬‌﻿⁢⁢﻿﻿‬⁡⁡⁣⁣‌﻿‌‌⁡⁡‌‬‬‬⁢‌‌﻿‌‍⁡⁡‌‬‬‌‌‌⁡​⁡⁡‍‬‍‬﻿‍⁢‌​⁣⁡​‌‌⁣‬⁢​‍‍‌⁡前端监控方案 · 钉钉文档",
+    "url": "https://alidocs.dingtalk.com/i/nodes/Exel2BLV5znPKMjzfPKjnvOGJgk9rpMq?utm_scene=team_space&iframeQuery=anchorId%3Duu_mqhhbmb7rk9dne1n8bi%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E7%9A%84%E5%9F%8B%E7%82%B9%E7%9B%91%E6%8E%A7%E8%A1%A8%E7%BB%93%E6%9E%84%EF%BC%8C%E8%BF%98%E6%9C%89%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E6%88%91%E9%83%BD%E6%94%BE%E6%96%87%E6%A1%A3%E9%87%8C%E4%BA%86%E5%93%88",
+    "category": "书签栏/卓越",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "M4A to MP3 | CloudConvert",
+    "url": "https://cloudconvert.com/m4a-to-mp3",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "快马加编【站外爆款奖】内容提交链接",
+    "url": "https://wj.toutiao.com/q/v2/7637735572287979555/98VFG983/816f/#/",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "AI音乐创作台_一键免费生成专属歌曲 - 妙响（抖音音乐创作实验室）",
+    "url": "https://music.douyin.com/studio/create",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "快速了解 FastGPT | FastGPT",
+    "url": "https://doc.fastgpt.io/zh-CN/guide/getting-started",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "1c7/chinese-independent-developer: 👩🏿‍💻👨🏾‍💻👩🏼‍💻👨🏽‍💻👩🏻‍💻中国独立开发者项目列表 -- 分享大家都在做什么",
+    "url": "https://github.com/1c7/chinese-independent-developer",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "shiyu-coder/Kronos: Kronos: A Foundation Model for the Language of Financial Markets",
+    "url": "https://github.com/shiyu-coder/Kronos",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "msitarzewski/agency-agents：触手可及的完整人工智能代理机构——从前端高手到 Reddit 社区达人，从创意注入者到现实检验者。每位代理都是拥有独特个性、流程和可靠成果的专业人士。 --- msitarzewski/agency-agents: A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
+    "url": "https://github.com/msitarzewski/agency-agents",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Anspire",
+    "url": "https://open.anspire.cn/cus/gift",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "‌​​‬⁡⁢‌​​‌‌​‍⁡⁤⁣﻿﻿‬⁣⁤⁤​﻿﻿⁤‬⁢﻿⁣⁣‬‍⁡⁤⁢⁢​‌⁤​​⁤⁡⁣​⁣⁢​​【T1-学习文档-商业化案例】掌纹运势小程序 MVP可行性方案 - 飞书云文档",
+    "url": "https://vcnvmnln7wit.feishu.cn/wiki/QQW5wcwX2iWZs2kLF4icM2dznmf",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ZhuLinsen/daily_stock_analysis: LLM驱动的 A/H/美股智能分析：多数据源行情 + 实时新闻 + LLM决策仪表盘 + 多渠道推送，零成本定时运行，纯白嫖. LLM-powered stock analysis system for A/H/US markets.",
+    "url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "HKUDS/Vibe-Trading: \"Vibe-Trading: Your Personal Trading Agent\"",
+    "url": "https://github.com/HKUDS/Vibe-Trading",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Claude Code 如何工作 | 菜鸟教程",
+    "url": "https://www.runoob.com/claude-code/claude-code-how-it-work.html",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Emails · Resend",
+    "url": "https://resend.com/emails",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Agnes",
+    "url": "https://platform.agnes-ai.com/settings/apiKeys",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Tushare数据",
+    "url": "https://tushare.pro/",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "租用 Unt. Kingdom 号码 — 物理 SIM（非 VoIP）与虚拟 | SMS/OTP",
+    "url": "https://smspva.com/cn/rent/country/united-kingdom",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "硬核指南 - 够高清才是真硬核！",
+    "url": "https://yinghezhinan.com/",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "X",
+    "url": "https://x.com/home",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "(21) 路飞 🏴‍☠️ AI 研究员🧐 on X: \"一个 AI 美女账号，9.4 万粉，每月赚 2.8 万人民币\" / X",
+    "url": "https://x.com/0xluffy_eth/status/2071440964829466983",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "注册 | 三毛机场",
+    "url": "https://g-1.xn--ehqx7tcnnope.com/#/register",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Skill商店_OpenClaw Skill技能下载_CocoLoop更安全的Skill市场",
+    "url": "https://hub.cocoloop.cn/",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "数字平台域名 --- DigitalPlat Domains",
+    "url": "https://dash.domain.digitalplat.org/",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ESTKme: Best eSIM adapter card for your phone, tablet, any mobile devices.",
+    "url": "https://store.estk.me/",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "simonlin1212/global-stock-data: US stock market data for AI coding assistants — zero-auth, official sources. CBOE options with full Greeks + 0DTE flow, FINRA market-wide short volume, SEC EDGAR filing stream, and a free market-wide screener. 13 layers, 30+ endpoints, 11 sources. Every source labeled with its compliance tier.",
+    "url": "https://github.com/simonlin1212/global-stock-data",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "JCodesMore/ai-website-cloner-template: Clone any website with one command using AI coding agents",
+    "url": "https://github.com/JCodesMore/ai-website-cloner-template",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "元衡 API",
+    "url": "https://cn.meta-api.vip/",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "API 密钥 - 圣路易斯联邦储备银行 --- API Keys - St. Louis Fed",
+    "url": "https://fredaccount.stlouisfed.org/apikeys",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Grok",
+    "url": "https://grok.com/build",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Google Gemini",
+    "url": "https://gemini.google.com/app",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "微信云托管",
+    "url": "https://cloud.weixin.qq.com/cloudrun/service/flask-px99",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "微信云托管",
+    "url": "https://cloud.weixin.qq.com/cloudrun/service",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "prompts.chat - AI Prompts Community",
+    "url": "https://prompts.chat/",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Login – Vercel",
+    "url": "https://vercel.com/login",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "API Keys (Legacy) | Settings | Asuria | Supabase",
+    "url": "https://supabase.com/dashboard/project/vvseqfvuxvfqokzsydfa/settings/api-keys/legacy",
+    "category": "书签栏/AI创作",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "TechCrunch | Startup and Technology News",
+    "url": "https://techcrunch.com/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "The Verge",
+    "url": "https://www.theverge.com/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "WIRED - The Latest in Technology, Science, Culture and Business | WIRED",
+    "url": "https://www.wired.com/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "MIT Technology Review",
+    "url": "https://www.technologyreview.com/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Science and Math News | Quanta Magazine",
+    "url": "https://www.quantamagazine.org/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "spectrum.ieee.org",
+    "url": "https://spectrum.ieee.org/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Visual Capitalist",
+    "url": "https://www.visualcapitalist.com/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Semafor - An intelligent, transparent global news platform for breaking stories, analysis and video",
+    "url": "https://www.semafor.com/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "ProPublica — Investigative Journalism and News in the Public Interest",
+    "url": "https://www.propublica.org/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "MIT OpenCourseWare | Free Online Course Materials",
+    "url": "https://ocw.mit.edu/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "OpenStax",
+    "url": "https://openstax.org/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Free eBooks | Project Gutenberg",
+    "url": "https://www.gutenberg.org/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  },
+  {
+    "title": "Arts & Letters Daily - ideas, criticism, debate",
+    "url": "https://www.aldaily.com/",
+    "category": "书签栏/最新消息网站",
+    "description": "",
+    "icon": "",
+    "notes": ""
+  }
+]

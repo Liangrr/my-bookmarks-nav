@@ -2,45 +2,32 @@
 
 import { useState, useMemo } from "react";
 import { BookmarkCard } from "@/components/bookmark-card";
+import reorganizedBookmarks from "@/data/bookmarks-reorganized.json";
 
+// 生成图标（标题首字母）
+const generateIcon = (title: string) => {
+  return title.charAt(0).toUpperCase();
+};
+
+// 处理书签数据
+const rawBookmarks = reorganizedBookmarks as any[];
+
+// 提取所有分类
+const categoryNames = [...new Set(rawBookmarks.map(b => b.category))];
 const categories = [
   { id: "all", name: "全部" },
-  { id: "video", name: "影视娱乐" },
-  { id: "dev", name: "开发工具" },
-  { id: "design", name: "设计灵感" },
-  { id: "tool", name: "实用工具" },
-  { id: "other", name: "其他" },
+  ...categoryNames.map(name => ({ id: name, name })),
 ];
 
-const bookmarks = [
-  // 影视娱乐
-  { title: "Netflix", url: "netflix.com", desc: "全球流媒体巨头，海量电影剧集，4K 画质，原创内容质量极高", category: "video", icon: "N", size: "large" as const },
-  { title: "哔哩哔哩", url: "bilibili.com", desc: "国内最大年轻人文化社区，番剧、纪录片、知识区内容丰富", category: "video", icon: "B", size: "wide" as const },
-  { title: "YouTube", url: "youtube.com", desc: "全球最大视频平台", category: "video", icon: "Y" },
-  { title: "豆瓣电影", url: "movie.douban.com", desc: "电影评分与影评参考", category: "video", icon: "D" },
-
-  // 开发工具
-  { title: "GitHub", url: "github.com", desc: "全球最大代码托管平台，开源项目聚集地，Trending 每天都有新宝藏", category: "dev", icon: "G", size: "large" as const },
-  { title: "GitHub Trending", url: "github.com/trending", desc: "每日/每周热门开源项目榜单，发现新工具新框架的最佳入口", category: "dev", icon: "T", size: "wide" as const },
-  { title: "Stack Overflow", url: "stackoverflow.com", desc: "程序员问答社区，技术问题解答", category: "dev", icon: "S" },
-  { title: "V2EX", url: "v2ex.com", desc: "创意工作者社区，程序员日常交流", category: "dev", icon: "V" },
-
-  // 设计灵感
-  { title: "Dribbble", url: "dribbble.com", desc: "全球设计师作品展示社区，UI/UX、插画、品牌设计灵感宝库", category: "design", icon: "Dr", size: "tall" as const },
-  { title: "Behance", url: "behance.net", desc: "Adobe 旗下作品集平台，专业设计作品展示", category: "design", icon: "Be" },
-  { title: "Figma", url: "figma.com", desc: "在线协作设计工具，组件库系统完善", category: "design", icon: "Fi" },
-  { title: "Mobbin", url: "mobbin.com", desc: "移动端 UI 模式库，千万级截图参考", category: "design", icon: "M" },
-
-  // 实用工具
-  { title: "Notion", url: "notion.so", desc: "全能笔记与知识库工具，文档、数据库、项目管理一站搞定", category: "tool", icon: "Nt", size: "wide" as const },
-  { title: "TinyPNG", url: "tinypng.com", desc: "图片压缩工具，PNG/JPG 智能压缩", category: "tool", icon: "TP" },
-  { title: "Canva", url: "canva.com", desc: "在线平面设计，模板丰富易上手", category: "tool", icon: "Ca" },
-
-  // 其他
-  { title: "少数派", url: "sspai.com", desc: "高品质数字消费指南与效率工具分享，发现好用的 App 和工作流", category: "other", icon: "少", size: "wide" as const },
-  { title: "知乎", url: "zhihu.com", desc: "中文问答社区，知识分享", category: "other", icon: "知" },
-  { title: "微博", url: "weibo.com", desc: "社交媒体热点资讯", category: "other", icon: "微" },
-];
+// 处理书签数据
+const bookmarks = rawBookmarks.map(b => ({
+  title: b.title,
+  url: b.url,
+  desc: b.notes || b.description || b.title,
+  category: b.category,
+  icon: b.icon || generateIcon(b.title),
+  size: "normal" as const,
+}));
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
