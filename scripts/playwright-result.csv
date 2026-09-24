@@ -1,0 +1,77 @@
+﻿title,url,final_url,status,title_found,content_len,nav_ms,result
+青空次元,https://www.sorani.net,https://www.sorani.net,,,0,25005,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+金牌影视,https://www.vv3nwjk.com,https://www.vv3nwjk.com,,,0,25002,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+奈飞工厂,https://www.netflixgc.com,https://www.netflixgc.com,,,0,25002,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+泥视频,https://www.nivod.vip,https://www.nivod.vip,,,0,25001,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+POMO,https://pomo.mom/,https://pomo.mom/,,,0,25001,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+剧OK,https://juok3.top/,https://juok3.top/,,,0,25003,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+66 大片网,https://www.77dpw.vip/,https://www.77dpw.vip/,,,0,25000,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+追影,https://zhuiying3.cc/,https://zhuiying3.cc/,,,0,25000,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+Netflix,netflix.com,https://netflix.com,,,0,25003,"fail_Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to ""http"
+ACG.RIP,https://acg.rip/,https://acg.rip/,,,0,3715,"fail_Page.goto: net::ERR_CONNECTION_CLOSED at https://acg.rip/
+Call log:
+  "
+iOS影视APP,https://b.zhuiju.me/archives/23/,https://b.zhuiju.me/archives/23/,,,0,10008,fail_Page.goto: net::ERR_CONNECTION_CLOSED at https://b.zhuiju.me/archives/
+影视大全,https://yingshidaquan.top/,https://yingshidaquan.top/,,,0,2416,fail_Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://yingshidaquan.top/
+937影视,https://www.937tv.vip,https://www.937tv.vip/,500,System Error,340,9602,fail_http_500
+追剧么博客,https://b.zhuiju.me,https://b.zhuiju.me/,502,502 Bad Gateway,435,9300,fail_http_502
+SeleneTV,https://b.zhuiju.me/archives/4/,https://b.zhuiju.me/archives/4/,502,502 Bad Gateway,435,5385,fail_http_502
+摸鱼儿,http://摸鱼儿.cc,http://xn--v4q818bf34b.cc/,502,,0,3918,fail_http_502
+PanSou,https://pansou.de,https://pansou.de/,502,502 Bad Gateway,429,12193,fail_http_502
+夸克搜,https://kkso.net,https://kkso.net/,502,502 Bad Gateway,426,8523,fail_http_502
+追剧吧,https://www.zhuiju.us/,https://www.zhuiju.us/,502,502 Bad Gateway,441,15629,fail_http_502
+谷哥搜,https://gugeso.com/,https://gugeso.com/,502,502 Bad Gateway,432,6729,fail_http_502
+羊壳 PeekPro,https://b.zhuiju.me/archives/19/,https://b.zhuiju.me/archives/19/,502,502 Bad Gateway,435,13955,fail_http_502
+WebHomeTV,https://b.zhuiju.me/archives/18/,https://b.zhuiju.me/archives/18/,502,502 Bad Gateway,435,15269,fail_http_502
+OK影视,https://b.zhuiju.me/archives/17/,https://b.zhuiju.me/archives/17/,502,502 Bad Gateway,435,9476,fail_http_502
+FongMi 蜂蜜,https://b.zhuiju.me/archives/16/,https://b.zhuiju.me/archives/16/,502,502 Bad Gateway,435,6960,fail_http_502
+影视仓,https://b.zhuiju.me/archives/15/,https://b.zhuiju.me/archives/15/,502,502 Bad Gateway,435,10422,fail_http_502
+关于,https://b.zhuiju.me/start-page.html,https://b.zhuiju.me/start-page.html,502,502 Bad Gateway,435,9286,fail_http_502
+申请友链,https://b.zhuiju.me/links.html,https://b.zhuiju.me/links.html,502,502 Bad Gateway,435,14810,fail_http_502
+提交收录,https://b.zhuiju.me/shoulu.html,https://b.zhuiju.me/shoulu.html,502,502 Bad Gateway,435,8165,fail_http_502
+TVBox / 影视仓接口配置教程,https://b.zhuiju.me/archives/,https://b.zhuiju.me/archives/,502,502 Bad Gateway,435,10922,fail_http_502
+TVBox影视仓接口/配置地址,https://b.zhuiju.me/archives/3,https://b.zhuiju.me/archives/3,502,502 Bad Gateway,435,7353,fail_http_502
+雪落影视,https://xlys.me/,https://v.xl01.eu.cc/,521,,0,11653,fail_http_521
+91毒舌,https://www.duse0.com/,https://www.duse0.com/,850,"Protected by cdndefend, verifying your browser...",0,5174,fail_http_850
+好好看,https://www.hhkan2.com/,https://www.hhkan2.com/,850,"Protected by cdndefend, verifying your browser...",0,8810,fail_http_850
+可可影视,https://www.kkys14.com/,https://www.kkys14.com/,850,"Protected by cdndefend, verifying your browser...",0,12941,fail_http_850
+无名,https://6800.kstore.vip/fish.json,https://6800.kstore.vip/fish.json,401,,0,368,http_401
+No影视,https://novipnoad.org/,https://www.novipnoad.uk/,403,Just a moment...,264,12644,http_403
+注视影视,https://gaze.red/,https://gaze.red/,403,Attention Required! | Cloudflare,688,7518,http_403
+爱壹帆,https://iyf.tv,https://www.iyf.tv/,403,Just a moment...,258,13541,http_403
+厂长资源,https://www.czzymovie.com,https://www.czzymovie.com/,403,,96,6977,http_403
+LIBVIO,https://libviobd.com,https://libviobd.com/,403,,39,2995,http_403
+BD影视聚合,https://www.juhebd.com/,https://www.juhebd.com/,403,Just a moment...,262,8878,http_403
+高清MP4,https://www.mp4ba.vip,https://www.mp4ba.vip/,403,"免费1080p电影,4k电影,mp4电影,mkv电影资源下载站 - 高清Mp4吧",2738,8488,http_403
+高清族,https://hdzu.org,https://hdzu.org/,403,"最新1080P电影下载,4K电影下载,迅雷下载影视资源站 - 高清族",4044,12709,http_403
+歪比巴卜,https://wbbb1.com/,https://wbbb1.com/,403,歪比巴卜-更多高清视频免费在线观看,2907,23073,http_403
+Stack Overflow,stackoverflow.com,https://stackoverflow.com/questions,403,Just a moment...,0,2662,http_403
+Behance,behance.net,https://www.behance.net/,403,,0,15565,http_403
+字幕库,https://zimuku.org,https://zimuku.org/,404,网站防火墙,31,8980,http_404
+VOX,http://rihou.cc:88/demo.php,http://rihou.cc:88/demo.php,404,404 Not Found,19,279,http_404
+蛋蛋奇,https://www.dandanqi.cc/,https://www.dandanqi.cc/,404,404 Not Found,19,4714,http_404
+PPnix,https://www.ppnix.com/cn/,https://www.ppnix.com/cn/,200,PPnix - 在线观看电影 在线观看电视剧,1389,8953,ok
+饭太硬,http://www.饭太硬.net/tv,http://www.xn--sss604efuw.net/,200,饭太硬 | 导航,477,19744,ok
+肥猫,http://肥猫.net/,http://xn--z7x900a.net/,200,,12619,2238,ok
+王二小,http://new.王二小放牛娃.top,https://www.xn--4kq62z5rby2qupq9ub.top/,200,,9,9034,ok
+SA视频,https://www.lsjys11.com/,https://www.lsjys11.com/,200,SA视频 - 活泼有趣的影像潮流站 | 热门新剧、动漫、多元短剧同步更新,2694,6784,ok
+YouTube,youtube.com,https://www.youtube.com/,200,YouTube,151,19832,ok
+Notion,notion.so,https://www.notion.com/,200,The AI workspace that works for you. | Notion,2120,18083,ok

@@ -1,0 +1,144 @@
+﻿title,url,final_url,status,dur_s,result
+肥猫,http://肥猫.net/,http://肥猫.net/,,0.0,error:'latin-1' codec can't encode characters in position 0-1: ord
+摸鱼儿,http://摸鱼儿.cc,http://摸鱼儿.cc,,0.0,error:'latin-1' codec can't encode characters in position 0-2: ord
+饭太硬,http://www.饭太硬.net/tv,http://www.饭太硬.net/tv,,0.0,error:'latin-1' codec can't encode characters in position 4-6: ord
+王二小,http://new.王二小放牛娃.top,http://new.王二小放牛娃.top,,0.0,error:'latin-1' codec can't encode characters in position 4-9: ord
+影视大全,https://yingshidaquan.top/,https://yingshidaquan.top/,,8.2,error:Remote end closed connection without response
+937影视,https://www.937tv.vip,https://www.937tv.vip,,10.4,error:The read operation timed out
+奈飞工厂,https://www.netflixgc.com,https://www.netflixgc.com,,12.5,error:The read operation timed out
+泥视频,https://www.nivod.vip,https://www.nivod.vip,,14.4,error:The read operation timed out
+无名,https://6800.kstore.vip/fish.json,https://6800.kstore.vip/fish.json,401,0.1,http_401
+LIBVIO,https://libviobd.com,https://libviobd.com,403,0.7,http_403
+厂长资源,https://www.czzymovie.com,https://www.czzymovie.com,403,1.5,http_403
+爱壹帆,https://iyf.tv,https://iyf.tv,403,1.7,http_403
+注视影视,https://gaze.red/,https://gaze.red/,403,3.1,http_403
+No影视,https://novipnoad.org/,https://novipnoad.org/,403,3.6,http_403
+BD影视聚合,https://www.juhebd.com/,https://www.juhebd.com/,403,1.6,http_403
+高清族,https://hdzu.org,https://hdzu.org,403,1.7,http_403
+高清MP4,https://www.mp4ba.vip,https://www.mp4ba.vip,403,3.6,http_403
+剧OK,https://juok3.top/,https://juok3.top/,403,3.2,http_403
+歪比巴卜,https://wbbb1.com/,https://wbbb1.com/,403,4.6,http_403
+Stack Overflow,stackoverflow.com,https://stackoverflow.com,403,6.9,http_403
+Behance,behance.net,https://behance.net,403,13.1,http_403
+字幕库,https://zimuku.org,https://zimuku.org,404,1.6,http_404
+VOX,http://rihou.cc:88/demo.php,http://rihou.cc:88/demo.php,404,0.1,http_404
+蛋蛋奇,https://www.dandanqi.cc/,https://www.dandanqi.cc/,404,2.4,http_404
+SeleneTV,https://b.zhuiju.me/archives/4/,https://b.zhuiju.me/archives/4/,502,1.4,http_502
+iOS影视APP,https://b.zhuiju.me/archives/23/,https://b.zhuiju.me/archives/23/,502,1.6,http_502
+夸克搜,https://kkso.net,https://kkso.net,502,1.3,http_502
+PanSou,https://pansou.de,https://pansou.de,502,1.6,http_502
+谷哥搜,https://gugeso.com/,https://gugeso.com/,502,2.5,http_502
+FongMi 蜂蜜,https://b.zhuiju.me/archives/16/,https://b.zhuiju.me/archives/16/,502,0.6,http_502
+追剧吧,https://www.zhuiju.us/,https://www.zhuiju.us/,502,3.0,http_502
+OK影视,https://b.zhuiju.me/archives/17/,https://b.zhuiju.me/archives/17/,502,2.2,http_502
+羊壳 PeekPro,https://b.zhuiju.me/archives/19/,https://b.zhuiju.me/archives/19/,502,3.5,http_502
+WebHomeTV,https://b.zhuiju.me/archives/18/,https://b.zhuiju.me/archives/18/,502,5.1,http_502
+提交收录,https://b.zhuiju.me/shoulu.html,https://b.zhuiju.me/shoulu.html,502,0.9,http_502
+申请友链,https://b.zhuiju.me/links.html,https://b.zhuiju.me/links.html,502,1.0,http_502
+TVBox影视仓接口/配置地址,https://b.zhuiju.me/archives/3,https://b.zhuiju.me/archives/3,502,1.9,http_502
+金牌影视,https://www.vv3nwjk.com,https://www.vv3nwjk.com,521,4.3,http_521
+雪落影视,https://xlys.me/,https://xlys.me/,521,6.2,http_521
+91毒舌,https://www.duse0.com/,https://www.duse0.com/,850,6.8,http_850
+可可影视,https://www.kkys14.com/,https://www.kkys14.com/,850,1.8,http_850
+观影导航,https://www.qhdh.top,https://www.qhdh.top,200,0.5,ok
+Awesome Zhuiju Free (GitHub),https://github.com/laoma2053/awesome-zhuiju-free,https://github.com/laoma2053/awesome-zhuiju-free,200,1.5,ok
+爱电影,https://kuhh4jo.com,https://kuhh4jo.com,200,1.6,ok
+追剧么指南,https://zhuiju.me,https://zhuiju.me,200,1.7,ok
+白嫖者联盟,https://www.tdgo.shop,https://www.tdgo.shop,200,1.8,ok
+APP影院,https://www.appmovie.art,https://www.appmovie.art,200,1.9,ok
+Auete影视,https://www.aeete.com,https://www.aeete.com,200,2.1,ok
+独播库,https://www.dbku.tv,https://www.dbku.tv,200,0.5,ok
+蛋蛋魔法,https://ddmf.net,https://ddmf.net,200,2.5,ok
+爱看机器人,https://www1.aikanbot.com,https://www1.aikanbot.com,200,0.5,ok
+黑夜影院,https://darkvod.com,https://darkvod.com,200,2.1,ok
+电影人生,https://dyrs.tv,https://dyrshd.net/,200,3.1,ok
+影猫仓库,https://www.ymck.pro,https://www.ymck.pro,200,1.9,ok
+奈菲影视,https://www.nfyingshi.com,https://www.nfyingshi.com,200,2.5,ok
+多瑙影视,https://www.duonaovod.com,https://www.duonaovod.com,200,4.4,ok
+搜TV啦,https://www.sotvla.cc/,https://www.sotvla.cc/,200,5.3,ok
+小马,https://szyyds.cn/tv/x.json,https://szyyds.cn/tv/x.json,200,0.2,ok
+SubHD,https://subhd.tv,https://subhd.tv,200,1.4,ok
+iptv,https://github.com/iptv-org/iptv,https://github.com/iptv-org/iptv,200,0.8,ok
+Kazumi,https://kazumi.app/download,https://kazumi.app/download/,200,2.3,ok
+Animeko,https://animeko.org/downloads/,https://animeko.org/downloads/,200,2.7,ok
+挺好分享多仓,http://ztha.top/TVBox/GYCK.json,https://ztha.top/TVBox/GYCK.json,200,0.3,ok
+IFN,https://ifn.watch/register?code=8B1EF6,https://ifn.watch/register?code=8B1EF6,200,3.7,ok
+光速影视,https://www.yingshiso.link/,https://www.yingshiso.link/,200,4.2,ok
+老刘备,https://raw.liucn.cc/box/m.json,https://raw.liucn.cc/box/m.json,200,1.8,ok
+爱努努,https://video.ainunu.com/,https://video.ainunu.com/,200,0.9,ok
+布布追剧,https://bubuzhuiju.com,https://duoduozhuiju.com/,200,5.5,ok
+小盒子多仓,http://xhztv.top/dc,http://xhztv.top/dc/,200,1.7,ok
+射手网(伪),https://assrt.net,https://assrt.net,200,3.2,ok
+Kodi,https://kodi.tv/,https://kodi.tv/,200,2.9,ok
+BT影视,https://www.btbtla.com,https://www.btbtla.com,200,0.7,ok
+小盒子,https://www.xhztv.pro/,https://www.xhztv.pro/,200,2.4,ok
+拾光多仓,http://xmbjm.fh4u.org/dc.txt,http://xmbjm.fh4u.org/dc.txt,200,2.9,ok
+BD电影首发,https://www.bdflixs.com/,https://www.bdflixs.com/,200,2.3,ok
+磁力狗,https://ciligou.net,https://ciligou.net,200,1.7,ok
+磁力熊,https://www.cilixiong.org,https://www.cilixiong.org,200,1.8,ok
+美剧粉,https://www.mjf2020.com,https://www.mjf2020.com,200,2.3,ok
+嗷呜,http://itv666.cc/aowu/config.webp,http://xn--nsr30bl8nb2kyt7a8vs.top/,200,3.6,ok
+小盒子4K,http://xhztv.top/4k.json,http://xhztv.top/4k.json,200,4.2,ok
+找电影时光,https://www.ldysg.win/,https://www.ldysg.win/,200,3.3,ok
+BT世界网,https://www.btsj6.com,https://www.btsj6.com,200,2.8,ok
+磁力帝,https://www.cld123.com,https://www.cld123.com,200,3.3,ok
+quark-auto-save,https://github.com/Cp0204/quark-auto-save,https://github.com/Cp0204/quark-auto-save,200,0.8,ok
+MoonTVPlus,https://github.com/mtvpls/MoonTVPlus,https://github.com/mtvpls/MoonTVPlus,200,2.0,ok
+电影港网,https://www.dyg22.com,https://www.dyg22.com,200,3.4,ok
+zyfun,https://github.com/Hiram-Wong/zyfun,https://github.com/Hiram-Wong/zyfun,200,2.1,ok
+SeleneTV,https://github.com/MoonTechLab/Selene,https://github.com/MoonTechLab/Selene,200,1.3,ok
+WebHomeTV2,https://github.com/Silent1566/webhtv,https://github.com/Silent1566/webhtv,200,1.1,ok
+小盒子单仓,http://xhztv.top/xhz,http://xhztv.top/xhz/,200,6.1,ok
+CloudSaver,https://github.com/jiangrui1994/CloudSaver,https://github.com/jiangrui1994/CloudSaver,200,1.8,ok
+Animeko,https://github.com/open-ani/animeko,https://github.com/open-ani/animeko,200,1.8,ok
+FongMi 影视,https://tv.xn--yhqu5zs87a.top/,https://tv.xn--yhqu5zs87a.top/,200,1.5,ok
+SeedHub,https://sidhub.cc/,https://sidhub.cc/,200,1.0,ok
+sky-tv,https://github.com/sky22333/sky-tv,https://github.com/sky22333/sky-tv,200,0.9,ok
+饭搭子影视,https://fdzys.com,https://fdzys.com,200,0.8,ok
+FongMi TV,https://github.com/FongMi/TV,https://github.com/FongMi/TV,200,1.0,ok
+pansou,https://github.com/fish2018/pansou,https://github.com/fish2018/pansou,200,3.1,ok
+奈飞工厂,https://naifei.fyi/,https://naifei.fyi/,200,1.5,ok
+剧踪影院,https://www.juzong01.me/,https://www.juzong01.me/,200,1.1,ok
+Kazumi,https://github.com/Predidit/Kazumi,https://github.com/Predidit/Kazumi,200,4.2,ok
+iptv-api,https://github.com/Guovin/iptv-api,https://github.com/Guovin/iptv-api,200,5.9,ok
+4k影视,https://www.4kvm.cc/,https://www.4kvm.cc/,200,3.8,ok
+星河影视,https://www.xhkan.top/,https://www.xhkan.top/,200,1.9,ok
+嘀嗒影视,https://www.didahd.xyz/,https://www.didahd.xyz/,200,1.9,ok
+樱之空,https://skr.skr1.cc:666/,https://skr.skr1.cc:666/,200,0.1,ok
+片库,https://4k01.pianku.online/,https://4k01.pianku.online/,200,2.7,ok
+爱盼,https://www.aipan.me/,https://www.aipan.me/,200,0.8,ok
+WebHomeTV,https://github.com/fish2018/webhtv,https://github.com/webhtv/webhtv,200,6.1,ok
+ZIP0,https://zip0.com/?r=KBDIG8,https://zip0.com/?r=KBDIG8,200,1.4,ok
+哔哩哔哩,bilibili.com,https://www.bilibili.com/,200,0.3,ok
+开心影院,https://www.kxyy1.cc/,https://www.kxyy1.cc/,200,2.7,ok
+Bangumi,https://github.com/czy0729/Bangumi,https://github.com/czy0729/Bangumi,200,2.0,ok
+豆瓣电影,movie.douban.com,https://movie.douban.com,200,0.4,ok
+Dribbble,dribbble.com,https://dribbble.com,202,1.6,ok
+GitHub Trending,github.com/trending,https://github.com/trending,200,2.1,ok
+少数派,sspai.com,https://sspai.com,200,0.3,ok
+知乎,zhihu.com,https://www.zhihu.com/signin?next=%2F,200,0.6,ok
+微博,weibo.com,https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=https%3A%2F%2Fweibo.com%2F&domain=weibo.com&ua=Mozilla%2F5.0%20%28Macintosh%3B%20Intel%20Mac%20OS%20X%2010_15_7%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F126.0%20Safari%2F537.36&_rand=1790238787721&sudaref=,200,0.3,ok
+V2EX,v2ex.com,https://v2ex.com,200,3.9,ok
+GitHub,github.com,https://github.com,200,4.0,ok
+宅男影视,https://zndy.top/,https://zndy.top/,200,8.4,ok
+Mobbin,mobbin.com,https://mobbin.com,200,2.6,ok
+Canva,canva.com,https://www.canva.com/,200,2.6,ok
+TinyPNG,tinypng.com,https://tinypng.com,200,3.1,ok
+Figma,figma.com,https://www.figma.com/,200,4.1,ok
+豆花电影网,https://dhvideo.cc/,https://dhvideo.cc/,200,7.7,ok
+简云影视,https://jianyunys.com/,https://jianyunys.com/,200,10.3,ok
+SA视频,https://www.lsjys11.com/,https://www.lsjys11.com/,,10.0,"unreachable:[Errno 8] nodename nor servname provided, or not known"
+追影,https://zhuiying3.cc/,https://zhuiying3.cc/,,10.0,"unreachable:[Errno 8] nodename nor servname provided, or not known"
+追剧么博客,https://b.zhuiju.me,https://b.zhuiju.me,,5.0,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+PPnix,https://www.ppnix.com/cn/,https://www.ppnix.com/cn/,,5.0,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+好好看,https://www.hhkan2.com/,https://www.hhkan2.com/,,5.0,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+ACG.RIP,https://acg.rip/,https://acg.rip/,,2.3,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+影视仓,https://b.zhuiju.me/archives/15/,https://b.zhuiju.me/archives/15/,,7.7,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+66 大片网,https://www.77dpw.vip/,https://www.77dpw.vip/,,5.7,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+TVBox / 影视仓接口配置教程,https://b.zhuiju.me/archives/,https://b.zhuiju.me/archives/,,4.5,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+关于,https://b.zhuiju.me/start-page.html,https://b.zhuiju.me/start-page.html,,5.0,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+YouTube,youtube.com,https://youtube.com,,5.2,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+Notion,notion.so,https://notion.so,,6.8,unreachable:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violatio
+青空次元,https://www.sorani.net,https://www.sorani.net,,10.0,unreachable:_ssl.c:1064: The handshake operation timed out
+POMO,https://pomo.mom/,https://pomo.mom/,,10.0,unreachable:_ssl.c:1064: The handshake operation timed out
+Netflix,netflix.com,https://netflix.com,,10.0,unreachable:_ssl.c:1064: The handshake operation timed out
