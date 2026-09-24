@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { AuthModal } from "./auth-modal";
+import { ProfileModal } from "./profile-modal";
 
 export function NavBar() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [user, setUser] = useState<any>(null);
   const [mounted, setMounted] = useState(false);
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
+  const [profileModal, setProfileModal] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -62,23 +63,8 @@ export function NavBar() {
         <div className="nav-actions">
           {user ? (
             <>
-              <Link
-                href="/profile"
-                style={{
-                  fontSize: "14px",
-                  color: "var(--text-secondary)",
-                  textDecoration: "none",
-                  padding: "8px 16px",
-                  borderRadius: "100px",
-                  border: "1px solid var(--border)",
-                  background: "var(--bg-card)",
-                  transition: "var(--transition)",
-                }}
-              >
-                个人中心
-              </Link>
               <button
-                onClick={handleSignOut}
+                onClick={() => setProfileModal(true)}
                 style={{
                   fontSize: "14px",
                   color: "var(--text-secondary)",
@@ -91,7 +77,7 @@ export function NavBar() {
                   transition: "var(--transition)",
                 }}
               >
-                退出
+                个人中心
               </button>
             </>
           ) : (
@@ -163,6 +149,8 @@ export function NavBar() {
           onSwitchMode={(mode) => setAuthModal(mode)}
         />
       )}
+
+      {profileModal && <ProfileModal onClose={() => setProfileModal(false)} />}
     </>
   );
 }
