@@ -20,7 +20,7 @@ jobs:
         run: npm i -g vercel
 
       - name: Deploy to Vercel
-        run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }} --project=my-bookmarks-nav
+        run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }} --project=bookmark-nav-site
         env:
           VERCEL_ORG_ID: asuria008-4929
-          VERCEL_PROJECT_ID: my-bookmarks-nav
+          VERCEL_PROJECT_ID: bookmark-nav-site
