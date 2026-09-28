@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { getOrCreateProfile } from "@/lib/supabase/profile";
 import type { User } from "@supabase/supabase-js";
 import { AuthModal } from "./auth-modal";
 import { ProfileModal } from "./profile-modal";
@@ -16,6 +17,8 @@ export function NavBar() {
     return localStorage.getItem("nav-accent") ?? "cyan";
   });
   const [user, setUser] = useState<User | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [nickname, setNickname] = useState("");
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
   const [profileModal, setProfileModal] = useState(false);
 
@@ -48,6 +51,23 @@ export function NavBar() {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // 登录后拉取头像与昵称
+  useEffect(() => {
+    if (!user) {
+      setAvatarUrl(null);
+      setNickname("");
+      return;
+    }
+    const supabase = createClient();
+    getOrCreateProfile<{ avatar_url: string | null; full_name: string | null }>(
+      supabase,
+      user.id
+    ).then((p) => {
+      setAvatarUrl(p?.avatar_url || null);
+      setNickname(p?.full_name || "");
+    });
+  }, [user]);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -86,9 +106,12 @@ export function NavBar() {
               <button
                 onClick={() => setProfileModal(true)}
                 style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
                   fontSize: "14px",
                   color: "var(--text-secondary)",
-                  padding: "8px 16px",
+                  padding: "6px 16px 6px 6px",
                   borderRadius: "100px",
                   border: "1px solid var(--border)",
                   background: "var(--bg-card)",
@@ -97,7 +120,41 @@ export function NavBar() {
                   transition: "var(--transition)",
                 }}
               >
-                个人中心
+                {avatarUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={avatarUrl}
+                    alt="头像"
+                    width={28}
+                    height={28}
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  <span
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "13px",
+                      fontWeight: "700",
+                      background: "var(--accent)",
+                      color: "white",
+                    }}
+                  >
+                    {nickname?.charAt(0) ||
+                      user?.email?.charAt(0)?.toUpperCase() ||
+                      "?"}
+                  </span>
+                )}
+                {nickname || "个人中心"}
               </button>
             </>
           ) : (

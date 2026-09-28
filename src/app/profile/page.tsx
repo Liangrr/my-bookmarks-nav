@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getOrCreateProfile } from "@/lib/supabase/profile";
+import { AvatarUploader } from "@/components/avatar-uploader";
 import type { User } from "@supabase/supabase-js";
 
 interface Profile {
@@ -26,6 +27,7 @@ export default function ProfilePage() {
   const [form, setForm] = useState({
     username: "",
     full_name: "",
+    avatar_url: "",
     bio: "",
   });
 
@@ -38,6 +40,7 @@ export default function ProfilePage() {
       setForm({
         username: data.username || "",
         full_name: data.full_name || "",
+        avatar_url: data.avatar_url || "",
         bio: data.bio || "",
       });
     }
@@ -70,6 +73,7 @@ export default function ProfilePage() {
         .update({
           username: form.username,
           full_name: form.full_name,
+          avatar_url: form.avatar_url || null,
           bio: form.bio,
           updated_at: new Date().toISOString(),
         })
@@ -120,12 +124,20 @@ export default function ProfilePage() {
         }}
       >
         <div className="flex items-center gap-4 mb-8">
-          <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold"
-            style={{ background: "var(--accent)", color: "white" }}
-          >
-            {form.full_name?.charAt(0) || user?.email?.charAt(0)?.toUpperCase()}
-          </div>
+          {user && (
+            <AvatarUploader
+              userId={user.id}
+              avatarUrl={form.avatar_url || null}
+              displayName={
+                form.full_name?.charAt(0) ||
+                user?.email?.charAt(0)?.toUpperCase() ||
+                "?"
+              }
+              onAvatarChange={(url) =>
+                setForm((f) => ({ ...f, avatar_url: url || "" }))
+              }
+            />
+          )}
           <div>
             <p className="font-semibold text-lg">{form.full_name || "未设置昵称"}</p>
             <p className="text-sm" style={{ color: "var(--text-secondary)" }}>

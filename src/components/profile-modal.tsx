@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { getOrCreateProfile } from "@/lib/supabase/profile";
+import { AvatarUploader } from "./avatar-uploader";
 import type { User } from "@supabase/supabase-js";
 
 interface ProfileModalProps {
@@ -28,6 +29,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
   const [form, setForm] = useState({
     username: "",
     full_name: "",
+    avatar_url: "",
     bio: "",
   });
 
@@ -40,6 +42,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
       setForm({
         username: data.username || "",
         full_name: data.full_name || "",
+        avatar_url: data.avatar_url || "",
         bio: data.bio || "",
       });
     }
@@ -82,6 +85,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
         .update({
           username: form.username,
           full_name: form.full_name,
+          avatar_url: form.avatar_url || null,
           bio: form.bio,
           updated_at: new Date().toISOString(),
         })
@@ -203,23 +207,20 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
                 borderRadius: "var(--radius-md)",
               }}
             >
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "20px",
-                  fontWeight: "700",
-                  background: "var(--accent)",
-                  color: "white",
-                  flexShrink: 0,
-                }}
-              >
-                {form.full_name?.charAt(0) || user?.email?.charAt(0)?.toUpperCase()}
-              </div>
+              {user && (
+                <AvatarUploader
+                  userId={user.id}
+                  avatarUrl={form.avatar_url || null}
+                  displayName={
+                    form.full_name?.charAt(0) ||
+                    user?.email?.charAt(0)?.toUpperCase() ||
+                    "?"
+                  }
+                  onAvatarChange={(url) =>
+                    setForm((f) => ({ ...f, avatar_url: url || "" }))
+                  }
+                />
+              )}
               <div style={{ flex: 1 }}>
                 <p style={{ fontSize: "16px", fontWeight: "600", marginBottom: "2px" }}>
                   {form.full_name || "未设置昵称"}
