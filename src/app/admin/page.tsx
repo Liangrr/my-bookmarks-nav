@@ -188,6 +188,22 @@ export default function AdminPage() {
 
   return (
     <div className="container">
+      <div className="flex items-center justify-between mb-10">
+        <h1 className="text-3xl font-bold">网站管理后台</h1>
+        <button
+          onClick={() => {
+            setShowForm(true);
+            setEditingBookmark(null);
+            resetForm();
+          }}
+          className="px-5 py-2.5 rounded-xl font-medium transition-all hover:scale-105"
+          style={{ background: "var(--accent)", color: "white" }}
+        >
+          + 新增网站
+        </button>
+      </div>
+
+
       {/* 用户统计 */}
       {stats && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
@@ -258,22 +274,6 @@ export default function AdminPage() {
           ))}
         </div>
       )}
-
-      <div className="flex items-center justify-between mb-10">
-        <h1 className="text-3xl font-bold">网站管理后台</h1>
-        <button
-          onClick={() => {
-            setShowForm(true);
-            setEditingBookmark(null);
-            resetForm();
-          }}
-          className="px-5 py-2.5 rounded-xl font-medium transition-all hover:scale-105"
-          style={{ background: "var(--accent)", color: "white" }}
-        >
-          + 新增网站
-        </button>
-      </div>
-
       {/* 新增/编辑弹窗（与登录/注册弹窗同款样式） */}
       {showForm && (
         <div
