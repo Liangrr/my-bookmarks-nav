@@ -4,6 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import {
+  validateEmail,
+  getAuthErrorMessage,
+  useSubmitThrottle,
+} from "@/lib/auth-utils";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,16 +16,31 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const canSubmit = useSubmitThrottle();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canSubmit()) return;
     setLoading(true);
     setError("");
+
+    const emailTrim = email.trim();
+    const emailErr = validateEmail(emailTrim);
+    if (emailErr) {
+      setError(emailErr);
+      setLoading(false);
+      return;
+    }
+    if (!password) {
+      setError("请输入密码");
+      setLoading(false);
+      return;
+    }
 
     try {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithPassword({
-        email,
+        email: emailTrim,
         password,
       });
 
@@ -29,7 +49,7 @@ export default function LoginPage() {
       router.push("/");
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "登录失败，请检查邮箱和密码");
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }

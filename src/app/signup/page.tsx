@@ -3,28 +3,52 @@
 import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import {
+  validateNickname,
+  validateEmail,
+  validatePasswordStrength,
+  validateConfirmPassword,
+  getAuthErrorMessage,
+  useSubmitThrottle,
+} from "@/lib/auth-utils";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const canSubmit = useSubmitThrottle();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canSubmit()) return;
     setLoading(true);
     setError("");
+
+    const name = username.trim();
+    const emailTrim = email.trim();
+    const nameErr = validateNickname(name);
+    const emailErr = validateEmail(emailTrim);
+    const pwdErr = validatePasswordStrength(password);
+    const confirmErr = validateConfirmPassword(password, confirmPassword);
+    const firstErr = nameErr || emailErr || pwdErr || confirmErr;
+    if (firstErr) {
+      setError(firstErr);
+      setLoading(false);
+      return;
+    }
 
     try {
       const supabase = createClient();
       const { error } = await supabase.auth.signUp({
-        email,
+        email: emailTrim,
         password,
         options: {
           data: {
-            full_name: username,
+            full_name: name,
           },
         },
       });
@@ -33,7 +57,7 @@ export default function SignupPage() {
 
       setSuccess(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "注册失败，请稍后重试");
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -140,14 +164,32 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              minLength={6}
+              minLength={8}
               className="w-full px-4 py-3 rounded-xl outline-none transition-all"
               style={{
                 background: "var(--bg-secondary)",
                 border: "1px solid var(--border)",
                 color: "var(--foreground)",
               }}
-              placeholder="至少 6 位"
+              placeholder="至少 8 位，含字母和数字"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-2">确认密码</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              minLength={8}
+              className="w-full px-4 py-3 rounded-xl outline-none transition-all"
+              style={{
+                background: "var(--bg-secondary)",
+                border: "1px solid var(--border)",
+                color: "var(--foreground)",
+              }}
+              placeholder="请再次输入密码"
             />
           </div>
 

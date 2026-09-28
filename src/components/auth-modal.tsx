@@ -2,6 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
+import {
+  validateEmail,
+  validateUsername,
+  validatePasswordStrength,
+  getAuthErrorMessage,
+  useSubmitThrottle,
+} from "@/lib/auth-utils";
 
 interface AuthModalProps {
   mode: "login" | "signup";
@@ -17,6 +24,7 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
   const [loginType, setLoginType] = useState<"email" | "username">("username");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const canSubmit = useSubmitThrottle();
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -39,27 +47,58 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canSubmit()) return;
     setLoading(true);
     setError("");
 
     try {
       const supabase = createClient();
       const authEmail = getAuthEmail();
+      const emailTrim = authEmail.trim();
+
+      // 前端校验
+      if (loginType === "email") {
+        const emailErr = validateEmail(emailTrim);
+        if (emailErr) {
+          setError(emailErr);
+          setLoading(false);
+          return;
+        }
+      } else {
+        const userErr = validateUsername(username);
+        if (userErr) {
+          setError(userErr);
+          setLoading(false);
+          return;
+        }
+      }
+      if (mode === "signup") {
+        const pwdErr = validatePasswordStrength(password);
+        if (pwdErr) {
+          setError(pwdErr);
+          setLoading(false);
+          return;
+        }
+      } else if (!password) {
+        setError("请输入密码");
+        setLoading(false);
+        return;
+      }
 
       if (mode === "login") {
         const { error } = await supabase.auth.signInWithPassword({
-          email: authEmail,
+          email: emailTrim,
           password,
         });
         if (error) throw error;
       } else {
         const { error } = await supabase.auth.signUp({
-          email: authEmail,
+          email: emailTrim,
           password,
           options: {
             data: {
-              username: loginType === "username" ? username : email.split("@")[0],
-              nickname: loginType === "username" ? username : email.split("@")[0],
+              username: loginType === "username" ? username.trim() : email.split("@")[0],
+              nickname: loginType === "username" ? username.trim() : email.split("@")[0],
             },
           },
         });
@@ -68,13 +107,7 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
       onClose();
       window.location.reload();
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : mode === "login"
-            ? "登录失败，请检查账号和密码"
-            : "注册失败，请稍后重试"
-      );
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
