@@ -25,8 +25,15 @@ const getDomain = (url: string) => {
   }
 };
 
-// 纯 IP 域名（如内网地址），favicon 服务无法解析，直接走文字图标
+// 纯 IP 域名（如内网地址），favicon 服务无法解析，用内联 SVG 地球图标兜底（data URI，全局可用、永不失败）
 const isIpAddress = (host: string) => /^\d{1,3}(\.\d{1,3}){3}$/.test(host);
+const IP_FALLBACK_ICON = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="9"></circle>
+  <path d="M3.5 12h17"></path>
+  <path d="M12 3.5c3.2 2.6 3.2 14.4 0 17"></path>
+  <path d="M12 3.5c-3.2 2.6-3.2 14.4 0 17"></path>
+</svg>`)}`;
 
 export function BookmarkCard({
   title,
@@ -43,10 +50,10 @@ export function BookmarkCard({
   const fullUrl = url.startsWith("http") ? url : `https://${url}`;
   const domain = getDomain(fullUrl);
 
-  // 用多个 favicon 源，按顺序尝试；纯 IP 域名不发请求，直接用文字图标
-  const [imgError, setImgError] = useState(isIpAddress(domain));
+  // 用多个 favicon 源，按顺序尝试；纯 IP 域名用内联 SVG 地球图标兜底
+  const [imgError, setImgError] = useState(false);
   const faviconUrl = isIpAddress(domain)
-    ? ""
+    ? IP_FALLBACK_ICON
     : `https://favicon.im/${domain}?larger=true`;
   const fallbackIcon = icon || title.charAt(0).toUpperCase();
 
