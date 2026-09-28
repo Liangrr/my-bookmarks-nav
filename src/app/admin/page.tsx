@@ -245,7 +245,7 @@ export default function AdminPage() {
           ].map((s) => (
             <div
               key={s.label}
-              className="group rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              className="group rounded-2xl p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
@@ -253,7 +253,7 @@ export default function AdminPage() {
               }}
             >
               <div
-                className="w-11 h-11 mx-auto mb-3 rounded-xl flex items-center justify-center"
+                className="w-11 h-11 mx-auto mb-4 rounded-xl flex items-center justify-center"
                 style={{
                   background: "var(--accent-glow)",
                   color: "var(--accent-light)",
@@ -262,7 +262,7 @@ export default function AdminPage() {
                 {s.icon}
               </div>
               <p
-                className="text-4xl font-bold mb-1"
+                className="text-4xl font-bold mb-1.5"
                 style={{ color: "var(--accent)", textShadow: "0 0 20px var(--accent-glow)" }}
               >
                 {s.value}
@@ -482,7 +482,7 @@ export default function AdminPage() {
       >
         {/* 表头 */}
         <div
-          className="grid grid-cols-[1fr_118px_84px_110px] items-center gap-4 px-6 py-3.5 text-[13px]"
+          className="grid grid-cols-[1fr_118px_84px_110px] items-center gap-5 px-6 py-4 text-[13px]"
           style={{
             color: "var(--text-tertiary)",
             background: "var(--bg-glass)",
@@ -501,7 +501,7 @@ export default function AdminPage() {
           return (
             <div
               key={bookmark.id}
-              className="admin-row grid grid-cols-[1fr_118px_84px_110px] items-center gap-4 px-6 py-4"
+              className="admin-row grid grid-cols-[1fr_118px_84px_110px] items-center gap-5 px-6 py-5"
               style={{
                 borderBottom: "1px solid var(--border)",
                 // @ts-expect-error CSS 自定义属性
@@ -509,7 +509,7 @@ export default function AdminPage() {
               }}
             >
               {/* 网站：首字母彩色图标 + 标题/域名两行 */}
-              <div className="flex items-center gap-4 min-w-0">
+              <div className="flex items-center gap-5 min-w-0">
                 <span
                   className="w-9 h-9 rounded-[10px] flex items-center justify-center font-bold text-sm shrink-0"
                   style={{ background: catColor + "1f", color: catColor }}
@@ -547,7 +547,7 @@ export default function AdminPage() {
               </span>
 
               {/* 操作：图标按钮 */}
-              <div className="flex gap-3 justify-end">
+              <div className="flex gap-4 justify-end">
                 <button
                   onClick={() => {
                     setEditingBookmark(bookmark);
