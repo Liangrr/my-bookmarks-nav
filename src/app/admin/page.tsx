@@ -190,7 +190,7 @@ export default function AdminPage() {
     <div className="container">
       {/* 用户统计 */}
       {stats && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
           {[
             {
               label: "总用户",
@@ -259,7 +259,7 @@ export default function AdminPage() {
         </div>
       )}
 
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-10">
         <h1 className="text-3xl font-bold">网站管理后台</h1>
         <button
           onClick={() => {
@@ -482,7 +482,7 @@ export default function AdminPage() {
       >
         {/* 表头 */}
         <div
-          className="grid grid-cols-[1fr_118px_84px_110px] items-center gap-3 px-5 py-3 text-[13px]"
+          className="grid grid-cols-[1fr_118px_84px_110px] items-center gap-4 px-6 py-3.5 text-[13px]"
           style={{
             color: "var(--text-tertiary)",
             background: "var(--bg-glass)",
@@ -501,7 +501,7 @@ export default function AdminPage() {
           return (
             <div
               key={bookmark.id}
-              className="admin-row grid grid-cols-[1fr_118px_84px_110px] items-center gap-3 px-5 py-3"
+              className="admin-row grid grid-cols-[1fr_118px_84px_110px] items-center gap-4 px-6 py-4"
               style={{
                 borderBottom: "1px solid var(--border)",
                 // @ts-expect-error CSS 自定义属性
@@ -509,7 +509,7 @@ export default function AdminPage() {
               }}
             >
               {/* 网站：首字母彩色图标 + 标题/域名两行 */}
-              <div className="flex items-center gap-3 min-w-0">
+              <div className="flex items-center gap-4 min-w-0">
                 <span
                   className="w-9 h-9 rounded-[10px] flex items-center justify-center font-bold text-sm shrink-0"
                   style={{ background: catColor + "1f", color: catColor }}
@@ -547,7 +547,7 @@ export default function AdminPage() {
               </span>
 
               {/* 操作：图标按钮 */}
-              <div className="flex gap-2 justify-end">
+              <div className="flex gap-3 justify-end">
                 <button
                   onClick={() => {
                     setEditingBookmark(bookmark);
