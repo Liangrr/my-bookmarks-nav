@@ -130,7 +130,11 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
       <div className="container">
         {/* Hero 区 */}
         <div className="hero">
-          <h1>Asuria精选网站收藏</h1>
+          <div className="hero-logo">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/icon.png" alt="航标" />
+          </div>
+          <h1>航标 · 精选网站收藏</h1>
           <p>前端开发、工作项目、AI 工具、科技资讯 —— 日常在用的优质网站，都在这里</p>
         </div>
 
@@ -234,7 +238,7 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
 
       {/* 页脚 */}
       <footer className="footer">
-        我的收藏夹 · 个人网站导航 · Powered by Vercel
+        航标 · 个人网站导航 · Powered by Vercel
       </footer>
     </>
   );
