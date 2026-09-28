@@ -25,6 +25,9 @@ const getDomain = (url: string) => {
   }
 };
 
+// 纯 IP 域名（如内网地址），favicon 服务无法解析，直接走文字图标
+const isIpAddress = (host: string) => /^\d{1,3}(\.\d{1,3}){3}$/.test(host);
+
 export function BookmarkCard({
   title,
   url,
@@ -40,9 +43,11 @@ export function BookmarkCard({
   const fullUrl = url.startsWith("http") ? url : `https://${url}`;
   const domain = getDomain(fullUrl);
 
-  // 用多个 favicon 源，按顺序尝试
-  const [imgError, setImgError] = useState(false);
-  const faviconUrl = `https://favicon.im/${domain}?larger=true`;
+  // 用多个 favicon 源，按顺序尝试；纯 IP 域名不发请求，直接用文字图标
+  const [imgError, setImgError] = useState(isIpAddress(domain));
+  const faviconUrl = isIpAddress(domain)
+    ? ""
+    : `https://favicon.im/${domain}?larger=true`;
   const fallbackIcon = icon || title.charAt(0).toUpperCase();
 
   const handleClick = () => {
