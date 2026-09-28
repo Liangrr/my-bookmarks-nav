@@ -383,6 +383,25 @@ body {
   box-shadow: 0 4px 16px var(--accent-glow);
 }
 
+/* ========== 管理后台列表（方案A 现代表格） ========== */
+.admin-row {
+  position: relative;
+  transition: background 0.15s;
+}
+.admin-row:hover {
+  background: var(--bg-card-hover);
+}
+.admin-row:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--card-accent, var(--accent));
+}
+
 /* ========== Bento Grid 布局 ========== */
 .bento-grid {
   display: grid;

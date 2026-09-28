@@ -472,87 +472,136 @@ export default function AdminPage() {
         </div>
       )}
 
-      {/* 网站列表（与首页卡片同款规范：圆角卡片 + 分类彩色pill + 居中 + hover 上浮） */}
-      <div className="flex flex-col gap-4">
-        {bookmarks.map((bookmark) => (
-          <div
-            key={bookmark.id}
-            className="admin-item rounded-2xl px-6 py-4 flex flex-col items-center gap-2 text-center transition-all duration-300 hover:-translate-y-0.5"
-            style={{
-              background: "var(--bg-card)",
-              border: "1px solid var(--border)",
-              borderTop: "3px solid " + getCategoryColor(bookmark.category_id),
-              boxShadow: "0 0 0 0 transparent",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "var(--border-hover)";
-              e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.18)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "var(--border)";
-              e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
-            }}
-          >
-            {/* 网站信息（居中） */}
-            <div className="w-full">
-              <p className="font-medium text-[15px]">{bookmark.title}</p>
-              <p
-                className="text-sm break-all mx-auto max-w-2xl"
-                style={{ color: "var(--text-tertiary)" }}
-              >
-                {bookmark.url}
-              </p>
-            </div>
+      {/* 网站列表（方案A：现代表格，hover 左侧主题色竖条） */}
+      <div
+        className="rounded-2xl overflow-hidden"
+        style={{
+          background: "var(--bg-card)",
+          border: "1px solid var(--border)",
+        }}
+      >
+        {/* 表头 */}
+        <div
+          className="grid grid-cols-[1fr_118px_84px_110px] items-center gap-3 px-5 py-3 text-[13px]"
+          style={{
+            color: "var(--text-tertiary)",
+            background: "var(--bg-glass)",
+            borderBottom: "1px solid var(--border)",
+          }}
+        >
+          <span>网站</span>
+          <span className="text-center">分类</span>
+          <span className="text-center">大小</span>
+          <span className="text-right">操作</span>
+        </div>
 
-            {/* 分类 pill + 大小徽章（并排居中） */}
-            <div className="flex items-center justify-center gap-3">
+        {bookmarks.map((bookmark) => {
+          const catColor = getCategoryColor(bookmark.category_id);
+          const iconChar = (bookmark.icon || bookmark.title.charAt(0)).toUpperCase();
+          return (
+            <div
+              key={bookmark.id}
+              className="admin-row grid grid-cols-[1fr_118px_84px_110px] items-center gap-3 px-5 py-3"
+              style={{
+                borderBottom: "1px solid var(--border)",
+                // @ts-expect-error CSS 自定义属性
+                "--card-accent": catColor,
+              }}
+            >
+              {/* 网站：首字母彩色图标 + 标题/域名两行 */}
+              <div className="flex items-center gap-3 min-w-0">
+                <span
+                  className="w-9 h-9 rounded-[10px] flex items-center justify-center font-bold text-sm shrink-0"
+                  style={{ background: catColor + "1f", color: catColor }}
+                >
+                  {iconChar}
+                </span>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium truncate">{bookmark.title}</p>
+                  <p className="text-xs truncate" style={{ color: "var(--text-tertiary)" }}>
+                    {bookmark.url}
+                  </p>
+                </div>
+              </div>
+
+              {/* 分类彩色胶囊 */}
+              <div className="flex justify-center">
+                <span
+                  className="whitespace-nowrap px-3 py-1 rounded-full text-xs font-medium"
+                  style={{
+                    color: catColor,
+                    background: catColor + "1f",
+                    border: "1px solid " + catColor + "55",
+                  }}
+                >
+                  {getCategoryName(bookmark.category_id)}
+                </span>
+              </div>
+
+              {/* 大小 */}
               <span
-                className="whitespace-nowrap px-3.5 py-1.5 rounded-full text-[13px] font-medium"
-                style={{
-                  color: getCategoryColor(bookmark.category_id),
-                  background: getCategoryColor(bookmark.category_id) + "1f",
-                  border: "1px solid " + getCategoryColor(bookmark.category_id) + "55",
-                }}
-              >
-                {getCategoryName(bookmark.category_id)}
-              </span>
-              <span
-                className="whitespace-nowrap text-[13px] px-3 py-1 rounded-md"
-                style={{ background: "var(--bg-glass)", color: "var(--text-secondary)" }}
+                className="text-xs text-center"
+                style={{ color: "var(--text-secondary)" }}
               >
                 {getSizeLabel(bookmark.size)}
               </span>
-            </div>
 
-            {/* 操作（居中） */}
-            <div className="flex items-center justify-center gap-5">
-              <button
-                onClick={() => {
-                  setEditingBookmark(bookmark);
-                  setForm({
-                    title: bookmark.title,
-                    url: bookmark.url,
-                    description: bookmark.description || "",
-                    icon: bookmark.icon || "",
-                    category_id: bookmark.category_id || 1,
-                    size: bookmark.size,
-                  });
-                  setShowForm(true);
-                }}
-                className="text-sm font-medium"
-                style={{ color: "var(--accent-light)" }}
-              >
-                编辑
-              </button>
-              <button
-                onClick={() => handleDelete(bookmark.id)}
-                className="text-sm font-medium"
-                style={{ color: "#ef4444" }}
-              >
-                删除
-              </button>
+              {/* 操作：图标按钮 */}
+              <div className="flex gap-2 justify-end">
+                <button
+                  onClick={() => {
+                    setEditingBookmark(bookmark);
+                    setForm({
+                      title: bookmark.title,
+                      url: bookmark.url,
+                      description: bookmark.description || "",
+                      icon: bookmark.icon || "",
+                      category_id: bookmark.category_id || 1,
+                      size: bookmark.size,
+                    });
+                    setShowForm(true);
+                  }}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+                  style={{ border: "1px solid var(--border)", color: "var(--text-secondary)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "var(--bg-card-hover)";
+                    e.currentTarget.style.color = "var(--accent-light)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
+                  title="编辑"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => handleDelete(bookmark.id)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+                  style={{ border: "1px solid var(--border)", color: "var(--text-secondary)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(239,68,68,0.1)";
+                    e.currentTarget.style.color = "#f87171";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
+                  title="删除"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 6h18" />
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                  </svg>
+                </button>
+              </div>
             </div>
-          </div>
+          );
+        })}
+      </div>
         ))}
       </div>
     </div>
