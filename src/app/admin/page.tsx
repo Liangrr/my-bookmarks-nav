@@ -250,6 +250,7 @@ export default function AdminPage() {
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
                 boxShadow: "0 0 0 0 transparent",
+                padding: 32,
               }}
             >
               <div
@@ -487,6 +488,7 @@ export default function AdminPage() {
             color: "var(--text-tertiary)",
             background: "var(--bg-glass)",
             borderBottom: "1px solid var(--border)",
+            gap: 20,
           }}
         >
           <span>网站</span>
@@ -504,12 +506,15 @@ export default function AdminPage() {
               className="admin-row grid grid-cols-[1fr_118px_84px_110px] items-center gap-5 px-6 py-5"
               style={{
                 borderBottom: "1px solid var(--border)",
+                gap: 20,
+                paddingTop: 20,
+                paddingBottom: 20,
                 // @ts-expect-error CSS 自定义属性
                 "--card-accent": catColor,
               }}
             >
               {/* 网站：首字母彩色图标 + 标题/域名两行 */}
-              <div className="flex items-center gap-5 min-w-0">
+              <div className="flex items-center gap-5 min-w-0" style={{ gap: 20 }}>
                 <span
                   className="w-9 h-9 rounded-[10px] flex items-center justify-center font-bold text-sm shrink-0"
                   style={{ background: catColor + "1f", color: catColor }}
@@ -547,7 +552,7 @@ export default function AdminPage() {
               </span>
 
               {/* 操作：图标按钮 */}
-              <div className="flex gap-4 justify-end">
+              <div className="flex gap-4 justify-end" style={{ gap: 16 }}>
                 <button
                   onClick={() => {
                     setEditingBookmark(bookmark);
