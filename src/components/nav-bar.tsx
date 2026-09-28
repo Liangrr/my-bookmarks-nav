@@ -62,11 +62,10 @@ export function NavBar() {
   };
 
   const ACCENTS = [
-    { id: "cyan", color: "#22d3ee", name: "青色" },
-    { id: "violet", color: "#8b5cf6", name: "紫色" },
-    { id: "blue", color: "#3b82f6", name: "蓝色" },
-    { id: "green", color: "#10b981", name: "绿色" },
-    { id: "orange", color: "#f59e0b", name: "橙色" },
+    { id: "cyan", color: "#22d3ee", name: "极光青" },
+    { id: "neon", color: "#a855f7", name: "赛博霓虹" },
+    { id: "space", color: "#60a5fa", name: "星际深空" },
+    { id: "sakura", color: "#f472b6", name: "樱粉次元" },
   ];
 
   if (!mounted) return null;

@@ -24,6 +24,92 @@
   --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ========== 主题包（默认极光青在 :root） ========== */
+/* 赛博霓虹：紫黑底 + 青紫霓虹 + 网格线 */
+[data-accent="neon"] {
+  --bg-primary: #0b0716;
+  --bg-secondary: #150f28;
+  --bg-card: rgba(168, 85, 247, 0.06);
+  --bg-card-hover: rgba(168, 85, 247, 0.12);
+  --bg-glass: rgba(30, 20, 60, 0.55);
+  --border: rgba(168, 85, 247, 0.18);
+  --border-hover: rgba(34, 211, 238, 0.35);
+  --accent: #a855f7;
+  --accent-light: #22d3ee;
+  --accent-glow: rgba(168, 85, 247, 0.3);
+}
+
+html[data-accent="neon"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse at 50% 0%, black 0%, transparent 75%);
+}
+
+/* 星际深空：深蓝底 + 星点 + 星蓝主色 */
+[data-accent="space"] {
+  --bg-primary: #050816;
+  --bg-secondary: #0a1128;
+  --bg-card: rgba(96, 165, 250, 0.06);
+  --bg-card-hover: rgba(96, 165, 250, 0.12);
+  --bg-glass: rgba(10, 17, 40, 0.6);
+  --border: rgba(96, 165, 250, 0.15);
+  --border-hover: rgba(129, 140, 248, 0.35);
+  --accent: #60a5fa;
+  --accent-light: #a5b4fc;
+  --accent-glow: rgba(96, 165, 250, 0.25);
+}
+
+html[data-accent="space"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(255, 255, 255, 0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 15%, rgba(165, 180, 252, 0.8) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 45% 65%, rgba(255, 255, 255, 0.5) 50%, transparent 51%),
+    radial-gradient(1px 1px at 85% 50%, rgba(165, 180, 252, 0.6) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 10% 75%, rgba(255, 255, 255, 0.6) 50%, transparent 51%),
+    radial-gradient(1px 1px at 55% 30%, rgba(255, 255, 255, 0.5) 50%, transparent 51%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 樱粉次元：深紫底 + 樱粉主色 + 柔和光晕 */
+[data-accent="sakura"] {
+  --bg-primary: #160d1f;
+  --bg-secondary: #201430;
+  --bg-card: rgba(244, 114, 182, 0.06);
+  --bg-card-hover: rgba(244, 114, 182, 0.12);
+  --bg-glass: rgba(40, 22, 52, 0.6);
+  --border: rgba(244, 114, 182, 0.16);
+  --border-hover: rgba(232, 121, 249, 0.35);
+  --accent: #f472b6;
+  --accent-light: #e879f9;
+  --accent-glow: rgba(244, 114, 182, 0.25);
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+}
+
+html[data-accent="sakura"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(600px 400px at 80% 10%, rgba(232, 121, 249, 0.12), transparent 70%),
+    radial-gradient(500px 350px at 10% 85%, rgba(103, 232, 249, 0.1), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 浅色模式：背景与光晕 */
 [data-theme="light"] {
   --bg-primary: #f8f9fc;
   --bg-secondary: #ffffff;
@@ -40,36 +126,10 @@
   --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-/* ========== 主题色组（默认青色在 :root，以下可覆盖） ========== */
-[data-accent="violet"] {
-  --accent: #8b5cf6;
-  --accent-light: #a78bfa;
-  --accent-glow: rgba(139, 92, 246, 0.25);
-}
-
-[data-accent="blue"] {
-  --accent: #3b82f6;
-  --accent-light: #60a5fa;
-  --accent-glow: rgba(59, 130, 246, 0.25);
-}
-
-[data-accent="green"] {
-  --accent: #10b981;
-  --accent-light: #34d399;
-  --accent-glow: rgba(16, 185, 129, 0.25);
-}
-
-[data-accent="orange"] {
-  --accent: #f59e0b;
-  --accent-light: #fbbf24;
-  --accent-glow: rgba(245, 158, 11, 0.25);
-}
-
 [data-theme="light"][data-accent="cyan"] { --accent-glow: rgba(34, 211, 238, 0.15); }
-[data-theme="light"][data-accent="violet"] { --accent-glow: rgba(139, 92, 246, 0.15); }
-[data-theme="light"][data-accent="blue"] { --accent-glow: rgba(59, 130, 246, 0.15); }
-[data-theme="light"][data-accent="green"] { --accent-glow: rgba(16, 185, 129, 0.15); }
-[data-theme="light"][data-accent="orange"] { --accent-glow: rgba(245, 158, 11, 0.15); }
+[data-theme="light"][data-accent="neon"] { --accent-glow: rgba(168, 85, 247, 0.15); }
+[data-theme="light"][data-accent="space"] { --accent-glow: rgba(96, 165, 250, 0.15); }
+[data-theme="light"][data-accent="sakura"] { --accent-glow: rgba(244, 114, 182, 0.15); }
 
 * {
   margin: 0;
