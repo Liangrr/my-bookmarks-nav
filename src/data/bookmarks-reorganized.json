@@ -320,14 +320,6 @@
     "notes": ""
   },
   {
-    "title": "JSON Schema 生成器 | Vue Json schema form",
-    "url": "https://form.lljj.me/schema-generator.html#/index",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "Nintex Login",
     "url": "https://nintex-portal.auth0.com/login?state=g6Fo2SBHM1B3andqRUl2RmdDaHhoT2ZpOGoyXzhZZ1drMmRmdqN0aWTZIEY0RUdwNlM5aGl4RXI0RGZqVXF6MmxuTXlhZkR2bTFwo2NpZNkgODkxU0NCU3NNT2V4YWgxZ1NJNmJWN282NXN1TTRPWDg&client=891SCBSsMOexah1gSI6bV7o65suM4OX8&protocol=oauth2&prompt=select_account&audience=https%3A%2F%2Fnintex.io&response_type=code&redirect_uri=https%3A%2F%2Fzldzt-347083.workflowcloud.com%2Foidccallback&scope=openid%20profile%20email%20tenant_name_zldzt-347083",
     "category": "前端开发",
