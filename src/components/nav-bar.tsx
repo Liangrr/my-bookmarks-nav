@@ -1,25 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 import { AuthModal } from "./auth-modal";
 import { ProfileModal } from "./profile-modal";
 
 export function NavBar() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const [user, setUser] = useState<any>(null);
-  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof window === "undefined") return "dark";
+    return (localStorage.getItem("nav-theme") as "dark" | "light" | null) ?? "dark";
+  });
+  const [user, setUser] = useState<User | null>(null);
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
   const [profileModal, setProfileModal] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("nav-theme") as "dark" | "light" | null;
-    if (saved) {
-      setTheme(saved);
-      document.documentElement.setAttribute("data-theme", saved);
-    }
+  // 挂载检测：服务端与首次客户端渲染返回 false，水合后再切 true，避免在 effect 里同步 setState
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
     const supabase = createClient();
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
@@ -39,12 +46,6 @@ export function NavBar() {
     setTheme(newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("nav-theme", newTheme);
-  };
-
-  const handleSignOut = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    window.location.href = "/";
   };
 
   if (!mounted) return null;

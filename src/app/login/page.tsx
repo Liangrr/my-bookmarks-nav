@@ -28,8 +28,8 @@ export default function LoginPage() {
 
       router.push("/");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message || "登录失败，请检查邮箱和密码");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "登录失败，请检查邮箱和密码");
     } finally {
       setLoading(false);
     }

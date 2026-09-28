@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
@@ -12,7 +11,6 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,8 +32,8 @@ export default function SignupPage() {
       if (error) throw error;
 
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message || "注册失败，请稍后重试");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "注册失败，请稍后重试");
     } finally {
       setLoading(false);
     }

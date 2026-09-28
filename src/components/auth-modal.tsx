@@ -67,8 +67,14 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
       }
       onClose();
       window.location.reload();
-    } catch (err: any) {
-      setError(err.message || (mode === "login" ? "登录失败，请检查账号和密码" : "注册失败，请稍后重试"));
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : mode === "login"
+            ? "登录失败，请检查账号和密码"
+            : "注册失败，请稍后重试"
+      );
     } finally {
       setLoading(false);
     }

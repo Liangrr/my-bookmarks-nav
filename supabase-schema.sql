@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS bookmarks (
   category_id INTEGER REFERENCES categories(id) ON DELETE SET NULL,
   size TEXT DEFAULT 'normal', -- large / wide / tall / normal
   is_featured BOOLEAN DEFAULT FALSE,
+  click_count INTEGER DEFAULT 0,
   sort_order INTEGER DEFAULT 0,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -111,12 +112,38 @@ CREATE POLICY "Admins can delete bookmarks" ON bookmarks FOR DELETE USING (
 );
 
 -- ================================================
+-- 7. 点击计数函数
+-- 匿名访问者点击书签时通过 /api/bookmarks/[id]/click 调用此 RPC。
+-- SECURITY DEFINER 使函数以所有者身份执行，绕过 RLS 对 bookmarks 的写入限制；
+-- 固定 search_path 防止 SQL 注入。
+-- ================================================
+CREATE OR REPLACE FUNCTION public.increment_bookmark_click(bookmark_id INTEGER)
+RETURNS INTEGER
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE
+  new_count INTEGER;
+BEGIN
+  UPDATE public.bookmarks
+  SET click_count = COALESCE(click_count, 0) + 1
+  WHERE id = bookmark_id
+  RETURNING click_count INTO new_count;
+  RETURN new_count;
+END;
+$$;
+
+-- 授权匿名与登录用户调用
+GRANT EXECUTE ON FUNCTION public.increment_bookmark_click(INTEGER) TO anon, authenticated;
+
+-- ================================================
 -- 初始数据：分类
 -- ================================================
 INSERT INTO categories (name, slug, color, icon, sort_order) VALUES
-  ('影视娱乐', 'entertainment', '#ec4899', '🎬', 1),
-  ('开发工具', 'development', '#3b82f6', '💻', 2),
-  ('设计灵感', 'design', '#8b5cf6', '🎨', 3),
-  ('实用工具', 'tools', '#10b981', '🛠️', 4),
-  ('其他', 'other', '#f59e0b', '📦', 5)
+  ('常用网站', 'common', '#3b82f6', '🌐', 1),
+  ('前端开发', 'frontend', '#10b981', '💻', 2),
+  ('工作项目', 'work', '#8b5cf6', '🧩', 3),
+  ('AI工具箱', 'ai-tools', '#ec4899', '🤖', 4),
+  ('科技资讯', 'tech-news', '#f59e0b', '📰', 5)
 ON CONFLICT (slug) DO NOTHING;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -39,54 +39,51 @@ export default function AdminPage() {
   });
   const router = useRouter();
 
-  useEffect(() => {
-    checkAdmin();
-  }, []);
-
-  const checkAdmin = async () => {
-    const supabase = createClient();
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session) {
-      router.push("/login");
-      return;
-    }
-
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("is_admin")
-      .eq("id", session.user.id)
-      .single();
-
-    if (!profile?.is_admin) {
-      router.push("/");
-      return;
-    }
-
-    setIsAdmin(true);
-    await Promise.all([fetchBookmarks(), fetchCategories()]);
-    setLoading(false);
-  };
-
-  const fetchBookmarks = async () => {
+  const fetchBookmarks = useCallback(async () => {
     const supabase = createClient();
     const { data } = await supabase
       .from("bookmarks")
       .select("*")
       .order("sort_order");
     if (data) setBookmarks(data);
-  };
+  }, []);
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     const supabase = createClient();
     const { data } = await supabase
       .from("categories")
       .select("*")
       .order("sort_order");
     if (data) setCategories(data);
-  };
+  }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        router.push("/login");
+        return;
+      }
+
+      supabase
+        .from("profiles")
+        .select("is_admin")
+        .eq("id", session.user.id)
+        .single()
+        .then(({ data: profile }) => {
+          if (!profile?.is_admin) {
+            router.push("/");
+            return;
+          }
+
+          setIsAdmin(true);
+          Promise.all([fetchBookmarks(), fetchCategories()]).then(() =>
+            setLoading(false)
+          );
+        });
+    });
+  }, [router, fetchBookmarks, fetchCategories]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 interface Profile {
   id: string;
@@ -14,7 +15,7 @@ interface Profile {
 }
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -27,22 +28,9 @@ export default function ProfilePage() {
     bio: "",
   });
 
-  useEffect(() => {
+  const fetchProfile = useCallback(async (userId: string) => {
     const supabase = createClient();
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) {
-        router.push("/login");
-        return;
-      }
-      setUser(session.user);
-      fetchProfile(session.user.id);
-    });
-  }, []);
-
-  const fetchProfile = async (userId: string) => {
-    const supabase = createClient();
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from("profiles")
       .select("*")
       .eq("id", userId)
@@ -57,10 +45,24 @@ export default function ProfilePage() {
       });
     }
     setLoading(false);
-  };
+  }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        router.push("/login");
+        return;
+      }
+      setUser(session.user);
+      fetchProfile(session.user.id);
+    });
+  }, [router, fetchProfile]);
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) return;
     setSaving(true);
     setMessage("");
 
@@ -80,8 +82,8 @@ export default function ProfilePage() {
 
       setMessage("保存成功！");
       setTimeout(() => setMessage(""), 3000);
-    } catch (err: any) {
-      setMessage(err.message || "保存失败");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "保存失败");
     } finally {
       setSaving(false);
     }

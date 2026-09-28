@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 interface ProfileModalProps {
   onClose: () => void;
@@ -17,7 +18,7 @@ interface Profile {
 }
 
 export function ProfileModal({ onClose }: ProfileModalProps) {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -28,6 +29,25 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
     full_name: "",
     bio: "",
   });
+
+  const fetchProfile = useCallback(async (userId: string) => {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .single();
+
+    if (data) {
+      setProfile(data);
+      setForm({
+        username: data.username || "",
+        full_name: data.full_name || "",
+        bio: data.bio || "",
+      });
+    }
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -50,29 +70,11 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
       document.removeEventListener("keydown", handleEsc);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
-
-  const fetchProfile = async (userId: string) => {
-    const supabase = createClient();
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .single();
-
-    if (data) {
-      setProfile(data);
-      setForm({
-        username: data.username || "",
-        full_name: data.full_name || "",
-        bio: data.bio || "",
-      });
-    }
-    setLoading(false);
-  };
+  }, [onClose, fetchProfile]);
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) return;
     setSaving(true);
     setMessage("");
 
@@ -92,8 +94,8 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
 
       setMessage("保存成功！");
       setTimeout(() => setMessage(""), 3000);
-    } catch (err: any) {
-      setMessage(err.message || "保存失败");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "保存失败");
     } finally {
       setSaving(false);
     }
