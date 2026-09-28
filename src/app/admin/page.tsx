@@ -206,7 +206,7 @@ export default function AdminPage() {
 
       {/* 用户统计 */}
       {stats && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-14">
           {[
             {
               label: "总用户",
