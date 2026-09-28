@@ -115,7 +115,7 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
         {/* Hero 区 */}
         <div className="hero">
           <h1>Asuria精选网站收藏</h1>
-          <p>常用网站、前端开发、工作项目、AI 工具、科技资讯 —— 日常在用的优质网站，都在这里</p>
+          <p>前端开发、工作项目、AI 工具、科技资讯 —— 日常在用的优质网站，都在这里</p>
         </div>
 
         {/* 搜索栏 */}

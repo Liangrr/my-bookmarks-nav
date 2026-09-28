@@ -2,15 +2,7 @@
   {
     "title": "百度一下，你就知道",
     "url": "https://www.baidu.com/",
-    "category": "常用网站",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "ECharts · Doc",
-    "url": "https://echarts.baidu.com/echarts2/doc/doc.html#SeriesWordCloud",
-    "category": "前端开发",
+    "category": "AI工具箱",
     "description": "",
     "icon": "",
     "notes": ""
@@ -1090,7 +1082,7 @@
   {
     "title": "构建性能 | webpack 中文文档",
     "url": "https://webpack.docschina.org/guides/build-performance/#incremental-builds",
-    "category": "常用网站",
+    "category": "前端开发",
     "description": "",
     "icon": "",
     "notes": ""
@@ -1098,7 +1090,7 @@
   {
     "title": "百度翻译",
     "url": "https://fanyi.baidu.com/?aldtype=85#zh/en/",
-    "category": "常用网站",
+    "category": "AI工具箱",
     "description": "",
     "icon": "",
     "notes": ""
