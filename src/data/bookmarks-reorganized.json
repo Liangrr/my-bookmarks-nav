@@ -16,22 +16,6 @@
     "notes": ""
   },
   {
-    "title": "ECharts演示",
-    "url": "https://echarts.baidu.com/examples/",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "jQuery API 中文文档 | jQuery API 中文在线手册 | jquery api 下载 | jquery api chm",
-    "url": "http://jquery.cuishifeng.cn/index.html",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "ECMAScript 6 入门 - ECMAScript 6入门",
     "url": "http://es6.ruanyifeng.com/",
     "category": "前端开发",
@@ -440,14 +424,6 @@
     "notes": ""
   },
   {
-    "title": "SCSS 在线编译工具 - JSRUN 工具箱",
-    "url": "http://jsrun.pro/app/scss",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "来画-短视频智能创作营销平台-MG动画视频制作工具-来画视频",
     "url": "https://www.laihua.com/",
     "category": "工作项目",
@@ -514,14 +490,6 @@
   {
     "title": "缺陷-维卓BPM重构版本-TAPD平台",
     "url": "https://www.tapd.cn/61969009/bugtrace/bugreports/my_view",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "线上wezonet-bpm",
-    "url": "http://crm.wezobpm.com/#/",
     "category": "工作项目",
     "description": "",
     "icon": "",
@@ -616,14 +584,6 @@
     "notes": ""
   },
   {
-    "title": "标签 - Postbird - 猫既吾命",
-    "url": "http://www.ptbird.cn/tags.html",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "下载地址链接转换工具 - 在线工具",
     "url": "https://tool.lu/urlconvert/",
     "category": "工作项目",
@@ -632,32 +592,8 @@
     "notes": ""
   },
   {
-    "title": "Frontend / magic-pipeline · GitLab",
-    "url": "http://gitlab-server.magic.com/web/magic-pipeline",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "Rust 程序设计语言",
     "url": "https://www.rust-lang.org/zh-CN/",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "React lingu翻译基础 - 前端团队 - Confluence",
-    "url": "http://confluence.magic.com/pages/viewpage.action?pageId=111575082",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "Magic Factor",
-    "url": "http://factor.magic.com/",
     "category": "工作项目",
     "description": "",
     "icon": "",
