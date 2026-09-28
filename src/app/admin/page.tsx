@@ -180,14 +180,14 @@ export default function AdminPage() {
 
   if (loading || !isAdmin) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-20 text-center">
+      <div className="container text-center" style={{ paddingTop: 80, paddingBottom: 80 }}>
         <p style={{ color: "var(--text-secondary)" }}>加载中...</p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="container">
       {/* 用户统计 */}
       {stats && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
