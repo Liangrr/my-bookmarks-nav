@@ -149,21 +149,65 @@ export default function AdminPage() {
     <div className="max-w-6xl mx-auto px-6 py-12">
       {/* 用户统计 */}
       {stats && (
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {[
-            { label: "总用户", value: stats.total_users },
-            { label: "今日活跃", value: stats.dau },
-            { label: "当前在线", value: stats.online },
+            {
+              label: "总用户",
+              value: stats.total_users,
+              icon: (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              ),
+            },
+            {
+              label: "今日活跃",
+              value: stats.dau,
+              icon: (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                </svg>
+              ),
+            },
+            {
+              label: "当前在线",
+              value: stats.online,
+              icon: (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="4" />
+                  <line x1="21.17" y1="8" x2="12" y2="8" />
+                  <line x1="3.95" y1="6.06" x2="8.54" y2="14" />
+                  <line x1="10.88" y1="21.94" x2="15.46" y2="14" />
+                </svg>
+              ),
+            },
           ].map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl p-6 text-center"
+              className="group rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
+                boxShadow: "0 0 0 0 transparent",
               }}
             >
-              <p className="text-4xl font-bold mb-1" style={{ color: "var(--accent)" }}>
+              <div
+                className="w-11 h-11 mx-auto mb-3 rounded-xl flex items-center justify-center"
+                style={{
+                  background: "var(--accent-glow)",
+                  color: "var(--accent-light)",
+                }}
+              >
+                {s.icon}
+              </div>
+              <p
+                className="text-4xl font-bold mb-1"
+                style={{ color: "var(--accent)", textShadow: "0 0 20px var(--accent-glow)" }}
+              >
                 {s.value}
               </p>
               <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
