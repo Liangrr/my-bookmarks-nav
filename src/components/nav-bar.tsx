@@ -76,9 +76,9 @@ export function NavBar() {
         <div className="nav-logo">
           <div className="nav-logo-icon">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icon.png" alt="航标" />
+            <img src="/icon.png" alt="星轨" />
           </div>
-          <span>航标</span>
+          <span>星轨</span>
         </div>
         <div className="nav-actions">
           {user ? (
