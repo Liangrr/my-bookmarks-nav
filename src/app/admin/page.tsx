@@ -70,7 +70,7 @@ export default function AdminPage() {
         .from("profiles")
         .select("is_admin")
         .eq("id", session.user.id)
-        .single()
+        .maybeSingle()
         .then(({ data: profile }) => {
           if (!profile?.is_admin) {
             router.push("/");

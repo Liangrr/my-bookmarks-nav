@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { getOrCreateProfile } from "@/lib/supabase/profile";
 import type { User } from "@supabase/supabase-js";
 
 interface Profile {
@@ -30,11 +31,7 @@ export default function ProfilePage() {
 
   const fetchProfile = useCallback(async (userId: string) => {
     const supabase = createClient();
-    const { data } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .single();
+    const data = await getOrCreateProfile<Profile>(supabase, userId);
 
     if (data) {
       setProfile(data);
