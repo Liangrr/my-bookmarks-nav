@@ -381,10 +381,10 @@ export default function AdminPage() {
         <table className="w-full">
           <thead>
             <tr style={{ borderBottom: "1px solid var(--border)" }}>
-              <th className="text-left px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>网站</th>
-              <th className="text-left px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>分类</th>
-              <th className="text-left px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>大小</th>
-              <th className="text-right px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>操作</th>
+              <th className="text-center px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>网站</th>
+              <th className="text-center px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>分类</th>
+              <th className="text-center px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>大小</th>
+              <th className="text-center px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -393,19 +393,19 @@ export default function AdminPage() {
                 key={bookmark.id}
                 style={{ borderBottom: "1px solid var(--border)" }}
               >
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 text-center">
                   <p className="font-medium">{bookmark.title}</p>
-                  <p className="text-sm" style={{ color: "var(--text-tertiary)" }}>
+                  <p className="text-sm break-all" style={{ color: "var(--text-tertiary)" }}>
                     {bookmark.url}
                   </p>
                 </td>
-                <td className="px-6 py-4 text-sm">
+                <td className="px-6 py-4 text-sm text-center">
                   {getCategoryName(bookmark.category_id)}
                 </td>
-                <td className="px-6 py-4 text-sm" style={{ color: "var(--text-secondary)" }}>
+                <td className="px-6 py-4 text-sm text-center" style={{ color: "var(--text-secondary)" }}>
                   {bookmark.size}
                 </td>
-                <td className="px-6 py-4 text-right">
+                <td className="px-6 py-4 text-center">
                   <button
                     onClick={() => {
                       setEditingBookmark(bookmark);
