@@ -96,14 +96,6 @@
     "notes": ""
   },
   {
-    "title": "在 Markdown 中 使用 Vue | VuePress",
-    "url": "https://vuepress.vuejs.org/zh/guide/using-vue.html#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-api-%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "电鸭社区-专注远程工作招聘交流-远程工作，从电鸭开始",
     "url": "https://eleduck.com/",
     "category": "前端开发",
@@ -160,14 +152,6 @@
     "notes": ""
   },
   {
-    "title": "Remove Paywalls from News Articles Instantly | PaywallBuster",
-    "url": "https://paywallbuster.com/",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "快图设计-帮助企业快速搭建在线设计工具",
     "url": "https://pro.kuaitu.cc/",
     "category": "前端开发",
@@ -186,14 +170,6 @@
   {
     "title": "介绍 | Vue JSON Schema Form",
     "url": "https://vue-json-schema-form.lljj.me/zh/guide/",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "Three.js教程",
-    "url": "http://www.webgl3d.cn/Three.js/",
     "category": "前端开发",
     "description": "",
     "icon": "",
@@ -392,14 +368,6 @@
     "notes": ""
   },
   {
-    "title": "广州市三地信息技术有限公司",
-    "url": "http://mail.sandi.com.cn/cgi-bin/frame_html?sid=zE-n4Nejbtm4eVQL,2&sign_type=&r=1ba0ff591bc4f600265f6668731db62b",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "RuoYi 若依官方网站 |后台管理系统|权限管理系统|快速开发框架|企业管理系统|开源框架|微服务框架|前后端分离框架|开源后台系统|RuoYi|RuoYi-Vue|RuoYi-Cloud|RuoYi框架|RuoYi开源|RuoYi视频|若依视频|RuoYi开发文档|若依开发文档|Java开源框架|Java|SpringBoot|SrpingBoot2.0|SrpingCloud|Alibaba|MyBatis|Shiro|OAuth2.0|Thymeleaf|BootStrap|Vue|Element-UI||www.ruoyi.vip",
     "url": "http://ruoyi.vip/",
     "category": "工作项目",
@@ -426,14 +394,6 @@
   {
     "title": "小红书_标记我的生活",
     "url": "https://www.xiaohongshu.com/protocols/news",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "荔枝【官方APP下载】",
-    "url": "https://www.lizhi.fm/about/download.html",
     "category": "工作项目",
     "description": "",
     "icon": "",
@@ -506,22 +466,6 @@
   {
     "title": "环球雅途集团",
     "url": "http://mail.hqyatu.com/",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "投诉建议开发",
-    "url": "http://www.jgdev.com/h5/complaints.html?region=9510822",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "智慧旅游监管系统开发",
-    "url": "http://www.jgdev.com/login.action",
     "category": "工作项目",
     "description": "",
     "icon": "",
@@ -664,14 +608,6 @@
     "notes": ""
   },
   {
-    "title": "近 20 人爆肝数周，写给初中级前端的万字高级进阶指南 - 掘金",
-    "url": "https://juejin.cn/post/7017645909483716615?utm_source=gold_browser_extension",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "Python教程 - 廖雪峰的官方网站",
     "url": "https://www.liaoxuefeng.com/wiki/1016959663602400",
     "category": "工作项目",
@@ -802,14 +738,6 @@
   {
     "title": "Framer x Motion — overrides, workshop, components | Motion",
     "url": "https://motion.dev/docs/react-layout-animations",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "joi.dev - 17.13.3 API Reference",
-    "url": "https://joi.dev/api/?v=17.13.3",
     "category": "工作项目",
     "description": "",
     "icon": "",
@@ -986,30 +914,6 @@
   {
     "title": "Vant Weapp - 轻量、可靠的小程序 UI 组件库",
     "url": "https://youzan.github.io/vant-weapp/#/cell",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "首页 - Vue Element Admin",
-    "url": "https://panjiachen.gitee.io/vue-element-admin/#/dashboard",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "介绍 | vue-element-admin",
-    "url": "https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "Vue.js · Fundebug文档 - 一行代码搞定BUG监控 - 网站错误监控|JS错误监控|资源加载错误|网络请求错误|小程序错误监控|Java异常监控|监控报警|Source Map|用户行为|可视化重现",
-    "url": "https://docs.fundebug.com/notifier/javascript/framework/vuejs.html",
     "category": "前端开发",
     "description": "",
     "icon": "",
@@ -1578,14 +1482,6 @@
   {
     "title": "元衡 API",
     "url": "https://cn.meta-api.vip/",
-    "category": "AI工具箱",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "API 密钥 - 圣路易斯联邦储备银行 --- API Keys - St. Louis Fed",
-    "url": "https://fredaccount.stlouisfed.org/apikeys",
     "category": "AI工具箱",
     "description": "",
     "icon": "",
