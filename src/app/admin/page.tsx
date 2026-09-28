@@ -188,7 +188,7 @@ export default function AdminPage() {
 
   return (
     <div className="container">
-      <div className="flex items-center justify-between mb-10">
+      <div className="flex items-center justify-between" style={{ marginBottom: 40 }}>
         <h1 className="text-3xl font-bold">网站管理后台</h1>
         <button
           onClick={() => {
@@ -206,7 +206,7 @@ export default function AdminPage() {
 
       {/* 用户统计 */}
       {stats && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" style={{ marginBottom: 56 }}>
           {[
             {
               label: "总用户",
