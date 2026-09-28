@@ -30,13 +30,13 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  // 1) 未登录 → 跳登录页
+  // 1) 未登录 → 跳首页（登录入口在导航栏登录弹窗）
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = "/";
     return NextResponse.redirect(url);
   }
 

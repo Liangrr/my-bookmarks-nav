@@ -52,7 +52,7 @@ export default function ProfilePage() {
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) {
-        router.push("/login");
+        router.push("/");
         return;
       }
       setUser(session.user);
