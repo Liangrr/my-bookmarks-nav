@@ -399,7 +399,7 @@ export default function AdminPage() {
         {bookmarks.map((bookmark) => (
           <div
             key={bookmark.id}
-            className="admin-item rounded-2xl px-6 py-4 flex items-center gap-6 transition-all duration-300 hover:-translate-y-0.5"
+            className="admin-item rounded-2xl px-6 py-4 flex flex-col items-center gap-2 text-center transition-all duration-300 hover:-translate-y-0.5"
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
@@ -416,38 +416,38 @@ export default function AdminPage() {
             }}
           >
             {/* 网站信息（居中） */}
-            <div className="flex-1 min-w-0 text-center">
+            <div className="w-full">
               <p className="font-medium text-[15px]">{bookmark.title}</p>
               <p
-                className="text-sm break-all"
+                className="text-sm break-all mx-auto max-w-2xl"
                 style={{ color: "var(--text-tertiary)" }}
               >
                 {bookmark.url}
               </p>
             </div>
 
-            {/* 分类彩色 pill（与首页 .tab 同款圆角） */}
-            <span
-              className="whitespace-nowrap px-3.5 py-1.5 rounded-full text-[13px] font-medium"
-              style={{
-                color: getCategoryColor(bookmark.category_id),
-                background: getCategoryColor(bookmark.category_id) + "1f",
-                border: "1px solid " + getCategoryColor(bookmark.category_id) + "55",
-              }}
-            >
-              {getCategoryName(bookmark.category_id)}
-            </span>
+            {/* 分类 pill + 大小徽章（并排居中） */}
+            <div className="flex items-center justify-center gap-3">
+              <span
+                className="whitespace-nowrap px-3.5 py-1.5 rounded-full text-[13px] font-medium"
+                style={{
+                  color: getCategoryColor(bookmark.category_id),
+                  background: getCategoryColor(bookmark.category_id) + "1f",
+                  border: "1px solid " + getCategoryColor(bookmark.category_id) + "55",
+                }}
+              >
+                {getCategoryName(bookmark.category_id)}
+              </span>
+              <span
+                className="whitespace-nowrap text-[13px] px-3 py-1 rounded-md"
+                style={{ background: "var(--bg-glass)", color: "var(--text-secondary)" }}
+              >
+                {getSizeLabel(bookmark.size)}
+              </span>
+            </div>
 
-            {/* 大小徽章 */}
-            <span
-              className="whitespace-nowrap text-[13px] min-w-[76px] text-center px-2 py-1 rounded-md"
-              style={{ background: "var(--bg-glass)", color: "var(--text-secondary)" }}
-            >
-              {getSizeLabel(bookmark.size)}
-            </span>
-
-            {/* 操作 */}
-            <div className="flex items-center gap-4 min-w-[96px] justify-end">
+            {/* 操作（居中） */}
+            <div className="flex items-center justify-center gap-5">
               <button
                 onClick={() => {
                   setEditingBookmark(bookmark);
