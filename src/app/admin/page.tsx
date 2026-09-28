@@ -96,6 +96,23 @@ export default function AdminPage() {
     });
   }, [router, fetchBookmarks, fetchCategories, fetchStats]);
 
+  // 弹窗：ESC 关闭 + 锁定背景滚动（与登录/注册弹窗一致）
+  useEffect(() => {
+    if (!showForm) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowForm(false);
+        setEditingBookmark(null);
+      }
+    };
+    document.addEventListener("keydown", handleEsc);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "";
+    };
+  }, [showForm]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const supabase = createClient();
@@ -257,19 +274,79 @@ export default function AdminPage() {
         </button>
       </div>
 
-      {/* 新增/编辑表单 */}
+      {/* 新增/编辑弹窗（与登录/注册弹窗同款样式） */}
       {showForm && (
         <div
-          className="rounded-2xl p-6 mb-8"
+          onClick={() => {
+            setShowForm(false);
+            setEditingBookmark(null);
+          }}
           style={{
-            background: "var(--bg-card)",
-            border: "1px solid var(--border)",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0, 0, 0, 0.5)",
+            backdropFilter: "blur(4px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+            padding: "20px",
           }}
         >
-          <h2 className="text-xl font-semibold mb-4">
-            {editingBookmark ? "编辑网站" : "新增网站"}
-          </h2>
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: "100%",
+              maxWidth: "520px",
+              background: "var(--bg-secondary)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-lg)",
+              padding: "32px",
+              position: "relative",
+              maxHeight: "calc(100vh - 40px)",
+              overflowY: "auto",
+            }}
+          >
+            {/* 关闭按钮（同登录/注册弹窗） */}
+            <button
+              onClick={() => {
+                setShowForm(false);
+                setEditingBookmark(null);
+              }}
+              style={{
+                position: "absolute",
+                top: "16px",
+                right: "16px",
+                width: "32px",
+                height: "32px",
+                borderRadius: "50%",
+                border: "none",
+                background: "var(--bg-card)",
+                color: "var(--text-secondary)",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "18px",
+                transition: "var(--transition)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--bg-card-hover)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "var(--bg-card)";
+              }}
+            >
+              ×
+            </button>
+
+            <h2 className="text-2xl font-bold mb-6 text-center">
+              {editingBookmark ? "编辑网站" : "新增网站"}
+            </h2>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium mb-1">网站名称</label>
               <input
@@ -301,7 +378,7 @@ export default function AdminPage() {
                 }}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-1 sm:col-span-2">
               <label className="block text-sm font-medium mb-1">描述</label>
               <textarea
                 value={form.description}
@@ -367,10 +444,10 @@ export default function AdminPage() {
                 <option value="tall">高（1x2）</option>
               </select>
             </div>
-            <div className="col-span-2 flex gap-3">
+            <div className="col-span-1 sm:col-span-2 flex gap-3 justify-center mt-2">
               <button
                 type="submit"
-                className="px-5 py-2.5 rounded-xl font-medium"
+                className="px-5 py-2.5 rounded-xl font-medium transition-all hover:scale-105"
                 style={{ background: "var(--accent)", color: "white" }}
               >
                 {editingBookmark ? "保存修改" : "添加"}
@@ -381,7 +458,7 @@ export default function AdminPage() {
                   setShowForm(false);
                   setEditingBookmark(null);
                 }}
-                className="px-5 py-2.5 rounded-xl font-medium"
+                className="px-5 py-2.5 rounded-xl font-medium transition-all hover:scale-105"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border)",
@@ -391,6 +468,7 @@ export default function AdminPage() {
               </button>
             </div>
           </form>
+          </div>
         </div>
       )}
 
