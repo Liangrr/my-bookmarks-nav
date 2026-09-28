@@ -68,9 +68,25 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
     [categories]
   );
 
-  // 筛选
+  // 全部书签按域名（hostname）字母数字排序
+  const sortedBookmarks = useMemo(() => {
+    const hostOf = (b: Bookmark) => {
+      try {
+        return new URL(b.url.startsWith("http") ? b.url : `https://${b.url}`)
+          .hostname.replace(/^www\./, "")
+          .toLowerCase();
+      } catch {
+        return b.url.toLowerCase();
+      }
+    };
+    return [...bookmarks].sort((a, b) =>
+      hostOf(a).localeCompare(hostOf(b), "en", { numeric: true, sensitivity: "base" })
+    );
+  }, [bookmarks]);
+
+  // 筛选（保持域名排序）
   const filteredBookmarks = useMemo(() => {
-    return bookmarks.filter((bookmark) => {
+    return sortedBookmarks.filter((bookmark) => {
       const matchesCategory =
         activeCategory === "all" || bookmark.category_id === activeCategory;
       const q = searchQuery.trim().toLowerCase();
@@ -81,7 +97,7 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
         bookmark.url.toLowerCase().includes(q);
       return matchesCategory && matchesSearch;
     });
-  }, [bookmarks, activeCategory, searchQuery]);
+  }, [sortedBookmarks, activeCategory, searchQuery]);
 
   // 热门排行：按点击次数取前 10
   const hotList = useMemo(() => {
