@@ -11,6 +11,10 @@ export function NavBar() {
     if (typeof window === "undefined") return "dark";
     return (localStorage.getItem("nav-theme") as "dark" | "light" | null) ?? "dark";
   });
+  const [accent, setAccent] = useState<string>(() => {
+    if (typeof window === "undefined") return "cyan";
+    return localStorage.getItem("nav-accent") ?? "cyan";
+  });
   const [user, setUser] = useState<User | null>(null);
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
   const [profileModal, setProfileModal] = useState(false);
@@ -25,6 +29,10 @@ export function NavBar() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-accent", accent);
+  }, [accent]);
 
   useEffect(() => {
     const supabase = createClient();
@@ -47,6 +55,19 @@ export function NavBar() {
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("nav-theme", newTheme);
   };
+
+  const changeAccent = (id: string) => {
+    setAccent(id);
+    localStorage.setItem("nav-accent", id);
+  };
+
+  const ACCENTS = [
+    { id: "cyan", color: "#22d3ee", name: "青色" },
+    { id: "violet", color: "#8b5cf6", name: "紫色" },
+    { id: "blue", color: "#3b82f6", name: "蓝色" },
+    { id: "green", color: "#10b981", name: "绿色" },
+    { id: "orange", color: "#f59e0b", name: "橙色" },
+  ];
 
   if (!mounted) return null;
 
@@ -116,6 +137,17 @@ export function NavBar() {
               </button>
             </>
           )}
+          <div className="accent-picker" title="主题色">
+            {ACCENTS.map((a) => (
+              <button
+                key={a.id}
+                className={`accent-dot ${accent === a.id ? "active" : ""}`}
+                style={{ background: a.color }}
+                onClick={() => changeAccent(a.id)}
+                aria-label={a.name}
+              />
+            ))}
+          </div>
           <button
             className="theme-toggle"
             onClick={toggleTheme}
