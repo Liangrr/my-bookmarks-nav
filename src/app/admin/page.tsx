@@ -137,6 +137,30 @@ export default function AdminPage() {
     return categories.find((c) => c.id === id)?.name || "未分类";
   };
 
+  // 分类颜色：与首页 globals.css 的 slug 映射保持一致（frontend 绿 / work 紫 / ai-tools 粉 / tech-news 橙 / 默认蓝）
+  const getCategoryColor = (id: number | null) => {
+    const slug = categories.find((c) => c.id === id)?.slug || "";
+    const map: Record<string, string> = {
+      frontend: "#10b981",
+      work: "#8b5cf6",
+      "ai-tools": "#ec4899",
+      "tech-news": "#f59e0b",
+      common: "#3b82f6",
+    };
+    return map[slug] || "#3b82f6";
+  };
+
+  // 大小标识中文映射（与新增表单一致）
+  const getSizeLabel = (size: string) => {
+    const map: Record<string, string> = {
+      normal: "普通",
+      large: "大(2×2)",
+      wide: "宽(2×1)",
+      tall: "高(1×2)",
+    };
+    return map[size] || size;
+  };
+
   if (loading || !isAdmin) {
     return (
       <div className="max-w-6xl mx-auto px-6 py-20 text-center">
@@ -370,72 +394,88 @@ export default function AdminPage() {
         </div>
       )}
 
-      {/* 网站列表 */}
-      <div
-        className="rounded-2xl overflow-hidden"
-        style={{
-          background: "var(--bg-card)",
-          border: "1px solid var(--border)",
-        }}
-      >
-        <table className="w-full">
-          <thead>
-            <tr style={{ borderBottom: "1px solid var(--border)" }}>
-              <th className="text-center px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>网站</th>
-              <th className="text-center px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>分类</th>
-              <th className="text-center px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>大小</th>
-              <th className="text-center px-6 py-4 text-sm font-medium" style={{ color: "var(--text-secondary)" }}>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookmarks.map((bookmark) => (
-              <tr
-                key={bookmark.id}
-                style={{ borderBottom: "1px solid var(--border)" }}
+      {/* 网站列表（与首页卡片同款规范：圆角卡片 + 分类彩色pill + 居中 + hover 上浮） */}
+      <div className="flex flex-col gap-4">
+        {bookmarks.map((bookmark) => (
+          <div
+            key={bookmark.id}
+            className="admin-item rounded-2xl px-6 py-4 flex items-center gap-6 transition-all duration-300 hover:-translate-y-0.5"
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderTop: "3px solid " + getCategoryColor(bookmark.category_id),
+              boxShadow: "0 0 0 0 transparent",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "var(--border-hover)";
+              e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.18)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "var(--border)";
+              e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
+            }}
+          >
+            {/* 网站信息（居中） */}
+            <div className="flex-1 min-w-0 text-center">
+              <p className="font-medium text-[15px]">{bookmark.title}</p>
+              <p
+                className="text-sm break-all"
+                style={{ color: "var(--text-tertiary)" }}
               >
-                <td className="px-6 py-4 text-center">
-                  <p className="font-medium">{bookmark.title}</p>
-                  <p className="text-sm break-all" style={{ color: "var(--text-tertiary)" }}>
-                    {bookmark.url}
-                  </p>
-                </td>
-                <td className="px-6 py-4 text-sm text-center">
-                  {getCategoryName(bookmark.category_id)}
-                </td>
-                <td className="px-6 py-4 text-sm text-center" style={{ color: "var(--text-secondary)" }}>
-                  {bookmark.size}
-                </td>
-                <td className="px-6 py-4 text-center">
-                  <button
-                    onClick={() => {
-                      setEditingBookmark(bookmark);
-                      setForm({
-                        title: bookmark.title,
-                        url: bookmark.url,
-                        description: bookmark.description || "",
-                        icon: bookmark.icon || "",
-                        category_id: bookmark.category_id || 1,
-                        size: bookmark.size,
-                      });
-                      setShowForm(true);
-                    }}
-                    className="text-sm mr-4"
-                    style={{ color: "var(--accent-light)" }}
-                  >
-                    编辑
-                  </button>
-                  <button
-                    onClick={() => handleDelete(bookmark.id)}
-                    className="text-sm"
-                    style={{ color: "#ef4444" }}
-                  >
-                    删除
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                {bookmark.url}
+              </p>
+            </div>
+
+            {/* 分类彩色 pill（与首页 .tab 同款圆角） */}
+            <span
+              className="whitespace-nowrap px-3.5 py-1.5 rounded-full text-[13px] font-medium"
+              style={{
+                color: getCategoryColor(bookmark.category_id),
+                background: getCategoryColor(bookmark.category_id) + "1f",
+                border: "1px solid " + getCategoryColor(bookmark.category_id) + "55",
+              }}
+            >
+              {getCategoryName(bookmark.category_id)}
+            </span>
+
+            {/* 大小徽章 */}
+            <span
+              className="whitespace-nowrap text-[13px] min-w-[76px] text-center px-2 py-1 rounded-md"
+              style={{ background: "var(--bg-glass)", color: "var(--text-secondary)" }}
+            >
+              {getSizeLabel(bookmark.size)}
+            </span>
+
+            {/* 操作 */}
+            <div className="flex items-center gap-4 min-w-[96px] justify-end">
+              <button
+                onClick={() => {
+                  setEditingBookmark(bookmark);
+                  setForm({
+                    title: bookmark.title,
+                    url: bookmark.url,
+                    description: bookmark.description || "",
+                    icon: bookmark.icon || "",
+                    category_id: bookmark.category_id || 1,
+                    size: bookmark.size,
+                  });
+                  setShowForm(true);
+                }}
+                className="text-sm font-medium"
+                style={{ color: "var(--accent-light)" }}
+              >
+                编辑
+              </button>
+              <button
+                onClick={() => handleDelete(bookmark.id)}
+                className="text-sm font-medium"
+                style={{ color: "#ef4444" }}
+              >
+                删除
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
