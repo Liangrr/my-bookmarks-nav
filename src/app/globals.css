@@ -131,12 +131,6 @@ html[data-accent="sakura"] body::before {
 [data-theme="light"][data-accent="space"] { --accent-glow: rgba(96, 165, 250, 0.15); }
 [data-theme="light"][data-accent="sakura"] { --accent-glow: rgba(244, 114, 182, 0.15); }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
   background: var(--bg-primary);
