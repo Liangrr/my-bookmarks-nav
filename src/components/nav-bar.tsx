@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { getOrCreateProfile } from "@/lib/supabase/profile";
 import type { User } from "@supabase/supabase-js";
@@ -17,6 +17,13 @@ export function NavBar() {
     return localStorage.getItem("nav-accent") ?? "cyan";
   });
   const [user, setUser] = useState<User | null>(null);
+  const uidRef = useRef<string | null>(null);
+  const applyUser = useCallback((u: User | null) => {
+    const uid = u?.id ?? null;
+    if (uidRef.current === uid) return; // 同一用户不重复 setState，避免 useEffect([user]) 重复拉取 profile
+    uidRef.current = uid;
+    setUser(u);
+  }, []);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [nickname, setNickname] = useState("");
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
@@ -40,17 +47,17 @@ export function NavBar() {
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
+      applyUser(session?.user ?? null);
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+      applyUser(session?.user ?? null);
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [applyUser]);
 
   // 登录后拉取头像与昵称
   useEffect(() => {
