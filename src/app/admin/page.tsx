@@ -27,6 +27,11 @@ export default function AdminPage() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [stats, setStats] = useState<{
+    total_users: number;
+    dau: number;
+    online: number;
+  } | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | null>(null);
   const [form, setForm] = useState({
@@ -57,6 +62,12 @@ export default function AdminPage() {
     if (data) setCategories(data);
   }, []);
 
+  const fetchStats = useCallback(async () => {
+    const supabase = createClient();
+    const { data } = await supabase.rpc("get_user_stats");
+    if (data) setStats(data);
+  }, []);
+
   useEffect(() => {
     const supabase = createClient();
 
@@ -78,12 +89,12 @@ export default function AdminPage() {
           }
 
           setIsAdmin(true);
-          Promise.all([fetchBookmarks(), fetchCategories()]).then(() =>
-            setLoading(false)
+          Promise.all([fetchBookmarks(), fetchCategories(), fetchStats()]).then(
+            () => setLoading(false)
           );
         });
     });
-  }, [router, fetchBookmarks, fetchCategories]);
+  }, [router, fetchBookmarks, fetchCategories, fetchStats]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -136,6 +147,33 @@ export default function AdminPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
+      {/* 用户统计 */}
+      {stats && (
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          {[
+            { label: "总用户", value: stats.total_users },
+            { label: "今日活跃", value: stats.dau },
+            { label: "当前在线", value: stats.online },
+          ].map((s) => (
+            <div
+              key={s.label}
+              className="rounded-2xl p-6 text-center"
+              style={{
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              <p className="text-4xl font-bold mb-1" style={{ color: "var(--accent)" }}>
+                {s.value}
+              </p>
+              <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+                {s.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">网站管理后台</h1>
         <button

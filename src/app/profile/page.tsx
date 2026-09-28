@@ -175,19 +175,26 @@ export default function ProfilePage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">用户名</label>
+            <label className="block text-sm font-medium mb-2">
+              用户名（唯一，不可修改）
+            </label>
             <input
               type="text"
               value={form.username}
-              onChange={(e) => setForm({ ...form, username: e.target.value })}
+              disabled
               className="w-full px-4 py-3 rounded-xl outline-none transition-all"
               style={{
                 background: "var(--bg-secondary)",
                 border: "1px solid var(--border)",
-                color: "var(--foreground)",
+                color: "var(--text-secondary)",
+                opacity: "0.7",
+                cursor: "not-allowed",
               }}
               placeholder="用户名"
             />
+            <p className="text-xs mt-1.5" style={{ color: "var(--text-secondary)" }}>
+              用户名用于登录且全局唯一，注册后不可修改
+            </p>
           </div>
 
           <div>

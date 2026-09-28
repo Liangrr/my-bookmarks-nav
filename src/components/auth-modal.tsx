@@ -92,12 +92,26 @@ export function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
         });
         if (error) throw error;
       } else {
+        // 注册：用户名全局唯一，先查占用
+        const targetUsername = (
+          loginType === "username" ? username.trim() : email.split("@")[0]
+        ).toLowerCase();
+        const { data: taken, error: takenErr } = await supabase.rpc(
+          "is_username_taken",
+          { target: targetUsername }
+        );
+        if (takenErr) throw takenErr;
+        if (taken) {
+          setError("该用户名已被占用，请换一个");
+          setLoading(false);
+          return;
+        }
         const { error } = await supabase.auth.signUp({
           email: emailTrim,
           password,
           options: {
             data: {
-              username: loginType === "username" ? username.trim() : email.split("@")[0],
+              username: targetUsername,
               nickname: loginType === "username" ? username.trim() : email.split("@")[0],
             },
           },

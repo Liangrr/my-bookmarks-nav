@@ -319,34 +319,36 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
                     color: "var(--text-secondary)",
                   }}
                 >
-                  用户名
+                  用户名（唯一，不可修改）
                 </label>
                 <input
                   type="text"
                   value={form.username}
-                  onChange={(e) => setForm({ ...form, username: e.target.value })}
+                  disabled
                   style={{
                     width: "100%",
                     padding: "12px 16px",
                     borderRadius: "var(--radius-md)",
                     border: "1px solid var(--border)",
                     background: "var(--bg-card)",
-                    color: "var(--text-primary)",
+                    color: "var(--text-secondary)",
                     fontSize: "14px",
                     outline: "none",
                     fontFamily: "inherit",
-                    transition: "var(--transition)",
+                    opacity: "0.7",
+                    cursor: "not-allowed",
                   }}
                   placeholder="用户名"
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "var(--accent)";
-                    e.currentTarget.style.boxShadow = "0 0 0 3px var(--accent-glow)";
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
                 />
+                <p
+                  style={{
+                    fontSize: "12px",
+                    color: "var(--text-secondary)",
+                    marginTop: "6px",
+                  }}
+                >
+                  用户名用于登录且全局唯一，注册后不可修改
+                </p>
               </div>
 
               <div>
