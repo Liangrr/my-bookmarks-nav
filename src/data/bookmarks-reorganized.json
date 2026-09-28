@@ -64,14 +64,6 @@
     "notes": ""
   },
   {
-    "title": "GraphQL | 一种为你的 API 而生的查询语言",
-    "url": "https://graphql.cn/",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "电鸭社区-专注远程工作招聘交流-远程工作，从电鸭开始",
     "url": "https://eleduck.com/",
     "category": "前端开发",
@@ -144,14 +136,6 @@
     "notes": ""
   },
   {
-    "title": "介绍 | Vue JSON Schema Form",
-    "url": "https://vue-json-schema-form.lljj.me/zh/guide/",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "API | Hexo",
     "url": "https://hexo.io/zh-cn/api/index.html",
     "category": "前端开发",
@@ -200,14 +184,6 @@
     "notes": ""
   },
   {
-    "title": "Widgets 目录 - Flutter中文网",
-    "url": "https://flutterchina.club/widgets/",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "API 文档 | Node.js 中文网",
     "url": "http://nodejs.cn/api/",
     "category": "前端开发",
@@ -226,14 +202,6 @@
   {
     "title": "Moment.js | Home",
     "url": "https://momentjs.com/",
-    "category": "前端开发",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "程序员导航-CXY521",
-    "url": "https://cxy521.com/",
     "category": "前端开发",
     "description": "",
     "icon": "",
@@ -432,22 +400,6 @@
     "notes": ""
   },
   {
-    "title": "环球雅途集团",
-    "url": "http://mail.hqyatu.com/",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "导游导览webchat新地址",
-    "url": "https://agt.jznews.net.cn/webchat/#/",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
     "title": "广元生产",
     "url": "http://www.zhlyjg.com/main.action",
     "category": "工作项目",
@@ -626,14 +578,6 @@
   {
     "title": "Best Practices | Cypress Documentation",
     "url": "https://docs.cypress.io/guides/references/best-practices#Cypress-and-Testing-Library",
-    "category": "工作项目",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "3Q影视-qqq影视",
-    "url": "https://qqqys.com/",
     "category": "工作项目",
     "description": "",
     "icon": "",
@@ -978,14 +922,6 @@
   {
     "title": "Postgres.app Downloads",
     "url": "https://postgresapp.com/downloads.html",
-    "category": "AI工具箱",
-    "description": "",
-    "icon": "",
-    "notes": ""
-  },
-  {
-    "title": "下载 - Cursor Agent",
-    "url": "https://agent.92xx.vip/download.html",
     "category": "AI工具箱",
     "description": "",
     "icon": "",
