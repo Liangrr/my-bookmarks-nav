@@ -11,8 +11,19 @@ const SYMBOLS: { sym: string; key: string; name: string; unit: string }[] = [
   { sym: "HG=F", key: "hf_HG", name: "美铜", unit: "美元/磅" },
 ];
 
+// 统一超时：单次外部请求 6s 内返回，避免被 Vercel 函数时长上限(免费版10s)硬杀
+async function fetchWithTimeout(url: string, init: RequestInit = {}, ms = 6000) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { ...init, signal: ctrl.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function yahooQuote(sym: string) {
-  const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`, {
+  const res = await fetchWithTimeout(`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`, {
     headers: { "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)" },
     cache: "no-store",
   });
@@ -29,7 +40,7 @@ async function yahooQuote(sym: string) {
 
 // 东财港伦敦金（黄金国际价兜底）
 async function eastmoneyGold() {
-  const res = await fetch(
+  const res = await fetchWithTimeout(
     "https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f4,f12,f14&secids=123.HLAU&ut=fa5fd1943c7b386f172d6893dbfba10b",
     { cache: "no-store" }
   );
