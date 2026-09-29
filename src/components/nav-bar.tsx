@@ -31,6 +31,7 @@ export function NavBar() {
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
   const [profileModal, setProfileModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const pathname = usePathname();
 
   // 挂载检测：服务端与首次客户端渲染返回 false，水合后再切 true，避免在 effect 里同步 setState
@@ -85,12 +86,14 @@ export function NavBar() {
       return;
     }
     const supabase = createClient();
-    getOrCreateProfile<{ avatar_url: string | null; full_name: string | null }>(
-      supabase,
-      user.id
-    ).then((p) => {
+    getOrCreateProfile<{
+      avatar_url: string | null;
+      full_name: string | null;
+      is_admin: boolean | null;
+    }>(supabase, user.id).then((p) => {
       setAvatarUrl(p?.avatar_url || null);
       setNickname(p?.full_name || "");
+      setIsAdmin(p?.is_admin || false);
     });
   }, [user]);
 
@@ -299,6 +302,19 @@ export function NavBar() {
             </svg>
             <span>首页</span>
           </Link>
+          {isAdmin && (
+            <Link
+              href="/admin"
+              onClick={() => setMenuOpen(false)}
+              className={`drawer-item ${pathname.startsWith("/admin") ? "active" : ""}`}
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+              <span>管理后台</span>
+            </Link>
+          )}
           <Link
             href="/about"
             onClick={() => setMenuOpen(false)}
