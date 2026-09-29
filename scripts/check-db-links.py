@@ -81,6 +81,8 @@ def check_one(bm, use_proxy=False):
         if "ssl" in reason:
             return bm["id"], bm["title"], raw, 0, "ssl-error"
         return bm["id"], bm["title"], raw, 0, f"conn-fail:{reason[:30]}"
+    except TimeoutError:
+        return bm["id"], bm["title"], raw, 0, "timeout"
     except Exception as e:
         return bm["id"], bm["title"], raw, 0, f"err:{type(e).__name__}"
 

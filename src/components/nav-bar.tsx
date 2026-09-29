@@ -365,6 +365,43 @@ export function NavBar() {
             <span>人生指南</span>
           </Link>
           <Link
+            href="/survival"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/survival" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 20 9 8l4 7 3-4 5 9z" />
+              <circle cx="17" cy="5" r="1.6" />
+            </svg>
+            <span>野外求生</span>
+          </Link>
+          <Link
+            href="/tcm"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/tcm" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 21c-4-2-7-5-7-9a7 7 0 0 1 14 0c0 4-3 7-7 9z" />
+              <path d="M12 12c-1.5-1.5-2-3-2-4.5" />
+              <path d="M12 12c1.5-1.5 2-3 2-4.5" />
+              <path d="M12 12v5" />
+            </svg>
+            <span>中医养生</span>
+          </Link>
+          <Link
+            href="/emergency"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/emergency" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2v20" />
+              <path d="M4 12h16" />
+              <path d="M5 7l14 10" />
+              <path d="M19 7L5 17" />
+            </svg>
+            <span>急救知识</span>
+          </Link>
+          <Link
             href="/about"
             onClick={() => setMenuOpen(false)}
             className={`drawer-item ${pathname === "/about" ? "active" : ""}`}
