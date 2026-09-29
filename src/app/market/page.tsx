@@ -40,27 +40,30 @@ export default function MarketPage() {
   const fetchQuotes = useCallback(async () => {
     const secids = METALS.map((m) => `113.${m.id}`).join(",");
     const cnUrl = `https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f4,f12,f14&secids=${secids}&ut=fa5fd1943c7b386f172d6893dbfba10b`;
-    try {
-      const [cnRes, intlRes] = await Promise.all([
-        fetch(cnUrl),
-        fetch("/api/market/intl", { cache: "no-store" }),
-      ]);
-      const [cnJson, intlJson] = await Promise.all([cnRes.json(), intlRes.json()]);
-      const diff = cnJson?.data?.diff;
-      if (!Array.isArray(diff) || diff.length === 0) throw new Error("empty cn");
-      const map: Record<string, Quote> = {};
-      for (const it of diff) {
-        map[it.f12] = { id: it.f12, name: it.f14, price: it.f2, change: it.f4, pct: it.f3 };
-      }
-      setQuotes(map);
-      if (intlJson?.ok && intlJson.data) setIntl(intlJson.data);
-      setLastUpdate(new Date());
-      setError("");
-    } catch (e) {
-      setError("行情获取失败，请检查网络后重试");
-    } finally {
-      setLoading(false);
-    }
+    // 国内/国际独立容错：任一源失败不影响另一源展示
+    const cnP = fetch(cnUrl)
+      .then((r) => r.json())
+      .then((j) => {
+        const diff = j?.data?.diff;
+        if (!Array.isArray(diff) || diff.length === 0) throw new Error("empty cn");
+        const map: Record<string, Quote> = {};
+        for (const it of diff) {
+          map[it.f12] = { id: it.f12, name: it.f14, price: it.f2, change: it.f4, pct: it.f3 };
+        }
+        setQuotes(map);
+      })
+      .catch(() => setError("国内行情获取失败，请检查网络后重试"));
+
+    const intlP = fetch("/api/market/intl", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((j) => {
+        if (j?.ok && j.data) setIntl(j.data);
+      })
+      .catch(() => {}); // 国际价失败不报错，卡片显示 --
+
+    await Promise.all([cnP, intlP]).catch(() => {});
+    setLastUpdate(new Date());
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -221,7 +224,7 @@ export default function MarketPage() {
                     color: "var(--text-tertiary)",
                   }}
                 >
-                  国际价暂无
+                  国际价暂不可用
                 </div>
               )}
             </div>
