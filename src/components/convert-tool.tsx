@@ -302,19 +302,7 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
     () => () => { workerRef.current?.terminate?.().catch(() => {}); },
     []
   );
-  // 原生捕获阶段监听 change：绕开 React 对 file input 的合成事件模拟
-  // （React onChange 在重复选择文件时可能丢失 e.target.files，导致二次上传无效）
-  useEffect(() => {
-    const input = inputRef.current;
-    if (!input) return;
-    const onNativeChange = (e: Event) => {
-      const t = e.target as HTMLInputElement;
-      addFiles(t.files);
-      t.value = "";
-    };
-    input.addEventListener("change", onNativeChange, true);
-    return () => input.removeEventListener("change", onNativeChange, true);
-  }, []);
+
 
   const getWorker = async () => {
     if (workerRef.current) return workerRef.current;
@@ -505,7 +493,27 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
         </div>
         <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>{tool.accept}</div>
         <input
-          ref={inputRef}
+          ref={(el) => {
+            inputRef.current = el;
+            // 原生捕获阶段监听（仅绑定一次）：绕开 React 合成 onChange 在重复选择文件时丢失 files 的问题
+            if (el && !el.dataset.up) {
+              el.dataset.up = "1";
+              el.addEventListener(
+                "change",
+                (e) => {
+                  const t = e.target as HTMLInputElement;
+                  if (t.files && t.files.length) {
+                    setFiles((prev) => [...prev, ...Array.from(t.files!)].slice(0, 20));
+                    setErr("");
+                    setResults([]);
+                    setOcrText("");
+                  }
+                  t.value = "";
+                },
+                true
+              );
+            }
+          }}
           type="file"
           hidden
           multiple={tool.multiple}
