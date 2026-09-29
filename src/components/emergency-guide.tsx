@@ -95,7 +95,7 @@ export function EmergencyGuide() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          医学应急急救与常用小知识
+          急救知识手册
         </h1>
         <p
           style={{

@@ -108,7 +108,7 @@ export function SurvivalGuide() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          野外求生知识手册
+          野外求生手册
         </h1>
         <p
           style={{

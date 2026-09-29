@@ -103,7 +103,7 @@ export function TcmGuide() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          中医养生小常识
+          中医养生手册
         </h1>
         <p
           style={{

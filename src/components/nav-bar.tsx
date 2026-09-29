@@ -373,7 +373,7 @@ export function NavBar() {
               <path d="M3 20 9 8l4 7 3-4 5 9z" />
               <circle cx="17" cy="5" r="1.6" />
             </svg>
-            <span>野外求生</span>
+            <span>野外求生手册</span>
           </Link>
           <Link
             href="/tcm"
@@ -386,7 +386,7 @@ export function NavBar() {
               <path d="M12 12c1.5-1.5 2-3 2-4.5" />
               <path d="M12 12v5" />
             </svg>
-            <span>中医养生</span>
+            <span>中医养生手册</span>
           </Link>
           <Link
             href="/emergency"
@@ -399,7 +399,7 @@ export function NavBar() {
               <path d="M5 7l14 10" />
               <path d="M19 7L5 17" />
             </svg>
-            <span>急救知识</span>
+            <span>急救知识手册</span>
           </Link>
           <Link
             href="/about"
