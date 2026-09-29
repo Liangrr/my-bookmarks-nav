@@ -68,7 +68,7 @@ export default function MarketPage() {
 
   useEffect(() => {
     fetchQuotes();
-    timerRef.current = setInterval(fetchQuotes, 30000);
+    timerRef.current = setInterval(fetchQuotes, 300000);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
@@ -92,7 +92,7 @@ export default function MarketPage() {
             实时行情
           </h1>
           <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: "8px 0 0" }}>
-            国内：上海期货交易所主力合约（人民币） · 国际：伦敦/纽约金属（美元） · 30 秒自动刷新
+            国内：上海期货交易所主力合约（人民币） · 国际：伦敦/纽约金属（美元） · 5 分钟自动刷新
           </p>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
