@@ -128,16 +128,6 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
   return (
     <>
       <div className="container">
-        {/* Hero 区 */}
-        <div className="hero">
-          <div className="hero-logo">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icon.png" alt="星轨" />
-          </div>
-          <h1>星轨 · 精选网站收藏</h1>
-          <p>日常在用的优质网站，都在这里</p>
-        </div>
-
         {/* 搜索栏 */}
         <div className="search-bar">
           <span className="search-icon">
