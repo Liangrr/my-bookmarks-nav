@@ -294,10 +294,6 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
   const [results, setResults] = useState<Result[]>([]);
   const [ocrText, setOcrText] = useState("");
   const [ocrLoading, setOcrLoading] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  // 清空时递增 key 强制重建 input：与「返回列表重新进入」行为一致，
-  // 避免同一 input 实例在多次渲染后出现上传失效
-  const [inputKey, setInputKey] = useState(0);
   const workerRef = useRef<{ recognize: (f: File) => Promise<{ data: { text: string } }>; terminate?: () => Promise<unknown> } | null>(null);
   const filesRef = useRef<File[]>([]);
   useEffect(() => { filesRef.current = files; }, [files]);
@@ -480,12 +476,13 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
         </div>
       )}
 
-      {/* 上传区 */}
-      <div
+      {/* 上传区：用 label 原生机制激活文件选择，不依赖 ref/JS click 调用链，
+          避免多次操作后 input 关联失效导致选完文件 files 为空 */}
+      <label
         onDragOver={(e) => e.preventDefault()}
         onDrop={onDrop}
-        onClick={() => inputRef.current?.click()}
         style={{
+          display: "block",
           border: "2px dashed var(--border)", borderRadius: 12, padding: "28px 16px", textAlign: "center",
           cursor: "pointer", background: "var(--bg-secondary)", transition: "var(--transition)",
         }}
@@ -496,34 +493,13 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
         </div>
         <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>{tool.accept}</div>
         <input
-          key={inputKey}
-          ref={(el) => {
-            inputRef.current = el;
-            // 原生捕获阶段监听（仅绑定一次）：绕开 React 合成 onChange 在重复选择文件时丢失 files 的问题
-            if (el && !el.dataset.up) {
-              el.dataset.up = "1";
-              el.addEventListener(
-                "change",
-                (e) => {
-                  const t = e.target as HTMLInputElement;
-                  if (t.files && t.files.length) {
-                    setFiles((prev) => [...prev, ...Array.from(t.files!)].slice(0, 20));
-                    setErr("");
-                    setResults([]);
-                    setOcrText("");
-                  }
-                  t.value = "";
-                },
-                true
-              );
-            }
-          }}
           type="file"
           hidden
           multiple={tool.multiple}
           accept={tool.accept}
+          onChange={(e) => { addFiles(e.target.files); e.target.value = ""; }}
         />
-      </div>
+      </label>
 
       {/* 已选文件 */}
       {files.length > 0 && (
@@ -551,7 +527,7 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
           {ocrLoading ? "加载识别引擎…" : busy ? "转换中…" : "开始转换"}
         </button>
         <button
-          onClick={() => { setFiles([]); setResults([]); setErr(""); setOcrText(""); setInputKey((k) => k + 1); }}
+          onClick={() => { setFiles([]); setResults([]); setErr(""); setOcrText(""); }}
           style={{ fontSize: 13, color: "var(--text-secondary)", padding: "8px 16px", borderRadius: 100, border: "1px solid var(--border)", background: "var(--bg-card)", cursor: "pointer", fontFamily: "inherit" }}
         >
           清空
