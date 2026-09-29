@@ -295,6 +295,9 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
   const [ocrText, setOcrText] = useState("");
   const [ocrLoading, setOcrLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  // 清空时递增 key 强制重建 input：与「返回列表重新进入」行为一致，
+  // 避免同一 input 实例在多次渲染后出现上传失效
+  const [inputKey, setInputKey] = useState(0);
   const workerRef = useRef<{ recognize: (f: File) => Promise<{ data: { text: string } }>; terminate?: () => Promise<unknown> } | null>(null);
   const filesRef = useRef<File[]>([]);
   useEffect(() => { filesRef.current = files; }, [files]);
@@ -493,6 +496,7 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
         </div>
         <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>{tool.accept}</div>
         <input
+          key={inputKey}
           ref={(el) => {
             inputRef.current = el;
             // 原生捕获阶段监听（仅绑定一次）：绕开 React 合成 onChange 在重复选择文件时丢失 files 的问题
@@ -547,7 +551,7 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
           {ocrLoading ? "加载识别引擎…" : busy ? "转换中…" : "开始转换"}
         </button>
         <button
-          onClick={() => { setFiles([]); setResults([]); setErr(""); setOcrText(""); }}
+          onClick={() => { setFiles([]); setResults([]); setErr(""); setOcrText(""); setInputKey((k) => k + 1); }}
           style={{ fontSize: 13, color: "var(--text-secondary)", padding: "8px 16px", borderRadius: 100, border: "1px solid var(--border)", background: "var(--bg-card)", cursor: "pointer", fontFamily: "inherit" }}
         >
           清空
