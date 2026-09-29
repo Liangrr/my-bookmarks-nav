@@ -159,9 +159,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--bg-primary);
   border-bottom: 1px solid var(--border);
   padding: 16px 32px;
   display: flex;
