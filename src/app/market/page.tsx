@@ -233,7 +233,7 @@ export default function MarketPage() {
       </div>
 
       <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 20, textAlign: "center" }}>
-        国内数据来源：东方财富 · 国际数据来源：新浪财经 · 仅供个人参考，不构成投资建议 · 交易时段外为最近收盘价
+        国内数据来源：东方财富 · 国际数据来源：Yahoo Finance · 仅供个人参考，不构成投资建议 · 交易时段外为最近收盘价
       </p>
     </div>
   );
