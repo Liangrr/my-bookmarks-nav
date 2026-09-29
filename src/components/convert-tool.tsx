@@ -29,7 +29,7 @@ type Tool = {
 };
 
 const TOOLS: Tool[] = [
-  { id: "img-convert", icon: "🖼️", name: "图片格式转换", desc: "PNG / JPG / WebP / AVIF / BMP 互转", group: "图片", multiple: true, accept: "image/*", hint: "支持多张图片批量转换" },
+  { id: "img-convert", icon: "🖼️", name: "图片格式转换", desc: "PNG / JPG / WebP 互转", group: "图片", multiple: true, accept: "image/*", hint: "支持多张图片批量转换" },
   { id: "img-compress", icon: "🗜️", name: "图片压缩", desc: "调整质量与尺寸，压缩图片体积", group: "图片", multiple: true, accept: "image/*", hint: "输出 JPG/WebP，显示压缩前后大小" },
   { id: "img-ocr", icon: "🔍", name: "图片文字识别", desc: "OCR 提取图片中的中文 / 英文文字", group: "图片", multiple: false, accept: "image/*", hint: "首次使用需下载语言包（约 15MB），稍候" },
   { id: "img-pdf", icon: "📷", name: "图片转 PDF", desc: "多张图片合成一个 PDF", group: "图片", multiple: true, accept: "image/*", hint: "按选择顺序逐页合成 PDF" },
@@ -88,8 +88,8 @@ function canvasToBlob(canvas: HTMLCanvasElement, mime: string, quality = 0.92): 
 
 /* ---------- 各转换实现 ---------- */
 
-async function runImgConvert(files: File[], fmt: "png" | "jpg" | "webp" | "avif" | "bmp"): Promise<{ blob: Blob; name: string }[]> {
-  const mime = { png: "image/png", jpg: "image/jpeg", webp: "image/webp", avif: "image/avif", bmp: "image/bmp" }[fmt];
+async function runImgConvert(files: File[], fmt: "png" | "jpg" | "webp"): Promise<{ blob: Blob; name: string }[]> {
+  const mime = { png: "image/png", jpg: "image/jpeg", webp: "image/webp" }[fmt];
   const out: { blob: Blob; name: string }[] = [];
   for (const f of files) {
     const canvas = await loadImage(f);
@@ -327,7 +327,7 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
     try {
       let out: Result[] = [];
       switch (tool.id) {
-        case "img-convert": out = await runImgConvert(files, fmt as "png" | "jpg" | "webp" | "avif" | "bmp"); break;
+        case "img-convert": out = await runImgConvert(files, fmt as "png" | "jpg" | "webp"); break;
         case "img-compress": out = await runImgCompress(files, compressFmt, quality, maxW); break;
         case "img-ocr": {
           const t = await runImgOcr(files[0]);
@@ -377,7 +377,7 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
           <div style={label}>输出格式</div>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             {(tool.id === "img-convert"
-              ? ["png", "jpg", "webp", "avif", "bmp"]
+              ? ["png", "jpg", "webp"]
               : tool.id === "xlsx-csv"
                 ? ["csv", "json"]
                 : ["txt", "html"]
