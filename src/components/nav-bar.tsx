@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getOrCreateProfile } from "@/lib/supabase/profile";
 import type { User } from "@supabase/supabase-js";
@@ -28,6 +30,8 @@ export function NavBar() {
   const [nickname, setNickname] = useState("");
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
   const [profileModal, setProfileModal] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // 挂载检测：服务端与首次客户端渲染返回 false，水合后再切 true，避免在 effect 里同步 setState
   const mounted = useSyncExternalStore(
@@ -58,6 +62,20 @@ export function NavBar() {
 
     return () => subscription.unsubscribe();
   }, [applyUser]);
+
+  // 抽屉菜单：ESC 关闭 + 展开时锁定背景滚动
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", handleEsc);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   // 登录后拉取头像与昵称
   useEffect(() => {
@@ -100,13 +118,27 @@ export function NavBar() {
   return (
     <>
       <nav className="nav-bar">
-        <div className="nav-logo">
+        <button
+          className="nav-logo"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-expanded={menuOpen}
+          aria-label="展开菜单"
+          title="菜单"
+          style={{
+            cursor: "pointer",
+            background: "none",
+            border: "none",
+            fontFamily: "inherit",
+            color: "inherit",
+            padding: 0,
+          }}
+        >
           <div className="nav-logo-icon">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/icon.png" alt="星轨" />
           </div>
           <span>星轨</span>
-        </div>
+        </button>
         <div className="nav-actions">
           {user ? (
             <>
@@ -236,6 +268,52 @@ export function NavBar() {
           </button>
         </div>
       </nav>
+
+      {/* 抽屉菜单：点 Logo 展开/收起；遮罩、ESC 关闭；分类属于首页，不进菜单 */}
+      <div
+        className={`drawer-overlay ${menuOpen ? "open" : ""}`}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden={!menuOpen}
+      />
+      <aside
+        className={`drawer ${menuOpen ? "open" : ""}`}
+        aria-hidden={!menuOpen}
+        inert={!menuOpen}
+      >
+        <div className="drawer-head">
+          <div className="nav-logo-icon">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/icon.png" alt="星轨" />
+          </div>
+          <span>星轨</span>
+        </div>
+        <nav className="drawer-nav">
+          <Link
+            href="/"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 9.5 12 3l9 6.5" />
+              <path d="M5 10.5V21h14V10.5" />
+            </svg>
+            <span>首页</span>
+          </Link>
+          <Link
+            href="/about"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/about" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 8h.01" />
+              <path d="M11 12h1v5h1" />
+            </svg>
+            <span>关于</span>
+          </Link>
+        </nav>
+        <div className="drawer-foot">星轨 · 精选网站导航</div>
+      </aside>
 
       {authModal && (
         <AuthModal
