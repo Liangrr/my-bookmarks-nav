@@ -289,17 +289,7 @@ body {
   color: var(--text-secondary);
 }
 
-/* 主题色选择器 */
-.accent-picker {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 10px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  background: var(--bg-card);
-}
-
+/* 主题色选择器（收纳于调色板弹层） */
 .accent-dot {
   width: 16px;
   height: 16px;
@@ -327,6 +317,72 @@ body {
 .theme-toggle svg {
   width: 18px;
   height: 18px;
+}
+
+/* ========== 主题设置弹层 ========== */
+.theme-popover-wrap {
+  position: relative;
+}
+
+.theme-popover {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  box-shadow: var(--shadow-hover);
+  z-index: 120;
+}
+
+.popover-section {
+  margin-bottom: 14px;
+}
+
+.popover-section:last-child {
+  margin-bottom: 0;
+}
+
+.popover-label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.popover-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.popover-theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.popover-theme-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.popover-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: transparent;
 }
 
 /* ========== 主容器 ========== */
@@ -758,10 +814,6 @@ body {
 
   .nav-bar {
     padding: 12px 16px;
-  }
-
-  .accent-picker {
-    display: none;
   }
 
   .search-input {

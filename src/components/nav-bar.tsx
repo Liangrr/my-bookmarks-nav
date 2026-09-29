@@ -31,6 +31,7 @@ export function NavBar() {
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
   const [profileModal, setProfileModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const pathname = usePathname();
 
@@ -144,131 +145,144 @@ export function NavBar() {
         </button>
         <div className="nav-actions">
           {user ? (
-            <>
-              <button
-                onClick={() => setProfileModal(true)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  fontSize: "14px",
-                  color: "var(--text-secondary)",
-                  padding: "6px 16px 6px 6px",
-                  borderRadius: "100px",
-                  border: "1px solid var(--border)",
-                  background: "var(--bg-card)",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  transition: "var(--transition)",
-                }}
-              >
-                {avatarUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={avatarUrl}
-                    alt="头像"
-                    width={28}
-                    height={28}
-                    style={{
-                      width: "28px",
-                      height: "28px",
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                    }}
-                  />
-                ) : (
-                  <span
-                    style={{
-                      width: "28px",
-                      height: "28px",
-                      borderRadius: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "13px",
-                      fontWeight: "700",
-                      background: "var(--accent)",
-                      color: "white",
-                    }}
-                  >
-                    {nickname?.charAt(0) ||
-                      user?.email?.charAt(0)?.toUpperCase() ||
-                      "?"}
-                  </span>
-                )}
-                {nickname || "个人中心"}
-              </button>
-            </>
+            <button
+              onClick={() => setProfileModal(true)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                fontSize: "14px",
+                color: "var(--text-secondary)",
+                padding: "6px 16px 6px 6px",
+                borderRadius: "100px",
+                border: "1px solid var(--border)",
+                background: "var(--bg-card)",
+                cursor: "pointer",
+                fontFamily: "inherit",
+                transition: "var(--transition)",
+              }}
+            >
+              {avatarUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={avatarUrl}
+                  alt="头像"
+                  width={28}
+                  height={28}
+                  style={{
+                    width: "28px",
+                    height: "28px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                />
+              ) : (
+                <span
+                  style={{
+                    width: "28px",
+                    height: "28px",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    background: "var(--accent)",
+                    color: "white",
+                  }}
+                >
+                  {nickname?.charAt(0) ||
+                    user?.email?.charAt(0)?.toUpperCase() ||
+                    "?"}
+                </span>
+              )}
+              {nickname || "个人中心"}
+            </button>
           ) : (
-            <>
-              <button
-                onClick={() => setAuthModal("login")}
-                style={{
-                  fontSize: "14px",
-                  color: "var(--text-secondary)",
-                  padding: "8px 16px",
-                  borderRadius: "100px",
-                  border: "1px solid var(--border)",
-                  background: "var(--bg-card)",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  transition: "var(--transition)",
-                }}
-              >
-                登录
-              </button>
-              <button
-                onClick={() => setAuthModal("signup")}
-                style={{
-                  fontSize: "14px",
-                  color: "white",
-                  padding: "8px 16px",
-                  borderRadius: "100px",
-                  border: "1px solid var(--accent)",
-                  background: "var(--accent)",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  transition: "var(--transition)",
-                }}
-              >
-                注册
-              </button>
-            </>
+            <button
+              className="theme-toggle"
+              onClick={() => setAuthModal("login")}
+              title="登录 / 注册"
+              aria-label="登录 / 注册"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </button>
           )}
-          <div className="accent-picker" title="主题色">
-            {ACCENTS.map((a) => (
-              <button
-                key={a.id}
-                className={`accent-dot ${accent === a.id ? "active" : ""}`}
-                style={{ background: a.color }}
-                onClick={() => changeAccent(a.id)}
-                aria-label={a.name}
-              />
-            ))}
-          </div>
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            title="切换主题"
-          >
-            {theme === "dark" ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          <div className="theme-popover-wrap">
+            <button
+              className="theme-toggle"
+              onClick={() => setThemeMenuOpen((v) => !v)}
+              title="主题设置"
+              aria-label="主题设置"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22a10 10 0 1 1 10-10c0 1.66-1.34 3-3 3h-2.5a2.5 2.5 0 0 0-1.8 4.2c.34.4.55.83.55 1.25 0 1.1-.9 1.55-2.25 1.55z" />
+                <circle cx="7.5" cy="11.5" r="1" />
+                <circle cx="10.5" cy="7.5" r="1" />
+                <circle cx="14.5" cy="7.5" r="1" />
+                <circle cx="16.5" cy="11.5" r="1" />
               </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
+            </button>
+            {themeMenuOpen && (
+              <>
+                <div className="theme-popover">
+                  <div className="popover-section">
+                    <div className="popover-label">主题色</div>
+                    <div className="popover-row">
+                      {ACCENTS.map((a) => (
+                        <button
+                          key={a.id}
+                          className={`accent-dot ${accent === a.id ? "active" : ""}`}
+                          style={{ background: a.color }}
+                          onClick={() => changeAccent(a.id)}
+                          aria-label={a.name}
+                          title={a.name}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="popover-section">
+                    <div className="popover-label">外观</div>
+                    <button
+                      className="popover-theme-btn"
+                      onClick={() => {
+                        toggleTheme();
+                        setThemeMenuOpen(false);
+                      }}
+                    >
+                      {theme === "dark" ? (
+                        <>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                          </svg>
+                          浅色模式
+                        </>
+                      ) : (
+                        <>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                          </svg>
+                          深色模式
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+                <div className="popover-mask" onClick={() => setThemeMenuOpen(false)} />
+              </>
             )}
-          </button>
+          </div>
         </div>
       </nav>
 
