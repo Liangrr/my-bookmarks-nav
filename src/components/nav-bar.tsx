@@ -341,6 +341,19 @@ export function NavBar() {
             <span>实时行情</span>
           </Link>
           <Link
+            href="/convert"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/convert" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M17 3l4 4-4 4" />
+              <path d="M21 7H8a4 4 0 0 0-4 4v2" />
+              <path d="M7 21l-4-4 4-4" />
+              <path d="M3 17h13a4 4 0 0 0 4-4v-2" />
+            </svg>
+            <span>格式转换</span>
+          </Link>
+          <Link
             href="/about"
             onClick={() => setMenuOpen(false)}
             className={`drawer-item ${pathname === "/about" ? "active" : ""}`}
