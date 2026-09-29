@@ -354,6 +354,17 @@ export function NavBar() {
             <span>格式转换</span>
           </Link>
           <Link
+            href="/living"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/living" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 3a6 6 0 0 0-6 6c0 2 .8 3 2 4v3h8v-3c1.2-1 2-2 2-4a6 6 0 0 0-6-6z" />
+              <path d="M10 21h4" />
+            </svg>
+            <span>人生指南</span>
+          </Link>
+          <Link
             href="/about"
             onClick={() => setMenuOpen(false)}
             className={`drawer-item ${pathname === "/about" ? "active" : ""}`}
