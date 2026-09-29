@@ -302,6 +302,19 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
     () => () => { workerRef.current?.terminate?.().catch(() => {}); },
     []
   );
+  // 原生捕获阶段监听 change：绕开 React 对 file input 的合成事件模拟
+  // （React onChange 在重复选择文件时可能丢失 e.target.files，导致二次上传无效）
+  useEffect(() => {
+    const input = inputRef.current;
+    if (!input) return;
+    const onNativeChange = (e: Event) => {
+      const t = e.target as HTMLInputElement;
+      addFiles(t.files);
+      t.value = "";
+    };
+    input.addEventListener("change", onNativeChange, true);
+    return () => input.removeEventListener("change", onNativeChange, true);
+  }, []);
 
   const getWorker = async () => {
     if (workerRef.current) return workerRef.current;
@@ -497,7 +510,6 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
           hidden
           multiple={tool.multiple}
           accept={tool.accept}
-          onChange={(e) => { addFiles(e.target.files); e.target.value = ""; }}
         />
       </div>
 

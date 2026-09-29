@@ -50,12 +50,15 @@ export function BookmarkCard({
   const fullUrl = url.startsWith("http") ? url : `https://${url}`;
   const domain = getDomain(fullUrl);
 
-  // 用多个 favicon 源，按顺序尝试；纯 IP 域名用内联 SVG 地球图标兜底
-  const [imgError, setImgError] = useState(false);
-  const faviconUrl = isIpAddress(domain)
-    ? IP_FALLBACK_ICON
-    : `https://favicon.im/${domain}?larger=true`;
-  const fallbackIcon = icon || title.charAt(0).toUpperCase();
+  // 图标三级兜底：数据库 icon（真实 favicon 地址）→ favicon.im 服务 → 文字图标
+  // 纯 IP 域名直接用内联 SVG 地球图标
+  const [srcIdx, setSrcIdx] = useState(0);
+  const sources = isIpAddress(domain)
+    ? [IP_FALLBACK_ICON]
+    : [icon, `https://favicon.im/${domain}?larger=true`].filter(Boolean) as string[];
+  const faviconUrl = sources[srcIdx] ?? IP_FALLBACK_ICON;
+  const fallbackIcon = icon && icon.startsWith("http") ? "" : icon || title.charAt(0).toUpperCase();
+  const iconFailed = srcIdx >= sources.length;
 
   const handleClick = () => {
     if (id && onOpen) onOpen(id);
@@ -71,16 +74,17 @@ export function BookmarkCard({
     >
       <div className="card-header">
         <div className="card-icon">
-          {!imgError ? (
-            // 外部 favicon 动态域名，无法走 next/image 优化，保留原生 img 并用 onError 回退到文字图标
+          {!iconFailed ? (
+            // 外部 favicon 动态域名，无法走 next/image 优化，保留原生 img 并用 onError 逐级回退
             // eslint-disable-next-line @next/next/no-img-element
             <img
+              key={faviconUrl}
               src={faviconUrl}
               alt={title}
               width="24"
               height="24"
               style={{ borderRadius: "4px" }}
-              onError={() => setImgError(true)}
+              onError={() => setSrcIdx((i) => i + 1)}
             />
           ) : (
             fallbackIcon
