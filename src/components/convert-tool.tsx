@@ -6,6 +6,8 @@ import { useRef, useState } from "react";
 
 type ToolId =
   | "img-convert"
+  | "img-compress"
+  | "img-ocr"
   | "img-pdf"
   | "pdf-img"
   | "pdf-merge"
@@ -27,7 +29,9 @@ type Tool = {
 };
 
 const TOOLS: Tool[] = [
-  { id: "img-convert", icon: "🖼️", name: "图片格式转换", desc: "PNG / JPG / WebP 互转", group: "图片", multiple: true, accept: "image/*", hint: "支持多张图片批量转换" },
+  { id: "img-convert", icon: "🖼️", name: "图片格式转换", desc: "PNG / JPG / WebP / AVIF / BMP 互转", group: "图片", multiple: true, accept: "image/*", hint: "支持多张图片批量转换" },
+  { id: "img-compress", icon: "🗜️", name: "图片压缩", desc: "调整质量与尺寸，压缩图片体积", group: "图片", multiple: true, accept: "image/*", hint: "输出 JPG/WebP，显示压缩前后大小" },
+  { id: "img-ocr", icon: "🔍", name: "图片文字识别", desc: "OCR 提取图片中的中文 / 英文文字", group: "图片", multiple: false, accept: "image/*", hint: "首次使用需下载语言包（约 15MB），稍候" },
   { id: "img-pdf", icon: "📷", name: "图片转 PDF", desc: "多张图片合成一个 PDF", group: "图片", multiple: true, accept: "image/*", hint: "按选择顺序逐页合成 PDF" },
   { id: "pdf-img", icon: "📄", name: "PDF 转图片", desc: "PDF 每页渲染为 PNG", group: "PDF", multiple: false, accept: "application/pdf", hint: "最多处理前 20 页" },
   { id: "pdf-merge", icon: "🔗", name: "PDF 合并", desc: "多个 PDF 合并为一个", group: "PDF", multiple: true, accept: "application/pdf", hint: "按选择顺序合并" },
@@ -84,14 +88,56 @@ function canvasToBlob(canvas: HTMLCanvasElement, mime: string, quality = 0.92): 
 
 /* ---------- 各转换实现 ---------- */
 
-async function runImgConvert(files: File[], fmt: "png" | "jpg" | "webp"): Promise<{ blob: Blob; name: string }[]> {
-  const mime = { png: "image/png", jpg: "image/jpeg", webp: "image/webp" }[fmt];
+async function runImgConvert(files: File[], fmt: "png" | "jpg" | "webp" | "avif" | "bmp"): Promise<{ blob: Blob; name: string }[]> {
+  const mime = { png: "image/png", jpg: "image/jpeg", webp: "image/webp", avif: "image/avif", bmp: "image/bmp" }[fmt];
   const out: { blob: Blob; name: string }[] = [];
   for (const f of files) {
     const canvas = await loadImage(f);
-    out.push({ blob: await canvasToBlob(canvas, mime), name: `${baseName(f.name)}.${fmt}` });
+    const blob = await canvasToBlob(canvas, mime, 0.92);
+    if (blob.type !== mime) throw new Error(`当前浏览器不支持转换为 ${fmt.toUpperCase()}，请换用其他格式`);
+    out.push({ blob, name: `${baseName(f.name)}.${fmt}` });
   }
   return out;
+}
+
+async function runImgCompress(files: File[], fmt: "jpg" | "webp", quality: number, maxW: number): Promise<{ blob: Blob; name: string }[]> {
+  const mime = fmt === "jpg" ? "image/jpeg" : "image/webp";
+  const out: { blob: Blob; name: string }[] = [];
+  for (const f of files) {
+    const bmp = await createImageBitmap(f);
+    let w = bmp.width, h = bmp.height;
+    if (maxW > 0 && w > maxW) {
+      h = Math.round((h * maxW) / w);
+      w = maxW;
+    }
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(bmp, 0, 0, w, h);
+    bmp.close();
+    const blob = await canvasToBlob(canvas, mime, quality);
+    const ratio = f.size > 0 ? Math.round((1 - blob.size / f.size) * 100) : 0;
+    out.push({ blob, name: `${baseName(f.name)}-压缩(${fmtSize(f.size)}→${fmtSize(blob.size)},${ratio >= 0 ? "-" : "+"}${Math.abs(ratio)}%).${fmt}` });
+  }
+  return out;
+}
+
+async function runImgOcr(file: File): Promise<string> {
+  const { createWorker } = await import("tesseract.js");
+  const worker = await createWorker("chi_sim+eng", 1, {
+    workerPath: "https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/worker.min.js",
+    corePath: "https://cdn.jsdelivr.net/npm/tesseract.js-core@7.0.0/tesseract-core.wasm.js",
+    langPath: "https://tessdata.projectnaptha.com/4.0.0",
+  });
+  try {
+    const { data } = await worker.recognize(file);
+    return data.text.trim();
+  } finally {
+    await worker.terminate();
+  }
 }
 
 async function runImgPdf(files: File[]): Promise<{ blob: Blob; name: string }[]> {
@@ -250,9 +296,13 @@ type Result = { blob: Blob; name: string };
 function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
   const [files, setFiles] = useState<File[]>([]);
   const [fmt, setFmt] = useState("png");
+  const [compressFmt, setCompressFmt] = useState<"jpg" | "webp">("webp");
+  const [quality, setQuality] = useState(0.7);
+  const [maxW, setMaxW] = useState(1920);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
   const [results, setResults] = useState<Result[]>([]);
+  const [ocrText, setOcrText] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const addFiles = (list: FileList | null) => {
@@ -260,6 +310,7 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
     setFiles((prev) => [...prev, ...Array.from(list)].slice(0, 20));
     setErr("");
     setResults([]);
+    setOcrText("");
   };
 
   const onDrop = (e: React.DragEvent) => {
@@ -272,10 +323,18 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
     setBusy(true);
     setErr("");
     setResults([]);
+    setOcrText("");
     try {
       let out: Result[] = [];
       switch (tool.id) {
-        case "img-convert": out = await runImgConvert(files, fmt as "png" | "jpg" | "webp"); break;
+        case "img-convert": out = await runImgConvert(files, fmt as "png" | "jpg" | "webp" | "avif" | "bmp"); break;
+        case "img-compress": out = await runImgCompress(files, compressFmt, quality, maxW); break;
+        case "img-ocr": {
+          const t = await runImgOcr(files[0]);
+          setOcrText(t || "（未识别到文字）");
+          out = [{ blob: new Blob(["\ufeff" + t], { type: "text/plain;charset=utf-8" }), name: `${baseName(files[0].name)}-识别结果.txt` }];
+          break;
+        }
         case "img-pdf": out = await runImgPdf(files); break;
         case "pdf-img": out = await runPdfImg(files[0]); break;
         case "pdf-merge": out = await runPdfMerge(files); break;
@@ -316,9 +375,9 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
       {(tool.id === "img-convert" || tool.id === "xlsx-csv" || tool.id === "docx-text") && (
         <div style={{ marginBottom: 14 }}>
           <div style={label}>输出格式</div>
-          <div style={{ display: "flex", gap: 8 }}>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             {(tool.id === "img-convert"
-              ? ["png", "jpg", "webp"]
+              ? ["png", "jpg", "webp", "avif", "bmp"]
               : tool.id === "xlsx-csv"
                 ? ["csv", "json"]
                 : ["txt", "html"]
@@ -337,6 +396,59 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
                 {f.toUpperCase()}
               </button>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* 压缩参数 */}
+      {tool.id === "img-compress" && (
+        <div style={{ marginBottom: 14, display: "flex", flexDirection: "column", gap: 12 }}>
+          <div>
+            <div style={label}>输出格式</div>
+            <div style={{ display: "flex", gap: 8 }}>
+              {(["jpg", "webp"] as const).map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setCompressFmt(f)}
+                  style={{
+                    fontSize: 13, padding: "6px 16px", borderRadius: 100, cursor: "pointer", fontFamily: "inherit",
+                    border: compressFmt === f ? "1px solid var(--accent)" : "1px solid var(--border)",
+                    background: compressFmt === f ? "var(--accent)" : "var(--bg-card)",
+                    color: compressFmt === f ? "#fff" : "var(--text-secondary)",
+                    transition: "var(--transition)",
+                  }}
+                >
+                  {f.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div style={label}>质量：{Math.round(quality * 100)}%</div>
+            <input
+              type="range"
+              min={0.1}
+              max={1}
+              step={0.05}
+              value={quality}
+              onChange={(e) => setQuality(Number(e.target.value))}
+              style={{ width: "100%", accentColor: "var(--accent)" }}
+            />
+          </div>
+          <div>
+            <div style={label}>最长边限制（px，0 = 不缩放）</div>
+            <input
+              type="number"
+              min={0}
+              max={8000}
+              step={100}
+              value={maxW}
+              onChange={(e) => setMaxW(Math.max(0, Number(e.target.value)))}
+              style={{
+                width: 140, padding: "6px 12px", borderRadius: 8, border: "1px solid var(--border)",
+                background: "var(--bg-card)", color: "var(--text-primary)", fontFamily: "inherit", fontSize: 14,
+              }}
+            />
           </div>
         </div>
       )}
@@ -401,6 +513,21 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
       </div>
 
       {/* 结果 */}
+      {ocrText !== "" && (
+        <div style={{ marginTop: 18, borderTop: "1px solid var(--border)", paddingTop: 16 }}>
+          <div style={label}>识别结果（可编辑复制）</div>
+          <textarea
+            readOnly
+            value={ocrText}
+            rows={10}
+            style={{
+              width: "100%", boxSizing: "border-box", padding: 12, borderRadius: 10, fontFamily: "inherit",
+              fontSize: 13, lineHeight: 1.7, background: "var(--bg-secondary)", color: "var(--text-primary)",
+              border: "1px solid var(--border)", resize: "vertical",
+            }}
+          />
+        </div>
+      )}
       {results.length > 0 && (
         <div style={{ marginTop: 18, borderTop: "1px solid var(--border)", paddingTop: 16 }}>
           <div style={label}>转换完成（{results.length} 个文件）</div>
