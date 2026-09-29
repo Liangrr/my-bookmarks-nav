@@ -7,8 +7,8 @@ type IntlQuote = { name: string; price: number; chg: number; pct: number; usdTon
 
 const METALS = [
   { id: "aum", name: "沪金", symbol: "Au", unit: "元/克", color: "#f59e0b", intl: "hf_XAU", intlName: "伦敦金" },
-  { id: "agm", name: "沪银", symbol: "Ag", unit: "元/千克", color: "#94a3b8", intl: "hf_XAG", intlName: "伦敦银" },
-  { id: "cum", name: "沪铜", symbol: "Cu", unit: "元/吨", color: "#d97706", intl: "hf_HG", intlName: "美铜" },
+  { id: "agm", name: "沪银", symbol: "Ag", unit: "元/千克", color: "#94a3b8", intl: "hf_XAG", intlName: "伦敦银", gramDiv: 1000, gramDigits: 3 },
+  { id: "cum", name: "沪铜", symbol: "Cu", unit: "元/吨", color: "#d97706", intl: "hf_HG", intlName: "美铜", gramDiv: 1000000, gramDigits: 4 },
   { id: "alm", name: "沪铝", symbol: "Al", unit: "元/吨", color: "#a8a29e" },
   { id: "znm", name: "沪锌", symbol: "Zn", unit: "元/吨", color: "#64748b" },
   { id: "nim", name: "沪镍", symbol: "Ni", unit: "元/吨", color: "#14b8a6" },
@@ -192,6 +192,11 @@ export default function MarketPage() {
                 <div style={{ fontSize: 12, fontVariantNumeric: "tabular-nums", color: q ? (cnUp ? UP : DOWN) : "var(--text-tertiary)", marginTop: 2 }}>
                   {q ? `${q.change >= 0 ? "+" : ""}${fmtPrice(q.change, 1)}  ${fmtPct(q.pct)}` : "--"}
                 </div>
+                {m.gramDiv && q && (
+                  <div style={{ fontSize: 11, color: "var(--text-tertiary)", fontVariantNumeric: "tabular-nums", marginTop: 4 }}>
+                    折合 {(q.price / m.gramDiv).toFixed(m.gramDigits)} 元/克
+                  </div>
+                )}
               </div>
 
               {/* 国际价 */}
