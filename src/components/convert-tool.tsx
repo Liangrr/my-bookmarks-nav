@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* ================= 工具定义 ================= */
 
@@ -125,19 +125,9 @@ async function runImgCompress(files: File[], fmt: "jpg" | "webp", quality: numbe
   return out;
 }
 
-async function runImgOcr(file: File): Promise<string> {
-  const { createWorker } = await import("tesseract.js");
-  const worker = await createWorker("chi_sim+eng", 1, {
-    workerPath: "https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/worker.min.js",
-    corePath: "https://cdn.jsdelivr.net/npm/tesseract.js-core@7.0.0/tesseract-core.wasm.js",
-    langPath: "https://tessdata.projectnaptha.com/4.0.0",
-  });
-  try {
-    const { data } = await worker.recognize(file);
-    return data.text.trim();
-  } finally {
-    await worker.terminate();
-  }
+async function runImgOcr(file: File, worker: { recognize: (f: File) => Promise<{ data: { text: string } }> }): Promise<string> {
+  const { data } = await worker.recognize(file);
+  return data.text.trim();
 }
 
 async function runImgPdf(files: File[]): Promise<{ blob: Blob; name: string }[]> {
@@ -303,7 +293,32 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
   const [err, setErr] = useState("");
   const [results, setResults] = useState<Result[]>([]);
   const [ocrText, setOcrText] = useState("");
+  const [ocrLoading, setOcrLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const workerRef = useRef<{ recognize: (f: File) => Promise<{ data: { text: string } }>; terminate?: () => Promise<unknown> } | null>(null);
+  const filesRef = useRef<File[]>([]);
+  useEffect(() => { filesRef.current = files; }, [files]);
+  useEffect(
+    () => () => { workerRef.current?.terminate?.().catch(() => {}); },
+    []
+  );
+
+  const getWorker = async () => {
+    if (workerRef.current) return workerRef.current;
+    setOcrLoading(true);
+    try {
+      const { createWorker } = await import("tesseract.js");
+      const worker = await createWorker("chi_sim+eng", 1, {
+        workerPath: "https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/worker.min.js",
+        corePath: "https://cdn.jsdelivr.net/npm/tesseract.js-core@7.0.0/tesseract-core.wasm.js",
+        langPath: "https://tessdata.projectnaptha.com/4.0.0",
+      });
+      workerRef.current = worker;
+      return worker;
+    } finally {
+      setOcrLoading(false);
+    }
+  };
 
   const addFiles = (list: FileList | null) => {
     if (!list || !list.length) return;
@@ -330,9 +345,12 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
         case "img-convert": out = await runImgConvert(files, fmt as "png" | "jpg" | "webp"); break;
         case "img-compress": out = await runImgCompress(files, compressFmt, quality, maxW); break;
         case "img-ocr": {
-          const t = await runImgOcr(files[0]);
+          const target = files[0];
+          const worker = await getWorker();
+          const t = await runImgOcr(target, worker);
+          if (filesRef.current[0] !== target) break; // 期间已清空/换图，丢弃过期结果
           setOcrText(t || "（未识别到文字）");
-          out = [{ blob: new Blob(["\ufeff" + t], { type: "text/plain;charset=utf-8" }), name: `${baseName(files[0].name)}-识别结果.txt` }];
+          out = [{ blob: new Blob(["\ufeff" + t], { type: "text/plain;charset=utf-8" }), name: `${baseName(target.name)}-识别结果.txt` }];
           break;
         }
         case "img-pdf": out = await runImgPdf(files); break;
@@ -346,7 +364,12 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
       }
       setResults(out);
     } catch (e) {
-      setErr(e instanceof Error ? e.message : "转换失败，请检查文件");
+      const msg = e instanceof Error ? e.message : String(e);
+      setErr(
+        /decoded|decode|decode image/i.test(msg)
+          ? "无法识别该图片（格式不支持或文件已损坏），请换 PNG/JPG 后重试"
+          : msg
+      );
     } finally {
       setBusy(false);
     }
@@ -501,10 +524,10 @@ function Panel({ tool, onBack }: { tool: Tool; onBack: () => void }) {
             opacity: busy || !files.length ? 0.6 : 1, transition: "var(--transition)",
           }}
         >
-          {busy ? "转换中…" : "开始转换"}
+          {ocrLoading ? "加载识别引擎…" : busy ? "转换中…" : "开始转换"}
         </button>
         <button
-          onClick={() => { setFiles([]); setResults([]); setErr(""); }}
+          onClick={() => { setFiles([]); setResults([]); setErr(""); setOcrText(""); }}
           style={{ fontSize: 13, color: "var(--text-secondary)", padding: "8px 16px", borderRadius: 100, border: "1px solid var(--border)", background: "var(--bg-card)", cursor: "pointer", fontFamily: "inherit" }}
         >
           清空
