@@ -24,44 +24,100 @@ function fmtPct(pct: number | undefined) {
   return `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
 }
 
+// ---- 行情本地缓存（localStorage）：进入页面先展示缓存，后台更新后替换 ----
+const CACHE_KEY = "bookmark-nav-market-v1";
+
+type MarketCache = {
+  quotes: Record<string, Quote>;
+  intl: Record<string, IntlQuote>;
+  ts: number; // 缓存时间戳（毫秒）
+};
+
+function readCache(): MarketCache | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const c = JSON.parse(raw) as MarketCache;
+    if (!c || typeof c.ts !== "number" || !c.quotes) return null;
+    return c;
+  } catch {
+    return null;
+  }
+}
+
+function writeCache(quotes: Record<string, Quote>, intl: Record<string, IntlQuote>, ts: number) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(CACHE_KEY, JSON.stringify({ quotes, intl, ts } satisfies MarketCache));
+  } catch {
+    /* 存储满/隐私模式时静默失败，不影响页面 */
+  }
+}
+
 export default function MarketPage() {
   const [quotes, setQuotes] = useState<Record<string, Quote>>({});
   const [intl, setIntl] = useState<Record<string, IntlQuote>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const [fromCache, setFromCache] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const quotesRef = useRef<Record<string, Quote>>({});
+  const intlRef = useRef<Record<string, IntlQuote>>({});
 
   const fetchQuotes = useCallback(async () => {
     const secids = METALS.map((m) => `113.${m.id}`).join(",");
     const cnUrl = `https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f4,f12,f14&secids=${secids}&ut=fa5fd1943c7b386f172d6893dbfba10b`;
+    let cnOk = false;
     // 国内/国际独立容错：任一源失败不影响另一源展示
-    const cnP = fetch(cnUrl)
-      .then((r) => r.json())
-      .then((j) => {
-        const diff = j?.data?.diff;
-        if (!Array.isArray(diff) || diff.length === 0) throw new Error("empty cn");
-        const map: Record<string, Quote> = {};
-        for (const it of diff) {
-          map[it.f12] = { id: it.f12, name: it.f14, price: it.f2, change: it.f4, pct: it.f3 };
-        }
-        setQuotes(map);
-      })
-      .catch(() => setError("国内行情获取失败，请检查网络后重试"));
+    try {
+      const j = await fetch(cnUrl).then((r) => r.json());
+      const diff = j?.data?.diff;
+      if (!Array.isArray(diff) || diff.length === 0) throw new Error("empty cn");
+      const map: Record<string, Quote> = {};
+      for (const it of diff) {
+        map[it.f12] = { id: it.f12, name: it.f14, price: it.f2, change: it.f4, pct: it.f3 };
+      }
+      quotesRef.current = map;
+      setQuotes(map);
+      cnOk = true;
+    } catch {
+      setError("国内行情获取失败，请检查网络后重试");
+    }
 
-    const intlP = fetch("/api/market/intl", { cache: "no-store" })
-      .then((r) => r.json())
-      .then((j) => {
-        if (j?.ok && j.data) setIntl(j.data);
-      })
-      .catch(() => {}); // 国际价失败不报错，卡片显示 --
+    try {
+      const j = await fetch("/api/market/intl", { cache: "no-store" }).then((r) => r.json());
+      if (j?.ok && j.data) {
+        intlRef.current = j.data;
+        setIntl(j.data);
+      }
+    } catch {
+      /* 国际价失败不报错，卡片显示 -- */
+    }
 
-    await Promise.all([cnP, intlP]).catch(() => {});
-    setLastUpdate(new Date());
+    // 任一路径有数据（至少其一成功）即视为一次有效更新：刷新时间、清缓存标记、回写缓存
+    if (cnOk || intlRef.current) {
+      setFromCache(false);
+      setLastUpdate(new Date());
+      writeCache(quotesRef.current, intlRef.current, Date.now());
+    }
     setLoading(false);
   }, []);
 
   useEffect(() => {
+    // 1) 先读缓存：命中则立即展示缓存数据与缓存时间
+    const cache = readCache();
+    if (cache) {
+      quotesRef.current = cache.quotes;
+      intlRef.current = cache.intl ?? {};
+      setQuotes(cache.quotes);
+      setIntl(cache.intl ?? {});
+      setLastUpdate(new Date(cache.ts));
+      setFromCache(true);
+      setLoading(false);
+    }
+    // 2) 再拉最新数据，拿到后替换（同时更新时间与缓存）
     fetchQuotes();
     timerRef.current = setInterval(fetchQuotes, 300000);
     return () => {
@@ -92,7 +148,11 @@ export default function MarketPage() {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
-            {lastUpdate ? `更新于 ${lastUpdate.toLocaleTimeString("zh-CN")}` : loading ? "加载中…" : ""}
+            {lastUpdate
+              ? `更新于 ${lastUpdate.toLocaleTimeString("zh-CN")}${fromCache ? "（缓存）" : ""}`
+              : loading
+                ? "加载中…"
+                : ""}
           </span>
           <button
             onClick={() => { setLoading(true); fetchQuotes(); }}
