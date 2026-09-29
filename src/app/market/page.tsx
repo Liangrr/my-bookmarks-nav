@@ -9,11 +9,6 @@ const METALS = [
   { id: "aum", name: "沪金", symbol: "Au", unit: "元/克", color: "#f59e0b", intl: "hf_XAU", intlName: "伦敦金" },
   { id: "agm", name: "沪银", symbol: "Ag", unit: "元/千克", color: "#94a3b8", intl: "hf_XAG", intlName: "伦敦银", gramDiv: 1000, gramDigits: 3 },
   { id: "cum", name: "沪铜", symbol: "Cu", unit: "元/吨", color: "#d97706", intl: "hf_HG", intlName: "美铜", gramDiv: 1000000, gramDigits: 4 },
-  { id: "alm", name: "沪铝", symbol: "Al", unit: "元/吨", color: "#a8a29e" },
-  { id: "znm", name: "沪锌", symbol: "Zn", unit: "元/吨", color: "#64748b" },
-  { id: "nim", name: "沪镍", symbol: "Ni", unit: "元/吨", color: "#14b8a6" },
-  { id: "snm", name: "沪锡", symbol: "Sn", unit: "元/吨", color: "#8b5cf6" },
-  { id: "pbm", name: "沪铅", symbol: "Pb", unit: "元/吨", color: "#6b7280" },
 ];
 
 const UP = "#ef4444";
