@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Quote = { id: string; name: string; price: number; change: number; pct: number };
+type IntlQuote = { name: string; price: number; chg: number; pct: number; usdTon?: number; unit: string };
 
 const METALS = [
-  { id: "aum", name: "沪金", symbol: "Au", unit: "元/克", color: "#f59e0b" },
-  { id: "agm", name: "沪银", symbol: "Ag", unit: "元/千克", color: "#94a3b8" },
-  { id: "cum", name: "沪铜", symbol: "Cu", unit: "元/吨", color: "#d97706" },
+  { id: "aum", name: "沪金", symbol: "Au", unit: "元/克", color: "#f59e0b", intl: "hf_XAU", intlName: "伦敦金" },
+  { id: "agm", name: "沪银", symbol: "Ag", unit: "元/千克", color: "#94a3b8", intl: "hf_XAG", intlName: "伦敦银" },
+  { id: "cum", name: "沪铜", symbol: "Cu", unit: "元/吨", color: "#d97706", intl: "hf_HG", intlName: "美铜" },
   { id: "alm", name: "沪铝", symbol: "Al", unit: "元/吨", color: "#a8a29e" },
   { id: "znm", name: "沪锌", symbol: "Zn", unit: "元/吨", color: "#64748b" },
   { id: "nim", name: "沪镍", symbol: "Ni", unit: "元/吨", color: "#14b8a6" },
@@ -18,13 +19,19 @@ const METALS = [
 const UP = "#ef4444";
 const DOWN = "#22c55e";
 
-function fmtPrice(v: number) {
-  if (v == null) return "--";
-  return v.toLocaleString("zh-CN", { maximumFractionDigits: 2 });
+function fmtPrice(v: number | undefined, digits = 2) {
+  if (v == null || Number.isNaN(v)) return "--";
+  return v.toLocaleString("zh-CN", { maximumFractionDigits: digits });
+}
+
+function fmtPct(pct: number | undefined) {
+  if (pct == null || Number.isNaN(pct)) return "--";
+  return `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
 }
 
 export default function MarketPage() {
   const [quotes, setQuotes] = useState<Record<string, Quote>>({});
+  const [intl, setIntl] = useState<Record<string, IntlQuote>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
@@ -32,23 +39,21 @@ export default function MarketPage() {
 
   const fetchQuotes = useCallback(async () => {
     const secids = METALS.map((m) => `113.${m.id}`).join(",");
-    const url = `https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f4,f12,f14&secids=${secids}&ut=fa5fd1943c7b386f172d6893dbfba10b`;
+    const cnUrl = `https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f4,f12,f14&secids=${secids}&ut=fa5fd1943c7b386f172d6893dbfba10b`;
     try {
-      const res = await fetch(url);
-      const json = await res.json();
-      const diff = json?.data?.diff;
-      if (!Array.isArray(diff) || diff.length === 0) throw new Error("empty");
+      const [cnRes, intlRes] = await Promise.all([
+        fetch(cnUrl),
+        fetch("/api/market/intl", { cache: "no-store" }),
+      ]);
+      const [cnJson, intlJson] = await Promise.all([cnRes.json(), intlRes.json()]);
+      const diff = cnJson?.data?.diff;
+      if (!Array.isArray(diff) || diff.length === 0) throw new Error("empty cn");
       const map: Record<string, Quote> = {};
       for (const it of diff) {
-        map[it.f12] = {
-          id: it.f12,
-          name: it.f14,
-          price: it.f2,
-          change: it.f4,
-          pct: it.f3,
-        };
+        map[it.f12] = { id: it.f12, name: it.f14, price: it.f2, change: it.f4, pct: it.f3 };
       }
       setQuotes(map);
+      if (intlJson?.ok && intlJson.data) setIntl(intlJson.data);
       setLastUpdate(new Date());
       setError("");
     } catch (e) {
@@ -84,7 +89,7 @@ export default function MarketPage() {
             实时行情
           </h1>
           <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: "8px 0 0" }}>
-            上海期货交易所主力合约 · 人民币计价 · 30 秒自动刷新
+            国内：上海期货交易所主力合约（人民币） · 国际：伦敦/纽约金属（美元） · 30 秒自动刷新
           </p>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -130,13 +135,15 @@ export default function MarketPage() {
         style={{
           marginTop: 24,
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
           gap: 16,
         }}
       >
         {METALS.map((m) => {
           const q = quotes[m.id];
-          const up = q && q.pct >= 0;
+          const i = m.intl ? intl[m.intl] : undefined;
+          const cnUp = q && q.pct >= 0;
+          const intlUp = i && i.pct >= 0;
           return (
             <div
               key={m.id}
@@ -173,21 +180,57 @@ export default function MarketPage() {
                   <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{m.unit}</div>
                 </div>
               </div>
+
+              {/* 国内价 */}
               <div>
-                <div style={{ fontSize: 26, fontWeight: 800, fontVariantNumeric: "tabular-nums", color: q ? (up ? UP : DOWN) : "var(--text-secondary)" }}>
+                <div style={{ fontSize: 24, fontWeight: 800, fontVariantNumeric: "tabular-nums", color: q ? (cnUp ? UP : DOWN) : "var(--text-secondary)" }}>
                   {fmtPrice(q?.price)}
                 </div>
-                <div style={{ fontSize: 13, fontVariantNumeric: "tabular-nums", color: q ? (up ? UP : DOWN) : "var(--text-tertiary)", marginTop: 4 }}>
-                  {q ? `${up ? "+" : ""}${fmtPrice(q.change)}  ${up ? "+" : ""}${q.pct.toFixed(2)}%` : "--"}
+                <div style={{ fontSize: 12, fontVariantNumeric: "tabular-nums", color: q ? (cnUp ? UP : DOWN) : "var(--text-tertiary)", marginTop: 2 }}>
+                  {q ? `${q.change >= 0 ? "+" : ""}${fmtPrice(q.change, 1)}  ${fmtPct(q.pct)}` : "--"}
                 </div>
               </div>
+
+              {/* 国际价 */}
+              {m.intl ? (
+                <div
+                  style={{
+                    borderTop: "1px dashed var(--border)",
+                    paddingTop: 10,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 2,
+                  }}
+                >
+                  <div style={{ fontSize: 11, color: "var(--text-tertiary)" }}>
+                    {m.intlName} {i?.usdTon ? "· 美元/吨" : i?.unit ?? "美元/盎司"}
+                  </div>
+                  <div style={{ fontSize: 17, fontWeight: 700, fontVariantNumeric: "tabular-nums", color: i ? (intlUp ? UP : DOWN) : "var(--text-secondary)" }}>
+                    {i ? (i.usdTon != null ? fmtPrice(i.usdTon, 0) : fmtPrice(i.price)) : "--"}
+                  </div>
+                  <div style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: i ? (intlUp ? UP : DOWN) : "var(--text-tertiary)" }}>
+                    {i ? `${i.chg >= 0 ? "+" : ""}${fmtPrice(i.chg, 1)}  ${fmtPct(i.pct)}` : "--"}
+                  </div>
+                </div>
+              ) : (
+                <div
+                  style={{
+                    borderTop: "1px dashed var(--border)",
+                    paddingTop: 10,
+                    fontSize: 11,
+                    color: "var(--text-tertiary)",
+                  }}
+                >
+                  国际价暂无
+                </div>
+              )}
             </div>
           );
         })}
       </div>
 
       <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 20, textAlign: "center" }}>
-        数据来源：东方财富 · 仅供个人参考，不构成投资建议 · 交易时段外为最近收盘价
+        国内数据来源：东方财富 · 国际数据来源：新浪财经 · 仅供个人参考，不构成投资建议 · 交易时段外为最近收盘价
       </p>
     </div>
   );
