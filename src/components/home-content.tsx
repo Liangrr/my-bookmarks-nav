@@ -228,7 +228,7 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
 
       {/* 页脚 */}
       <footer className="footer">
-        星轨 · 个人网站导航 · Powered by Vercel
+        星轨 · 日常在用的优质网站，都在这里 · 粤ICP备2026050662号-1
       </footer>
     </>
   );
