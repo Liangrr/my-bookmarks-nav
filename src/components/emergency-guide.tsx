@@ -1,7 +1,7 @@
 "use client";
-
 import { useEffect, useMemo, useState } from "react";
 import emergencyData from "@/data/emergency-guide.json";
+import FilterBtn from "@/components/filter-btn";
 
 interface ESource {
   text: string;
@@ -294,35 +294,7 @@ export function EmergencyGuide() {
   );
 }
 
-function FilterBtn({
-  active,
-  label,
-  onClick,
-}: {
-  active: boolean;
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      aria-pressed={active}
-      style={{
-        height: 28,
-        padding: "0 10px",
-        borderRadius: 999,
-        border: active ? "1px solid var(--accent)" : "1px solid var(--border)",
-        background: active ? "var(--accent-light)" : "var(--bg-card)",
-        color: active ? "var(--accent)" : "var(--text-secondary)",
-        font: "500 12px/1 inherit",
-        cursor: "pointer",
-        transition: "var(--transition)",
-      }}
-    >
-      {label}
-    </button>
-  );
-}
+
 
 function ECard({ item }: { item: EItem }) {
   const us = URGENCY_STYLE[item.urgency] ?? URGENCY_STYLE.日常;

@@ -1,7 +1,7 @@
 "use client";
-
 import { useEffect, useMemo, useState } from "react";
 import livingData from "@/data/living-guide.json";
+import FilterBtn from "@/components/filter-btn";
 
 interface LivingSource {
   text: string;
@@ -108,7 +108,7 @@ export function LivingGuide() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          高性价比人生指南
+          高性价比人生手册
         </h1>
         <p
           style={{
@@ -118,7 +118,7 @@ export function LivingGuide() {
             lineHeight: 1.7,
           }}
         >
-          开源书《高性价比人生指南》全书 33 节 615 条建议：每条写清花掉什么、换回什么、证据多硬，
+          开源书《高性价比人生手册》全书 34 节 631 条建议：每条写清花掉什么、换回什么、证据多硬，
           只引期刊论文和官方文件。内容来自{" "}
           <a
             href="https://github.com/eternity4719/HowToLiveBetter"
@@ -345,35 +345,7 @@ export function LivingGuide() {
   );
 }
 
-function FilterBtn({
-  active,
-  label,
-  onClick,
-}: {
-  active: boolean;
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      aria-pressed={active}
-      style={{
-        height: 28,
-        padding: "0 10px",
-        borderRadius: 999,
-        border: active ? "1px solid var(--accent)" : "1px solid var(--border)",
-        background: active ? "var(--accent-light)" : "var(--bg-card)",
-        color: active ? "var(--accent)" : "var(--text-secondary)",
-        font: "500 12px/1 inherit",
-        cursor: "pointer",
-        transition: "var(--transition)",
-      }}
-    >
-      {label}
-    </button>
-  );
-}
+
 
 function LivingCard({ item }: { item: LivingItem }) {
   const g = GRADE_COLOR[item.grade] ?? GRADE_COLOR.B;

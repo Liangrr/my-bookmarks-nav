@@ -1,7 +1,7 @@
 "use client";
-
 import { useEffect, useMemo, useState } from "react";
 import survivalData from "@/data/survival-guide.json";
+import FilterBtn from "@/components/filter-btn";
 
 interface SurvivalSource {
   text: string;
@@ -338,35 +338,7 @@ export function SurvivalGuide() {
   );
 }
 
-function FilterBtn({
-  active,
-  label,
-  onClick,
-}: {
-  active: boolean;
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      aria-pressed={active}
-      style={{
-        height: 28,
-        padding: "0 10px",
-        borderRadius: 999,
-        border: active ? "1px solid var(--accent)" : "1px solid var(--border)",
-        background: active ? "var(--accent-light)" : "var(--bg-card)",
-        color: active ? "var(--accent)" : "var(--text-secondary)",
-        font: "500 12px/1 inherit",
-        cursor: "pointer",
-        transition: "var(--transition)",
-      }}
-    >
-      {label}
-    </button>
-  );
-}
+
 
 function SurvivalCard({ item }: { item: SurvivalItem }) {
   const lv = LEVEL_COLOR[item.level] ?? LEVEL_COLOR.进阶;

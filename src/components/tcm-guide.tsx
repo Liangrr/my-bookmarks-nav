@@ -1,7 +1,7 @@
 "use client";
-
 import { useEffect, useMemo, useState } from "react";
 import tcmData from "@/data/tcm-guide.json";
+import FilterBtn from "@/components/filter-btn";
 
 interface TcmItem {
   id: string;
@@ -350,35 +350,7 @@ export function TcmGuide() {
   );
 }
 
-function FilterBtn({
-  active,
-  label,
-  onClick,
-}: {
-  active: boolean;
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      aria-pressed={active}
-      style={{
-        height: 28,
-        padding: "0 10px",
-        borderRadius: 999,
-        border: active ? "1px solid #7fb896" : "1px solid var(--border)",
-        background: active ? "rgba(127,184,150,.16)" : "var(--bg-card)",
-        color: active ? "#7fb896" : "var(--text-secondary)",
-        font: "500 12px/1 inherit",
-        cursor: "pointer",
-        transition: "var(--transition)",
-      }}
-    >
-      {label}
-    </button>
-  );
-}
+
 
 function TcmCard({ item }: { item: TcmItem }) {
   const lc = LEVEL_COLOR[item.level] ?? LEVEL_COLOR.民间参考;

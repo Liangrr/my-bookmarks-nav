@@ -362,7 +362,7 @@ export function NavBar() {
               <path d="M12 3a6 6 0 0 0-6 6c0 2 .8 3 2 4v3h8v-3c1.2-1 2-2 2-4a6 6 0 0 0-6-6z" />
               <path d="M10 21h4" />
             </svg>
-            <span>人生指南</span>
+            <span>人生手册</span>
           </Link>
           <Link
             href="/survival"
