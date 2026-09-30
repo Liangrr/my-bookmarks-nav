@@ -394,6 +394,18 @@ export function NavBar() {
             <span>Web 开发学习</span>
           </Link>
           <Link
+            href="/indie-dev"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/indie-dev" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
+            <span>独立开发者</span>
+          </Link>
+          <Link
             href="/living"
             onClick={() => setMenuOpen(false)}
             className={`drawer-item ${pathname === "/living" ? "active" : ""}`}
