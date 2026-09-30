@@ -1,0 +1,995 @@
+{
+  "meta": {
+    "title": "Web 开发学习",
+    "updated": "2026-09-30",
+    "desc": "前端 / 后端 / 全栈三条路线一键切换，阶段任务 + 资源导航 + 实战阶梯，全部内容可溯源。"
+  },
+  "tracks": [
+    {
+      "id": "frontend",
+      "title": "前端",
+      "desc": "HTML/CSS/JS → 框架 → 工程化 → 实战，做用户看得见的界面。",
+      "color": "#10b981",
+      "stages": [
+        {
+          "id": "fe0",
+          "num": 0,
+          "title": "Web 基础",
+          "desc": "把 HTML / CSS / JavaScript 三件套打牢。",
+          "tasks": [
+            {
+              "id": "fe0t1",
+              "title": "HTML 语义化与常用标签",
+              "plain": "用对标签比写满标签重要：文档结构、表单、媒体元素各司其职。",
+              "links": [
+                { "text": "MDN HTML", "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTML" }
+              ],
+              "output": "用纯 HTML 写一页个人简介页面。",
+              "tags": ["html", "基础"]
+            },
+            {
+              "id": "fe0t2",
+              "title": "CSS 盒模型、Flex 与 Grid 布局",
+              "plain": "先懂盒子与轴线，再谈布局：flex 管一维，grid 管二维。",
+              "links": [
+                { "text": "MDN CSS", "url": "https://developer.mozilla.org/zh-CN/docs/Web/CSS" },
+                { "text": "MDN Flexbox 基础", "url": "https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox" }
+              ],
+              "output": "用 Flex/Grid 各做一个居中的导航栏。",
+              "tags": ["css", "布局"]
+            },
+            {
+              "id": "fe0t3",
+              "title": "JavaScript 语法与 DOM 操作",
+              "plain": "变量、函数、事件、取 DOM 改 DOM，是前端交互的最小闭环。",
+              "links": [
+                { "text": "MDN JavaScript", "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" },
+                { "text": "现代 JavaScript 教程", "url": "https://zh.javascript.info/" }
+              ],
+              "output": "做一个点击按钮切换明暗的主题切换器。",
+              "tags": ["js", "dom"]
+            },
+            {
+              "id": "fe0t4",
+              "title": "浏览器开发者工具",
+              "plain": "Elements 看结构、Console 看报错、Network 看请求，调试靠它。",
+              "links": [
+                { "text": "MDN 开发者工具入门", "url": "https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools" }
+              ],
+              "output": "用 DevTools 定位并修复一个页面报错。",
+              "tags": ["调试"]
+            },
+            {
+              "id": "fe0t5",
+              "title": "响应式设计基础",
+              "plain": "一套页面适配手机到桌面：视口、媒体查询、相对单位。",
+              "links": [
+                { "text": "MDN 响应式设计", "url": "https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Core/CSS_layout/Responsive_design" }
+              ],
+              "output": "把个人简介页改成手机/桌面都好看。",
+              "tags": ["css", "响应式"]
+            }
+          ]
+        },
+        {
+          "id": "fe1",
+          "num": 1,
+          "title": "开发环境",
+          "desc": "命令行、Git、编辑器、包管理，工程化的基本功。",
+          "tasks": [
+            {
+              "id": "fe1t1",
+              "title": "命令行基础",
+              "plain": "cd / ls / mkdir / grep，会用终端跑命令是第一步。",
+              "links": [
+                { "text": "The Odin Project Foundations", "url": "https://www.theodinproject.com/paths/foundations/courses/foundations" }
+              ],
+              "output": "用命令行创建项目目录并完成一次 git 初始化。",
+              "tags": ["工具"]
+            },
+            {
+              "id": "fe1t2",
+              "title": "Git 与 GitHub 工作流",
+              "plain": "add / commit / push / pull，分支与提交信息规范。",
+              "links": [
+                { "text": "Pro Git 中文版", "url": "https://git-scm.com/book/zh/v2" },
+                { "text": "GitHub Skills", "url": "https://skills.github.com/" }
+              ],
+              "output": "把个人简介页推到自己的 GitHub 仓库。",
+              "tags": ["git"]
+            },
+            {
+              "id": "fe1t3",
+              "title": "编辑器与快捷键",
+              "plain": "VS Code 智能提示、多光标、命令面板，效率翻倍。",
+              "links": [
+                { "text": "VS Code 入门视频", "url": "https://code.visualstudio.com/docs/getstarted/introvideos" }
+              ],
+              "output": "配置好编辑器并启用自动格式化。",
+              "tags": ["工具"]
+            },
+            {
+              "id": "fe1t4",
+              "title": "npm 与包管理",
+              "plain": "package.json、npm install、脚本命令，前端项目的地基。",
+              "links": [
+                { "text": "npm 文档", "url": "https://docs.npmjs.com/" }
+              ],
+              "output": "初始化一个 npm 项目并安装一个依赖。",
+              "tags": ["工具", "工程化"]
+            }
+          ]
+        },
+        {
+          "id": "fe2",
+          "num": 2,
+          "title": "框架入门",
+          "desc": "React 或 Vue 二选一，学会组件化开发。",
+          "tasks": [
+            {
+              "id": "fe2t1",
+              "title": "理解组件化与单向数据流",
+              "plain": "界面拆成组件，数据自上而下传递，事件自下而上回调。",
+              "links": [
+                { "text": "React 官方教程", "url": "https://react.dev/learn" }
+              ],
+              "output": "画出组件树与数据流向图。",
+              "tags": ["react", "概念"]
+            },
+            {
+              "id": "fe2t2",
+              "title": "JSX 与组件渲染",
+              "plain": "模板语法与逻辑混写，props 传参、条件渲染、列表渲染。",
+              "links": [
+                { "text": "React 快速入门", "url": "https://react.dev/learn" }
+              ],
+              "output": "用组件渲染一个待办列表。",
+              "tags": ["react"]
+            },
+            {
+              "id": "fe2t3",
+              "title": "State 与事件处理",
+              "plain": "useState 管理可变状态，事件回调驱动界面更新。",
+              "links": [
+                { "text": "React：管理状态", "url": "https://react.dev/learn/managing-state" }
+              ],
+              "output": "实现一个可增删的计数器组件。",
+              "tags": ["react", "状态"]
+            },
+            {
+              "id": "fe2t4",
+              "title": "表单与受控组件",
+              "plain": "输入框值由 state 控制，提交、校验、清空一条线。",
+              "links": [
+                { "text": "React：表单", "url": "https://react.dev/learn" }
+              ],
+              "output": "做一个带校验的注册表单。",
+              "tags": ["react", "表单"]
+            },
+            {
+              "id": "fe2t5",
+              "title": "或选 Vue 完成同等内容",
+              "plain": "Vue 的模板语法与响应式同样主流，二选一深入学习即可。",
+              "links": [
+                { "text": "Vue 官方交互教程", "url": "https://cn.vuejs.org/tutorial/#step-1" }
+              ],
+              "output": "用 Vue 重做待办列表与计数器。",
+              "tags": ["vue"]
+            }
+          ]
+        },
+        {
+          "id": "fe3",
+          "num": 3,
+          "title": "工程化",
+          "desc": "模块化、构建工具、代码质量与性能意识。",
+          "tasks": [
+            {
+              "id": "fe3t1",
+              "title": "ES Modules 与代码拆分",
+              "plain": "import / export 组织代码，按需加载减少首屏体积。",
+              "links": [
+                { "text": "MDN 模块指南", "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules" }
+              ],
+              "output": "把一个脚本拆成多个模块。",
+              "tags": ["js", "工程化"]
+            },
+            {
+              "id": "fe3t2",
+              "title": "构建工具：Vite",
+              "plain": "开发服务器热更新、生产构建打包，现代前端标配。",
+              "links": [
+                { "text": "Vite 中文文档", "url": "https://cn.vitejs.dev/guide/" }
+              ],
+              "output": "用 Vite 脚手架创建并运行一个 React 项目。",
+              "tags": ["工具", "工程化"]
+            },
+            {
+              "id": "fe3t3",
+              "title": "代码质量：Lint 与格式化",
+              "plain": "ESLint 查逻辑问题，Prettier 统一格式，进 CI 自动检查。",
+              "links": [
+                { "text": "ESLint 文档", "url": "https://eslint.org/docs/latest/" }
+              ],
+              "output": "给项目接入 ESLint 并修复全部警告。",
+              "tags": ["质量"]
+            },
+            {
+              "id": "fe3t4",
+              "title": "浏览器渲染与性能基础",
+              "plain": "重排重绘、图片加载、懒加载，理解为什么页面卡。",
+              "links": [
+                { "text": "web.dev 性能学习", "url": "https://web.dev/learn/performance" }
+              ],
+              "output": "用 Lighthouse 给自己的页面打分并优化一项。",
+              "tags": ["性能"]
+            }
+          ]
+        },
+        {
+          "id": "fe4",
+          "num": 4,
+          "title": "进阶",
+          "desc": "TypeScript、网络协议、可访问性与测试。",
+          "tasks": [
+            {
+              "id": "fe4t1",
+              "title": "TypeScript 基础",
+              "plain": "类型标注、接口、泛型入门，让错误在编译期暴露。",
+              "links": [
+                { "text": "TypeScript Handbook", "url": "https://www.typescriptlang.org/docs/handbook/intro.html" }
+              ],
+              "output": "把一个小项目从 JS 迁移到 TS。",
+              "tags": ["ts"]
+            },
+            {
+              "id": "fe4t2",
+              "title": "HTTP 与网络请求",
+              "plain": "请求方法、状态码、缓存、跨域，前端绕不开的网络常识。",
+              "links": [
+                { "text": "MDN HTTP", "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTTP" }
+              ],
+              "output": "用 fetch 请求公开 API 并处理错误状态。",
+              "tags": ["http"]
+            },
+            {
+              "id": "fe4t3",
+              "title": "可访问性基础",
+              "plain": "语义标签、键盘导航、对比度，让产品人人可用。",
+              "links": [
+                { "text": "web.dev 可访问性学习", "url": "https://web.dev/learn/accessibility" }
+              ],
+              "output": "给项目页面补全 aria 属性并通过一次审计。",
+              "tags": ["a11y"]
+            },
+            {
+              "id": "fe4t4",
+              "title": "测试基础：Vitest",
+              "plain": "单元测试覆盖工具函数与组件渲染，防止回归。",
+              "links": [
+                { "text": "Vitest 中文文档", "url": "https://cn.vitest.dev/" }
+              ],
+              "output": "为工具函数写一组单元测试。",
+              "tags": ["测试"]
+            }
+          ]
+        },
+        {
+          "id": "fe5",
+          "num": 5,
+          "title": "实战项目",
+          "desc": "按梯度做出可上线的作品，简历靠它说话。",
+          "tasks": [
+            {
+              "id": "fe5t1",
+              "title": "个人主页 / 作品集",
+              "plain": "静态页面练手，同时建立自己的线上名片。",
+              "links": [
+                { "text": "web.dev 学习 HTML", "url": "https://web.dev/learn/html" }
+              ],
+              "output": "上线一个个人主页。",
+              "tags": ["项目"]
+            },
+            {
+              "id": "fe5t2",
+              "title": "交互小应用：Todo / 计算器",
+              "plain": "纯 JS 或框架都行，把状态管理练熟。",
+              "links": [
+                { "text": "React 教程实战", "url": "https://react.dev/learn" }
+              ],
+              "output": "一个可本地持久化的 Todo 应用。",
+              "tags": ["项目"]
+            },
+            {
+              "id": "fe5t3",
+              "title": "React 页面对接公开 API",
+              "plain": "列表、详情、加载态、错误态，真实数据驱动页面。",
+              "links": [
+                { "text": "Full Stack Open 中文（Part 0-2 前端部分）", "url": "https://fullstackopen.com/zh/" }
+              ],
+              "output": "一个对接公开 API 的查询/展示页。",
+              "tags": ["项目"]
+            },
+            {
+              "id": "fe5t4",
+              "title": "部署上线：Vercel",
+              "plain": "连接 GitHub 自动部署，拿到公网可访问的地址。",
+              "links": [
+                { "text": "Vercel 文档", "url": "https://vercel.com/docs" }
+              ],
+              "output": "把项目部署到 Vercel 并配置自定义域名。",
+              "tags": ["部署"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "官方文档",
+          "items": [
+            { "title": "MDN Web 文档", "url": "https://developer.mozilla.org/zh-CN/", "desc": "HTML/CSS/JS 权威参考，查就完事" },
+            { "title": "React 官方文档", "url": "https://react.dev/", "desc": "组件化与状态管理第一手教程" },
+            { "title": "Vue 中文文档", "url": "https://cn.vuejs.org/", "desc": "渐进式框架官方教程" }
+          ]
+        },
+        {
+          "category": "系统课程",
+          "items": [
+            { "title": "Frontend Roadmap", "url": "https://roadmap.sh/frontend", "desc": "前端路线图，随时对照查缺补漏" },
+            { "title": "FreeCodeCamp 中文", "url": "https://www.freecodecamp.org/chinese/learn/", "desc": "免费课程 + 认证项目" },
+            { "title": "Web-Dev-For-Beginners", "url": "https://github.com/microsoft/Web-Dev-For-Beginners", "desc": "微软 24 课 12 周 Web 入门" },
+            { "title": "The Odin Project", "url": "https://www.theodinproject.com/", "desc": "开源全栈课程，前端部分扎实" }
+          ]
+        },
+        {
+          "category": "中文社区",
+          "items": [
+            { "title": "掘金", "url": "https://juejin.cn/", "desc": "前端文章与实战经验" },
+            { "title": "现代 JavaScript 教程（中文）", "url": "https://zh.javascript.info/", "desc": "系统性 JS 教程，可当教材" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "静态个人主页", "learn": "HTML 结构 + CSS 布局 + 响应式" },
+        { "level": 2, "project": "Todo / 计算器应用", "learn": "JS 状态管理 + DOM 交互" },
+        { "level": 3, "project": "React + 公开 API 页面", "learn": "组件化 + 数据请求 + 状态" },
+        { "level": 4, "project": "部署上线的作品集", "learn": "工程化 + 性能优化 + 部署" }
+      ]
+    },
+    {
+      "id": "backend",
+      "title": "后端",
+      "desc": "语言 → 数据库 → API → 部署，做服务与数据。",
+      "color": "#3b82f6",
+      "stages": [
+        {
+          "id": "be0",
+          "num": 0,
+          "title": "编程基础",
+          "desc": "选一门主语言（Node.js / Python / Java 均可）并打牢核心。",
+          "tasks": [
+            {
+              "id": "be0t1",
+              "title": "选定主语言并跑通环境",
+              "plain": "Node.js 与前端同语言最省心，Python 生态广，Java 企业多，按目标选。",
+              "links": [
+                { "text": "Node.js 官方教程", "url": "https://nodejs.org/zh-cn/learn" },
+                { "text": "Python 官方教程", "url": "https://docs.python.org/zh-cn/3/tutorial/" }
+              ],
+              "output": "输出第一个 hello world 程序。",
+              "tags": ["基础"]
+            },
+            {
+              "id": "be0t2",
+              "title": "语言核心：变量 / 控制流 / 函数",
+              "plain": "类型、循环、分支、函数作用域，写任何程序的地基。",
+              "links": [
+                { "text": "MDN JavaScript 指南", "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide" }
+              ],
+              "output": "实现一个简易计算器函数。",
+              "tags": ["基础"]
+            },
+            {
+              "id": "be0t3",
+              "title": "数据结构与算法基础",
+              "plain": "数组、链表、哈希表、栈队列，复杂度意识很重要。",
+              "links": [
+                { "text": "roadmap.sh 计算机科学", "url": "https://roadmap.sh/computer-science" }
+              ],
+              "output": "手写哈希表与二分查找各一个。",
+              "tags": ["算法"]
+            },
+            {
+              "id": "be0t4",
+              "title": "模块化与代码组织",
+              "plain": "函数拆文件、依赖注入、命名规范，可维护性的起点。",
+              "links": [
+                { "text": "MDN 模块指南", "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules" }
+              ],
+              "output": "把一个脚本重构为多模块项目。",
+              "tags": ["工程化"]
+            }
+          ]
+        },
+        {
+          "id": "be1",
+          "num": 1,
+          "title": "数据库",
+          "desc": "SQL、索引、事务与 NoSQL，数据是后端的心脏。",
+          "tasks": [
+            {
+              "id": "be1t1",
+              "title": "SQL 与关系数据库",
+              "plain": "建表、增删改查、联表，先从 SQLite/PostgreSQL 练起。",
+              "links": [
+                { "text": "SQLBolt 交互教程", "url": "https://sqlbolt.com/" },
+                { "text": "PostgreSQL 文档", "url": "https://www.postgresql.org/docs/" }
+              ],
+              "output": "设计一个用户-订单数据库并写全 CRUD。",
+              "tags": ["sql"]
+            },
+            {
+              "id": "be1t2",
+              "title": "索引、事务与性能",
+              "plain": "索引加速查询，事务保证一致，锁与隔离级别要懂。",
+              "links": [
+                { "text": "roadmap.sh SQL 路线", "url": "https://roadmap.sh/sql" }
+              ],
+              "output": "为查询建立索引并对比执行计划。",
+              "tags": ["sql", "进阶"]
+            },
+            {
+              "id": "be1t3",
+              "title": "NoSQL：Redis 与 MongoDB",
+              "plain": "Redis 做缓存与队列，MongoDB 做文档存储，各有适用场景。",
+              "links": [
+                { "text": "Redis 文档", "url": "https://redis.io/docs/" },
+                { "text": "MongoDB 文档", "url": "https://www.mongodb.com/docs/" }
+              ],
+              "output": "用 Redis 给接口加一层缓存。",
+              "tags": ["nosql"]
+            },
+            {
+              "id": "be1t4",
+              "title": "ORM 与迁移",
+              "plain": "用对象模型操作数据库，迁移管理表结构演进。",
+              "links": [
+                { "text": "Prisma 文档", "url": "https://www.prisma.io/docs" }
+              ],
+              "output": "用 ORM 完成一次建表与迁移。",
+              "tags": ["工具"]
+            }
+          ]
+        },
+        {
+          "id": "be2",
+          "num": 2,
+          "title": "API 设计",
+          "desc": "REST 原则、HTTP 语义、认证授权与 GraphQL。",
+          "tasks": [
+            {
+              "id": "be2t1",
+              "title": "REST 设计原则",
+              "plain": "资源用名词、动作用方法，状态码表意，URL 可预测。",
+              "links": [
+                { "text": "roadmap.sh API 设计", "url": "https://roadmap.sh/api-design" }
+              ],
+              "output": "为博客系统设计一份 REST API 文档。",
+              "tags": ["api"]
+            },
+            {
+              "id": "be2t2",
+              "title": "HTTP 方法、状态码与请求头",
+              "plain": "GET/POST/PUT/DELETE、2xx/4xx/5xx、幂等与缓存语义。",
+              "links": [
+                { "text": "MDN HTTP", "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTTP" }
+              ],
+              "output": "用 curl 完整走一遍增删改查。",
+              "tags": ["http"]
+            },
+            {
+              "id": "be2t3",
+              "title": "认证与授权：JWT / OAuth",
+              "plain": "区分认证（你是谁）与授权（你能做什么），Token 与刷新策略。",
+              "links": [
+                { "text": "JWT 介绍", "url": "https://jwt.io/introduction" }
+              ],
+              "output": "实现注册登录并保护一个接口。",
+              "tags": ["安全"]
+            },
+            {
+              "id": "be2t4",
+              "title": "GraphQL 概念",
+              "plain": "按需取字段、单一端点、类型系统，了解它与 REST 的取舍。",
+              "links": [
+                { "text": "GraphQL 官方学习", "url": "https://graphql.org/learn/" }
+              ],
+              "output": "写一个 GraphQL query 并解释字段选择。",
+              "tags": ["api"]
+            }
+          ]
+        },
+        {
+          "id": "be3",
+          "num": 3,
+          "title": "服务端框架",
+          "desc": "Express 等框架的组织方式与安全底线。",
+          "tasks": [
+            {
+              "id": "be3t1",
+              "title": "Node.js 与 Express 起步",
+              "plain": "路由、中间件、请求响应处理，跑通第一个接口。",
+              "links": [
+                { "text": "Express 中文文档", "url": "https://expressjs.com/zh-cn/" }
+              ],
+              "output": "一个返回 JSON 的健康检查接口。",
+              "tags": ["node", "框架"]
+            },
+            {
+              "id": "be3t2",
+              "title": "中间件与错误处理",
+              "plain": "日志、鉴权、CORS 都靠中间件串联，错误要统一兜底。",
+              "links": [
+                { "text": "Express 指南", "url": "https://expressjs.com/zh-cn/guide/using-middleware.html" }
+              ],
+              "output": "给 API 加统一的错误响应结构。",
+              "tags": ["框架"]
+            },
+            {
+              "id": "be3t3",
+              "title": "输入校验与安全基线",
+              "plain": "校验参数、防注入、防 XSS，OWASP Top 10 过一遍。",
+              "links": [
+                { "text": "OWASP Cheat Sheets", "url": "https://cheatsheetseries.owasp.org/" }
+              ],
+              "output": "为接口加参数校验并列出安全清单。",
+              "tags": ["安全"]
+            },
+            {
+              "id": "be3t4",
+              "title": "日志与监控基础",
+              "plain": "结构化日志、错误追踪、指标采集，线上排障靠它。",
+              "links": [
+                { "text": "roadmap.sh 后端路线", "url": "https://roadmap.sh/backend" }
+              ],
+              "output": "给应用接入结构化日志。",
+              "tags": ["运维"]
+            }
+          ]
+        },
+        {
+          "id": "be4",
+          "num": 4,
+          "title": "部署运维",
+          "desc": "Linux、Docker、CI/CD 与云平台。",
+          "tasks": [
+            {
+              "id": "be4t1",
+              "title": "Linux 与服务器基础",
+              "plain": "进程、权限、systemd、SSH，服务器日常操作。",
+              "links": [
+                { "text": "roadmap.sh Linux", "url": "https://roadmap.sh/linux" }
+              ],
+              "output": "在云服务器上跑起一个服务。",
+              "tags": ["运维"]
+            },
+            {
+              "id": "be4t2",
+              "title": "Docker 容器化",
+              "plain": "镜像、容器、Dockerfile，环境一致性从容器开始。",
+              "links": [
+                { "text": "Docker 入门", "url": "https://docs.docker.com/get-started/" }
+              ],
+              "output": "把 API 项目打包成 Docker 镜像运行。",
+              "tags": ["容器"]
+            },
+            {
+              "id": "be4t3",
+              "title": "CI/CD：GitHub Actions",
+              "plain": "提交自动跑测试与构建，流水线即文档。",
+              "links": [
+                { "text": "GitHub Actions 文档", "url": "https://docs.github.com/zh/actions" }
+              ],
+              "output": "配置一个自动测试 + 部署的流水线。",
+              "tags": ["ci"]
+            },
+            {
+              "id": "be4t4",
+              "title": "云平台部署",
+              "plain": "Render / Vercel / 云厂商选一个，环境变量与数据库托管。",
+              "links": [
+                { "text": "Render 文档", "url": "https://render.com/docs" }
+              ],
+              "output": "把 API + 数据库部署上线。",
+              "tags": ["部署"]
+            }
+          ]
+        },
+        {
+          "id": "be5",
+          "num": 5,
+          "title": "实战项目",
+          "desc": "从脚本到可部署的完整服务，逐级做出作品。",
+          "tasks": [
+            {
+              "id": "be5t1",
+              "title": "命令行工具 / 脚本",
+              "plain": "用语言写一个解决真实小问题的工具。",
+              "links": [
+                { "text": "Node.js 入门", "url": "https://nodejs.org/zh-cn/learn" }
+              ],
+              "output": "一个可复用的 CLI 小工具。",
+              "tags": ["项目"]
+            },
+            {
+              "id": "be5t2",
+              "title": "REST API + 数据库 CRUD",
+              "plain": "数据从数据库进出，接口语义完整。",
+              "links": [
+                { "text": "Full Stack Open 中文（Part 3 后端）", "url": "https://fullstackopen.com/zh/" }
+              ],
+              "output": "一个完整的博客 CRUD API。",
+              "tags": ["项目"]
+            },
+            {
+              "id": "be5t3",
+              "title": "带认证的用户系统",
+              "plain": "注册登录、Token 校验、权限区分。",
+              "links": [
+                { "text": "OWASP 认证备忘单", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html" }
+              ],
+              "output": "用户系统 + 受保护资源接口。",
+              "tags": ["项目", "安全"]
+            },
+            {
+              "id": "be5t4",
+              "title": "容器化部署上线",
+              "plain": "Docker + 云平台，服务跑在公网。",
+              "links": [
+                { "text": "Docker 部署指南", "url": "https://docs.docker.com/get-started/" }
+              ],
+              "output": "一个线上可访问的完整后端服务。",
+              "tags": ["项目", "部署"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "官方文档",
+          "items": [
+            { "title": "Node.js 官方文档", "url": "https://nodejs.org/zh-cn/", "desc": "运行时与标准库第一手资料" },
+            { "title": "PostgreSQL 文档", "url": "https://www.postgresql.org/docs/", "desc": "关系数据库权威参考" },
+            { "title": "Express 中文文档", "url": "https://expressjs.com/zh-cn/", "desc": "最主流 Node 框架" }
+          ]
+        },
+        {
+          "category": "系统课程",
+          "items": [
+            { "title": "Backend Roadmap", "url": "https://roadmap.sh/backend", "desc": "后端路线图，按图索骥" },
+            { "title": "Full Stack Open 中文", "url": "https://fullstackopen.com/zh/", "desc": "大学级全栈课程，后端部分实战性强" },
+            { "title": "The Odin Project", "url": "https://www.theodinproject.com/", "desc": "全栈课程，含 Node 轨道" }
+          ]
+        },
+        {
+          "category": "工具与平台",
+          "items": [
+            { "title": "Docker 文档", "url": "https://docs.docker.com/", "desc": "容器化标准工具" },
+            { "title": "Prisma 文档", "url": "https://www.prisma.io/docs", "desc": "TypeScript ORM 首选" },
+            { "title": "Render 文档", "url": "https://render.com/docs", "desc": "后端一键部署平台" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "CLI 小工具", "learn": "语言基础 + 文件/输入输出" },
+        { "level": 2, "project": "CRUD REST API", "learn": "框架 + 数据库 + HTTP 语义" },
+        { "level": 3, "project": "带认证的完整 API", "learn": "安全 + 权限 + 中间件" },
+        { "level": 4, "project": "容器化部署上线", "learn": "Docker + CI/CD + 云平台" }
+      ]
+    },
+    {
+      "id": "fullstack",
+      "title": "全栈",
+      "desc": "前端 + 后端 + 数据库 + 部署，独立交付完整产品。",
+      "color": "#ec4899",
+      "stages": [
+        {
+          "id": "fs0",
+          "num": 0,
+          "title": "前端基础",
+          "desc": "先用最短路径补齐前端三件套与版本控制。",
+          "tasks": [
+            {
+              "id": "fs0t1",
+              "title": "HTML/CSS 基础",
+              "plain": "语义化结构 + 盒模型布局，能写出像样的静态页。",
+              "links": [
+                { "text": "MDN Web 文档", "url": "https://developer.mozilla.org/zh-CN/" }
+              ],
+              "output": "一个响应式静态页面。",
+              "tags": ["html", "css"]
+            },
+            {
+              "id": "fs0t2",
+              "title": "JavaScript 核心",
+              "plain": "语法、DOM、事件、异步 Promise，前后端都要用它。",
+              "links": [
+                { "text": "现代 JavaScript 教程", "url": "https://zh.javascript.info/" }
+              ],
+              "output": "用 JS 完成一个异步交互小功能。",
+              "tags": ["js"]
+            },
+            {
+              "id": "fs0t3",
+              "title": "Git 与 GitHub",
+              "plain": "提交、分支、协作，全栈开发每天的日常。",
+              "links": [
+                { "text": "Pro Git 中文版", "url": "https://git-scm.com/book/zh/v2" }
+              ],
+              "output": "建立个人仓库并规范提交。",
+              "tags": ["git"]
+            }
+          ]
+        },
+        {
+          "id": "fs1",
+          "num": 1,
+          "title": "前端框架",
+          "desc": "React 为主，掌握组件化与数据请求。",
+          "tasks": [
+            {
+              "id": "fs1t1",
+              "title": "React 组件与状态",
+              "plain": "组件拆分、props、useState，搭起界面骨架。",
+              "links": [
+                { "text": "React 官方教程", "url": "https://react.dev/learn" }
+              ],
+              "output": "一个可交互的列表组件。",
+              "tags": ["react"]
+            },
+            {
+              "id": "fs1t2",
+              "title": "路由与数据请求",
+              "plain": "页面路由 + fetch 后端接口，前后端开始联通。",
+              "links": [
+                { "text": "Full Stack Open 中文（Part 2）", "url": "https://fullstackopen.com/zh/" }
+              ],
+              "output": "一个从接口取数并渲染的页面。",
+              "tags": ["react", "http"]
+            },
+            {
+              "id": "fs1t3",
+              "title": "样式方案：Tailwind / CSS Modules",
+              "plain": "工具类与模块化样式，选一个统一起来。",
+              "links": [
+                { "text": "Tailwind CSS 文档", "url": "https://tailwindcss.com/docs" }
+              ],
+              "output": "用统一样式方案重做页面。",
+              "tags": ["css"]
+            }
+          ]
+        },
+        {
+          "id": "fs2",
+          "num": 2,
+          "title": "后端 API",
+          "desc": "Node.js + Express 写服务端，接口与前端对接。",
+          "tasks": [
+            {
+              "id": "fs2t1",
+              "title": "Node.js 与 REST API",
+              "plain": "路由、请求解析、JSON 响应，跑通第一个接口。",
+              "links": [
+                { "text": "Express 中文文档", "url": "https://expressjs.com/zh-cn/" }
+              ],
+              "output": "一组完整 CRUD 接口。",
+              "tags": ["node", "api"]
+            },
+            {
+              "id": "fs2t2",
+              "title": "参数校验与错误处理",
+              "plain": "输入不可信：校验、状态码、统一错误结构。",
+              "links": [
+                { "text": "OWASP 输入校验备忘单", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html" }
+              ],
+              "output": "接口层统一的校验与错误返回。",
+              "tags": ["安全"]
+            },
+            {
+              "id": "fs2t3",
+              "title": "认证：JWT 会话",
+              "plain": "注册登录、Token 签发与校验、保护私有接口。",
+              "links": [
+                { "text": "JWT 介绍", "url": "https://jwt.io/introduction" }
+              ],
+              "output": "带登录态的用户接口。",
+              "tags": ["安全"]
+            }
+          ]
+        },
+        {
+          "id": "fs3",
+          "num": 3,
+          "title": "数据库",
+          "desc": "PostgreSQL + ORM，数据模型落到表。",
+          "tasks": [
+            {
+              "id": "fs3t1",
+              "title": "SQL 与 PostgreSQL",
+              "plain": "建表、查询、联表、索引，数据库基本功。",
+              "links": [
+                { "text": "PostgreSQL 文档", "url": "https://www.postgresql.org/docs/" },
+                { "text": "SQLBolt", "url": "https://sqlbolt.com/" }
+              ],
+              "output": "为项目设计完整表结构。",
+              "tags": ["sql"]
+            },
+            {
+              "id": "fs3t2",
+              "title": "ORM：Prisma",
+              "plain": "schema 定义模型、迁移建表、类型安全查询。",
+              "links": [
+                { "text": "Prisma 文档", "url": "https://www.prisma.io/docs" }
+              ],
+              "output": "用 Prisma 完成模型与迁移。",
+              "tags": ["工具"]
+            },
+            {
+              "id": "fs3t3",
+              "title": "数据建模与关系设计",
+              "plain": "一多关系、外键、约束，模型决定产品上限。",
+              "links": [
+                { "text": "roadmap.sh SQL", "url": "https://roadmap.sh/sql" }
+              ],
+              "output": "用户-内容-评论的关联建模。",
+              "tags": ["建模"]
+            }
+          ]
+        },
+        {
+          "id": "fs4",
+          "num": 4,
+          "title": "部署与工程化",
+          "desc": "环境管理、容器、CI 与监控，让项目可上线。",
+          "tasks": [
+            {
+              "id": "fs4t1",
+              "title": "环境变量与配置管理",
+              "plain": "配置不入库，环境区分开发/生产。",
+              "links": [
+                { "text": "12-Factor 中文", "url": "https://12factor.net/zh_cn/" }
+              ],
+              "output": "重构项目配置为环境变量驱动。",
+              "tags": ["工程化"]
+            },
+            {
+              "id": "fs4t2",
+              "title": "Docker 与部署",
+              "plain": "前后端镜像化，一条命令起整套环境。",
+              "links": [
+                { "text": "Docker 入门", "url": "https://docs.docker.com/get-started/" }
+              ],
+              "output": "docker-compose 跑起前后端 + 数据库。",
+              "tags": ["容器", "部署"]
+            },
+            {
+              "id": "fs4t3",
+              "title": "CI/CD 与自动化测试",
+              "plain": "测试先行，流水线自动构建部署。",
+              "links": [
+                { "text": "GitHub Actions 文档", "url": "https://docs.github.com/zh/actions" }
+              ],
+              "output": "一条从提交到上线的流水线。",
+              "tags": ["ci"]
+            },
+            {
+              "id": "fs4t4",
+              "title": "日志、监控与性能",
+              "plain": "线上出问题先看日志，再谈优化。",
+              "links": [
+                { "text": "web.dev 性能学习", "url": "https://web.dev/learn/performance" }
+              ],
+              "output": "为线上服务加日志与基础监控。",
+              "tags": ["运维"]
+            }
+          ]
+        },
+        {
+          "id": "fs5",
+          "num": 5,
+          "title": "完整项目",
+          "desc": "从需求到上线的全栈闭环，这是最有说服力的作品。",
+          "tasks": [
+            {
+              "id": "fs5t1",
+              "title": "需求拆解与数据库设计",
+              "plain": "功能列表、数据模型、接口清单，动手前先画图。",
+              "links": [
+                { "text": "roadmap.sh 全栈路线", "url": "https://roadmap.sh/full-stack" }
+              ],
+              "output": "一份项目需求 + 表结构 + API 清单。",
+              "tags": ["项目"]
+            },
+            {
+              "id": "fs5t2",
+              "title": "前后端联调",
+              "plain": "前端调真实接口，处理加载、错误、空态。",
+              "links": [
+                { "text": "Full Stack Open 中文", "url": "https://fullstackopen.com/zh/" }
+              ],
+              "output": "前后端跑通一个完整功能链路。",
+              "tags": ["项目"]
+            },
+            {
+              "id": "fs5t3",
+              "title": "认证闭环 + 部署上线",
+              "plain": "注册登录贯穿前后端，部署到 Vercel + 托管数据库。",
+              "links": [
+                { "text": "Vercel 文档", "url": "https://vercel.com/docs" },
+                { "text": "Supabase 文档", "url": "https://supabase.com/docs" }
+              ],
+              "output": "一个线上可注册登录的完整应用。",
+              "tags": ["项目", "部署"]
+            },
+            {
+              "id": "fs5t4",
+              "title": "项目复盘与优化",
+              "plain": "性能、安全、代码结构，回看并改进自己的代码。",
+              "links": [
+                { "text": "OWASP Top 10 中文", "url": "https://owasp.org/Top10/zh/" }
+              ],
+              "output": "一份复盘清单 + 一轮优化提交。",
+              "tags": ["项目"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "系统课程",
+          "items": [
+            { "title": "Full Stack Open 中文", "url": "https://fullstackopen.com/zh/", "desc": "本轨主线课程：React + Node 全栈，免费证书" },
+            { "title": "Full Stack Roadmap", "url": "https://roadmap.sh/full-stack", "desc": "全栈路线图，前后端对照查缺" },
+            { "title": "FreeCodeCamp 中文", "url": "https://www.freecodecamp.org/chinese/learn/", "desc": "认证体系 + 项目练习" },
+            { "title": "The Odin Project", "url": "https://www.theodinproject.com/", "desc": "开源全栈课程，JS 轨道完整" }
+          ]
+        },
+        {
+          "category": "官方文档",
+          "items": [
+            { "title": "MDN Web 文档", "url": "https://developer.mozilla.org/zh-CN/", "desc": "前端三件套权威参考" },
+            { "title": "React 官方文档", "url": "https://react.dev/", "desc": "组件化第一手资料" },
+            { "title": "Node.js 文档", "url": "https://nodejs.org/zh-cn/", "desc": "运行时与标准库" },
+            { "title": "PostgreSQL 文档", "url": "https://www.postgresql.org/docs/", "desc": "数据库权威参考" }
+          ]
+        },
+        {
+          "category": "部署平台",
+          "items": [
+            { "title": "Vercel 文档", "url": "https://vercel.com/docs", "desc": "前端一键部署" },
+            { "title": "Supabase 文档", "url": "https://supabase.com/docs", "desc": "托管 Postgres + 认证，全栈标配" },
+            { "title": "Render 文档", "url": "https://render.com/docs", "desc": "后端与数据库托管" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "静态页 + 简单 API", "learn": "前端基础 + 第一个接口" },
+        { "level": 2, "project": "Todo 全栈应用", "learn": "前后端联通 + 数据库 CRUD" },
+        { "level": 3, "project": "带认证的完整产品", "learn": "用户系统 + 权限 + 部署" },
+        { "level": 4, "project": "上线运营级项目", "learn": "工程化 + 监控 + 复盘优化" }
+      ]
+    }
+  ],
+  "glossary": [
+    { "term": "SPA", "plain": "单页应用：页面不刷新，由 JavaScript 切换视图与数据" },
+    { "term": "SSR", "plain": "服务端渲染：HTML 在服务端生成后发给浏览器，利于首屏与 SEO" },
+    { "term": "REST", "plain": "一种 API 设计风格：资源用名词 URL，操作用 HTTP 方法表达" },
+    { "term": "GraphQL", "plain": "API 查询语言：客户端按需声明要哪些字段，单一端点返回" },
+    { "term": "JWT", "plain": "JSON Web Token：服务端签发的身份令牌，客户端携带访问受保护接口" },
+    { "term": "ORM", "plain": "对象关系映射：用代码对象操作数据库表，免写原生 SQL" },
+    { "term": "CDN", "plain": "内容分发网络：把静态资源缓存到离用户近的节点，加速访问" },
+    { "term": "CI/CD", "plain": "持续集成/持续部署：提交代码自动测试、构建并发布上线" },
+    { "term": "Docker", "plain": "容器化工具：把应用与环境打包成镜像，随处一致运行" },
+    { "term": "响应式设计", "plain": "一套界面自适应手机/平板/桌面，不用为每种屏幕单独做页面" }
+  ]
+}
