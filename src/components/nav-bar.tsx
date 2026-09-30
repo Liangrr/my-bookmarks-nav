@@ -354,6 +354,21 @@ export function NavBar() {
             <span>格式转换</span>
           </Link>
           <Link
+            href="/learn-agents"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/learn-agents" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="5" y="8" width="14" height="10" rx="2" />
+              <circle cx="9.5" cy="13" r="1" />
+              <circle cx="14.5" cy="13" r="1" />
+              <path d="M12 8V5" />
+              <circle cx="12" cy="3.5" r="1" />
+              <path d="M2 13h3M19 13h3" />
+            </svg>
+            <span>AI Agent 学习</span>
+          </Link>
+          <Link
             href="/living"
             onClick={() => setMenuOpen(false)}
             className={`drawer-item ${pathname === "/living" ? "active" : ""}`}

@@ -1,0 +1,351 @@
+{
+  "meta": {
+    "title": "AI Agent 学习",
+    "updated": "2026-09-30",
+    "desc": "照着做就能入门 AI Agent：学习路线 + 资源导航 + 实战阶梯，全部内容可溯源。"
+  },
+  "stages": [
+    {
+      "id": "s0",
+      "num": 0,
+      "title": "基础认知",
+      "desc": "搞清楚 Agent 是什么、为什么用、什么时候不该用。",
+      "tasks": [
+        {
+          "id": "s0t1",
+          "title": "区分 chatbot / workflow / agent / multi-agent",
+          "plain": "chatbot 只对话；workflow 按固定流程执行；agent 由模型自主决策调工具；multi-agent 是多角色协作。",
+          "links": [
+            { "text": "Anthropic: Building effective agents", "url": "https://www.anthropic.com/engineering/building-effective-agents" }
+          ],
+          "output": "写一页笔记：我的场景为什么需要 agent，而不是普通 workflow？",
+          "tags": ["认知"]
+        },
+        {
+          "id": "s0t2",
+          "title": "理解 agent 基本循环：observe → think → act → observe",
+          "plain": "所有 agent 都是这个循环的变体：观察输入 → 模型思考 → 执行动作 → 观察结果。",
+          "links": [
+            { "text": "OpenAI: A practical guide to building agents", "url": "https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/" },
+            { "text": "Lilian Weng: LLM Powered Autonomous Agents", "url": "https://lilianweng.github.io/posts/2023-06-23-agent/" }
+          ],
+          "output": "用自己的话画出这个循环。",
+          "tags": ["认知"]
+        },
+        {
+          "id": "s0t3",
+          "title": "知道什么时候不该用 agent",
+          "plain": "任务可预测、流程稳定、普通脚本能解决时，agent 反而增加不确定性与成本。",
+          "links": [
+            { "text": "Anthropic: Building effective agents", "url": "https://www.anthropic.com/engineering/building-effective-agents" }
+          ],
+          "output": "列出 3 个「不该用 agent」的场景。",
+          "tags": ["认知"]
+        },
+        {
+          "id": "s0t4",
+          "title": "认识 MCP / A2A / Skills 三个新协议名词",
+          "plain": "MCP 连接工具与数据源，A2A 连接 agent 与 agent，Skills 是打包可复用的流程知识。",
+          "links": [
+            { "text": "Model Context Protocol", "url": "https://modelcontextprotocol.io/" },
+            { "text": "Agent2Agent Protocol", "url": "https://a2a-protocol.org/latest/specification/" }
+          ],
+          "output": "一句话分别解释三者的作用。",
+          "tags": ["认知", "协议"]
+        }
+      ]
+    },
+    {
+      "id": "s1",
+      "num": 1,
+      "title": "最小 Agent Loop",
+      "desc": "亲手从零搭一个能选工具、执行工具、返回答案的最小 agent。",
+      "tasks": [
+        {
+          "id": "s1t1",
+          "title": "用 LLM API 完成一次普通对话",
+          "plain": "选一个主流 API（OpenAI / Anthropic / Google 均可），跑通最基础的对话调用。",
+          "links": [
+            { "text": "OpenAI Function Calling 指南", "url": "https://platform.openai.com/docs/guides/function-calling" },
+            { "text": "Claude Tool Use", "url": "https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview" }
+          ],
+          "output": "一个可运行的对话脚本。",
+          "tags": ["动手"]
+        },
+        {
+          "id": "s1t2",
+          "title": "让模型输出结构化 JSON",
+          "plain": "用 response_format / 工具 schema 约束输出，为工具调用做准备。",
+          "links": [],
+          "output": "输出一段可被 json.load 解析的结果。",
+          "tags": ["动手"]
+        },
+        {
+          "id": "s1t3",
+          "title": "定义一个工具函数（search / calculator / read_file）",
+          "plain": "把普通 Python/TS 函数注册成带 schema 的工具。",
+          "links": [],
+          "output": "至少一个可被模型调用并返回结果的工具。",
+          "tags": ["动手"]
+        },
+        {
+          "id": "s1t4",
+          "title": "解析 tool call、执行工具、结果回喂模型",
+          "plain": "这是 agent loop 的核心：模型说调哪个工具 → 程序执行 → 结果塞回对话 → 模型继续。",
+          "links": [],
+          "output": "跑通一次完整的工具调用闭环。",
+          "tags": ["动手"]
+        },
+        {
+          "id": "s1t5",
+          "title": "给 agent loop 加最大步数、超时与错误处理",
+          "plain": "没有上限的循环会烧钱卡死；工具报错要能被消化而不是崩溃。",
+          "links": [],
+          "output": "循环带步数上限、超时与 try/catch。",
+          "tags": ["工程化"]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "num": 2,
+      "title": "工具 / 检索 / 记忆",
+      "desc": "让 agent 会查资料、会记住东西、会处理失败。",
+      "tasks": [
+        {
+          "id": "s2t1",
+          "title": "搭一条最小 RAG：chunk → embed → retrieve → 带引用回答",
+          "plain": "把文档切块、向量化、检索最相关片段、让模型基于片段回答并给出来源。",
+          "links": [
+            { "text": "LlamaIndex Agents", "url": "https://docs.llamaindex.ai/en/stable/use_cases/agents/" },
+            { "text": "LangChain 文档", "url": "https://docs.langchain.com/" }
+          ],
+          "output": "一个能对本地文档提问并带引用的 demo。",
+          "tags": ["RAG"]
+        },
+        {
+          "id": "s2t2",
+          "title": "把搜索、数据库、文件、代码执行接成工具",
+          "plain": "工具越多 agent 越有用；重点是统一的工具接口与错误返回。",
+          "links": [],
+          "output": "至少接入两种外部能力。",
+          "tags": ["工具"]
+        },
+        {
+          "id": "s2t3",
+          "title": "区分短期上下文 / 会话记忆 / 长期记忆",
+          "plain": "上下文窗口是短期工作台；会话记忆跨轮次；长期记忆用向量库或数据库持久化。",
+          "links": [
+            { "text": "mem0（记忆层组件）", "url": "https://github.com/mem0ai/mem0" },
+            { "text": "Letta（stateful agents）", "url": "https://github.com/letta-ai/letta" }
+          ],
+          "output": "给 agent 加一种长期记忆。",
+          "tags": ["记忆"]
+        },
+        {
+          "id": "s2t4",
+          "title": "处理工具失败、空结果、重复调用、幻觉引用",
+          "plain": "生产可用的 agent 一半工作在失败处理：重试、降级、给不出证据就明说。",
+          "links": [],
+          "output": "为每个失败场景写一个处理分支。",
+          "tags": ["工程化"]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "num": 3,
+      "title": "框架与工程化",
+      "desc": "选一个主流框架深入，再补 harness 与评测两门工程课。",
+      "tasks": [
+        {
+          "id": "s3t1",
+          "title": "smolagents 入门（轻量 CodeAgent）",
+          "plain": "HuggingFace 出品，让模型写代码执行动作的范式，最接近 agent 本质。",
+          "links": [
+            { "text": "huggingface/smolagents", "url": "https://github.com/huggingface/smolagents" }
+          ],
+          "output": "用它重写一遍阶段 1 的最小 agent。",
+          "tags": ["框架"]
+        },
+        {
+          "id": "s3t2",
+          "title": "LangGraph 状态图编排",
+          "plain": "把 agent 流程画成状态图，可控、可恢复、可观测。",
+          "links": [
+            { "text": "LangGraph 文档", "url": "https://langchain-ai.github.io/langgraph/" }
+          ],
+          "output": "实现一个带分支与循环的图。",
+          "tags": ["框架"]
+        },
+        {
+          "id": "s3t3",
+          "title": "LlamaIndex Agents（数据侧 agent）",
+          "plain": "擅长在数据索引之上做 agent，RAG 场景首选。",
+          "links": [
+            { "text": "LlamaIndex Agents", "url": "https://docs.llamaindex.ai/en/stable/use_cases/agents/" }
+          ],
+          "output": "做一个数据问答 agent。",
+          "tags": ["框架"]
+        },
+        {
+          "id": "s3t4",
+          "title": "理解 agent harness：工具注册、权限门、会话存储、上下文压缩",
+          "plain": "harness 是 agent 的能力骨架：很多可靠性问题（越权、上下文爆炸）都靠它解决。",
+          "links": [
+            { "text": "learn-claude-code（从零复刻 harness）", "url": "https://github.com/shareAI-lab/learn-claude-code" },
+            { "text": "bytedance/deer-flow（SuperAgent runtime）", "url": "https://github.com/bytedance/deer-flow" }
+          ],
+          "output": "读一个 harness 源码，标出 4 个核心模块。",
+          "tags": ["工程化"]
+        },
+        {
+          "id": "s3t5",
+          "title": "学习评测与可观测性：eval 表格 + trace",
+          "plain": "没有 eval 和 trace 的 agent 只是 demo：固定测试集、成功率、失败分类、成本延迟。",
+          "links": [
+            { "text": "OpenAI Evals", "url": "https://platform.openai.com/docs/guides/evals" },
+            { "text": "LangSmith", "url": "https://docs.smith.langchain.com/" }
+          ],
+          "output": "一张至少 20 个任务的 eval 表格。",
+          "tags": ["评测"]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "num": 4,
+      "title": "实战项目阶梯",
+      "desc": "按阶梯逐档做项目，至少完成 3 档，每个项目要能给别人 clone 下来跑。",
+      "tasks": [
+        {
+          "id": "s4t1",
+          "title": "Calculator Agent（最小 tool call loop）",
+          "plain": "只做一个能算数、能查天气的小 agent，练熟闭环。",
+          "links": [],
+          "output": "README + 运行步骤 + 示例输入输出。",
+          "tags": ["项目"]
+        },
+        {
+          "id": "s4t2",
+          "title": "Web Research Agent（搜索、筛选、引用、总结）",
+          "plain": "输入主题自动搜索、抓取、筛选、总结并输出引用链接。",
+          "links": [
+            { "text": "GPT Researcher（参考成品）", "url": "https://github.com/assafelovic/gpt-researcher" }
+          ],
+          "output": "一个能产出带引用报告的研究 agent。",
+          "tags": ["项目"]
+        },
+        {
+          "id": "s4t3",
+          "title": "PDF QA Agent（RAG + 引用）",
+          "plain": "对 PDF 提问，答案必须带页码或来源。",
+          "links": [
+            { "text": "RAGFlow（参考成品）", "url": "https://github.com/infiniflow/ragflow" },
+            { "text": "AnythingLLM（参考成品）", "url": "https://github.com/Mintplex-Labs/anything-llm" }
+          ],
+          "output": "上传 PDF 即可问答的 demo。",
+          "tags": ["项目"]
+        },
+        {
+          "id": "s4t4",
+          "title": "Coding Review Agent（读 diff、风险排序）",
+          "plain": "输入代码 diff，输出风险排序与修改建议，是最接近真实工作的 agent 项目。",
+          "links": [
+            { "text": "OpenHands（参考成品）", "url": "https://github.com/All-Hands-AI/OpenHands" }
+          ],
+          "output": "能对一次 commit 给出 review 意见。",
+          "tags": ["项目"]
+        },
+        {
+          "id": "s4t5",
+          "title": "多 Agent 系统（planner → writer → reviewer）",
+          "plain": "理解多 agent 是协调问题：定义职责边界、输入输出 schema、停止条件。",
+          "links": [
+            { "text": "OpenAI Agents SDK", "url": "https://platform.openai.com/docs/guides/agents-sdk/" },
+            { "text": "Microsoft AutoGen", "url": "https://microsoft.github.io/autogen/" }
+          ],
+          "output": "research → write → review → revise 流水线。",
+          "tags": ["项目", "多智能体"]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "category": "官方文档",
+      "items": [
+        { "title": "OpenAI Agents SDK", "url": "https://platform.openai.com/docs/guides/agents-sdk/", "desc": "OpenAI 原生 agent 开发入口：loop、工具、handoffs、tracing。" },
+        { "title": "Anthropic Tool Use", "url": "https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview", "desc": "Claude 工具调用机制官方文档。" },
+        { "title": "Google Agent Development Kit", "url": "https://google.github.io/adk-docs/", "desc": "Google 的 agent 开发框架。" },
+        { "title": "Model Context Protocol", "url": "https://modelcontextprotocol.io/", "desc": "agent 连接工具和数据源的开放标准。" },
+        { "title": "Agent2Agent Protocol", "url": "https://a2a-protocol.org/latest/specification/", "desc": "agent 之间发现、通信与协作协议。" }
+      ]
+    },
+    {
+      "category": "经典文章",
+      "items": [
+        { "title": "Anthropic: Building Effective Agents", "url": "https://www.anthropic.com/engineering/building-effective-agents", "desc": "Agent 设计入门必读，讲清 workflow 与 agent 的边界。" },
+        { "title": "OpenAI: A Practical Guide to Building Agents", "url": "https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/", "desc": "面向产品与工程团队的 agent 落地指南。" },
+        { "title": "Lilian Weng: LLM Powered Autonomous Agents", "url": "https://lilianweng.github.io/posts/2023-06-23-agent/", "desc": "经典长文，系统整理 agent 架构、记忆、规划与工具。" },
+        { "title": "Simon Willison 的 LLM 工程观察", "url": "https://simonwillison.net/tags/llms/", "desc": "非常务实的 LLM/agent 工程经验。" }
+      ]
+    },
+    {
+      "category": "开源项目",
+      "items": [
+        { "title": "huggingface/smolagents", "url": "https://github.com/huggingface/smolagents", "desc": "轻量 CodeAgent 框架，让模型写代码执行动作。" },
+        { "title": "langchain-ai/langgraph", "url": "https://github.com/langchain-ai/langgraph", "desc": "状态图编排，可控、可恢复的 agent 流程。" },
+        { "title": "openai/openai-agents-python", "url": "https://github.com/openai/openai-agents-python", "desc": "OpenAI Agents SDK 的 Python 实现。" },
+        { "title": "QwenLM/Qwen-Agent", "url": "https://github.com/QwenLM/Qwen-Agent", "desc": "国产模型生态的工具调用 / RAG / MCP agent 框架。" },
+        { "title": "browser-use/browser-use", "url": "https://github.com/browser-use/browser-use", "desc": "浏览器 agent 实战：观察、点击、提取、失败恢复。" },
+        { "title": "bytedance/deer-flow", "url": "https://github.com/bytedance/deer-flow", "desc": "字节开源 long-horizon SuperAgent harness。" },
+        { "title": "All-Hands-AI/OpenHands", "url": "https://github.com/All-Hands-AI/OpenHands", "desc": "开源 coding agent，真实代码库操作样本。" },
+        { "title": "earendil-works/pi", "url": "https://github.com/earendil-works/pi", "desc": "TypeScript 的 AI agent toolkit，含 CLI 与统一 LLM API。" }
+      ]
+    },
+    {
+      "category": "论文",
+      "items": [
+        { "title": "ReAct（Reasoning + Acting）", "url": "https://arxiv.org/abs/2210.03629", "desc": "agent 基础范式：思考与行动交替。" },
+        { "title": "Reflexion（语言反馈与自我改进）", "url": "https://arxiv.org/abs/2303.11366", "desc": "让 agent 从失败中自我修正。" },
+        { "title": "SWE-bench", "url": "https://arxiv.org/abs/2310.06770", "desc": "真实 GitHub issue 修复评测基准。" },
+        { "title": "τ-bench（tool-agent-user 动态交互）", "url": "https://arxiv.org/abs/2406.12045", "desc": "评估 agent 可靠性的重要参照。" },
+        { "title": "AgentBench", "url": "https://arxiv.org/abs/2308.03688", "desc": "agent 能力多维评测基准。" }
+      ]
+    },
+    {
+      "category": "视频课程",
+      "items": [
+        { "title": "Deep Agents 实战（Datawhale，B 站）", "url": "https://www.bilibili.com/video/BV1XsEi6qEA6/", "desc": "LangChain/LangGraph 生态生产级课程，周更。" },
+        { "title": "Deep Agents 实战 · 课程主页", "url": "https://datawhalechina.github.io/deepagents-in-action/", "desc": "Astro 在线文档 + 讲义 PDF。" },
+        { "title": "微软 AI Agents for Beginners（中文）", "url": "https://microsoft.github.io/ai-agents-for-beginners/translations/zh-CN/", "desc": "18 课入门课程，每课视频 + 代码 + 扩展资源。" },
+        { "title": "HuggingFace Agents Course", "url": "https://hf.co/learn/agents-course", "desc": "官方免费课程，含 Quiz 与期末评测。" }
+      ]
+    },
+    {
+      "category": "中文社区",
+      "items": [
+        { "title": "hello-agents（从零开始构建智能体）", "url": "https://github.com/datawhalechina/hello-agents", "desc": "81k star 中文系统性教程，16 章 + 配套代码 + PDF。" },
+        { "title": "hello-agents · 在线阅读", "url": "https://hello-agents.datawhale.cc", "desc": "国内加速在线阅读地址。" },
+        { "title": "Agent-Learning-Hub（学习路线库）", "url": "https://github.com/datawhalechina/Agent-Learning-Hub", "desc": "Stage 0–8 勾选式学习路线 + 实战阶梯 + 精选资源。" }
+      ]
+    }
+  ],
+  "ladder": [
+    { "level": 1, "project": "Calculator Agent", "learn": "最小 tool call loop：选工具、执行、回喂" },
+    { "level": 2, "project": "Web Research Agent", "learn": "搜索、筛选、引用、总结" },
+    { "level": 3, "project": "PDF QA Agent", "learn": "RAG、chunk、retrieval、citation" },
+    { "level": 4, "project": "Coding Review Agent", "learn": "读 diff、风险排序、测试建议" },
+    { "level": 5, "project": "Browser Agent", "learn": "页面观察、点击、提取、失败恢复" },
+    { "level": 6, "project": "多 Agent 写作系统", "learn": "planner / writer / reviewer 职责与协作" }
+  ],
+  "glossary": [
+    { "term": "Agent Loop", "plain": "观察 → 思考 → 行动 → 观察结果，agent 的基本循环。" },
+    { "term": "Tool Calling", "plain": "模型输出结构化工具调用指令，由程序执行后把结果回喂模型。" },
+    { "term": "RAG", "plain": "检索增强生成：先检索相关资料，再让模型基于资料回答并引用来源。" },
+    { "term": "MCP", "plain": "Model Context Protocol，agent 标准化连接外部工具与数据源的协议。" },
+    { "term": "Harness", "plain": "agent 运行骨架：工具注册、权限门、会话存储、上下文压缩、日志与评测。" },
+    { "term": "Eval", "plain": "用固定测试集与可量化指标（成功率、失败分类、成本、延迟）评估 agent。" }
+  ]
+}
