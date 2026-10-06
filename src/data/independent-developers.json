@@ -1,14 +1,194 @@
 {
  "source": "https://github.com/1c7/chinese-independent-developer/blob/master/.github/pages/README-Programmer-Edition.md",
- "updatedAt": "2026-09-30 15:00:37 CST",
+ "updatedAt": "2026-10-06 08:20:47 CST",
  "stats": {
-  "total": 330,
-  "ok": 326,
+  "total": 337,
+  "ok": 333,
   "dead": 4,
-  "authors": 296,
-  "dateGroups": 207
+  "authors": 304,
+  "dateGroups": 212
  },
  "groups": [
+  {
+   "date": "2026 年 10 月 5 号添加",
+   "authors": [
+    {
+     "name": "coffeecoproject",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/coffeecoproject"
+      }
+     ],
+     "items": [
+      {
+       "title": "LayerMap",
+       "url": "https://github.com/coffeecoproject/layermap",
+       "status": "ok",
+       "desc": "给编程 Agent 用的代码调用关系地图，一次调用把某个函数的调用方一路追到 HTTP 接口，回答「改这里会影响哪些接口」；用各语言自己的编译器解析 TypeScript/JavaScript、Go、Python、Java，完全本地运行不上传代码；提供 MCP 服务与插件，已收录在官方 MCP Registry，Apache-2.0 开源",
+       "links": [
+        {
+         "text": "中文说明",
+         "url": "https://github.com/coffeecoproject/layermap/blob/main/README.zh-CN.md"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "saime428",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/saime428"
+      }
+     ],
+     "items": [
+      {
+       "title": "AI Code Usage Tray",
+       "url": "https://github.com/saime428/ai-code-usage-tray",
+       "status": "ok",
+       "desc": "Windows 托盘用量监视器，一处看 Claude Code、Codex、Grok CLI、Antigravity、OpenCode 的 token 用量和金额，Claude、Codex、Grok 的官方额度在贴边悬浮条上常驻显示，另有跨工具的按天、项目、模型用量报表；只读本机会话记录，不上传用量数据，MIT 开源，提供 Windows 安装包",
+       "links": [
+        {
+         "text": "中文说明",
+         "url": "https://github.com/saime428/ai-code-usage-tray/blob/main/README.zh-CN.md"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 4 号添加",
+   "authors": [
+    {
+     "name": "jaychouchannel",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/jaychouchannel"
+      }
+     ],
+     "items": [
+      {
+       "title": "夜观天象 Astrolabe",
+       "url": "https://github.com/jaychouchannel/Astrolabe",
+       "status": "ok",
+       "desc": "OKX 行情与账户监控面板，实时展示币价、K 线、资金费率和自己持仓的未实现盈亏，行情剧烈波动、资金费率越阈或账户开平仓、权益变动时通过 Telegram 推送提醒；只观测不下单，无任何交易权限，不配 API Key 也能看公开行情 — 需自建 Python 服务，MIT 开源",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "SandGrid(北京)",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/lcy362"
+      },
+      {
+       "text": "博客",
+       "url": "https://lichuanyang.top/"
+      }
+     ],
+     "items": [
+      {
+       "title": "Flint Skills Manager",
+       "url": "https://flint.lichuanyang.top",
+       "status": "ok",
+       "desc": "本地优先的 AI Skills 资产管理器，把分散在 Claude Code 等工具里的 skill 收进可版本化的本地资产库，统一去重、打标签、按预设部署到各个 agent，换工具资产也带得走；`npx flint-skills-hub` 即用，支持 macOS / Windows / Linux，MIT 开源",
+       "links": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 3 号添加",
+   "authors": [
+    {
+     "name": "oisano11",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/oisano11"
+      }
+     ],
+     "items": [
+      {
+       "title": "中转塔台 Relay Tower",
+       "url": "https://github.com/oisano11/relay-tower",
+       "status": "ok",
+       "desc": "上游半夜涨价、主调账号出故障时不用盯后台，自动提醒、自动切换，手机 Telegram 一键切线；MIT 开源，Docker 一键部署",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "Jack",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/jcaiagent7143-ui"
+      }
+     ],
+     "items": [
+      {
+       "title": "LinkDigest",
+       "url": "https://linkdigest.dev/zh",
+       "status": "ok",
+       "desc": "给 AI Agent 用的小红书 / 抖音链接读取器，一次调用把链接变成文字：小红书图文笔记逐图 OCR、视频带时间戳逐字稿和画面文字，可选爆款拆解（引用逐字核对原文）；远程 MCP 一行接入 Claude Code / Cursor / Cherry Studio，也有 REST API；注册送 10 积分，之后按量付费（支持支付宝）；不支持 B站",
+       "links": [
+        {
+         "text": "开源客户端与接入说明",
+         "url": "https://github.com/jcaiagent7143-ui/linkdigest-mcp"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 1 号添加",
+   "authors": [
+    {
+     "name": "AmethystineAlpaca",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/AmethystineAlpaca"
+      }
+     ],
+     "items": []
+    }
+   ]
+  },
+  {
+   "date": "2026 年 9 月 30 号添加",
+   "authors": [
+    {
+     "name": "Owaid0723666",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/Owaid0723666"
+      }
+     ],
+     "items": [
+      {
+       "title": "onomeo",
+       "url": "https://onomeo.com/zh",
+       "status": "ok",
+       "desc": "兼容 OpenAI 的 AI 接口聚合站，一把密钥调用 DeepSeek、GLM、Gemini、Qwen 等 35 个免费模型，免费模型不扣额度（未付费账号每 5 小时 20 次），网页里也能直接对话和画图；Claude、GPT 等大模型需付费；目前是公测阶段，不保证所有功能都能正常使用，正在大量收集反馈，欢迎提",
+       "links": []
+      }
+     ]
+    }
+   ]
+  },
   {
    "date": "2026 年 9 月 29 号添加",
    "authors": [
