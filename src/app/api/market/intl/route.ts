@@ -51,8 +51,22 @@ async function eastmoneyGold() {
   return { price: it.f2, chg: it.f4, pct: it.f3, name: "港伦敦金" };
 }
 
+// USD/CNY 汇率（Yahoo 外汇，供人民币折算）
+async function usdCny(): Promise<number> {
+  const res = await fetchWithTimeout(`https://query1.finance.yahoo.com/v8/finance/chart/USDCNY=X?interval=1d&range=1d`, {
+    headers: { "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)" },
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error(`yahoo USDCNY http ${res.status}`);
+  const j = await res.json();
+  const p = j?.chart?.result?.[0]?.meta?.regularMarketPrice;
+  if (p == null) throw new Error("yahoo USDCNY no price");
+  return p;
+}
+
 export async function GET() {
   const out: Record<string, { name: string; price: number; chg: number; pct: number; usdTon?: number; unit: string }> = {};
+  let cny: number | null = null;
   try {
     // 并行拉 Yahoo 三品种，单个失败不拖垮整体
     const results = await Promise.allSettled(SYMBOLS.map((s) => yahooQuote(s.sym)));
@@ -72,8 +86,11 @@ export async function GET() {
     // 美铜：美元/磅 → 美元/短吨（×2204.62）
     if (out["hf_HG"]) out["hf_HG"].usdTon = Math.round(out["hf_HG"].price * 2204.62);
 
+    // 汇率（失败不影响金属价展示，人民币折算列显示 --）
+    cny = await usdCny().catch(() => null);
+
     const ok = Object.keys(out).length > 0;
-    return NextResponse.json({ ok, data: out }, { status: ok ? 200 : 502 });
+    return NextResponse.json({ ok, data: out, usdCny: cny }, { status: ok ? 200 : 502 });
   } catch (e) {
     return NextResponse.json({ ok: false, error: String(e) }, { status: 502 });
   }

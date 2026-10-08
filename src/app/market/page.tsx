@@ -2,13 +2,25 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type Quote = { id: string; name: string; price: number; change: number; pct: number };
 type IntlQuote = { name: string; price: number; chg: number; pct: number; usdTon?: number; unit: string };
 
+// 数据源：Yahoo Finance 国际金属价 + USD/CNY 汇率，人民币价为折算值（沪金/沪银/沪铜无稳定免费直连源，见开发规范 3.24）
 const METALS = [
-  { id: "aum", name: "沪金", symbol: "Au", unit: "元/克", color: "#f59e0b", intl: "hf_XAU", intlName: "伦敦金" },
-  { id: "agm", name: "沪银", symbol: "Ag", unit: "元/千克", color: "#94a3b8", intl: "hf_XAG", intlName: "伦敦银", gramDiv: 1000, gramDigits: 3 },
-  { id: "cum", name: "沪铜", symbol: "Cu", unit: "元/吨", color: "#d97706", intl: "hf_HG", intlName: "美铜", gramDiv: 1000000, gramDigits: 4 },
+  {
+    id: "xau", name: "黄金", symbol: "Au", color: "#f59e0b",
+    intl: "hf_XAU", intlName: "纽约金", usdUnit: "美元/盎司",
+    cnyUnit: "元/克", cnyDiv: 31.1034768, cnyMult: 1, cnyDigits: 2,
+  },
+  {
+    id: "xag", name: "白银", symbol: "Ag", color: "#94a3b8",
+    intl: "hf_XAG", intlName: "纽约银", usdUnit: "美元/盎司",
+    cnyUnit: "元/克", cnyDiv: 31.1034768, cnyMult: 1, cnyDigits: 3,
+  },
+  {
+    id: "hg", name: "铜", symbol: "Cu", color: "#d97706",
+    intl: "hf_HG", intlName: "美铜", usdUnit: "美元/磅",
+    cnyUnit: "元/吨", cnyDiv: 1, cnyMult: 2204.6226, cnyDigits: 0,
+  },
 ];
 
 const UP = "#ef4444";
@@ -25,11 +37,11 @@ function fmtPct(pct: number | undefined) {
 }
 
 // ---- 行情本地缓存（localStorage）：进入页面先展示缓存，后台更新后替换 ----
-const CACHE_KEY = "bookmark-nav-market-v1";
+const CACHE_KEY = "bookmark-nav-market-v2";
 
 type MarketCache = {
-  quotes: Record<string, Quote>;
   intl: Record<string, IntlQuote>;
+  usdCny?: number | null;
   ts: number; // 缓存时间戳（毫秒）
 };
 
@@ -39,70 +51,48 @@ function readCache(): MarketCache | null {
     const raw = window.localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
     const c = JSON.parse(raw) as MarketCache;
-    if (!c || typeof c.ts !== "number" || !c.quotes) return null;
+    if (!c || typeof c.ts !== "number" || !c.intl) return null;
     return c;
   } catch {
     return null;
   }
 }
 
-function writeCache(quotes: Record<string, Quote>, intl: Record<string, IntlQuote>, ts: number) {
+function writeCache(intl: Record<string, IntlQuote>, usdCny: number | null, ts: number) {
   if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(CACHE_KEY, JSON.stringify({ quotes, intl, ts } satisfies MarketCache));
+    window.localStorage.setItem(CACHE_KEY, JSON.stringify({ intl, usdCny, ts } satisfies MarketCache));
   } catch {
     /* 存储满/隐私模式时静默失败，不影响页面 */
   }
 }
 
 export default function MarketPage() {
-  const [quotes, setQuotes] = useState<Record<string, Quote>>({});
   const [intl, setIntl] = useState<Record<string, IntlQuote>>({});
+  const [usdCny, setUsdCny] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [fromCache, setFromCache] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const quotesRef = useRef<Record<string, Quote>>({});
   const intlRef = useRef<Record<string, IntlQuote>>({});
+  const cnyRef = useRef<number | null>(null);
 
   const fetchQuotes = useCallback(async () => {
-    let cnOk = false;
-    // 国内/国际独立容错：任一源失败不影响另一源展示
-    // 国内行情走服务端代理（浏览器直连东财 push2 会被 CORS/反爬空响应拒绝，见开发规范 3.24）
-    try {
-      const j = await fetch("/api/market/cn", { cache: "no-store" }).then((r) => r.json());
-      if (!j?.ok || !j.data) throw new Error("cn proxy fail");
-      const map: Record<string, Quote> = {};
-      for (const it of Object.values(j.data) as { id: string; name: string; price: number; change: number; pct: number }[]) {
-        map[it.id] = { id: it.id, name: it.name, price: it.price, change: it.change, pct: it.pct };
-      }
-      if (Object.keys(map).length === 0) throw new Error("empty cn");
-      quotesRef.current = map;
-      setQuotes(map);
-      cnOk = true;
-    } catch {
-      // 有缓存则静默保留展示（时间戳停在旧值，状态栏提示），无缓存才报错
-      if (!quotesRef.current || Object.keys(quotesRef.current).length === 0) {
-        setError("国内行情获取失败，请检查网络后重试");
-      }
-    }
-
     try {
       const j = await fetch("/api/market/intl", { cache: "no-store" }).then((r) => r.json());
-      if (j?.ok && j.data) {
-        intlRef.current = j.data;
-        setIntl(j.data);
-      }
-    } catch {
-      /* 国际价失败不报错，卡片显示 -- */
-    }
-
-    // 任一路径有数据（至少其一成功）即视为一次有效更新：刷新时间、清缓存标记、回写缓存
-    if (cnOk || intlRef.current) {
+      if (!j?.ok || !j.data) throw new Error("intl proxy fail");
+      intlRef.current = j.data;
+      cnyRef.current = j.usdCny ?? null;
+      setIntl(j.data);
+      setUsdCny(j.usdCny ?? null);
       setFromCache(false);
       setLastUpdate(new Date());
-      writeCache(quotesRef.current, intlRef.current, Date.now());
+      writeCache(j.data, j.usdCny ?? null, Date.now());
+    } catch {
+      // 有缓存则静默保留展示（时间戳停在旧值），无缓存才提示
+      if (!intlRef.current || Object.keys(intlRef.current).length === 0) {
+        // 无缓存时也静默：卡片显示 --，不弹错误横幅（避免刺眼）
+      }
     }
     setLoading(false);
   }, []);
@@ -111,10 +101,10 @@ export default function MarketPage() {
     // 1) 先读缓存：命中则立即展示缓存数据与缓存时间
     const cache = readCache();
     if (cache) {
-      quotesRef.current = cache.quotes;
-      intlRef.current = cache.intl ?? {};
-      setQuotes(cache.quotes);
-      setIntl(cache.intl ?? {});
+      intlRef.current = cache.intl;
+      cnyRef.current = cache.usdCny ?? null;
+      setIntl(cache.intl);
+      setUsdCny(cache.usdCny ?? null);
       setLastUpdate(new Date(cache.ts));
       setFromCache(true);
       setLoading(false);
@@ -145,7 +135,8 @@ export default function MarketPage() {
             实时行情
           </h1>
           <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: "8px 0 0" }}>
-            国内：上海期货交易所主力合约（人民币） · 国际：伦敦/纽约金属（美元） · 5 分钟自动刷新
+            国际金属价格（美元）与人民币折算价 · 5 分钟自动刷新
+            {usdCny != null && ` · USD/CNY ${fmtPrice(usdCny, 4)}`}
           </p>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -175,22 +166,6 @@ export default function MarketPage() {
         </div>
       </header>
 
-      {error && (
-        <div
-          style={{
-            marginTop: 16,
-            padding: "10px 16px",
-            borderRadius: 10,
-            fontSize: 13,
-            color: "#f87171",
-            background: "rgba(248,113,113,0.08)",
-            border: "1px solid rgba(248,113,113,0.25)",
-          }}
-        >
-          {error}
-        </div>
-      )}
-
       <div
         style={{
           marginTop: 24,
@@ -200,10 +175,12 @@ export default function MarketPage() {
         }}
       >
         {METALS.map((m) => {
-          const q = quotes[m.id];
-          const i = m.intl ? intl[m.intl] : undefined;
-          const cnUp = q && q.pct >= 0;
-          const intlUp = i && i.pct >= 0;
+          const i = intl[m.intl];
+          const usdPrice = m.intl === "hf_HG" && i?.usdTon != null ? i.usdTon : i?.price;
+          const cny = cnyRef.current;
+          // 人民币折算：美元价 ÷ 盎司克数（或 × 磅吨系数）× 汇率
+          const cnyPrice = i && cny != null ? (usdPrice != null ? (usdPrice / m.cnyDiv) * m.cnyMult * cny : null) : null;
+          const up = i ? i.pct >= 0 : false;
           return (
             <div
               key={m.id}
@@ -237,27 +214,22 @@ export default function MarketPage() {
                 </div>
                 <div>
                   <div style={{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)" }}>{m.name}</div>
-                  <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{m.unit}</div>
+                  <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{m.cnyUnit}（折算）</div>
                 </div>
               </div>
 
-              {/* 国内价 */}
+              {/* 人民币折算价（主行） */}
               <div>
-                <div style={{ fontSize: 24, fontWeight: 800, fontVariantNumeric: "tabular-nums", color: q ? (cnUp ? UP : DOWN) : "var(--text-secondary)" }}>
-                  {fmtPrice(q?.price)}
+                <div style={{ fontSize: 24, fontWeight: 800, fontVariantNumeric: "tabular-nums", color: i ? (up ? UP : DOWN) : "var(--text-secondary)" }}>
+                  {fmtPrice(cnyPrice ?? undefined, m.cnyDigits)}
                 </div>
-                <div style={{ fontSize: 12, fontVariantNumeric: "tabular-nums", color: q ? (cnUp ? UP : DOWN) : "var(--text-tertiary)", marginTop: 2 }}>
-                  {q ? `${q.change >= 0 ? "+" : ""}${fmtPrice(q.change, 1)}  ${fmtPct(q.pct)}` : "--"}
+                <div style={{ fontSize: 12, fontVariantNumeric: "tabular-nums", color: i ? (up ? UP : DOWN) : "var(--text-tertiary)", marginTop: 2 }}>
+                  {i ? `${i.chg >= 0 ? "+" : ""}${fmtPrice(i.chg, 1)}  ${fmtPct(i.pct)}` : "--"}
                 </div>
-                {m.gramDiv && q && (
-                  <div style={{ fontSize: 11, color: "var(--text-tertiary)", fontVariantNumeric: "tabular-nums", marginTop: 4 }}>
-                    折合 {(q.price / m.gramDiv).toFixed(m.gramDigits)} 元/克
-                  </div>
-                )}
               </div>
 
-              {/* 国际价 */}
-              {m.intl ? (
+              {/* 国际价（副行） */}
+              {i ? (
                 <div
                   style={{
                     borderTop: "1px dashed var(--border)",
@@ -268,13 +240,13 @@ export default function MarketPage() {
                   }}
                 >
                   <div style={{ fontSize: 11, color: "var(--text-tertiary)" }}>
-                    {m.intlName} {i?.usdTon ? "· 美元/吨" : i?.unit ?? "美元/盎司"}
+                    {m.intlName} {i.usdTon != null ? "美元/吨" : m.usdUnit}
                   </div>
-                  <div style={{ fontSize: 17, fontWeight: 700, fontVariantNumeric: "tabular-nums", color: i ? (intlUp ? UP : DOWN) : "var(--text-secondary)" }}>
-                    {i ? (i.usdTon != null ? fmtPrice(i.usdTon, 0) : fmtPrice(i.price)) : "--"}
+                  <div style={{ fontSize: 17, fontWeight: 700, fontVariantNumeric: "tabular-nums", color: up ? UP : DOWN }}>
+                    {fmtPrice(usdPrice ?? undefined, i.usdTon != null ? 0 : 2)}
                   </div>
-                  <div style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: i ? (intlUp ? UP : DOWN) : "var(--text-tertiary)" }}>
-                    {i ? `${i.chg >= 0 ? "+" : ""}${fmtPrice(i.chg, 1)}  ${fmtPct(i.pct)}` : "--"}
+                  <div style={{ fontSize: 11, fontVariantNumeric: "tabular-nums", color: "var(--text-tertiary)" }}>
+                    {cny != null && cnyPrice != null ? `≈ 按汇率 ${fmtPrice(cny, 4)} 折算` : "汇率暂不可用"}
                   </div>
                 </div>
               ) : (
@@ -286,7 +258,7 @@ export default function MarketPage() {
                     color: "var(--text-tertiary)",
                   }}
                 >
-                  国际价暂不可用
+                  行情暂不可用
                 </div>
               )}
             </div>
@@ -295,7 +267,8 @@ export default function MarketPage() {
       </div>
 
       <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 20, textAlign: "center" }}>
-        国内数据来源：东方财富 · 国际数据来源：Yahoo Finance · 仅供个人参考，不构成投资建议 · 交易时段外为最近收盘价
+        数据来源：Yahoo Finance · 人民币价 = 国际价 × USD/CNY 汇率折算（黄金白银按 1 金衡盎司 = 31.1035 克，铜按 1 短吨 = 2204.62 磅）
+        · 仅供个人参考，不构成投资建议 · 交易时段外为最近收盘价
       </p>
     </div>
   );
