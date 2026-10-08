@@ -22,6 +22,11 @@ interface LivingItem {
   sources: LivingSource[];
 }
 
+interface LivingDoc {
+  title: string;
+  content: string[];
+}
+
 interface LivingSection {
   id: string;
   num: number;
@@ -29,6 +34,7 @@ interface LivingSection {
   count: string;
   intro: string;
   items: LivingItem[];
+  docs?: LivingDoc[];
 }
 
 interface LivingData {
@@ -118,7 +124,7 @@ export function LivingGuide() {
             lineHeight: 1.7,
           }}
         >
-          开源书《高性价比人生手册》全书 34 节 631 条建议：每条写清花掉什么、换回什么、证据多硬，
+          开源书《高性价比人生手册》全书 {DATA.length} 节 {TOTAL_ITEMS} 条建议：每条写清花掉什么、换回什么、证据多硬，
           只引期刊论文和官方文件。内容来自{" "}
           <a
             href="https://github.com/eternity4719/HowToLiveBetter"
@@ -309,6 +315,61 @@ export function LivingGuide() {
                 <LivingCard key={it.id} item={it} />
               ))}
             </div>
+
+            {sec.docs && sec.docs.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {sec.docs.map((doc) => (
+                  <details
+                    key={doc.title}
+                    style={{
+                      background: "var(--bg-card)",
+                      border: "1px dashed var(--border)",
+                      borderRadius: "var(--radius-md)",
+                      padding: "12px 16px",
+                    }}
+                  >
+                    <summary
+                      style={{
+                        cursor: "pointer",
+                        fontSize: 14,
+                        fontWeight: 700,
+                        color: "var(--accent)",
+                        userSelect: "none",
+                      }}
+                    >
+                      📄 扩展长文：{doc.title}
+                    </summary>
+                    <div
+                      style={{
+                        marginTop: 10,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 8,
+                      }}
+                    >
+                      {doc.content.map((para, i) => {
+                        const isHead = /^#{1,6}\s/.test(para);
+                        const text = para.replace(/^#{1,6}\s+/, "");
+                        return (
+                          <p
+                            key={i}
+                            style={{
+                              fontSize: isHead ? 14 : 13,
+                              fontWeight: isHead ? 700 : 400,
+                              color: isHead ? "var(--text-primary)" : "var(--text-secondary)",
+                              lineHeight: 1.7,
+                              margin: isHead ? "6px 0 0" : 0,
+                            }}
+                          >
+                            {text}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            )}
           </section>
         ))
       )}
