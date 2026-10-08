@@ -82,7 +82,10 @@ export default function MarketPage() {
       setQuotes(map);
       cnOk = true;
     } catch {
-      setError("国内行情获取失败，请检查网络后重试");
+      // 有缓存则静默保留展示（时间戳停在旧值，状态栏提示），无缓存才报错
+      if (!quotesRef.current || Object.keys(quotesRef.current).length === 0) {
+        setError("国内行情获取失败，请检查网络后重试");
+      }
     }
 
     try {

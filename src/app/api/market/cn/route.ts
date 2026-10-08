@@ -9,7 +9,7 @@ const HOSTS = ["push2.eastmoney.com", "push2delay.eastmoney.com", "push2his.east
 const SECIDS = "113.aum,113.agm,113.cum";
 const PATH = `/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f4,f12,f14&secids=${SECIDS}&ut=fa5fd1943c7b386f172d6893dbfba10b`;
 
-async function fetchWithTimeout(url: string, init: RequestInit = {}, ms = 5000) {
+async function fetchWithTimeout(url: string, init: RequestInit = {}, ms = 7000) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), ms);
   try {
