@@ -19,7 +19,8 @@ const METALS = [
   {
     id: "hg", name: "铜", symbol: "Cu", color: "#d97706",
     intl: "hf_HG", intlName: "美铜", usdUnit: "美元/磅",
-    cnyUnit: "元/吨", cnyDiv: 1, cnyMult: 2204.6226, cnyDigits: 0,
+    // 铜取 usdTon（美元/吨，接口已 ×2204.62），故 cnyMult 为 1，直接 ×汇率
+    cnyUnit: "元/吨", cnyDiv: 1, cnyMult: 1, cnyDigits: 0,
   },
 ];
 
