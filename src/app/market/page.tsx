@@ -67,18 +67,17 @@ export default function MarketPage() {
   const intlRef = useRef<Record<string, IntlQuote>>({});
 
   const fetchQuotes = useCallback(async () => {
-    const secids = METALS.map((m) => `113.${m.id}`).join(",");
-    const cnUrl = `https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f4,f12,f14&secids=${secids}&ut=fa5fd1943c7b386f172d6893dbfba10b`;
     let cnOk = false;
     // 国内/国际独立容错：任一源失败不影响另一源展示
+    // 国内行情走服务端代理（浏览器直连东财 push2 会被 CORS/反爬空响应拒绝，见开发规范 3.24）
     try {
-      const j = await fetch(cnUrl).then((r) => r.json());
-      const diff = j?.data?.diff;
-      if (!Array.isArray(diff) || diff.length === 0) throw new Error("empty cn");
+      const j = await fetch("/api/market/cn", { cache: "no-store" }).then((r) => r.json());
+      if (!j?.ok || !j.data) throw new Error("cn proxy fail");
       const map: Record<string, Quote> = {};
-      for (const it of diff) {
-        map[it.f12] = { id: it.f12, name: it.f14, price: it.f2, change: it.f4, pct: it.f3 };
+      for (const it of Object.values(j.data) as { id: string; name: string; price: number; change: number; pct: number }[]) {
+        map[it.id] = { id: it.id, name: it.name, price: it.price, change: it.change, pct: it.pct };
       }
+      if (Object.keys(map).length === 0) throw new Error("empty cn");
       quotesRef.current = map;
       setQuotes(map);
       cnOk = true;
