@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { Solar } from "lunar-typescript";
+import { HOLIDAYS, WORKDAYS } from "@/data/china-holidays";
 
 const WEEK_LABELS = ["一", "二", "三", "四", "五", "六", "日"];
 const WEEK_CN = ["日", "一", "二", "三", "四", "五", "六"];
@@ -55,22 +56,33 @@ export default function Calendar() {
       lunarDay: string;
       jieQi: string;
       festival: string;
+      isFestival: boolean;
+      isRed: boolean;
     }[] = [];
     for (let i = 0; i < 42; i++) {
       const dt = new Date(view.y, view.m, i - offset + 1);
       const y = dt.getFullYear();
       const m = dt.getMonth();
       const d = dt.getDate();
-      const lunar = Solar.fromYmd(y, m + 1, d).getLunar();
+      const solar = Solar.fromYmd(y, m + 1, d);
+      const lunar = solar.getLunar();
+      const lunarFests = [...lunar.getFestivals(), ...lunar.getOtherFestivals()];
+      const solarFests = [...solar.getFestivals(), ...solar.getOtherFestivals()];
+      const festival = lunarFests[0] || solarFests[0] || "";
+      const jieQi = lunar.getJieQi() || "";
+      const dateKey = `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+      const isWeekend = dt.getDay() === 0 || dt.getDay() === 6;
+      const isRed = HOLIDAYS.has(dateKey) || (isWeekend && !WORKDAYS.has(dateKey));
       arr.push({
         y,
         m,
         d,
         inMonth: m === view.m,
         lunarDay: lunar.getDayInChinese(),
-        jieQi: lunar.getJieQi() || "",
-        festival:
-          lunar.getFestivals()[0] || lunar.getOtherFestivals()[0] || "",
+        jieQi,
+        festival,
+        isFestival: festival !== "",
+        isRed,
       });
     }
     return arr;
@@ -92,7 +104,12 @@ export default function Calendar() {
     const daysToNext = nextDate
       ? Math.round((nextDate.getTime() - todayDate.getTime()) / 86400000)
       : null;
-    const festivals = [...lunar.getFestivals(), ...lunar.getOtherFestivals()];
+    const festivals = [
+      ...lunar.getFestivals(),
+      ...lunar.getOtherFestivals(),
+      ...solar.getFestivals(),
+      ...solar.getOtherFestivals(),
+    ];
     const week = WEEK_CN[new Date(selected.y, selected.m, selected.d).getDay()];
 
     return {
@@ -159,21 +176,23 @@ export default function Calendar() {
           {cells.map((c) => {
             const isToday = sameDay(c, today);
             const isSelected = sameDay(c, selected);
+            const tagText = c.jieQi || c.festival;
             return (
               <button
                 key={`${c.y}-${c.m}-${c.d}`}
                 role="gridcell"
-                className={`cal-day ${!c.inMonth ? "is-out" : ""} ${isToday ? "is-today" : ""} ${isSelected ? "is-selected" : ""}`}
+                className={`cal-day ${!c.inMonth ? "is-out" : ""} ${isToday ? "is-today" : ""} ${isSelected ? "is-selected" : ""} ${c.isFestival ? "is-festival" : ""} ${c.isRed ? "is-red" : ""}`}
                 onClick={() => setSelected({ y: c.y, m: c.m, d: c.d })}
-                aria-label={`${c.y}年${c.m + 1}月${c.d}日`}
+                aria-label={`${c.y}年${c.m + 1}月${c.d}日${c.jieQi ? ` ${c.jieQi}` : ""}${c.festival ? ` ${c.festival}` : ""}`}
                 aria-current={isToday ? "date" : undefined}
               >
                 <span className="cal-day-num">{c.d}</span>
-                {c.jieQi || c.festival ? (
-                  <span className="cal-day-tag">{c.jieQi || c.festival}</span>
-                ) : (
-                  <span className="cal-day-lunar">{c.lunarDay}</span>
-                )}
+                <span className="cal-day-lunar">{c.lunarDay}</span>
+                <span className="cal-day-bottom">
+                  {tagText && (
+                    <span className={`cal-day-badge ${c.festival && !c.jieQi ? "cal-day-badge--fest" : "cal-day-badge--jieqi"}`}>{tagText}</span>
+                  )}
+                </span>
               </button>
             );
           })}
