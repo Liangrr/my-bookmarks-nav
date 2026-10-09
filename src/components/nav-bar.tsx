@@ -341,6 +341,30 @@ export function NavBar() {
             </svg>
             <span>智能体市场</span>
           </Link>
+          <Link
+            href="/diy"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/diy" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg>
+            <span>DIY 手作</span>
+          </Link>
+          <Link
+            href="/fruits"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/fruits" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 13a8 8 0 0 1 16 0z" />
+              <circle cx="9" cy="6" r="1.5" />
+              <circle cx="15" cy="6" r="1.5" />
+              <circle cx="12" cy="4" r="1.5" />
+              <path d="M12 13l1.2 2.2 2.4.4-1.8 1.7.4 2.5-2.2-1.2-2.2 1.2.4-2.5-1.8-1.7 2.4-.4z" />
+            </svg>
+            <span>应季水果</span>
+          </Link>
           {isAdmin && (
             <Link
               href="/admin"
@@ -463,16 +487,6 @@ export function NavBar() {
               <path d="M19 7L5 17" />
             </svg>
             <span>急救知识手册</span>
-          </Link>
-          <Link
-            href="/diy"
-            onClick={() => setMenuOpen(false)}
-            className={`drawer-item ${pathname === "/diy" ? "active" : ""}`}
-          >
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-            </svg>
-            <span>DIY 手作</span>
           </Link>
         </nav>
         <div className="drawer-foot">星轨 · 精选网站导航</div>
