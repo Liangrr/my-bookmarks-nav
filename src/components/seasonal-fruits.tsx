@@ -295,10 +295,31 @@ function FruitCard({ item }: { item: Fruit }) {
         transition: "var(--transition)",
       }}
     >
-      {/* 标题行 */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-        <span style={{ fontSize: 24 }} aria-hidden="true">
-          {item.icon}
+      {/* 标题行：图标 + 名称 */}
+      <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+        <span
+          style={{
+            fontSize: 20,
+            lineHeight: 1,
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 28,
+            height: 28,
+            borderRadius: 8,
+            background: "color-mix(in srgb, var(--accent) 14%, var(--bg-card))",
+            border: "1px solid var(--border)",
+            flexShrink: 0,
+          }}
+          aria-hidden="true"
+        >
+          {item.icon ? (
+            item.icon
+          ) : (
+            <span style={{ fontSize: 14, fontWeight: 800, color: "var(--accent)" }}>
+              {item.name[0]}
+            </span>
+          )}
         </span>
         <h3 style={{ fontSize: 17, fontWeight: 700, margin: 0, flex: 1, minWidth: 120 }}>
           {item.name}
@@ -306,12 +327,15 @@ function FruitCard({ item }: { item: Fruit }) {
         {isSeason && (
           <span
             style={{
-              fontSize: 11,
-              fontWeight: 700,
+              fontSize: 10,
+              fontWeight: 800,
+              letterSpacing: 1,
               color: "#0a0a0f",
               background: "var(--accent)",
-              borderRadius: 6,
-              padding: "2px 8px",
+              borderRadius: 999,
+              padding: "3px 10px",
+              boxShadow: "var(--shadow-card)",
+              whiteSpace: "nowrap",
             }}
           >
             当季
