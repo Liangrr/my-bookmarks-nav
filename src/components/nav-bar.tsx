@@ -305,6 +305,7 @@ export function NavBar() {
           <span>星轨</span>
         </div>
         <nav className="drawer-nav">
+          <div className="drawer-group-label">常用</div>
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
@@ -341,6 +342,7 @@ export function NavBar() {
             </svg>
             <span>智能体市场</span>
           </Link>
+          <div className="drawer-group-label">工具生活</div>
           <Link
             href="/diy"
             onClick={() => setMenuOpen(false)}
@@ -365,19 +367,6 @@ export function NavBar() {
             </svg>
             <span>应季水果</span>
           </Link>
-          {isAdmin && (
-            <Link
-              href="/admin"
-              onClick={() => setMenuOpen(false)}
-              className={`drawer-item ${pathname.startsWith("/admin") ? "active" : ""}`}
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="3" />
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-              </svg>
-              <span>管理后台</span>
-            </Link>
-          )}
           <Link
             href="/market"
             onClick={() => setMenuOpen(false)}
@@ -402,6 +391,7 @@ export function NavBar() {
             </svg>
             <span>格式转换</span>
           </Link>
+          <div className="drawer-group-label">学习成长</div>
           <Link
             href="/learn-agents"
             onClick={() => setMenuOpen(false)}
@@ -440,6 +430,7 @@ export function NavBar() {
             </svg>
             <span>独立开发者</span>
           </Link>
+          <div className="drawer-group-label">实用手册</div>
           <Link
             href="/living"
             onClick={() => setMenuOpen(false)}
@@ -488,6 +479,33 @@ export function NavBar() {
             </svg>
             <span>急救知识手册</span>
           </Link>
+          <Link
+            href="/ailments"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/ailments" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="4" y="3" width="16" height="18" rx="2" />
+              <path d="M8 3v18" />
+              <path d="M8 9l2-1 2 1 2-1 2 1" />
+              <path d="M8 15l2-1 2 1 2-1 2 1" />
+            </svg>
+            <span>日常小病治理</span>
+          </Link>
+          <div className="drawer-group-label">系统管理</div>
+          {isAdmin && (
+            <Link
+              href="/admin"
+              onClick={() => setMenuOpen(false)}
+              className={`drawer-item ${pathname.startsWith("/admin") ? "active" : ""}`}
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+              <span>管理后台</span>
+            </Link>
+          )}
         </nav>
         <div className="drawer-foot">星轨 · 精选网站导航</div>
       </aside>
