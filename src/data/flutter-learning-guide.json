@@ -1,0 +1,705 @@
+{
+  "meta": {
+    "title": "Flutter 学习",
+    "updated": "2026-10-10",
+    "desc": "Flutter 核心 / Dart 语言 / 跨端实战三条路线一键切换，阶段任务 + 资源导航 + 实战阶梯，内容全部可溯源到官方文档。"
+  },
+  "tracks": [
+    {
+      "id": "flutter-core",
+      "title": "Flutter 核心",
+      "desc": "环境搭建 → 基础 Widget → 状态管理 → 导航 → 动画，搞定移动端 UI 开发。",
+      "color": "#0175C2",
+      "stages": [
+        {
+          "id": "f0",
+          "num": 0,
+          "title": "环境与首个 App",
+          "desc": "装好 Flutter SDK 与编辑器，跑起第一个 App，理解项目的目录结构。",
+          "tasks": [
+            {
+              "id": "f0t1",
+              "title": "安装 Flutter SDK 与环境",
+              "plain": "Flutter 跨平台靠同一套 SDK + 各平台工具链。macOS 上先装稳定版 SDK 并跑 flutter doctor 体检环境是否齐备。",
+              "links": [
+                { "text": "Flutter 官方安装文档（macOS）", "url": "https://docs.flutter.dev/get-started/install/macos" },
+                { "text": "Flutter SDK 下载", "url": "https://docs.flutter.dev/get-started/install" }
+              ],
+              "output": "flutter doctor 全部通过，flutter --version 能看到版本号。",
+              "tags": ["环境", "安装"]
+            },
+            {
+              "id": "f0t2",
+              "title": "创建并运行第一个 App",
+              "plain": "flutter create 生成工程，了解 lib/main.dart 入口与热重载：改代码保存即可即时看到 UI 变化。",
+              "links": [
+                { "text": "Flutter 中文文档：起步", "url": "https://docs.flutter.dev/get-started" },
+                { "text": "用 VS Code 开发 Flutter", "url": "https://docs.flutter.dev/tools/vs-code" }
+              ],
+              "output": "在模拟器/真机运行官方计数器 Demo，并试一次热重载。",
+              "tags": ["入门", "热重载"]
+            },
+            {
+              "id": "f0t3",
+              "title": "工程目录与 pubspec 剖析",
+              "plain": "lib/ 放代码，pubspec.yaml 管理依赖与资源，assets/ 放图片字体。看懂三者的分工。",
+              "links": [
+                { "text": "Flutter 工程结构说明", "url": "https://docs.flutter.dev/tools/pubspec" },
+                { "text": "Dart 包与 pubspec 规范", "url": "https://dart.dev/tools/pub/pubspec" }
+              ],
+              "output": "在 pubspec.yaml 里新增一个依赖并执行 flutter pub get 成功。",
+              "tags": ["工程", "pubspec"]
+            },
+            {
+              "id": "f0t4",
+              "title": "Dart 快速上手（够用版）",
+              "plain": "写 Flutter 前先过一遍 Dart 的变量、函数、类与可选参数，能读懂官方示例即可。",
+              "links": [
+                { "text": "Dart 语言概览", "url": "https://dart.dev/language" },
+                { "text": "Dart 交互式 Tour", "url": "https://dart.dev/tour" }
+              ],
+              "output": "读懂一个官方 Widget 示例里的类与函数调用。",
+              "tags": ["dart", "基础"]
+            }
+          ]
+        },
+        {
+          "id": "f1",
+          "num": 1,
+          "title": "基础 Widget 与布局",
+          "desc": "理解『一切皆 Widget』，掌握布局与常用组件的组合方式。",
+          "tasks": [
+            {
+              "id": "f1t1",
+              "title": "Widget 体系与无/有状态分类",
+              "plain": "StatelessWidget 无变化、StatefulWidget 有可变状态。弄懂 build() 方法才是 UI 来源。",
+              "links": [
+                { "text": "Flutter：Widget 概述", "url": "https://docs.flutter.dev/ui/widgets-intro" },
+                { "text": "Flutter 中文：Widget 总览", "url": "https://docs.flutter.dev/ui/widgets" }
+              ],
+              "output": "手写一个 StatelessWidget 和一个 StatefulWidget，说明差异。",
+              "tags": ["widget", "概念"]
+            },
+            {
+              "id": "f1t2",
+              "title": "布局：Row / Column / Stack",
+              "plain": "Row 横向、Column 纵向、Stack 层叠，配合主轴/交叉轴对齐与 Expanded/SizedBox 控制尺寸。",
+              "links": [
+                { "text": "Flutter 布局教程", "url": "https://docs.flutter.dev/ui/layout" },
+                { "text": "Flutter 布局：构建 UI", "url": "https://docs.flutter.dev/ui/layout/building-layouts" }
+              ],
+              "output": "用 Row/Column/Stack 拼一个卡片布局原型。",
+              "tags": ["布局"]
+            },
+            {
+              "id": "f1t3",
+              "title": "常用组件：容器 / 文本 / 图片 / 按钮",
+              "plain": "Container、Text、Image、ElevatedButton 是最常用的一组，掌握参数如 Text 的 style、Container 的 padding/margin/decoration。",
+              "links": [
+                { "text": "Flutter：Text 组件", "url": "https://docs.flutter.dev/ui/widgets/text" },
+                { "text": "Flutter：基础组件目录", "url": "https://docs.flutter.dev/reference/widgets" }
+              ],
+              "output": "渲染一张带标题、配图、按钮的商品卡。",
+              "tags": ["组件"]
+            },
+            {
+              "id": "f1t4",
+              "title": "主题、颜色与 Material 设计",
+              "plain": "ThemeData 统一样式，配合 Material 的间距/颜色规范，让 App 看起来专业且统一。",
+              "links": [
+                { "text": "Flutter：主题 Theme", "url": "https://docs.flutter.dev/ui/material" },
+                { "text": "Material 3 设计规范", "url": "https://m3.material.io/zh-cn/" }
+              ],
+              "output": "给 App 配置主色/强调色并统一应用到页面。",
+              "tags": ["主题", "material"]
+            }
+          ]
+        },
+        {
+          "id": "f2",
+          "num": 2,
+          "title": "状态管理与交互",
+          "desc": "管理可变状态、处理点击输入、接入常用的状态管理库。",
+          "tasks": [
+            {
+              "id": "f2t1",
+              "title": "setState 与状态提升",
+              "plain": "setState 触发重绘；状态放哪个 Widget 决定数据流动，先理解『状态提升』再考虑第三方库。",
+              "links": [
+                { "text": "Flutter：管理状态入门", "url": "https://docs.flutter.dev/ui/state-management" },
+                { "text": "Flutter：Stateful 状态指南", "url": "https://docs.flutter.dev/ui/state-management/introduction" }
+              ],
+              "output": "用 setState 实现一个可交互的计数器/开关。",
+              "tags": ["状态", "基础"]
+            },
+            {
+              "id": "f2t2",
+              "title": "事件处理：点击 / 表单 / 手势",
+              "plain": "GestureDetector、TextField、Form 校验，处理用户输入与交互反馈。",
+              "links": [
+                { "text": "Flutter：点击与手势", "url": "https://docs.flutter.dev/ui/interactivity" },
+                { "text": "Flutter：处理表单输入", "url": "https://docs.flutter.dev/ui/forms" }
+              ],
+              "output": "做一个带校验的登录表单。",
+              "tags": ["交互", "表单"]
+            },
+            {
+              "id": "f2t3",
+              "title": "Provider 状态管理",
+              "plain": "跨 Widget 共享状态时用 Provider 把依赖注入到组件树，业务与 UI 解耦。",
+              "links": [
+                { "text": "Flutter：Provider 入门", "url": "https://docs.flutter.dev/ui/state-management/simple" },
+                { "text": "Provider 官方包文档", "url": "https://pub.dev/packages/provider" }
+              ],
+              "output": "用 Provider 把购物车状态共享到多个页面。",
+              "tags": ["状态", "进阶"]
+            },
+            {
+              "id": "f2t4",
+              "title": "Riverpod / Bloc 选型了解",
+              "plain": "大型项目常用 Riverpod、Bloc 等方案，了解其核心思想以便后续选型深入。",
+              "links": [
+                { "text": "flutter_bloc 官方文档", "url": "https://bloclibrary.dev/" },
+                { "text": "Riverpod 官方文档", "url": "https://riverpod.dev/" }
+              ],
+              "output": "对比 Provider / Riverpod / Bloc 的适用场景并写笔记。",
+              "tags": ["状态", "选型"]
+            }
+          ]
+        },
+        {
+          "id": "f3",
+          "num": 3,
+          "title": "路由与导航",
+          "desc": "掌握页面跳转、参数传递与返回，构建多页应用骨架。",
+          "tasks": [
+            {
+              "id": "f3t1",
+              "title": "Navigator 基础：页面跳转",
+              "plain": "Navigator.push/pop 完成页面推入与返回，理解路由栈模型。",
+              "links": [
+                { "text": "Flutter：导航指南", "url": "https://docs.flutter.dev/ui/navigation" },
+                { "text": "Flutter：集成的导航方案", "url": "https://docs.flutter.dev/ui/navigation/deep-linking" }
+              ],
+              "output": "实现 A 页面 → B 页面再返回。",
+              "tags": ["导航"]
+            },
+            {
+              "id": "f3t2",
+              "title": "路由传参与返回值",
+              "plain": "通过构造参数给下一页传数据，用 Navigator 返回值回调上一页，完成页面间数据往返。",
+              "links": [
+                { "text": "Flutter：路由与传参示例", "url": "https://docs.flutter.dev/ui/navigation/send-returning-data" },
+                { "text": "Flutter：命名路由", "url": "https://docs.flutter.dev/ui/navigation/named-routes" }
+              ],
+              "output": "列表页点击跳详情页并把选中的 id 传过去。",
+              "tags": ["导航", "传参"]
+            },
+            {
+              "id": "f3t3",
+              "title": "底部导航与 Tab 切换",
+              "plain": "用 NavigationBar / TabBar 构建底部导航 + 多 Tab 的多模块主界面。",
+              "links": [
+                { "text": "Flutter：底部导航栏", "url": "https://docs.flutter.dev/ui/navigation#bottom-navigation" },
+                { "text": "Flutter：BottomNavigationBar 示例", "url": "https://docs.flutter.dev/cookbook/design/using-bottom-navigationbars" }
+              ],
+              "output": "做一个含 3 个 Tab 的主框架。",
+              "tags": ["导航", "tab"]
+            }
+          ]
+        },
+        {
+          "id": "f4",
+          "num": 4,
+          "title": "动画与绘图",
+          "desc": "用动画与自定义绘制让交互更有质感。",
+          "tasks": [
+            {
+              "id": "f4t1",
+              "title": "基础动画：AnimatedOpacity / AnimatedContainer",
+              "plain": "声明式动画组件传入目标值即可自动补间，先掌握最省心的用法。",
+              "links": [
+                { "text": "Flutter：动画概述", "url": "https://docs.flutter.dev/ui/animation" },
+                { "text": "Flutter：隐式动画", "url": "https://docs.flutter.dev/ui/animations/implicit-animations" }
+              ],
+              "output": "做一个元素淡入淡出 + 尺寸变化的动画。",
+              "tags": ["动画"]
+            },
+            {
+              "id": "f4t2",
+              "title": "显式动画：AnimationController",
+              "plain": "用 AnimationController + Tween 自定义动画时长、曲线与控制器，适合复杂动画。",
+              "links": [
+                { "text": "Flutter：AnimationController 指南", "url": "https://docs.flutter.dev/ui/animations/tutorial" },
+                { "text": "Flutter：动画 API 概览", "url": "https://docs.flutter.dev/ui/animations/overview" }
+              ],
+              "output": "实现一个无限循环的加载动画/呼吸效果。",
+              "tags": ["动画"]
+            },
+            {
+              "id": "f4t3",
+              "title": "CustomPaint 自定义绘制",
+              "plain": "用 CustomPainter 画 Canvas，实现饼图、进度环等自定义图形。",
+              "links": [
+                { "text": "Flutter：CustomPaint 示例", "url": "https://docs.flutter.dev/cookbook/effects/custom-paint" },
+                { "text": "Canvas 与 Painter API 参考", "url": "https://api.flutter.dev/flutter/widgets/CustomPaint-class.html" }
+              ],
+              "output": "用 CustomPaint 绘制一个进度环或饼图。",
+              "tags": ["绘图", "canvas"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "官方文档",
+          "items": [
+            { "title": "Flutter 中文文档", "url": "https://docs.flutter.dev/", "desc": "官方第一手教程与 API 参考，全程可溯源" },
+            { "title": "Flutter API 参考", "url": "https://api.flutter.dev/", "desc": "所有类与组件的方法/参数权威查询" },
+            { "title": "Flutter 官方示例集", "url": "https://docs.flutter.dev/ui/widgets-examples", "desc": "每个组件的可运行示例" }
+          ]
+        },
+        {
+          "category": "系统课程",
+          "items": [
+            { "title": "Google Flutter 官方 Codelabs", "url": "https://docs.flutter.dev/get-started/codelab", "desc": "带手把手的官方动手实验室" },
+            { "title": "Flutter 中文社区入门教程", "url": "https://flutter.cn/docs/get-started/install", "desc": "国内可达的官方镜像资料" },
+            { "title": "Flutter 学习路线（roadmap）", "url": "https://roadmap.sh/flutter", "desc": "社区整理的 Flutter 路线图，对照查缺" }
+          ]
+        },
+        {
+          "category": "组件速查",
+          "items": [
+            { "title": "Material 组件目录", "url": "https://docs.flutter.dev/reference/widgets", "desc": "Material 风格组件的英文速查" },
+            { "title": "Widget 分类浏览", "url": "https://docs.flutter.dev/ui/widgets", "desc": "按功能分类浏览全部 Widget" },
+            { "title": "flutter.wtf", "url": "https://flutter.wtf/", "desc": "Flutter 资源聚合站，含目录与工具" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "登录/注册表单页", "learn": "Widget + 布局 + 表单校验" },
+        { "level": 2, "project": "待办清单 App", "learn": "状态管理 + 列表渲染 + 增删改" },
+        { "level": 3, "project": "带底部导航的博客阅读 App", "learn": "导航 + 传参 + 页面骨架" },
+        { "level": 4, "project": "带动画与绘图的完整 App 原型", "learn": "动画 + CustomPaint + 状态共享" }
+      ]
+    },
+    {
+      "id": "dart-lang",
+      "title": "Dart 语言",
+      "desc": "基础语法 → 面向对象 → 异步并发 → 内置集合，扎深写 Flutter 的语言功底。",
+      "color": "#0175C2",
+      "stages": [
+        {
+          "id": "d0",
+          "num": 0,
+          "title": "Dart 基础语法",
+          "desc": "类型、控制流、函数与空安全，Dart 的地基。",
+          "tasks": [
+            {
+              "id": "d0t1",
+              "title": "变量、类型与空安全",
+              "plain": "dart 强调类型 + 空安全：int/double/String/bool，与 Java/JS 的差异在哪，? 与 ! 的用法。",
+              "links": [
+                { "text": "Dart：对象与类型 system", "url": "https://dart.dev/language/type-system" },
+                { "text": "Dart 语言总览", "url": "https://dart.dev/language" }
+              ],
+              "output": "写一段用到 nullable / non-nullable 类型声明的演示。",
+              "tags": ["语法", "空安全"]
+            },
+            {
+              "id": "d0t2",
+              "title": "控制流：循环与分支",
+              "plain": "if/else、for/while、switch，以及 Dart 特有的控制流增强写法。",
+              "links": [
+                { "text": "Dart：控制流", "url": "https://dart.dev/language/control-flow" }
+              ],
+              "output": "用循环聚合一个列表并打印条件分支结果。",
+              "tags": ["语法"]
+            },
+            {
+              "id": "d0t3",
+              "title": "函数与可选参数",
+              "plain": "命名参数、可选位置参数、箭头函数、闭包，调用方可读性靠参数设计。",
+              "links": [
+                { "text": "Dart：函数", "url": "https://dart.dev/language/functions" }
+              ],
+              "output": "编写带命名参数与默认值的函数库。",
+              "tags": ["函数"]
+            },
+            {
+              "id": "d0t4",
+              "title": "运算符与模式匹配",
+              "plain": "熟悉的运算符 + Dart 3 的 pattern 匹配，简化解构与判断逻辑。",
+              "links": [
+                { "text": "Dart：运算符", "url": "https://dart.dev/language/operators" },
+                { "text": "Dart：模式匹配 Patterns", "url": "https://dart.dev/language/patterns" }
+              ],
+              "output": "用 pattern 拆解一个 Map 并做条件分发。",
+              "tags": ["语法", "pattern"]
+            }
+          ]
+        },
+        {
+          "id": "d1",
+          "num": 1,
+          "title": "面向对象",
+          "desc": "类、继承、接口与多态，Dart 的对象模型与 static/抽象能力。",
+          "tasks": [
+            {
+              "id": "d1t1",
+              "title": "类、构造器与字段",
+              "plain": "字段、构造器（含 named constructor）、getter/setter，以及 factory 构造器。",
+              "links": [
+                { "text": "Dart：类 Classes", "url": "https://dart.dev/language/classes" }
+              ],
+              "output": "定义一个带 factory 构造器的实体类。",
+              "tags": ["oop"]
+            },
+            {
+              "id": "d1t2",
+              "title": "继承、接口与混入 mixin",
+              "plain": "extends 继承、implements 实现接口、with mixin 复用能力，理解三者的区别。",
+              "links": [
+                { "text": "Dart：继承与接口", "url": "https://dart.dev/language/classes" },
+                { "text": "Dart：mixins 指南", "url": "https://dart.dev/language/mixins" }
+              ],
+              "output": "用 mixin 组合『可打印/可序列化』两种能力。",
+              "tags": ["oop", "mixin"]
+            },
+            {
+              "id": "d1t3",
+              "title": "抽象类、泛型与扩展方法",
+              "plain": "abstract 抽象类、泛型约束，以及 extension 给已有类型加方法，非常实用。",
+              "links": [
+                { "text": "Dart：泛型 Generics", "url": "https://dart.dev/language/generics" },
+                { "text": "Dart：扩展方法", "url": "https://dart.dev/language/extension-methods" }
+              ],
+              "output": "为一个现有类型写个扩展方法（如字符串去空白统计）。",
+              "tags": ["oop", "泛型"]
+            }
+          ]
+        },
+        {
+          "id": "d2",
+          "num": 2,
+          "title": "异步与并发",
+          "desc": "Promise 式的 Future、async/await 与 Stream，Flutter 数据请求的关键。",
+          "tasks": [
+            {
+              "id": "d2t1",
+              "title": "Future 与 async / await",
+              "plain": "Future 代表未来的异步结果，async/await 让异步代码可读，must 养成 try-catch 习惯。",
+              "links": [
+                { "text": "Dart：异步编程", "url": "https://dart.dev/language/async" },
+                { "text": "Dart：异步 Future 概览", "url": "https://dart.dev/asynchronous-programming" }
+              ],
+              "output": "写一个模拟网络请求的 async 函数并处理错误。",
+              "tags": ["异步"]
+            },
+            {
+              "id": "d2t2",
+              "title": "Stream 与流式数据处理",
+              "plain": "Stream 是一连串事件，用于监听不断到达的数据（如下载进度），yield 生成流。",
+              "links": [
+                { "text": "Dart：Stream 概览", "url": "https://dart.dev/libraries/async/streams" }
+              ],
+              "output": "用 Stream 生成一组从 1 增长的进度值并监听打印。",
+              "tags": ["异步", "stream"]
+            },
+            {
+              "id": "d2t3",
+              "title": "Isolate 与并发模型",
+              "plain": "Dart 单线程模型 + Isolate 开的独立内存并发单元，重计算放后台避免阻塞 UI。",
+              "links": [
+                { "text": "Dart：并发 Isolates", "url": "https://dart.dev/language/isolates" }
+              ],
+              "output": "用 Isolate 在后台跑一次耗时计算并回传结果。",
+              "tags": ["并发"]
+            }
+          ]
+        },
+        {
+          "id": "d3",
+          "num": 3,
+          "title": "内置集合",
+          "desc": "List / Set / Map 与集合操作符，数据处理效率的核心。",
+          "tasks": [
+            {
+              "id": "d3t1",
+              "title": "List 与常用操作",
+              "plain": "列表增删改查、切片、遍历，以及常用方法 map/filter/sort/fold。",
+              "links": [
+                { "text": "Dart：集合 Collections", "url": "https://dart.dev/language/collections" },
+                { "text": "Dart：List API 参考", "url": "https://api.dart.dev/stable/dart-core/List-class.html" }
+              ],
+              "output": "用链式操作把一组对象过滤、映射、排序。",
+              "tags": ["集合"]
+            },
+            {
+              "id": "d3t2",
+              "title": "Set 与 Map",
+              "plain": "Set 去重、Map 键值对，结合 key 唯一性与查找性能理解各自用途。",
+              "links": [
+                { "text": "Dart：Set API", "url": "https://api.dart.dev/stable/dart-core/Set-class.html" },
+                { "text": "Dart：Map API", "url": "https://api.dart.dev/stable/dart-core/Map-class.html" }
+              ],
+              "output": "用 Map 实现一个词频统计，Set 做去重。",
+              "tags": ["集合"]
+            },
+            {
+              "id": "d3t3",
+              "title": "Lambda 与声明式处理",
+              "plain": "回调函数风格 + 一等函数，处理集合时既声明式又不易出错。",
+              "links": [
+                { "text": "Dart：函数与闭包", "url": "https://dart.dev/language/functions" }
+              ],
+              "output": "把一层命令式循环改写为链式 map/filter 风格。",
+              "tags": ["函数式"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "官方文档",
+          "items": [
+            { "title": "Dart 官方语言文档", "url": "https://dart.dev/language", "desc": "语法的第一手权威参考" },
+            { "title": "Dart API 参考", "url": "https://api.dart.dev/", "desc": "核心库与类的完整 API 查询" },
+            { "title": "Dart 交互式 Tour", "url": "https://dart.dev/tour", "desc": "可边读边跑的语法导览" }
+          ]
+        },
+        {
+          "category": "系统课程",
+          "items": [
+            { "title": "Dart 官方 Codelab 入门", "url": "https://dart.dev/codelabs/async-await", "desc": "async/await 动手实践" },
+            { "title": "DartPad 在线环境", "url": "https://dart.dev/#try-dart", "desc": "无需安装直接跑 Dart 代码" },
+            { "title": "effective dart 规范", "url": "https://dart.dev/effective-dart", "desc": "官方代码风格与最佳实践" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "命令行小工具脚本", "learn": "语法 + 函数 + 控制流" },
+        { "level": 2, "project": "对象模型数据封装", "learn": "类 / 泛型 / 集合" },
+        { "level": 3, "project": "异步数据抓取与转换", "learn": "Future/await + Stream + 集合处理" },
+        { "level": 4, "project": "独立的数据处理模块", "learn": "Isolate + 扩展方法 + 模块化" }
+      ]
+    },
+    {
+      "id": "flutter-cross",
+      "title": "跨端实战",
+      "desc": "双平台构建、Web/桌面、原生通道与打包上架，一套代码多端上线。",
+      "color": "#00B4D8",
+      "stages": [
+        {
+          "id": "c0",
+          "num": 0,
+          "title": "双平台构建运行",
+          "desc": "在 Android 与 iOS 上分别构建运行，处理平台差异。",
+          "tasks": [
+            {
+              "id": "c0t1",
+              "title": "在 Android 模拟器运行",
+              "plain": "配置 Android Studio/模拟器，flutter run 到 Android 设备，理解 AndroidManifest 与 Gradle。",
+              "links": [
+                { "text": "Flutter：Android 构建与运行", "url": "https://docs.flutter.dev/get-started/install/android" },
+                { "text": "Flutter：部署到 Android", "url": "https://docs.flutter.dev/deployment/android" }
+              ],
+              "output": "在 Android 模拟器上跑起 App 并看到日志输出。",
+              "tags": ["android"]
+            },
+            {
+              "id": "c0t2",
+              "title": "在 iOS 模拟器/真机运行",
+              "plain": "Xcode + CocoaPods，flutter run 到 iOS，理解 Info.plist 与证书。",
+              "links": [
+                { "text": "Flutter：iOS 构建与运行", "url": "https://docs.flutter.dev/get-started/install/macos#ios-setup" },
+                { "text": "Flutter：部署到 iOS", "url": "https://docs.flutter.dev/deployment/ios" }
+              ],
+              "output": "在 iOS 模拟器上跑起同一个 App。",
+              "tags": ["ios"]
+            },
+            {
+              "id": "c0t3",
+              "title": "平台差异与条件处理",
+              "plain": "用 Platform 判断与 platform_if 处理 Android/iOS 差异（如状态栏、返回按钮、权限）。",
+              "links": [
+                { "text": "Flutter：平台特定行为", "url": "https://docs.flutter.dev/platform-integration/main-thread" },
+                { "text": "Flutter：平台适配", "url": "https://docs.flutter.dev/platform-integration" }
+              ],
+              "output": "在代码中按平台区分显示不同的文案或组件。",
+              "tags": ["跨平台"]
+            }
+          ]
+        },
+        {
+          "id": "c1",
+          "num": 1,
+          "title": "Web 与桌面支持",
+          "desc": "把同一套代码跑上浏览器与桌面端。",
+          "tasks": [
+            {
+              "id": "c1t1",
+              "title": "启用 Web 构建",
+              "plain": "flutter config --enable-web 后 flutter run -d chrome，体验一次代码直接上浏览器。",
+              "links": [
+                { "text": "Flutter：Web 支持", "url": "https://docs.flutter.dev/platform-integration/web" }
+              ],
+              "output": "在 Chrome 跑起 App 并部署到一个静态托管。",
+              "tags": ["web"]
+            },
+            {
+              "id": "c1t2",
+              "title": "桌面端（macOS/Windows/Linux）",
+              "plain": "启用桌面支持并运行，注意桌面特有的窗口管理与磁盘/文件交互。",
+              "links": [
+                { "text": "Flutter：桌面支持", "url": "https://docs.flutter.dev/platform-integration/desktop" }
+              ],
+              "output": "在 macOS 上跑起一个桌面窗口应用。",
+              "tags": ["桌面"]
+            },
+            {
+              "id": "c1t3",
+              "title": "自适应布局与响应式",
+              "plain": "用 MediaQuery/LayoutBuilder 让同一套 UI 适配手机/平板/桌面不同宽度。",
+              "links": [
+                { "text": "Flutter：自适应与响应式", "url": "https://docs.flutter.dev/ui/adaptive-responsive" },
+                { "text": "Flutter：构建响应式布局", "url": "https://docs.flutter.dev/ui/adaptive-responsive#creating-a-responsive-layout" }
+              ],
+              "output": "让一个页面在窄屏/宽屏下呈现不同布局。",
+              "tags": ["响应式"]
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "num": 2,
+          "title": "插件与原生通道",
+          "desc": "调用相机、定位等原生能力，必要时写自定义原生代码。",
+          "tasks": [
+            {
+              "id": "c2t1",
+              "title": "常用插件：url_launcher / image_picker",
+              "plain": "pub get 引入插件，调用系统能力（打开链接、选图），理解插件即原生能力封装。",
+              "links": [
+                { "text": "url_launcher 插件文档", "url": "https://pub.dev/packages/url_launcher" },
+                { "text": "image_picker 插件文档", "url": "https://pub.dev/packages/image_picker" }
+              ],
+              "output": "实现按钮打开浏览器 + 从相册选图展示。",
+              "tags": ["插件"]
+            },
+            {
+              "id": "c2t2",
+              "title": "MethodChannel 原生通道",
+              "plain": "Dart 与原生双向通信：invokeMethod 调用原生方法，理解桥接原理。",
+              "links": [
+                { "text": "Flutter：平台通道原理", "url": "https://docs.flutter.dev/platform-integration/platform-channels" },
+                { "text": "Flutter：MethodChannel 解析", "url": "https://docs.flutter.dev/platform-integration/platform-channels" }
+              ],
+              "output": "用 MethodChannel 调到原生读取一个系统信息回传。",
+              "tags": ["原生"]
+            },
+            {
+              "id": "c2t3",
+              "title": "权限处理与隐私",
+              "plain": "Android 权限声明、iOS Info.plist 权限描述，合规使用相机/定位等敏感能力。",
+              "links": [
+                { "text": "Flutter：权限最佳实践", "url": "https://docs.flutter.dev/platform-integration/main-thread" },
+                { "text": "Flutter 平台权限说明", "url": "https://docs.flutter.dev/data-and-backend/networking" }
+              ],
+              "output": "给 App 申请并处理相册/相机权限。",
+              "tags": ["权限", "隐私"]
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "num": 3,
+          "title": "打包与上架",
+          "desc": "签名打包、发到应用商店，完成从开发到交付的闭环。",
+          "tasks": [
+            {
+              "id": "c3t1",
+              "title": "Android APK / AAB 打包",
+              "plain": "配置签名 keystore，flutter build apk / appbundle，产出可安装与可上架的包。",
+              "links": [
+                { "text": "Flutter：Android 打包发布", "url": "https://docs.flutter.dev/deployment/android" }
+              ],
+              "output": "打出一个签名 release 版 APK 并装到真机。",
+              "tags": ["打包", "android"]
+            },
+            {
+              "id": "c3t2",
+              "title": "iOS 打包与 TestFlight",
+              "plain": "配置签名与 team，flutter build ipa，上传 TestFlight 内测分发。",
+              "links": [
+                { "text": "Flutter：iOS 打包发布", "url": "https://docs.flutter.dev/deployment/ios" }
+              ],
+              "output": "构建 ipa 并上传到 TestFlight 供内测。",
+              "tags": ["打包", "ios"]
+            },
+            {
+              "id": "c3t3",
+              "title": "应用商店上架流程",
+              "plain": "App Store 与 Google Play 上架审核材料、隐私政策、商店文案与图标素材规范。",
+              "links": [
+                { "text": "Flutter：发布到商店", "url": "https://docs.flutter.dev/deployment" },
+                { "text": "Flutter 发布清单", "url": "https://docs.flutter.dev/release" }
+              ],
+              "output": "整理一份上架所需的商店文案 + 图标 + 隐私链接清单。",
+              "tags": ["上架"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "跨平台指南",
+          "items": [
+            { "title": "Flutter 平台集成总览", "url": "https://docs.flutter.dev/platform-integration", "desc": "Android/iOS/Web/桌面统一入口" },
+            { "title": "Flutter 发布部署文档", "url": "https://docs.flutter.dev/deployment", "desc": "各平台打包与上架手册" },
+            { "title": "flutter.dev 官方站点", "url": "https://flutter.dev/", "desc": "所有跨端能力的官方来源" }
+          ]
+        },
+        {
+          "category": "插件生态",
+          "items": [
+            { "title": "pub.dev 官方包仓库", "url": "https://pub.dev/", "desc": "Flutter/Dart 插件与依赖的唯一权威源" },
+            { "title": "Flutter Favorite 认证包", "url": "https://pub.dev/packages", "desc": "官方推荐的高质量插件" },
+            { "title": "awesome-flutter 精选", "url": "https://github.com/Solido/awesome-flutter", "desc": "社区整理的 Flutter 资源与插件合集" }
+          ]
+        },
+        {
+          "category": "打包实践",
+          "items": [
+            { "title": "Android 打包官方文档", "url": "https://docs.flutter.dev/deployment/android", "desc": "签名与 APK/AAB 权威步骤" },
+            { "title": "iOS 打包官方文档", "url": "https://docs.flutter.dev/deployment/ios", "desc": "证书与 TestFlight 权威步骤" },
+            { "title": "Flutter 发布清单", "url": "https://docs.flutter.dev/release", "desc": "上架前逐项核对清单" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "打通 Android + iOS 双端运行", "learn": "双平台工具链 + 首次构建" },
+        { "level": 2, "project": "Web/桌面多端跑起同一 App", "learn": "web/desktop + 响应式布局" },
+        { "level": 3, "project": "集成插件与原生通道的完整 App", "learn": "插件 + MethodChannel + 权限" },
+        { "level": 4, "project": "打包上架到应用商店", "learn": "签名打包 + TestFlight + 商店上架" }
+      ]
+    }
+  ],
+  "glossary": [
+    { "term": "Widget", "plain": "Flutter 中一切界面元素都是 Widget，描述『这个界面长什么样』，UI 由 Widget 树构成" },
+    { "term": "StatelessWidget", "plain": "无状态组件：自身不带可变数据，界面只由外部传入的参数决定，创建后不变" },
+    { "term": "StatefulWidget", "plain": "有状态组件：内部持有一个 State 对象保存可变数据，setState 后触发界面重建刷新" },
+    { "term": "setState", "plain": "StatefulWidget 里通知框架『状态变了，请重建界面』的方法，驱动 UI 刷新" },
+    { "term": "build()", "plain": "每个 Widget 都必须实现的方法，返回描述当前界面的 Widget 树" },
+    { "term": "pub get", "plain": "Flutter/Dart 拉取 pubspec.yaml 声明依赖的命令，装第三方包的标准动作" },
+    { "term": "pubspec.yaml", "plain": "工程的配置文件，管理包名、依赖、资源与 SDK 版本" },
+    { "term": "State management", "plain": "状态管理：在组件间共享和更新可变数据的一套方案，常见 Provider / Riverpod / Bloc" },
+    { "term": "Navigator", "plain": "负责页面跳转的路由管理器，通过 push/pop 管理路由栈（页面进出顺序）" },
+    { "term": "Isolate", "plain": "Dart 的并发单元，拥有独立内存，多 Isolate 之间靠消息传递数据" },
+    { "term": "Future", "plain": "表示将来某个时刻才完成的异步运算结果，配合 async/await 使用" },
+    { "term": "Stream", "plain": "一串按顺序到达的事件序列，用于持续监听数据流（如下载进度、传感器数据）" },
+    { "term": "Mixin", "plain": "在类之间复用方法的机制，用 with 关键字混入，避免多重继承的限制" },
+    { "term": "MethodChannel", "plain": "Dart 与原生（Android/iOS）双向通信的桥，invokeMethod 调用原生代码" },
+    { "term": "Hot reload", "plain": "热重载：保存代码后毫秒级刷新界面，保留当前状态，是 Flutter 开发的关键效率特性" }
+  ]
+}
