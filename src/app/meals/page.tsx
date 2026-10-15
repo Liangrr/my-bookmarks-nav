@@ -3,7 +3,8 @@ import { MealPlanner } from "@/components/meal-planner";
 
 export const metadata: Metadata = {
   title: "今天吃什么 - 星轨",
-  description: "单人一日三餐推荐，日预算100元内，早餐不超过10元。",
+  description:
+    "单人一日三餐推荐：🍳 自己做与 🛵 点外卖两套方案，含食材成本/参考价、耗时与做法步骤，日预算100元内。",
 };
 
 export default function MealsPage() {
