@@ -33,6 +33,7 @@ type MealSet = {
 type PlannerData = {
   version: string;
   budget: {
+    dailyTarget: number;
     dailyMax: number;
     breakfastMax: number;
     lunchMax: number;
@@ -173,8 +174,39 @@ export function MealPlanner() {
   const set = PLANNER.sets[setIdx];
   const plan = plans[setIdx];
   const total = totals[setIdx];
-  const over = total > BUDGET.dailyMax;
   const day = DAYS[dayIdx];
+  const budgetState =
+    total > BUDGET.dailyMax
+      ? { text: "✗ 超上限", color: "#ef4444", bg: "rgba(239,68,68,0.12)" }
+      : total > BUDGET.dailyTarget
+        ? { text: "⚠ 高于日常目标", color: "#f59e0b", bg: "rgba(245,158,11,0.14)" }
+        : { text: `✓ 达标 ≤¥${BUDGET.dailyTarget}`, color: "#22c55e", bg: "rgba(34,197,94,0.12)" };
+
+  // 同样三餐 + 汤的最省组合；以及「早晚自制 + 午餐外卖」混搭区间
+  const saving = useMemo(() => {
+    const cheapest = (a: Meal[]) => a.reduce((x, y) => (y.price < x.price ? y : x));
+    const priciest = (a: Meal[]) => a.reduce((x, y) => (y.price > x.price ? y : x));
+    const b = cheapest(set.breakfast);
+    const l = cheapest(set.lunch);
+    const d = cheapest(set.dinner);
+    const sp = cheapest(set.soups);
+    const hc = PLANNER.sets.find((s) => s.id === "homecook")!;
+    const to = PLANNER.sets.find((s) => s.id === "takeout")!;
+    return {
+      total: b.price + l.price + d.price + sp.price,
+      items: [b.name, l.name, d.name, sp.name],
+      mixLo:
+        cheapest(hc.breakfast).price +
+        cheapest(to.lunch).price +
+        cheapest(hc.dinner).price +
+        cheapest(hc.soups).price,
+      mixHi:
+        priciest(hc.breakfast).price +
+        priciest(to.lunch).price +
+        priciest(hc.dinner).price +
+        priciest(hc.soups).price,
+    };
+  }, [set]);
 
   // 营养均衡：按当日实际选中的三餐 + 汤推导
   const balance = useMemo(() => {
@@ -208,7 +240,8 @@ export function MealPlanner() {
         </h1>
         <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: "8px 0 0", lineHeight: 1.7 }}>
           近三天营养套餐：每天三餐 + 🍲 一汤 + 🍎 应季水果，蛋白质 / 蔬菜 / 主食 / 汤 / 水果五件齐全。
-          两套方案可选：🍳 自己做（成本约为外卖一半）或 🛵 点外卖。日预算 ≤ {BUDGET.dailyMax} 元，同一天结果固定。
+          两套方案可选：🍳 自己做（成本约为外卖一半）或 🛵 点外卖。花费日常目标 ¥{BUDGET.dailyTarget}
+          左右，最多不超过 ¥{BUDGET.dailyMax}，同一天结果固定。
         </p>
       </header>
 
@@ -275,41 +308,64 @@ export function MealPlanner() {
 
       <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, lineHeight: 1.6 }}>{set.desc}</p>
 
-      {/* 当日预算总览 */}
+      {/* 当日预算：目标 ≤50，最多不超过 100 */}
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
           padding: "14px 16px",
           borderRadius: "var(--radius-lg)",
           border: "1px solid var(--border)",
           background: "var(--bg-card)",
         }}
       >
-        <div>
-          <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
-            {day.label} · {set.icon} {set.label} · 含汤含果
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
+              {day.label} · {set.icon} {set.label} · 含汤含果
+            </div>
+            <div style={{ fontSize: 26, fontWeight: 800, marginTop: 2 }}>
+              ¥{total}
+              <span style={{ fontSize: 13, fontWeight: 500, color: "var(--text-tertiary)", marginLeft: 8 }}>
+                目标 ¥{BUDGET.dailyTarget} · 上限 ¥{BUDGET.dailyMax}
+              </span>
+            </div>
           </div>
-          <div style={{ fontSize: 26, fontWeight: 800, marginTop: 2 }}>
-            ¥{total}
-            <span style={{ fontSize: 13, fontWeight: 500, color: "var(--text-tertiary)", marginLeft: 8 }}>
-              / 预算 ¥{BUDGET.dailyMax}
-            </span>
+          <div
+            style={{
+              fontSize: 13,
+              fontWeight: 600,
+              padding: "6px 12px",
+              borderRadius: 999,
+              background: budgetState.bg,
+              color: budgetState.color,
+            }}
+          >
+            {budgetState.text}
           </div>
         </div>
-        <div
-          style={{
-            fontSize: 13,
-            fontWeight: 600,
-            padding: "6px 12px",
-            borderRadius: 999,
-            background: over ? "rgba(239,68,68,0.12)" : "rgba(34,197,94,0.12)",
-            color: over ? "#ef4444" : "#22c55e",
-          }}
-        >
-          {over ? "✗ 超预算" : "✓ 在预算内"}
-        </div>
+
+        {total > BUDGET.dailyTarget && (
+          <div
+            style={{
+              marginTop: 10,
+              paddingTop: 10,
+              borderTop: "1px solid var(--border)",
+              fontSize: 12,
+              color: "var(--text-secondary)",
+              lineHeight: 1.75,
+            }}
+          >
+            <div>
+              <span style={{ color: "var(--text-tertiary)" }}>省钱组合：</span>
+              全取低价档（{saving.items.join(" + ")}）可压到{" "}
+              <b style={{ color: "var(--accent)" }}>¥{saving.total}</b>，比当前省 ¥{total - saving.total}
+            </div>
+            <div>
+              <span style={{ color: "var(--text-tertiary)" }}>混搭建议：</span>
+              早/晚自己做 + 午餐外卖，一天约 ¥{saving.mixLo}～{saving.mixHi}，最容易守在 ¥
+              {BUDGET.dailyTarget} 上下
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 三餐卡片 */}

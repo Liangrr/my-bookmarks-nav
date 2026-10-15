@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "budget": { "dailyMax": 100, "breakfastMax": 10, "lunchMax": 45, "dinnerMax": 45 },
+  "budget": { "dailyTarget": 50, "dailyMax": 100, "breakfastMax": 10, "lunchMax": 45, "dinnerMax": 45 },
   "sets": [
     {
       "id": "homecook",
