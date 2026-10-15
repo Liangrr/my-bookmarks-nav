@@ -66,6 +66,7 @@ const DIFF_COUNT = DATA.reduce<Record<string, number>>((m, s) => {
 
 export function DiyGuide() {
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<string>("全部");
   const [difficulty, setDifficulty] = useState<string>("全部");
   const [duration, setDuration] = useState<string>("全部");
   const [showTop, setShowTop] = useState(false);
@@ -75,6 +76,7 @@ export function DiyGuide() {
   const filtered = useMemo(() => {
     return DATA.map((sec) => {
       const items = sec.items.filter((it) => {
+        if (category !== "全部" && sec.title !== category) return false;
         if (difficulty !== "全部" && it.difficulty !== difficulty) return false;
         if (duration !== "全部" && it.duration !== duration) return false;
         if (!q) return true;
@@ -197,33 +199,77 @@ export function DiyGuide() {
         <div
           style={{
             display: "flex",
-            gap: 4,
+            gap: 8,
             alignItems: "center",
             flexWrap: "wrap",
           }}
         >
-          <span style={{ fontSize: 11, color: "var(--text-tertiary)", marginRight: 2 }}>
-            难度
-          </span>
-          {["全部", ...DIFFICULTIES].map((d) => (
-            <FilterBtn
-              key={`d-${d}`}
-              active={difficulty === d}
-              label={d}
-              onClick={() => setDifficulty(d)}
-            />
-          ))}
-          <span style={{ fontSize: 11, color: "var(--text-tertiary)", margin: "0 2px 0 8px" }}>
-            耗时
-          </span>
-          {["全部", ...DURATIONS].map((r) => (
-            <FilterBtn
-              key={`r-${r}`}
-              active={duration === r}
-              label={r}
-              onClick={() => setDuration(r)}
-            />
-          ))}
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            aria-label="分类筛选"
+            style={{
+              height: 34,
+              padding: "0 8px",
+              borderRadius: "var(--radius-md)",
+              border: "1px solid var(--border)",
+              background: "var(--bg-card)",
+              color: "var(--text-primary)",
+              font: "inherit",
+              fontSize: 13,
+              outline: "none",
+              cursor: "pointer",
+            }}
+          >
+            <option value="全部">全部分类</option>
+            {DATA.map((s) => (
+              <option key={s.id} value={s.title}>{s.title}</option>
+            ))}
+          </select>
+          <select
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+            aria-label="难度筛选"
+            style={{
+              height: 34,
+              padding: "0 8px",
+              borderRadius: "var(--radius-md)",
+              border: "1px solid var(--border)",
+              background: "var(--bg-card)",
+              color: "var(--text-primary)",
+              font: "inherit",
+              fontSize: 13,
+              outline: "none",
+              cursor: "pointer",
+            }}
+          >
+            <option value="全部">全部难度</option>
+            {DIFFICULTIES.map((d) => (
+              <option key={d} value={d}>{d}</option>
+            ))}
+          </select>
+          <select
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            aria-label="耗时筛选"
+            style={{
+              height: 34,
+              padding: "0 8px",
+              borderRadius: "var(--radius-md)",
+              border: "1px solid var(--border)",
+              background: "var(--bg-card)",
+              color: "var(--text-primary)",
+              font: "inherit",
+              fontSize: 13,
+              outline: "none",
+              cursor: "pointer",
+            }}
+          >
+            <option value="全部">全部耗时</option>
+            {DURATIONS.map((r) => (
+              <option key={r} value={r}>{r}</option>
+            ))}
+          </select>
         </div>
         <span
           style={{
