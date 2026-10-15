@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 
 export default function MealsPage() {
   return (
-    <>
+    <div
+      className="container"
+      style={{ maxWidth: 900, paddingTop: 16, paddingBottom: 48 }}
+    >
       <MealPlanner />
-      <footer style={{ textAlign: "center", fontSize: 12, color: "var(--text-tertiary)", marginTop: 24, paddingBottom: 24 }}>
-        星轨 · 今天吃什么 · 预算内吃饱吃好
-      </footer>
-    </>
+    </div>
   );
 }
