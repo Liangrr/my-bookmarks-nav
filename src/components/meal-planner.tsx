@@ -122,6 +122,22 @@ function pickBy<T>(list: T[], seed: number, offset: number): T {
   return arr[offset % arr.length];
 }
 
+// 预算兜底：合计超上限时，把最贵的一档换成本档最低价项，直到合计不超上限
+function fitBudget(picks: { meal: Meal; floor: Meal }[], max: number): Meal[] {
+  const list = [...picks];
+  let sum = list.reduce((n, p) => n + p.meal.price, 0);
+  while (sum > max && list.length > 0) {
+    let idx = 0;
+    for (let i = 1; i < list.length; i++) {
+      if (list[i].meal.price > list[idx].meal.price) idx = i;
+    }
+    if (list[idx].meal.price <= list[idx].floor.price) break;
+    sum -= list[idx].meal.price - list[idx].floor.price;
+    list[idx] = { meal: list[idx].floor, floor: list[idx].floor };
+  }
+  return list.map((p) => p.meal);
+}
+
 function monthAfter(t: Ymd, offset: number) {
   const d = new Date(t.y, t.m - 1, t.d + offset);
   return d.getMonth() + 1;
@@ -153,14 +169,29 @@ export function MealPlanner() {
     const month = today ? monthAfter(today, DAYS[dayIdx].offset) : null;
     const seasonal = month ? FRUITS.filter((f) => f.months.includes(month)) : FRUITS;
     const pool = seasonal.length > 0 ? seasonal : FRUITS;
+    // 汤非每日必需：三天里固定一天不配汤（同一天结果固定，「换一批」会换位置）
+    const soupDays = shuffle([true, true, false], base + round * ROUND_STEP + 977);
+    const cheapest = (a: Meal[]) => a.reduce((x, y) => (y.price < x.price ? y : x));
     return PLANNER.sets.map((s, si) => {
       const sb = base + round * ROUND_STEP + si * 101;
       const offset = DAYS[dayIdx].offset;
+      const hasSoup = soupDays[offset % soupDays.length];
+      // 先按种子选，再经预算兜底，保证当日合计不超 ¥BUDGET.dailyMax
+      const [breakfast, lunch, dinner, pickedSoup] = fitBudget(
+        [
+          { meal: pickBy(s.breakfast, sb + SALT.breakfast, offset), floor: cheapest(s.breakfast) },
+          { meal: pickBy(s.lunch, sb + SALT.lunch, offset), floor: cheapest(s.lunch) },
+          { meal: pickBy(s.dinner, sb + SALT.dinner, offset), floor: cheapest(s.dinner) },
+          ...(hasSoup ? [{ meal: pickBy(s.soups, sb + SALT.soup, offset), floor: cheapest(s.soups) }] : []),
+        ],
+        BUDGET.dailyMax
+      );
       return {
-        breakfast: pickBy(s.breakfast, sb + SALT.breakfast, offset),
-        lunch: pickBy(s.lunch, sb + SALT.lunch, offset),
-        dinner: pickBy(s.dinner, sb + SALT.dinner, offset),
-        soup: pickBy(s.soups, sb + SALT.soup, offset),
+        breakfast,
+        lunch,
+        dinner,
+        soup: pickedSoup ?? pickBy(s.soups, sb + SALT.soup, offset),
+        hasSoup,
         fruit: pickBy(pool, sb + SALT.fruit, offset),
         month,
       };
@@ -168,7 +199,7 @@ export function MealPlanner() {
   }, [base, round, dayIdx, today]);
 
   const totals = plans.map(
-    (p) => p.breakfast.price + p.lunch.price + p.dinner.price + p.soup.price
+    (p) => p.breakfast.price + p.lunch.price + p.dinner.price + (p.hasSoup ? p.soup.price : 0)
   );
 
   const set = PLANNER.sets[setIdx];
@@ -182,7 +213,7 @@ export function MealPlanner() {
         ? { text: "⚠ 高于日常目标", color: "#f59e0b", bg: "rgba(245,158,11,0.14)" }
         : { text: `✓ 达标 ≤¥${BUDGET.dailyTarget}`, color: "#22c55e", bg: "rgba(34,197,94,0.12)" };
 
-  // 同样三餐 + 汤的最省组合；以及「早晚自制 + 午餐外卖」混搭区间
+  // 同样三餐 + 汤的最省组合；以及「早晚自制 + 午餐外卖」混搭区间（该天不配汤则不计汤价）
   const saving = useMemo(() => {
     const cheapest = (a: Meal[]) => a.reduce((x, y) => (y.price < x.price ? y : x));
     const priciest = (a: Meal[]) => a.reduce((x, y) => (y.price > x.price ? y : x));
@@ -192,25 +223,33 @@ export function MealPlanner() {
     const sp = cheapest(set.soups);
     const hc = PLANNER.sets.find((s) => s.id === "homecook")!;
     const to = PLANNER.sets.find((s) => s.id === "takeout")!;
+    const soupCost = plan.hasSoup ? sp.price : 0;
+    // 混搭上限同样守在预算内：从最贵档起步，超了就往下换
+    const mixHiPicks = fitBudget(
+      [
+        { meal: priciest(hc.breakfast), floor: cheapest(hc.breakfast) },
+        { meal: priciest(to.lunch), floor: cheapest(to.lunch) },
+        { meal: priciest(hc.dinner), floor: cheapest(hc.dinner) },
+        ...(plan.hasSoup ? [{ meal: priciest(hc.soups), floor: cheapest(hc.soups) }] : []),
+      ],
+      BUDGET.dailyMax
+    );
     return {
-      total: b.price + l.price + d.price + sp.price,
-      items: [b.name, l.name, d.name, sp.name],
+      total: b.price + l.price + d.price + soupCost,
+      items: plan.hasSoup ? [b.name, l.name, d.name, sp.name] : [b.name, l.name, d.name],
       mixLo:
         cheapest(hc.breakfast).price +
         cheapest(to.lunch).price +
         cheapest(hc.dinner).price +
-        cheapest(hc.soups).price,
-      mixHi:
-        priciest(hc.breakfast).price +
-        priciest(to.lunch).price +
-        priciest(hc.dinner).price +
-        priciest(hc.soups).price,
+        (plan.hasSoup ? cheapest(hc.soups).price : 0),
+      mixHi: mixHiPicks.reduce((n, m) => n + m.price, 0),
     };
-  }, [set]);
+  }, [set, plan.hasSoup]);
 
-  // 营养均衡：按当日实际选中的三餐 + 汤推导
+  // 营养均衡：按当日实际选中的三餐（+ 有汤时的汤）推导
   const balance = useMemo(() => {
-    const items = [plan.breakfast.name, plan.lunch.name, plan.dinner.name, plan.soup.name];
+    const items = [plan.breakfast.name, plan.lunch.name, plan.dinner.name];
+    if (plan.hasSoup) items.push(plan.soup.name);
     const collect = (keys: string[]) =>
       items.filter((n) => matchNames(n, keys)).map((n) => n.split(/[+（(]/)[0].trim());
     return {
@@ -239,7 +278,7 @@ export function MealPlanner() {
           今天吃什么
         </h1>
         <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: "8px 0 0", lineHeight: 1.7 }}>
-          近三天营养套餐：每天三餐 + 🍲 一汤 + 🍎 应季水果，蛋白质 / 蔬菜 / 主食 / 汤 / 水果五件齐全。
+          近三天营养套餐：每天三餐 +  应季水果，🍲 汤按天间隔安排（不是每天都有）。
           两套方案可选：🍳 自己做（成本约为外卖一半）或 🛵 点外卖。花费日常目标 ¥{BUDGET.dailyTarget}
           左右，最多不超过 ¥{BUDGET.dailyMax}，同一天结果固定。
         </p>
@@ -308,7 +347,7 @@ export function MealPlanner() {
 
       <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, lineHeight: 1.6 }}>{set.desc}</p>
 
-      {/* 当日预算：目标 ≤50，最多不超过 100 */}
+      {/* 当日预算：目标 ≤50，最多不超过 70 */}
       <div
         style={{
           padding: "14px 16px",
@@ -320,7 +359,7 @@ export function MealPlanner() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
             <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
-              {day.label} · {set.icon} {set.label} · 含汤含果
+              {day.label} · {set.icon} {set.label} · {plan.hasSoup ? "含汤含果" : "含果（不配汤）"}
             </div>
             <div style={{ fontSize: 26, fontWeight: 800, marginTop: 2 }}>
               ¥{total}
@@ -354,11 +393,13 @@ export function MealPlanner() {
               lineHeight: 1.75,
             }}
           >
-            <div>
-              <span style={{ color: "var(--text-tertiary)" }}>省钱组合：</span>
-              全取低价档（{saving.items.join(" + ")}）可压到{" "}
-              <b style={{ color: "var(--accent)" }}>¥{saving.total}</b>，比当前省 ¥{total - saving.total}
-            </div>
+            {total > saving.total && (
+              <div>
+                <span style={{ color: "var(--text-tertiary)" }}>省钱组合：</span>
+                全取低价档（{saving.items.join(" + ")}）可压到{" "}
+                <b style={{ color: "var(--accent)" }}>¥{saving.total}</b>，比当前省 ¥{total - saving.total}
+              </div>
+            )}
             <div>
               <span style={{ color: "var(--text-tertiary)" }}>混搭建议：</span>
               早/晚自己做 + 午餐外卖，一天约 ¥{saving.mixLo}～{saving.mixHi}，最容易守在 ¥
@@ -467,7 +508,8 @@ export function MealPlanner() {
         );
       })}
 
-      {/* 汤品 */}
+      {/* 汤品（非每日必需，按天间隔安排） */}
+      {plan.hasSoup ? (
       <div
         style={{
           padding: 16,
@@ -553,6 +595,49 @@ export function MealPlanner() {
           ))}
         </div>
       </div>
+      ) : (
+        <div
+          style={{
+            padding: 16,
+            borderRadius: "var(--radius-lg)",
+            border: "1px dashed var(--border)",
+            background: "var(--bg-card)",
+            borderLeft: "4px solid #14b8a6",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+            <span style={{ fontSize: 22 }}>🍲</span>
+            <span style={{ fontSize: 16, fontWeight: 700 }}>{day.label}不配汤</span>
+            <span
+              style={{
+                fontSize: 11,
+                padding: "2px 8px",
+                borderRadius: 999,
+                background: "var(--bg-card-hover)",
+                color: "var(--text-tertiary)",
+              }}
+            >
+              隔天喝更合理
+            </span>
+          </div>
+          <div style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: 8 }}>
+            汤不是每天必需。这天可用 300ml 温水、一杯无糖豆浆或一碗杂粮粥替代，补水同样够；三餐蛋白质与蔬菜吃够就行。
+          </div>
+          <div
+            style={{
+              fontSize: 12,
+              color: "var(--text-tertiary)",
+              lineHeight: 1.7,
+              padding: "8px 10px",
+              borderRadius: "var(--radius-sm)",
+              background: "var(--bg-secondary)",
+            }}
+          >
+            想喝的话，本套可加：{plan.soup.name}（¥{plan.soup.price}，{plan.soup.cookTime}）——加后当日约 ¥
+            {total + plan.soup.price}
+          </div>
+        </div>
+      )}
 
       {/* 应季水果搭配 */}
       <div
@@ -656,7 +741,7 @@ export function MealPlanner() {
           { label: "蛋白质", list: balance.protein },
           { label: "蔬菜", list: balance.veg },
           { label: "主食 / 碳水", list: balance.staple },
-          { label: "汤", list: [plan.soup.name] },
+          { label: "汤", list: plan.hasSoup ? [plan.soup.name] : [] },
           { label: "水果", list: [`${plan.fruit.name}（${plan.fruit.kcal} kcal / 纤维 ${plan.fruit.fiber}g）`] },
         ].map((row) => (
           <div
@@ -665,7 +750,11 @@ export function MealPlanner() {
           >
             <span style={{ width: 82, flexShrink: 0, color: "var(--text-tertiary)" }}>{row.label}</span>
             <span style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
-              {row.list.length > 0 ? row.list.join(" · ") : "—（今日这份偏少，可加一份）"}
+              {row.list.length > 0
+                ? row.list.join(" · ")
+                : row.label === "汤"
+                  ? "— 今天不配（隔天喝更合理）"
+                  : "—（今日这份偏少，可加一份）"}
             </span>
           </div>
         ))}

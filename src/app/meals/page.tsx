@@ -4,7 +4,7 @@ import { MealPlanner } from "@/components/meal-planner";
 export const metadata: Metadata = {
   title: "今天吃什么 - 星轨",
   description:
-    "近三天营养套餐：每天三餐 + 一汤 + 应季水果；含 🍳 自己做与 🛵 点外卖两套方案，花费日常目标50元、最多不超过100元，超目标时给出省钱组合与混搭建议。",
+    "近三天营养套餐：每天三餐 + 应季水果，汤按天间隔安排；含 🍳 自己做与 🛵 点外卖两套方案，花费日常目标50元、每天最多不超过70元，超目标时给出省钱组合与混搭建议。",
 };
 
 export default function MealsPage() {
