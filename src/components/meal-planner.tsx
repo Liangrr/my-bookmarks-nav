@@ -127,7 +127,17 @@ type SceneKey = (typeof SCENES)[number]["key"];
 const FEAST = (PLANNER.feast ?? null) as FeastData | null;
 const FEAST_PEOPLE: number[] = FEAST && FEAST.people.length > 0 ? FEAST.people : [3, 4, 5];
 const LEVEL_LABEL: Record<number, string> = { 1: "平价", 2: "中档", 3: "稍贵", 4: "高档" };
-const LEVEL_SALT: Record<number, number> = { 1: 17, 2: 31, 3: 47, 4: 61 };
+
+// 聚餐一次性列全部餐馆，按价位档分组（不随机、不换批）
+const FEAST_GROUPS: { level: number; label: string; places: Place[] }[] = FEAST
+  ? Array.from(new Set(FEAST.places.map((p) => p.level)))
+      .sort((a, b) => a - b)
+      .map((lv) => ({
+        level: lv,
+        label: LEVEL_LABEL[lv] ?? `档位 ${lv}`,
+        places: FEAST.places.filter((p) => p.level === lv),
+      }))
+  : [];
 
 // 用于推导「营养均衡」的关键词（不手写营养字段，按实际选中项推导）
 const NUTRI_KEYS = {
@@ -245,26 +255,7 @@ export function MealPlanner() {
     (p) => p.breakfast.price + p.lunch.price + p.dinner.price + (p.hasSoup ? p.soup.price : 0)
   );
 
-  // 聚餐：只去店里吃。按价位档各取一家，不分天次；「换一批」换的是别家
-  const feastPicks = useMemo(() => {
-    if (!FEAST || FEAST.places.length === 0) return null;
-    const seed = base + round * ROUND_STEP;
-    const levels = Array.from(new Set(FEAST.places.map((p) => p.level))).sort((a, b) => a - b);
-    const picked: Place[] = [];
-    levels.forEach((lv) => {
-      const pool = FEAST.places.filter((p) => p.level === lv);
-      if (pool.length === 0) return;
-      picked.push(pickBy(pool, seed + (LEVEL_SALT[lv] ?? 0), 0));
-    });
-    // 档位不够 3 家时，用剩余店铺补齐
-    if (picked.length < 3) {
-      FEAST.places.forEach((p) => {
-        if (picked.length < 3 && !picked.some((x) => x.id === p.id)) picked.push(p);
-      });
-    }
-    picked.sort((a, b) => a.level - b.level);
-    return picked.slice(0, 3);
-  }, [base, round]);
+  // 聚餐：一次性列出全部餐馆，不随机、不换批
 
   const set = PLANNER.sets[setIdx];
   const plan = plans[setIdx];
@@ -356,7 +347,7 @@ export function MealPlanner() {
           ) : (
             <>
               聚餐模式：只去店里吃。范围 {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}，
-              {FEAST_PEOPLE[0]}~{FEAST_PEOPLE[FEAST_PEOPLE.length - 1]} 人，给 3 家不同价位的候选，
+              {FEAST_PEOPLE[0]}~{FEAST_PEOPLE[FEAST_PEOPLE.length - 1]} 人，一次列出全部区内餐馆（按平价 / 中档 / 稍贵分组），
               按「人均 × 人数」估总花费。人均与门店来自公开点评 / 榜单，点来源可核验，价格会变动。
             </>
           )}
@@ -957,93 +948,96 @@ export function MealPlanner() {
             )}
           </div>
 
-          {/* 3 家候选：按价位档各取一家 */}
-          {feastPicks &&
-            feastPicks.map((p) => (
-              <div
-                key={p.id}
-                style={{
-                  padding: 16,
-                  borderRadius: "var(--radius-lg)",
-                  border: "1px solid var(--border)",
-                  background: "var(--bg-card)",
-                  borderLeft: `4px solid ${p.level === 1 ? "#22c55e" : p.level === 2 ? "#3b82f6" : "#f59e0b"}`,
-                }}
-              >
-                <div
+          {/* 全部餐馆：一次性列出，按价位档分组，不随机、不换批 */}
+          {FEAST_GROUPS.map((g) => (
+            <div key={g.level} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span
                   style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    justifyContent: "space-between",
-                    gap: 8,
-                    flexWrap: "wrap",
+                    width: 4,
+                    height: 16,
+                    borderRadius: 2,
+                    background: g.level === 1 ? "#22c55e" : g.level === 2 ? "#3b82f6" : "#f59e0b",
+                  }}
+                />
+                <span style={{ fontSize: 14, fontWeight: 800 }}>{g.label}</span>
+                <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{g.places.length} 家</span>
+              </div>
+              {g.places.map((p) => (
+                <div
+                  key={p.id}
+                  style={{
+                    padding: 16,
+                    borderRadius: "var(--radius-lg)",
+                    border: "1px solid var(--border)",
+                    background: "var(--bg-card)",
+                    borderLeft: `4px solid ${g.level === 1 ? "#22c55e" : g.level === 2 ? "#3b82f6" : "#f59e0b"}`,
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
-                    <span style={{ fontSize: 17, fontWeight: 800 }}>{p.name}</span>
-                    <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{p.category}</span>
-                    <span
-                      style={{
-                        fontSize: 11,
-                        padding: "2px 8px",
-                        borderRadius: 999,
-                        background: "var(--bg-card-hover)",
-                        color: "var(--text-tertiary)",
-                        flexShrink: 0,
-                      }}
-                    >
-                      {LEVEL_LABEL[p.level] ?? "参考"}
-                    </span>
-                  </div>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: "var(--accent)", flexShrink: 0 }}>
-                    {people} 人约 ¥{p.perPerson * people}
-                  </div>
-                </div>
-                <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>
-                  📍 {p.district} · {p.station} · {p.perText} · {p.fit}
-                </div>
-                {p.signature.length > 0 && (
-                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
-                    {p.signature.map((sig) => (
-                      <span
-                        key={sig}
-                        style={{
-                          fontSize: 12,
-                          padding: "3px 10px",
-                          borderRadius: 999,
-                          background: "var(--bg-secondary)",
-                          color: "var(--text-secondary)",
-                          border: "1px solid var(--border)",
-                        }}
-                      >
-                        {sig}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                {p.tips && (
                   <div
                     style={{
-                      fontSize: 12,
-                      color: "var(--text-secondary)",
-                      lineHeight: 1.7,
-                      marginTop: 8,
-                      padding: "8px 10px",
-                      borderRadius: "var(--radius-sm)",
-                      background: "var(--bg-secondary)",
+                      display: "flex",
+                      alignItems: "baseline",
+                      justifyContent: "space-between",
+                      gap: 8,
+                      flexWrap: "wrap",
                     }}
                   >
-                    {p.tips}
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
+                      <span style={{ fontSize: 17, fontWeight: 800 }}>{p.name}</span>
+                      <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{p.category}</span>
+                    </div>
+                    <div style={{ fontSize: 15, fontWeight: 800, color: "var(--accent)", flexShrink: 0 }}>
+                      {people} 人约 ¥{p.perPerson * people}
+                    </div>
                   </div>
-                )}
-                <div style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 8 }}>
-                  来源：
-                  <a href={p.source} target="_blank" rel="noreferrer noopener" style={{ color: "var(--accent)" }}>
-                    {p.sourceNote}
-                  </a>
+                  <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>
+                    📍 {p.district} · {p.station} · {p.perText} · {p.fit}
+                  </div>
+                  {p.signature.length > 0 && (
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
+                      {p.signature.map((sig) => (
+                        <span
+                          key={sig}
+                          style={{
+                            fontSize: 12,
+                            padding: "3px 10px",
+                            borderRadius: 999,
+                            background: "var(--bg-secondary)",
+                            color: "var(--text-secondary)",
+                            border: "1px solid var(--border)",
+                          }}
+                        >
+                          {sig}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {p.tips && (
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: "var(--text-secondary)",
+                        lineHeight: 1.7,
+                        marginTop: 8,
+                        padding: "8px 10px",
+                        borderRadius: "var(--radius-sm)",
+                        background: "var(--bg-secondary)",
+                      }}
+                    >
+                      {p.tips}
+                    </div>
+                  )}
+                  <div style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 8 }}>
+                    来源：
+                    <a href={p.source} target="_blank" rel="noreferrer noopener" style={{ color: "var(--accent)" }}>
+                      {p.sourceNote}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          ))}
 
           {/* 人数对应的点菜结构 */}
           <div
@@ -1070,21 +1064,24 @@ export function MealPlanner() {
           </div>
         </>
       )}
-      <button
-        onClick={() => setRound((r) => r + 1)}
-        style={{
-          height: 44,
-          borderRadius: "var(--radius-lg)",
-          border: "none",
-          cursor: "pointer",
-          background: "linear-gradient(135deg, #f59e0b, #ec4899)",
-          color: "#fff",
-          fontSize: 15,
-          fontWeight: 700,
-        }}
-      >
-        {scene === "solo" ? "🎲 换一批推荐（三天 × 两套同时）" : "🎲 换一批餐馆（三天同时换）"}
-      </button>
+      {/* 换一批仅个人模式；聚餐是一次性列全部餐馆，没有这一层 */}
+      {scene === "solo" && (
+        <button
+          onClick={() => setRound((r) => r + 1)}
+          style={{
+            height: 44,
+            borderRadius: "var(--radius-lg)",
+            border: "none",
+            cursor: "pointer",
+            background: "linear-gradient(135deg, #f59e0b, #ec4899)",
+            color: "#fff",
+            fontSize: 15,
+            fontWeight: 700,
+          }}
+        >
+          🎲 换一批推荐（三天 × 两套同时）
+        </button>
+      )}
     </div>
   );
 }
