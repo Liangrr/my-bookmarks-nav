@@ -245,17 +245,16 @@ export function MealPlanner() {
     (p) => p.breakfast.price + p.lunch.price + p.dinner.price + (p.hasSoup ? p.soup.price : 0)
   );
 
-  // 聚餐：只去店里吃。按价位档各取一家，三天不重样、「换一批」换的是别家
+  // 聚餐：只去店里吃。按价位档各取一家，不分天次；「换一批」换的是别家
   const feastPicks = useMemo(() => {
     if (!FEAST || FEAST.places.length === 0) return null;
-    const offset = DAYS[dayIdx].offset;
     const seed = base + round * ROUND_STEP;
     const levels = Array.from(new Set(FEAST.places.map((p) => p.level))).sort((a, b) => a - b);
     const picked: Place[] = [];
     levels.forEach((lv) => {
       const pool = FEAST.places.filter((p) => p.level === lv);
       if (pool.length === 0) return;
-      picked.push(pickBy(pool, seed + (LEVEL_SALT[lv] ?? 0), offset));
+      picked.push(pickBy(pool, seed + (LEVEL_SALT[lv] ?? 0), 0));
     });
     // 档位不够 3 家时，用剩余店铺补齐
     if (picked.length < 3) {
@@ -265,7 +264,7 @@ export function MealPlanner() {
     }
     picked.sort((a, b) => a.level - b.level);
     return picked.slice(0, 3);
-  }, [base, round, dayIdx]);
+  }, [base, round]);
 
   const set = PLANNER.sets[setIdx];
   const plan = plans[setIdx];
@@ -357,7 +356,7 @@ export function MealPlanner() {
           ) : (
             <>
               聚餐模式：只去店里吃。范围 {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}，
-              {FEAST_PEOPLE[0]}~{FEAST_PEOPLE[FEAST_PEOPLE.length - 1]} 人，每天给 3 家不同价位的候选，
+              {FEAST_PEOPLE[0]}~{FEAST_PEOPLE[FEAST_PEOPLE.length - 1]} 人，给 3 家不同价位的候选，
               按「人均 × 人数」估总花费。人均与门店来自公开点评 / 榜单，点来源可核验，价格会变动。
             </>
           )}
@@ -393,35 +392,37 @@ export function MealPlanner() {
         })}
       </div>
 
-      {/* 天次：今天 / 明天 / 后天 */}
-      <div style={{ display: "flex", gap: 8 }}>
-        {DAYS.map((d, i) => {
-          const on = i === dayIdx;
-          return (
-            <button
-              key={d.offset}
-              onClick={() => setDayIdx(i)}
-              style={{
-                flex: 1,
-                padding: "10px 8px",
-                borderRadius: "var(--radius-lg)",
-                cursor: "pointer",
-                border: `1px solid ${on ? "var(--accent)" : "var(--border)"}`,
-                background: on
-                  ? "color-mix(in srgb, var(--accent) 12%, var(--bg-card))"
-                  : "var(--bg-card)",
-              }}
-            >
-              <div style={{ fontSize: 14, fontWeight: 800, color: on ? "var(--accent)" : "var(--text-primary)" }}>
-                {d.label}
-              </div>
-              <div style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 2 }}>
-                {today ? dateLabel(today, d.offset) : "—"}
-              </div>
-            </button>
-          );
-        })}
-      </div>
+      {/* 天次：今天 / 明天 / 后天（仅个人；聚餐是去店里吃的候选名单，不分天次） */}
+      {scene === "solo" && (
+        <div style={{ display: "flex", gap: 8 }}>
+          {DAYS.map((d, i) => {
+            const on = i === dayIdx;
+            return (
+              <button
+                key={d.offset}
+                onClick={() => setDayIdx(i)}
+                style={{
+                  flex: 1,
+                  padding: "10px 8px",
+                  borderRadius: "var(--radius-lg)",
+                  cursor: "pointer",
+                  border: `1px solid ${on ? "var(--accent)" : "var(--border)"}`,
+                  background: on
+                    ? "color-mix(in srgb, var(--accent) 12%, var(--bg-card))"
+                    : "var(--bg-card)",
+                }}
+              >
+                <div style={{ fontSize: 14, fontWeight: 800, color: on ? "var(--accent)" : "var(--text-primary)" }}>
+                  {d.label}
+                </div>
+                <div style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 2 }}>
+                  {today ? dateLabel(today, d.offset) : "—"}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* 两套方案（仅个人：自己做 / 点外卖）；聚餐只去店里吃，没有这一层 */}
       {scene === "solo" && (
@@ -920,7 +921,7 @@ export function MealPlanner() {
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
               <div>
                 <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
-                  {day.label} · {people} 人 · 去店里吃
+                  {people} 人 · 去店里吃
                 </div>
                 <div style={{ fontSize: 21, fontWeight: 800, marginTop: 2 }}>
                   {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}
@@ -956,7 +957,7 @@ export function MealPlanner() {
             )}
           </div>
 
-          {/* 今日 3 家候选：按价位档各取一家 */}
+          {/* 3 家候选：按价位档各取一家 */}
           {feastPicks &&
             feastPicks.map((p) => (
               <div
