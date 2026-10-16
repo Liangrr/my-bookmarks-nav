@@ -1,6 +1,27 @@
 {
-  "version": "3.0.0",
+  "version": "4.0.0",
   "budget": { "dailyTarget": 50, "dailyMax": 70, "breakfastMax": 10, "lunchMax": 45, "dinnerMax": 45 },
+  "feast": {
+    "label": "去店里吃",
+    "area": "深圳 · 岗厦 → 大剧院",
+    "note": "覆盖 岗厦 / 会展中心 / 购物公园 / 华强北 / 蔡屋围 / 大剧院 / 国贸 / 东门 一带。人均为公开点评与榜单的参考值，会随菜单与时段变动，标「未核实」的请以到店为准。每天从 平价 / 中档 / 稍贵 三档各取一家。",
+    "people": [3, 4, 5],
+    "places": [
+      { "id": "fp1", "name": "来自潮州牛肉店（华强北店）", "category": "潮汕牛肉火锅", "district": "华强北", "station": "2/7 号线 华强北站", "perPerson": 48, "perText": "约 ¥48", "level": 1, "fit": "3~5 人 · 有露天大桌", "signature": ["牛筋丸", "湿炒牛河", "牛展肉"], "tips": "无自助调料台，高峰要等位；营业到凌晨 3 点，避开饭点更舒服。人均来自公开整理稿，可靠性一般。", "source": "https://www.sina.cn/news/article/comos_nirvkku4354709.html", "sourceNote": "新浪·转引百科（2026-09）" },
+      { "id": "fp2", "name": "小芙蓉", "category": "湘菜", "district": "罗湖 · 友谊路", "station": "1 号线 国贸站", "perPerson": 60, "perText": "人均未核实", "level": 1, "fit": "3~5 人 · 下饭小聚", "signature": ["剁椒鱼头", "干锅肥肠", "紫苏田螺"], "tips": "前身是 1985 年湖南省驻深办食堂，2026 米其林必比登推介；人均未核实，按普通湘菜馆估。", "source": "https://static.nfnews.com/content/202507/14/c11505624.html", "sourceNote": "南方+（2025-07）" },
+      { "id": "fp3", "name": "荔园小馆", "category": "广府家常", "district": "园岭 · 红荔路", "station": "3/9 号线 红岭站", "perPerson": 45, "perText": "平价（未核实）", "level": 1, "fit": "2~4 人 · 无包间", "signature": ["蒸饭", "肠粉", "煲仔粥", "小炒"], "tips": "开了 23 年的老店，饭点满座，点餐先撕饭票；人均未核实，按家常小店估。", "source": "http://m.toutiao.com/group/7522359634062426639/", "sourceNote": "头条·必吃榜报道（2025）" },
+      { "id": "fp4", "name": "蘩楼（华强北总店）", "category": "广式早茶", "district": "振华路", "station": "2 号线 华强北站 C 口", "perPerson": 80, "perText": "约 ¥80", "level": 2, "fit": "3~5 人 · 大堂圆桌", "signature": ["虾饺皇", "脆皮虾红米肠", "酱香牛仔骨", "古法叉烧包"], "tips": "必吃榜常客、节假日排队王，先扫码取号再逛；早茶时段比正餐便宜。", "source": "https://danielfooddiary.com/2026/09/20/fanlou/", "sourceNote": "探店文（2026-09）" },
+      { "id": "fp5", "name": "大鸽饭（星河 COCO Park 店）", "category": "粤菜 · 乳鸽", "district": "星河 COCO Park", "station": "1/3 号线 购物公园站", "perPerson": 100, "perText": "¥80~150", "level": 2, "fit": "3~5 人 · 有包间", "signature": ["爆汁红烧鸽王", "黑松露大鸽饭"], "tips": "被称为深圳排队王，常排 1~3 小时，务必先扫码取号再决定要不要来。", "source": "https://www.wenweipo.com/a/202512/15/AP693f89b5e4b0489cf51a5a13.html", "sourceNote": "文汇报（2025-12）" },
+      { "id": "fp6", "name": "海门鱼仔（金光华广场店）", "category": "潮汕菜", "district": "金光华广场 L7", "station": "1 号线 国贸站", "perPerson": 85, "perText": "¥70~100", "level": 2, "fit": "3~5 人 · 包房多", "signature": ["卤水鹅片拼卤蛋", "普宁炸粿肉", "金不换炒薄壳", "酸菜焗饭"], "tips": "约 19 年老字号；2 人套餐份量够 3~4 人，人少时点套餐最划算。", "source": "https://www.ulifestyle.com.hk/community/detailpost/bb8a615d-2944-4af0-b1cc-8a82b4b65fb5/", "sourceNote": "社区探店文（无日期）" },
+      { "id": "fp7", "name": "八合里潮汕鲜牛肉火锅（购物公园店）", "category": "潮汕牛肉火锅", "district": "购物公园", "station": "1 号线 购物公园站", "perPerson": 110, "perText": "¥100~125", "level": 2, "fit": "3~5 人 · 大桌", "signature": ["吊龙伴", "五花趾", "手捶牛肉丸", "湿炒牛河"], "tips": "必吃榜常客，高峰需排队，建议错峰；人均来自探店文，仅供参考。", "source": "https://hkexpatclub.com/chaoshan-beef-hotpot-shenzhen-freshest-hand-cut-beef/", "sourceNote": "探店文（无日期）" },
+      { "id": "fp8", "name": "椰荟四季椰子鸡火锅（华强北）", "category": "椰子鸡", "district": "华强北", "station": "华强北站", "perPerson": 70, "perText": "约 ¥70", "level": 2, "fit": "2~5 人", "signature": ["榴莲椰子鸡", "竹笙椰子鸡"], "tips": "有团购套餐，先进店前买好套餐通常更便宜；是音乐主题餐厅，偏吵。", "source": "https://hk.trip.com/moments/detail/shenzhen-26-131443209/", "sourceNote": "Trip Moments（无日期）" },
+      { "id": "fp9", "name": "广记昌鸽皇饭店（金光华店）", "category": "粤菜 · 乳鸽", "district": "金光华广场 B2", "station": "1 号线 国贸站", "perPerson": 80, "perText": "低于 ¥100", "level": 2, "fit": "3~5 人 · 座位间距宽", "signature": ["果木脆皮乳鸽 ¥49.9", "豉油王鸽王", "黑松露鸽王煲仔饭 ¥55.9"], "tips": "开业约两个月的新店，暂无排队信息，周末可能没位；毛记之外想换一家乳鸽可选这里。", "source": "https://www.wenweipo.com/a/202512/15/AP693f89b5e4b0489cf51a5a13.html", "sourceNote": "文汇报（2025-12）" },
+      { "id": "fp10", "name": "李小太·烧烤（东门中海商城店）", "category": "烧烤 · 海鲜串", "district": "东门中海商城", "station": "1 号线 老街站 F 口", "perPerson": 100, "perText": "百元出头", "level": 2, "fit": "3~5 人", "signature": ["爆汁牛肉串", "海鲜串"], "tips": "营业到凌晨 3 点，宵夜场最合适；人均为报道估算，点串多时容易超。", "source": "https://dw-media.tkww.hk/epaper/hker/20260302/p07-0302.pdf", "sourceNote": "香港经济日报（2026-03）" },
+      { "id": "fp11", "name": "利宝阁（嘉里建设广场店）", "category": "粤菜 · 茶点", "district": "嘉里建设广场 3 座", "station": "会展中心站", "perPerson": 130, "perText": "约 ¥130", "level": 3, "fit": "3~5 人", "signature": ["脆皮虾饺皇", "大宝果木烤鸭", "XO 酱干炒牛河"], "tips": "平台评分 4.6；人均来自聚合页，节假日与晚市可能更高。", "source": "https://you.ctrip.com/restaurantlist/shenzhen26/s0-p12.html", "sourceNote": "携程榜单（无日期）" },
+      { "id": "fp12", "name": "徐记海鲜（京基 100 KKMALL 店）", "category": "粤菜 · 海鲜", "district": "京基 100 KKMALL 3 楼", "station": "大剧院站", "perPerson": 160, "perText": "约 ¥160（港客记 HK$164~211）", "level": 3, "fit": "3~5 人 · 有包间", "signature": ["独蒜辣椒炒肉", "大红参烧农家豆腐", "时令海鲜"], "tips": "有包厢，适合稍微正式一点的小聚或庆祝；海鲜按时价，点前先问价。", "source": "https://you.ctrip.com/food/shenzhen26/127721983-dianping.html", "sourceNote": "携程点评（无日期）" },
+      { "id": "fp13", "name": "炳胜品味（罗湖万象城店）", "category": "高端粤菜", "district": "华润万象城 L5", "station": "大剧院站", "perPerson": 180, "perText": "¥160~220", "level": 3, "fit": "3~5 人 · 可预订", "signature": ["秘制脆皮灌汤烧鹅", "秘制黑叉烧", "招牌菠萝包", "烧味三拼"], "tips": "收 10% 服务费，可电话预订 0755-82248189；3~5 人想吃得体面又不至于太贵，这档最稳。", "source": "https://you.ctrip.com/food/shenzhen26/25038055-dianping.html", "sourceNote": "携程点评（2026-07）" }
+    ]
+  },
   "sets": [
     {
       "id": "homecook",
@@ -54,34 +75,7 @@
         { "id": "hs6", "name": "菌菇豆腐汤", "price": 8, "cookTime": "15分钟", "tags": ["低脂", "素食"], "desc": "鲜味足，热量很低。", "ingredients": "嫩豆腐 1 盒、香菇 4 朵、金针菇 1 把", "steps": ["菌菇炒香加水烧开", "下豆腐煮 5 分钟"] },
         { "id": "hs7", "name": "丝瓜蛋花汤", "price": 4, "cookTime": "10分钟", "tags": ["清热", "低脂"], "desc": "夏秋清热汤，清甜爽口。", "ingredients": "丝瓜 1 根、鸡蛋 2 个", "steps": ["丝瓜炒软加水烧开", "淋蛋液调味"] },
         { "id": "hs8", "name": "银耳雪梨羹", "price": 5, "cookTime": "30分钟", "tags": ["润燥", "甜汤"], "desc": "秋燥季节的甜汤，代替甜品。", "ingredients": "银耳 1 朵、雪梨 1 个、冰糖少许", "steps": ["银耳泡发撕小朵", "与雪梨同煮 25 分钟"] }
-      ],
-      "feast": {
-        "label": "聚餐（4~6 人）",
-        "cold": [
-          { "id": "fc1", "name": "凉拌黄瓜木耳", "price": 8, "cookTime": "10分钟", "portion": "4~6 人份", "tags": ["快手", "开胃"], "desc": "提前做好冷藏，上桌前淋汁，最省事的凉菜。", "ingredients": "黄瓜 2 根、干木耳 20g、蒜末、香醋", "steps": ["木耳泡发后焯 3 分钟", "黄瓜拍碎，与木耳加蒜醋香油拌匀"] },
-          { "id": "fc2", "name": "口水鸡", "price": 26, "cookTime": "35分钟", "portion": "4~6 人份", "tags": ["川味", "有面子"], "desc": "鸡肉煮好泡冰水更嫩，红油提前调好。", "ingredients": "三黄鸡半只、花生碎、辣椒油、花椒粉", "steps": ["整鸡煮 20 分钟，捞出浸冰水", "斩块摆盘，浇红油料汁撒花生碎"] },
-          { "id": "fc3", "name": "卤牛肉拼盘", "price": 38, "cookTime": "90分钟", "portion": "4~6 人份", "tags": ["下酒", "可提前"], "desc": "前一天卤好冷藏，当天切片就能上桌。", "ingredients": "牛腱 500g、卤料包、生抽、姜", "steps": ["牛腱焯水后加卤料小火 80 分钟", "冷藏切片，配蒜泥或辣油"] }
-        ],
-        "main": [
-          { "id": "fm1", "name": "红烧肉", "price": 38, "cookTime": "70分钟", "portion": "4~6 人份", "tags": ["硬菜", "经典"], "desc": "提前一小时炖上，收汁后色泽红亮。", "ingredients": "五花肉 800g、冰糖、生抽老抽、八角", "steps": ["五花肉切块煸出油", "加糖色与调料，小火炖 50 分钟收汁"] },
-          { "id": "fm2", "name": "清蒸鲈鱼", "price": 32, "cookTime": "25分钟", "portion": "4~6 人份", "tags": ["硬菜", "清淡"], "desc": "两条鱼同蒸，浇热油那一刻最有仪式感。", "ingredients": "鲈鱼 2 条、姜丝、蒸鱼豉油、葱", "steps": ["鱼身划刀铺姜丝，水开后蒸 8 分钟", "倒腥水淋豉油，浇热油撒葱"] },
-          { "id": "fm3", "name": "土豆炖牛腩", "price": 58, "cookTime": "90分钟", "portion": "4~6 人份", "tags": ["硬菜", "一锅出"], "desc": "炖上不用看火，肉量给足才有聚餐感。", "ingredients": "牛腩 1kg、土豆 3 个、胡萝卜、番茄", "steps": ["牛腩焯水后加番茄炒出汁", "加水与土豆炖 70 分钟"] },
-          { "id": "fm4", "name": "蒜蓉粉丝蒸虾", "price": 48, "cookTime": "20分钟", "portion": "4~6 人份", "tags": ["硬菜", "快手"], "desc": "铺盘一蒸就好，卖相好又不占灶台。", "ingredients": "基围虾 600g、龙口粉丝 2 把、蒜蓉", "steps": ["粉丝泡软垫底，虾剖开摆盘", "铺蒜蓉蒸 6 分钟，淋热油"] }
-        ],
-        "veg": [
-          { "id": "fv1", "name": "蒜蓉西兰花", "price": 12, "cookTime": "10分钟", "portion": "4~6 人份", "tags": ["清淡", "解腻"], "desc": "大鱼大肉之间最需要的一盘绿。", "ingredients": "西兰花 2 颗、蒜末", "steps": ["西兰花焯 2 分钟", "蒜末爆香后快炒调味"] },
-          { "id": "fv2", "name": "上汤娃娃菜", "price": 14, "cookTime": "12分钟", "portion": "4~6 人份", "tags": ["清淡", "汤菜"], "desc": "有汤有菜，老人小孩都爱喝。", "ingredients": "娃娃菜 3 颗、皮蛋、咸蛋、高汤", "steps": ["皮蛋咸蛋切丁炒香", "加高汤烧开下娃娃菜煮 6 分钟"] }
-        ],
-        "staple": [
-          { "id": "fs1", "name": "扬州炒饭", "price": 16, "cookTime": "15分钟", "portion": "4~6 人份", "tags": ["主食", "管饱"], "desc": "一锅炒饭顶一桌人的主食。", "ingredients": "隔夜饭 4 碗、鸡蛋 4 个、火腿丁、青豆", "steps": ["蛋炒散下火腿青豆", "加饭炒散调味"] },
-          { "id": "fs2", "name": "杂粮米饭", "price": 8, "cookTime": "25分钟", "portion": "4~6 人份", "tags": ["主食", "粗粮"], "desc": "电饭煲一锅，比单纯白米饭更耐吃。", "ingredients": "大米 3 杯、糙米/燕麦 1 杯", "steps": ["杂粮提前泡 30 分钟", "与米同煮"] }
-        ],
-        "soups": [
-          { "id": "fsp1", "name": "玉米排骨汤（一锅）", "price": 30, "cookTime": "50分钟", "portion": "一大锅", "tags": ["炖汤", "清甜"], "desc": "人多量翻倍，清甜不腻，最先被喝光。", "ingredients": "排骨 700g、玉米 3 根、胡萝卜 2 根", "steps": ["排骨焯水去沫", "全部加水炖 45 分钟加盐"] },
-          { "id": "fsp2", "name": "番茄牛腩汤（一锅）", "price": 36, "cookTime": "90分钟", "portion": "一大锅", "tags": ["酸甜", "开胃"], "desc": "汤和料都能吃，配主食刚好。", "ingredients": "牛腩 800g、番茄 4 个、洋葱 1 个", "steps": ["番茄洋葱炒出汁", "加牛腩与水炖 80 分钟"] },
-          { "id": "fsp3", "name": "菌菇鸡汤（一锅）", "price": 32, "cookTime": "70分钟", "portion": "一大锅", "tags": ["清淡", "滋补"], "desc": "整鸡炖到脱骨，开饭前先给每人盛一碗。", "ingredients": "整鸡 1 只、香菇 8 朵、金针菇、枸杞", "steps": ["整鸡焯水", "与菌菇同炖 60 分钟"] }
-        ]
-      }
+      ]
     },
     {
       "id": "takeout",
@@ -134,35 +128,7 @@
         { "id": "ts4", "name": "玉米排骨汤", "price": 25, "cookTime": "35分钟", "tags": ["家常", "清淡"], "desc": "清甜家常汤，怎么点都不出错。" },
         { "id": "ts5", "name": "酸辣汤", "price": 15, "cookTime": "25分钟", "tags": ["开胃", "低卡"], "desc": "开胃低卡，配饺子或主食都行。" },
         { "id": "ts6", "name": "味增汤", "price": 8, "cookTime": "20分钟", "tags": ["日式", "轻食"], "desc": "配日料定食的单点汤，清淡解腻。" }
-      ],
-      "feast": {
-        "label": "聚餐（4~6 人）",
-        "cold": [
-          { "id": "tc1", "name": "拍黄瓜", "price": 12, "cookTime": "20分钟", "portion": "4~6 人份", "tags": ["开胃", "便宜"], "desc": "先上这道垫垫，等主菜时不至于干坐着。", "ingredients": "黄瓜、蒜末、香醋、辣油" },
-          { "id": "tc2", "name": "口水鸡", "price": 32, "cookTime": "30分钟", "portion": "4~6 人份", "tags": ["川味", "下酒"], "desc": "红油给得多，第一道就有气氛。" },
-          { "id": "tc3", "name": "卤味拼盘", "price": 48, "cookTime": "30分钟", "portion": "4~6 人份", "tags": ["下酒", "耐放"], "desc": "卤蛋、豆干、鸭翅拼一盘，边聊边吃。" }
-        ],
-        "main": [
-          { "id": "tm1", "name": "干锅花菜", "price": 42, "cookTime": "35分钟", "portion": "4~6 人份", "tags": ["下饭", "微辣"], "desc": "最便宜的硬菜之一，有锅气、能配主食。" },
-          { "id": "tm2", "name": "大盘鸡", "price": 68, "cookTime": "40分钟", "portion": "4~6 人份", "tags": ["硬菜", "带面"], "desc": "自带皮带面，一道菜顶肉 + 主食。" },
-          { "id": "tm3", "name": "糖醋排骨", "price": 58, "cookTime": "35分钟", "portion": "4~6 人份", "tags": ["酸甜", "老少皆宜"], "desc": "酸甜口，桌上没人会拒绝。" },
-          { "id": "tm4", "name": "烤鱼", "price": 88, "cookTime": "45分钟", "portion": "4~6 人份", "tags": ["硬菜", "配菜多"], "desc": "自带配菜，一锅两吃，适合边聊边涮。" },
-          { "id": "tm5", "name": "香辣小龙虾", "price": 128, "cookTime": "50分钟", "portion": "4~6 人份", "tags": ["季节", "豪华"], "desc": "聚餐最有排面的一道，剥壳也自然拉长聊天时间。" }
-        ],
-        "veg": [
-          { "id": "tv1", "name": "蒜蓉西兰花", "price": 22, "cookTime": "25分钟", "portion": "4~6 人份", "tags": ["清淡", "解腻"], "desc": "一桌硬菜里唯一的绿，先点它。" },
-          { "id": "tv2", "name": "上汤娃娃菜", "price": 26, "cookTime": "30分钟", "portion": "4~6 人份", "tags": ["清淡", "汤菜"], "desc": "有汤有菜，老人小孩都能吃。" }
-        ],
-        "staple": [
-          { "id": "tsn1", "name": "蛋炒饭（大份）", "price": 18, "cookTime": "25分钟", "portion": "4~6 人份", "tags": ["主食", "管饱"], "desc": "大份炒饭分着吃，比每人一碗米饭省。" },
-          { "id": "tsn2", "name": "手工水饺（两盘）", "price": 30, "cookTime": "30分钟", "portion": "4~6 人份", "tags": ["主食", "中式"], "desc": "两盘分着装，配醋和蒜泥。" }
-        ],
-        "soups": [
-          { "id": "tsp1", "name": "番茄蛋汤（大锅）", "price": 28, "cookTime": "25分钟", "portion": "一大锅", "tags": ["便宜", "开胃"], "desc": "最省的一锅汤，酸甜解腻。" },
-          { "id": "tsp2", "name": "菌菇鸡汤（大锅）", "price": 68, "cookTime": "40分钟", "portion": "一大锅", "tags": ["滋补", "清淡"], "desc": "整鸡炖菌菇，开饭先喝汤垫胃。" },
-          { "id": "tsp3", "name": "胡椒猪肚鸡（大锅）", "price": 88, "cookTime": "45分钟", "portion": "一大锅", "tags": ["暖胃", "滋补"], "desc": "入秋聚餐最合适的一锅，暖胃又够分量。" }
-        ]
-      }
+      ]
     }
   ]
 }

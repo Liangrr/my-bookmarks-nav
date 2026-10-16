@@ -18,14 +18,29 @@ type Meal = {
 
 type Soup = Meal;
 
-// 聚餐：一桌菜，按整份计价、按人均算花费
-type Feast = {
+// 聚餐：只去店里吃，按「人均 × 人数」算花费
+type Place = {
+  id: string;
+  name: string;
+  category: string;
+  district: string;
+  station: string;
+  perPerson: number;
+  perText: string;
+  level: number;
+  fit: string;
+  signature: string[];
+  tips: string;
+  source: string;
+  sourceNote: string;
+};
+
+type FeastData = {
   label: string;
-  cold: Meal[];
-  main: Meal[];
-  veg: Meal[];
-  staple: Meal[];
-  soups: Meal[];
+  area: string;
+  note: string;
+  people: number[];
+  places: Place[];
 };
 
 type MealSet = {
@@ -39,7 +54,6 @@ type MealSet = {
   lunch: Meal[];
   dinner: Meal[];
   soups: Soup[];
-  feast?: Feast;
 };
 
 type PlannerData = {
@@ -51,6 +65,7 @@ type PlannerData = {
     lunchMax: number;
     dinnerMax: number;
   };
+  feast?: FeastData;
   sets: MealSet[];
 };
 
@@ -101,24 +116,18 @@ const SALT: Record<string, number> = {
 };
 const ROUND_STEP = 7919;
 
-// 场合：个人（一人份三餐） / 聚餐（一桌分享菜，按人均算）
+// 场合：个人（自己做 / 点外卖） / 聚餐（只去店里吃）
 const SCENES = [
-  { key: "solo", label: "个人", icon: "👤", desc: "一人份：三餐按份计价" },
-  { key: "feast", label: "聚餐", icon: "👥", desc: "4~6 人一桌：整份计价、按人均算" },
+  { key: "solo", label: "个人", icon: "👤", desc: "一人份：自己做或点外卖" },
+  { key: "feast", label: "聚餐", icon: "👥", desc: "3~5 人：去店里吃" },
 ] as const;
 type SceneKey = (typeof SCENES)[number]["key"];
 
-// 聚餐按 4 人桌折算人均
-const PEOPLE = 4;
-
-const FEAST_SALT: Record<string, number> = {
-  cold: 13,
-  main: 29,
-  veg: 43,
-  staple: 59,
-  soup: 67,
-  fruit: 79,
-};
+// 聚餐数据（单一：只去店里吃），人数在数据里可配
+const FEAST = (PLANNER.feast ?? null) as FeastData | null;
+const FEAST_PEOPLE: number[] = FEAST && FEAST.people.length > 0 ? FEAST.people : [3, 4, 5];
+const LEVEL_LABEL: Record<number, string> = { 1: "平价", 2: "中档", 3: "稍贵", 4: "高档" };
+const LEVEL_SALT: Record<number, number> = { 1: 17, 2: 31, 3: 47, 4: 61 };
 
 // 用于推导「营养均衡」的关键词（不手写营养字段，按实际选中项推导）
 const NUTRI_KEYS = {
@@ -188,6 +197,8 @@ export function MealPlanner() {
   const [setIdx, setSetIdx] = useState(0);
   const [dayIdx, setDayIdx] = useState(0);
   const [sceneIdx, setSceneIdx] = useState(0);
+  // 聚餐人数，默认取数据里的中间档（3/4/5 → 4）
+  const [people, setPeople] = useState(FEAST_PEOPLE[Math.min(1, FEAST_PEOPLE.length - 1)] ?? 3);
   // 日期状态挂载后再置入，避免服务端/客户端跨时区 hydration 不一致
   const [today, setToday] = useState<Ymd | null>(null);
   useEffect(() => {
@@ -234,50 +245,27 @@ export function MealPlanner() {
     (p) => p.breakfast.price + p.lunch.price + p.dinner.price + (p.hasSoup ? p.soup.price : 0)
   );
 
-  // 聚餐：1 凉菜 + 2 硬菜 + 1 时蔬 + 1 主食 + 1 锅汤，整份价合计后按 4 人折算人均
-  const feasts = useMemo(() => {
-    const month = today ? monthAfter(today, DAYS[dayIdx].offset) : null;
-    const seasonal = month ? FRUITS.filter((f) => f.months.includes(month)) : FRUITS;
-    const pool = seasonal.length > 0 ? seasonal : FRUITS;
-    const cheapest = (a: Meal[]) => a.reduce((x, y) => (y.price < x.price ? y : x));
-    return PLANNER.sets.map((s, si) => {
-      if (!s.feast) return null;
-      const f = s.feast;
-      const sb = base + round * ROUND_STEP + si * 101;
-      const offset = DAYS[dayIdx].offset;
-      const picks = fitBudget(
-        [
-          { meal: pickBy(f.cold, sb + FEAST_SALT.cold, offset), floor: cheapest(f.cold) },
-          { meal: pickBy(f.main, sb + FEAST_SALT.main, offset), floor: cheapest(f.main) },
-          { meal: pickBy(f.main, sb + FEAST_SALT.main, offset + 1), floor: cheapest(f.main) },
-          { meal: pickBy(f.veg, sb + FEAST_SALT.veg, offset), floor: cheapest(f.veg) },
-          { meal: pickBy(f.staple, sb + FEAST_SALT.staple, offset), floor: cheapest(f.staple) },
-          { meal: pickBy(f.soups, sb + FEAST_SALT.soup, offset), floor: cheapest(f.soups) },
-        ],
-        BUDGET.dailyMax * PEOPLE
-      );
-      // 兜底后两道硬菜可能撞成同一道：换一道不涨价的替补，保证一桌不重样
-      if (picks[1].id === picks[2].id) {
-        const alt =
-          f.main.find((m) => m.id !== picks[1].id && m.price <= picks[2].price) ??
-          f.main.find((m) => m.id !== picks[1].id);
-        if (alt) picks[2] = alt;
-      }
-      return {
-        label: f.label,
-        dishes: [
-          { slot: "凉菜", meal: picks[0] },
-          { slot: "硬菜", meal: picks[1] },
-          { slot: "硬菜", meal: picks[2] },
-          { slot: "时蔬", meal: picks[3] },
-          { slot: "主食", meal: picks[4] },
-        ],
-        soup: picks[5],
-        fruits: [pickBy(pool, sb + FEAST_SALT.fruit, offset), pickBy(pool, sb + FEAST_SALT.fruit, offset + 1)],
-        month,
-      };
+  // 聚餐：只去店里吃。按价位档各取一家，三天不重样、「换一批」换的是别家
+  const feastPicks = useMemo(() => {
+    if (!FEAST || FEAST.places.length === 0) return null;
+    const offset = DAYS[dayIdx].offset;
+    const seed = base + round * ROUND_STEP;
+    const levels = Array.from(new Set(FEAST.places.map((p) => p.level))).sort((a, b) => a - b);
+    const picked: Place[] = [];
+    levels.forEach((lv) => {
+      const pool = FEAST.places.filter((p) => p.level === lv);
+      if (pool.length === 0) return;
+      picked.push(pickBy(pool, seed + (LEVEL_SALT[lv] ?? 0), offset));
     });
-  }, [base, round, dayIdx, today]);
+    // 档位不够 3 家时，用剩余店铺补齐
+    if (picked.length < 3) {
+      FEAST.places.forEach((p) => {
+        if (picked.length < 3 && !picked.some((x) => x.id === p.id)) picked.push(p);
+      });
+    }
+    picked.sort((a, b) => a.level - b.level);
+    return picked.slice(0, 3);
+  }, [base, round, dayIdx]);
 
   const set = PLANNER.sets[setIdx];
   const plan = plans[setIdx];
@@ -291,18 +279,8 @@ export function MealPlanner() {
         : { text: `✓ 达标 ≤¥${BUDGET.dailyTarget}`, color: "#22c55e", bg: "rgba(34,197,94,0.12)" };
 
   const scene: SceneKey = SCENES[sceneIdx].key;
-  const feast = feasts[setIdx];
-  const feastTotals = feasts.map((f) =>
-    f ? f.dishes.reduce((n, d) => n + d.meal.price, 0) + f.soup.price : 0
-  );
-  const feastTotal = feastTotals[setIdx];
-  const feastPer = Math.round(feastTotal / PEOPLE);
-  const feastBudgetState =
-    feastPer > BUDGET.dailyMax
-      ? { text: "✗ 人均超上限", color: "#ef4444", bg: "rgba(239,68,68,0.12)" }
-      : feastPer > BUDGET.dailyTarget
-        ? { text: "⚠ 高于人均目标", color: "#f59e0b", bg: "rgba(245,158,11,0.14)" }
-        : { text: `✓ 人均 ≤¥${BUDGET.dailyTarget}`, color: "#22c55e", bg: "rgba(34,197,94,0.12)" };
+  const feastPerMin = FEAST ? Math.min(...FEAST.places.map((p) => p.perPerson)) : 0;
+  const feastPerMax = FEAST ? Math.max(...FEAST.places.map((p) => p.perPerson)) : 0;
 
   // 同样三餐 + 汤的最省组合；以及「早晚自制 + 午餐外卖」混搭区间（该天不配汤则不计汤价）
   const saving = useMemo(() => {
@@ -352,25 +330,7 @@ export function MealPlanner() {
 
   const balanced = balance.protein.length >= 2 && balance.veg.length >= 2 && balance.staple.length >= 1;
 
-  // 聚餐营养均衡：按整桌 6 道菜（含汤）推导
-  const feastBalance = useMemo(() => {
-    if (!feast) return null;
-    const items = [...feast.dishes.map((d) => d.meal.name), feast.soup.name];
-    const collect = (keys: string[]) =>
-      items.filter((n) => matchNames(n, keys)).map((n) => n.split(/[+（(]/)[0].trim());
-    return {
-      protein: collect(NUTRI_KEYS.protein),
-      veg: collect(NUTRI_KEYS.veg),
-      staple: collect(NUTRI_KEYS.staple),
-    };
-  }, [feast]);
-
-  const feastBalanced =
-    !!feastBalance &&
-    feastBalance.protein.length >= 2 &&
-    feastBalance.veg.length >= 2 &&
-    feastBalance.staple.length >= 1;
-
+  // 聚餐只看餐馆：这里直接进入渲染
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       <header style={{ marginTop: 4 }}>
@@ -396,9 +356,9 @@ export function MealPlanner() {
             </>
           ) : (
             <>
-              聚餐模式：4~6 人一桌，1 凉菜 + 2 硬菜 + 1 时蔬 + 1 主食 + 一锅汤 + 果盘，按整份价合计后折算人均。
-              两套方案可选：🍳 自己做（成本约为外卖一半）或 🛵 点外卖。人均目标 ¥{BUDGET.dailyTarget}
-              左右，最多不超过 ¥{BUDGET.dailyMax}，同一天结果固定。
+              聚餐模式：只去店里吃。范围 {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}，
+              {FEAST_PEOPLE[0]}~{FEAST_PEOPLE[FEAST_PEOPLE.length - 1]} 人，每天给 3 家不同价位的候选，
+              按「人均 × 人数」估总花费。人均与门店来自公开点评 / 榜单，点来源可核验，价格会变动。
             </>
           )}
         </p>
@@ -463,40 +423,73 @@ export function MealPlanner() {
         })}
       </div>
 
-      {/* 两套方案切换 */}
-      <div style={{ display: "flex", gap: 8 }}>
-        {PLANNER.sets.map((s, i) => {
-          const on = i === setIdx;
-          return (
-            <button
-              key={s.id}
-              onClick={() => setSetIdx(i)}
-              style={{
-                flex: 1,
-                padding: "12px 10px",
-                borderRadius: "var(--radius-lg)",
-                cursor: "pointer",
-                textAlign: "left",
-                border: `1px solid ${on ? "var(--accent)" : "var(--border)"}`,
-                background: on
-                  ? "color-mix(in srgb, var(--accent) 12%, var(--bg-card))"
-                  : "var(--bg-card)",
-              }}
-            >
-              <div style={{ fontSize: 15, fontWeight: 800, color: on ? "var(--accent)" : "var(--text-primary)" }}>
-                {s.icon} {s.label}
-              </div>
-              <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>
-                {scene === "solo"
-                  ? `${day.label} ${s.priceLabel} ¥${totals[i]}`
-                  : `${day.label} 整桌 ¥${feastTotals[i]} · 人均 ¥${Math.round(feastTotals[i] / PEOPLE)}`}
-              </div>
-            </button>
-          );
-        })}
-      </div>
+      {/* 两套方案（仅个人：自己做 / 点外卖）；聚餐只去店里吃，没有这一层 */}
+      {scene === "solo" && (
+        <>
+          <div style={{ display: "flex", gap: 8 }}>
+            {PLANNER.sets.map((s, i) => {
+              const on = i === setIdx;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setSetIdx(i)}
+                  style={{
+                    flex: 1,
+                    padding: "12px 10px",
+                    borderRadius: "var(--radius-lg)",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    border: `1px solid ${on ? "var(--accent)" : "var(--border)"}`,
+                    background: on
+                      ? "color-mix(in srgb, var(--accent) 12%, var(--bg-card))"
+                      : "var(--bg-card)",
+                  }}
+                >
+                  <div style={{ fontSize: 15, fontWeight: 800, color: on ? "var(--accent)" : "var(--text-primary)" }}>
+                    {s.icon} {s.label}
+                  </div>
+                  <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>
+                    {day.label} {s.priceLabel} ¥{totals[i]}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
 
-      <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, lineHeight: 1.6 }}>{set.desc}</p>
+          <p style={{ fontSize: 12, color: "var(--text-tertiary)", margin: 0, lineHeight: 1.6 }}>{set.desc}</p>
+        </>
+      )}
+
+      {/* 聚餐人数 */}
+      {scene === "feast" && (
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <span style={{ fontSize: 13, color: "var(--text-tertiary)", flexShrink: 0 }}>人数</span>
+          {FEAST_PEOPLE.map((n) => {
+            const on = n === people;
+            return (
+              <button
+                key={n}
+                onClick={() => setPeople(n)}
+                style={{
+                  flex: 1,
+                  padding: "8px 10px",
+                  borderRadius: "var(--radius-lg)",
+                  cursor: "pointer",
+                  fontSize: 14,
+                  fontWeight: 800,
+                  border: `1px solid ${on ? "var(--accent)" : "var(--border)"}`,
+                  background: on
+                    ? "color-mix(in srgb, var(--accent) 12%, var(--bg-card))"
+                    : "var(--bg-card)",
+                  color: on ? "var(--accent)" : "var(--text-primary)",
+                }}
+              >
+                {n} 人
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {scene === "solo" ? (
         <>
@@ -915,7 +908,7 @@ export function MealPlanner() {
         </>
       ) : (
         <>
-          {/* 聚餐预算卡：整桌价 + 人均 */}
+          {/* 聚餐：区域 + 人数 + 人均区间 */}
           <div
             style={{
               padding: "14px 16px",
@@ -924,16 +917,13 @@ export function MealPlanner() {
               background: "var(--bg-card)",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
               <div>
                 <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
-                  {day.label} · {set.icon} {set.label} · {feast ? feast.label : "聚餐"} · 按 {PEOPLE} 人摊
+                  {day.label} · {people} 人 · 去店里吃
                 </div>
-                <div style={{ fontSize: 26, fontWeight: 800, marginTop: 2 }}>
-                  ¥{feastTotal}
-                  <span style={{ fontSize: 13, fontWeight: 500, color: "var(--text-tertiary)", marginLeft: 8 }}>
-                    人均 ¥{feastPer} · 目标 ¥{BUDGET.dailyTarget} · 上限 ¥{BUDGET.dailyMax}
-                  </span>
+                <div style={{ fontSize: 21, fontWeight: 800, marginTop: 2 }}>
+                  {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}
                 </div>
               </div>
               <div
@@ -942,296 +932,143 @@ export function MealPlanner() {
                   fontWeight: 600,
                   padding: "6px 12px",
                   borderRadius: 999,
-                  background: feastBudgetState.bg,
-                  color: feastBudgetState.color,
+                  background: "color-mix(in srgb, var(--accent) 12%, var(--bg-card))",
+                  color: "var(--accent)",
+                  flexShrink: 0,
                 }}
               >
-                {feastBudgetState.text}
+                人均 ¥{feastPerMin}~{feastPerMax}
               </div>
             </div>
-            <div
-              style={{
-                marginTop: 10,
-                paddingTop: 10,
-                borderTop: "1px solid var(--border)",
-                fontSize: 12,
-                color: "var(--text-secondary)",
-                lineHeight: 1.75,
-              }}
-            >
-              <span style={{ color: "var(--text-tertiary)" }}>点菜思路：</span>
-              两道硬菜定人数感，凉菜和时蔬压成本，主食点大份分着吃；菜品数比人数少一道最不容易剩。
-            </div>
+            {FEAST && (
+              <div
+                style={{
+                  marginTop: 10,
+                  paddingTop: 10,
+                  borderTop: "1px solid var(--border)",
+                  fontSize: 12,
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.75,
+                }}
+              >
+                {FEAST.note}
+              </div>
+            )}
           </div>
 
-          {/* 聚餐菜单：一桌 6 道 */}
-          {feast && (
-            <div
-              style={{
-                padding: 16,
-                borderRadius: "var(--radius-lg)",
-                border: "1px solid var(--border)",
-                background: "var(--bg-card)",
-                borderLeft: "4px solid #3b82f6",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-                <span style={{ fontSize: 22 }}>🍽️</span>
-                <span style={{ fontSize: 16, fontWeight: 700 }}>{day.label}聚餐菜单</span>
-                <span
+          {/* 今日 3 家候选：按价位档各取一家 */}
+          {feastPicks &&
+            feastPicks.map((p) => (
+              <div
+                key={p.id}
+                style={{
+                  padding: 16,
+                  borderRadius: "var(--radius-lg)",
+                  border: "1px solid var(--border)",
+                  background: "var(--bg-card)",
+                  borderLeft: `4px solid ${p.level === 1 ? "#22c55e" : p.level === 2 ? "#3b82f6" : "#f59e0b"}`,
+                }}
+              >
+                <div
                   style={{
-                    fontSize: 11,
-                    padding: "2px 8px",
-                    borderRadius: 999,
-                    background: "var(--bg-card-hover)",
-                    color: "var(--text-tertiary)",
+                    display: "flex",
+                    alignItems: "baseline",
+                    justifyContent: "space-between",
+                    gap: 8,
+                    flexWrap: "wrap",
                   }}
                 >
-                  6 道 · 4~6 人 · 整份价
-                </span>
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                {feast.dishes.map((d, i) => (
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
+                    <span style={{ fontSize: 17, fontWeight: 800 }}>{p.name}</span>
+                    <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{p.category}</span>
+                    <span
+                      style={{
+                        fontSize: 11,
+                        padding: "2px 8px",
+                        borderRadius: 999,
+                        background: "var(--bg-card-hover)",
+                        color: "var(--text-tertiary)",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {LEVEL_LABEL[p.level] ?? "参考"}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: "var(--accent)", flexShrink: 0 }}>
+                    {people} 人约 ¥{p.perPerson * people}
+                  </div>
+                </div>
+                <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>
+                  📍 {p.district} · {p.station} · {p.perText} · {p.fit}
+                </div>
+                {p.signature.length > 0 && (
+                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
+                    {p.signature.map((sig) => (
+                      <span
+                        key={sig}
+                        style={{
+                          fontSize: 12,
+                          padding: "3px 10px",
+                          borderRadius: 999,
+                          background: "var(--bg-secondary)",
+                          color: "var(--text-secondary)",
+                          border: "1px solid var(--border)",
+                        }}
+                      >
+                        {sig}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {p.tips && (
                   <div
-                    key={`${d.meal.id}-${i}`}
                     style={{
-                      padding: "10px 12px",
-                      borderRadius: "var(--radius-md)",
+                      fontSize: 12,
+                      color: "var(--text-secondary)",
+                      lineHeight: 1.7,
+                      marginTop: 8,
+                      padding: "8px 10px",
+                      borderRadius: "var(--radius-sm)",
                       background: "var(--bg-secondary)",
                     }}
                   >
-                    <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8 }}>
-                      <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
-                        <span
-                          style={{
-                            fontSize: 11,
-                            padding: "2px 8px",
-                            borderRadius: 999,
-                            background: "var(--bg-card-hover)",
-                            color: "var(--text-tertiary)",
-                            flexShrink: 0,
-                          }}
-                        >
-                          {d.slot}
-                        </span>
-                        <span style={{ fontSize: 16, fontWeight: 700 }}>{d.meal.name}</span>
-                        <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>
-                          {d.meal.portion ?? "4~6 人份"} · {d.meal.cookTime}
-                        </span>
-                      </div>
-                      <div style={{ fontSize: 16, fontWeight: 800, color: "var(--accent)", flexShrink: 0 }}>
-                        ¥{d.meal.price}
-                      </div>
-                    </div>
-                    <div style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6, marginTop: 4 }}>
-                      {d.meal.desc}
-                    </div>
-                    {d.meal.ingredients && (
-                      <div style={{ fontSize: 12, color: "var(--text-tertiary)", lineHeight: 1.6, marginTop: 4 }}>
-                        食材：{d.meal.ingredients}
-                      </div>
-                    )}
-                    {d.meal.steps && d.meal.steps.length > 0 && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: 4, marginTop: 6 }}>
-                        {d.meal.steps.map((st, si) => (
-                          <div
-                            key={si}
-                            style={{
-                              display: "flex",
-                              gap: 6,
-                              fontSize: 12,
-                              lineHeight: 1.6,
-                              color: "var(--text-secondary)",
-                            }}
-                          >
-                            <span style={{ color: "var(--accent)", fontWeight: 700, flexShrink: 0 }}>{si + 1}.</span>
-                            <span>{st}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    {p.tips}
                   </div>
-                ))}
+                )}
+                <div style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 8 }}>
+                  来源：
+                  <a href={p.source} target="_blank" rel="noreferrer noopener" style={{ color: "var(--accent)" }}>
+                    {p.sourceNote}
+                  </a>
+                </div>
               </div>
-            </div>
-          )}
+            ))}
 
-          {/* 聚餐汤：一大锅 */}
-          {feast && (
-            <div
-              style={{
-                padding: 16,
-                borderRadius: "var(--radius-lg)",
-                border: "1px solid var(--border)",
-                background: "var(--bg-card)",
-                borderLeft: "4px solid #14b8a6",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ fontSize: 22 }}>🍲</span>
-                  <span style={{ fontSize: 16, fontWeight: 700 }}>{day.label}聚餐汤</span>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      padding: "2px 8px",
-                      borderRadius: 999,
-                      background: "var(--bg-card-hover)",
-                      color: "var(--text-tertiary)",
-                    }}
-                  >
-                    一大锅 · 够 4~6 人
-                  </span>
-                </div>
-                <div style={{ fontSize: 18, fontWeight: 800, color: "#14b8a6" }}>¥{feast.soup.price}</div>
+          {/* 人数对应的点菜结构 */}
+          <div
+            style={{
+              padding: 16,
+              borderRadius: "var(--radius-lg)",
+              border: "1px solid var(--border)",
+              background: "var(--bg-card)",
+            }}
+          >
+            <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 10 }}>🧾 {people} 人点菜怎么配</div>
+            {[
+              { label: "菜数", value: `${people} 道：凉菜 1 + 荤 ${Math.max(2, people - 2)} + 素 2` },
+              { label: "主食", value: people >= 5 ? "1~2 份大份，分着吃比每人一份省" : "1 份大份即可（或按人数份）" },
+              { label: "汤", value: "1 锅，3~5 人一锅就够，不必按人头点" },
+              { label: "买单", value: "先按人均估：人均 × 人数，酒水通常另算且最容易超支" },
+              { label: "避坑", value: "晚市比午市贵；能订位就先订，多人到店排队最耗时" },
+            ].map((row) => (
+              <div key={row.label} style={{ display: "flex", gap: 8, padding: "6px 0", fontSize: 13 }}>
+                <span style={{ width: 56, flexShrink: 0, color: "var(--text-tertiary)" }}>{row.label}</span>
+                <span style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>{row.value}</span>
               </div>
-              <div style={{ fontSize: 17, fontWeight: 700, marginBottom: 4 }}>{feast.soup.name}</div>
-              <div style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 8 }}>
-                {feast.soup.desc}
-              </div>
-              {feast.soup.ingredients && (
-                <div
-                  style={{
-                    fontSize: 12,
-                    color: "var(--text-secondary)",
-                    lineHeight: 1.6,
-                    padding: "8px 10px",
-                    borderRadius: "var(--radius-sm)",
-                    background: "var(--bg-secondary)",
-                    marginBottom: 8,
-                  }}
-                >
-                  <span style={{ color: "var(--text-tertiary)" }}>食材：</span>
-                  {feast.soup.ingredients}
-                </div>
-              )}
-              {feast.soup.steps && feast.soup.steps.length > 0 && (
-                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  {feast.soup.steps.map((st, si) => (
-                    <div
-                      key={si}
-                      style={{ display: "flex", gap: 6, fontSize: 12, lineHeight: 1.6, color: "var(--text-secondary)" }}
-                    >
-                      <span style={{ color: "var(--accent)", fontWeight: 700, flexShrink: 0 }}>{si + 1}.</span>
-                      <span>{st}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* 果盘 */}
-          {feast && (
-            <div
-              style={{
-                padding: 16,
-                borderRadius: "var(--radius-lg)",
-                border: "1px solid var(--border)",
-                background: "var(--bg-card)",
-                borderLeft: "4px solid #ec4899",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-                <span style={{ fontSize: 22 }}>🍎</span>
-                <span style={{ fontSize: 16, fontWeight: 700 }}>{day.label}果盘</span>
-                <span
-                  style={{
-                    fontSize: 11,
-                    padding: "2px 8px",
-                    borderRadius: 999,
-                    background: "var(--bg-card-hover)",
-                    color: "var(--text-tertiary)",
-                  }}
-                >
-                  切块拼盘 · 约 1kg · 够 4~6 人
-                </span>
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {feast.fruits.map((f) => (
-                  <div key={f.id} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <span
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: "var(--radius-sm)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: f.icon ? 20 : 15,
-                        fontWeight: 800,
-                        color: "var(--accent)",
-                        background: "var(--bg-secondary)",
-                        flexShrink: 0,
-                      }}
-                      aria-hidden="true"
-                    >
-                      {f.icon || f.name[0]}
-                    </span>
-                    <div>
-                      <div style={{ fontSize: 16, fontWeight: 700 }}>{f.name}</div>
-                      <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
-                        {f.kcal} kcal · 糖 {f.sugar}g · 纤维 {f.fiber}g · {f.diet}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6, marginTop: 8 }}>
-                果盘先摆上桌，等菜的时候垫肚子，比薯片和含糖饮料健康。
-              </div>
-            </div>
-          )}
-
-          {/* 整桌营养均衡 */}
-          {feast && feastBalance && (
-            <div
-              style={{
-                padding: 16,
-                borderRadius: "var(--radius-lg)",
-                border: `1px solid ${feastBalanced ? "rgba(34,197,94,0.4)" : "var(--border)"}`,
-                background: "var(--bg-card)",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
-                <span style={{ fontSize: 16, fontWeight: 700 }}>
-                  {feastBalanced ? "✅" : "⚠️"} {day.label}整桌营养均衡
-                </span>
-                <span
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    padding: "4px 10px",
-                    borderRadius: 999,
-                    background: feastBalanced ? "rgba(34,197,94,0.12)" : "rgba(245,158,11,0.14)",
-                    color: feastBalanced ? "#22c55e" : "#f59e0b",
-                  }}
-                >
-                  {feastBalanced ? "荤素齐了" : "建议加一道蔬菜"}
-                </span>
-              </div>
-              {[
-                { label: "蛋白质", list: feastBalance.protein },
-                { label: "蔬菜", list: feastBalance.veg },
-                { label: "主食 / 碳水", list: feastBalance.staple },
-                { label: "汤", list: [feast.soup.name] },
-                { label: "水果", list: feast.fruits.map((f) => f.name) },
-              ].map((row) => (
-                <div
-                  key={row.label}
-                  style={{ display: "flex", gap: 8, alignItems: "flex-start", padding: "6px 0", fontSize: 13 }}
-                >
-                  <span style={{ width: 82, flexShrink: 0, color: "var(--text-tertiary)" }}>{row.label}</span>
-                  <span style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
-                    {row.list.length > 0 ? row.list.join(" · ") : "—（这桌偏少，可加一道）"}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+            ))}
+          </div>
         </>
       )}
-
       <button
         onClick={() => setRound((r) => r + 1)}
         style={{
@@ -1245,7 +1082,7 @@ export function MealPlanner() {
           fontWeight: 700,
         }}
       >
-        🎲 换一批推荐（三天 × 两套同时）
+        {scene === "solo" ? "🎲 换一批推荐（三天 × 两套同时）" : "🎲 换一批餐馆（三天同时换）"}
       </button>
     </div>
   );
