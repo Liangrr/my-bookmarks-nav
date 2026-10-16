@@ -23,7 +23,10 @@ type Place = {
   id: string;
   name: string;
   category: string;
+  // 行政区：福田 / 罗湖 / 南山 / 宝安 / 龙华 / 龙岗 / 盐田 / 光明 / 坪山 / 大鹏
   district: string;
+  // 商圈 / 片区，如「星河 COCO Park」「车公庙」
+  subArea?: string;
   station: string;
   // 详细地址（含商场楼层 / 铺位，可直接拿去导航）
   address?: string;
@@ -155,6 +158,17 @@ const FEAST_CUISINES: string[] = FEAST
   ? (FEAST.cuisines ?? []).filter((c) => FEAST.places.some((p) => p.cuisine === c))
   : [];
 
+// 行政区下拉：按常用顺序排，只保留数据里真有门店的区，避免选了空结果
+const DISTRICT_ORDER = ["福田", "罗湖", "南山", "宝安", "龙华", "龙岗", "盐田", "光明", "坪山", "大鹏"];
+const ALL_DISTRICTS = FEAST ? Array.from(new Set(FEAST.places.map((p) => p.district))) : [];
+const FEAST_DISTRICTS: string[] = [
+  ...DISTRICT_ORDER.filter((d) => ALL_DISTRICTS.includes(d)),
+  ...ALL_DISTRICTS.filter((d) => !DISTRICT_ORDER.includes(d)),
+];
+
+// 全城门店较多，一次只渲染前 N 家，其余用「加载更多」逐段展开
+const FEAST_PAGE = 24;
+
 const LEVEL_COLOR: Record<number, string> = { 1: "#22c55e", 2: "#3b82f6", 3: "#f59e0b", 4: "#ef4444" };
 const TOP3 = new Set([1, 2, 3]);
 
@@ -237,8 +251,12 @@ export function MealPlanner() {
   const [setIdx, setSetIdx] = useState(0);
   const [dayIdx, setDayIdx] = useState(0);
   const [sceneIdx, setSceneIdx] = useState(0);
-  // 菜系筛选：空串 = 全部（聚餐门店统一按「适合 3~5 人」收录，不再选人数）
+  // 聚餐筛选：地区（行政区）+ 菜系 + 关键词搜索；空串 = 全部
+  const [district, setDistrict] = useState("");
   const [cuisine, setCuisine] = useState("");
+  const [query, setQuery] = useState("");
+  // 已展开的家数（切换筛选条件时重置）
+  const [shown, setShown] = useState(FEAST_PAGE);
   // 日期状态挂载后再置入，避免服务端/客户端跨时区 hydration 不一致
   const [today, setToday] = useState<Ymd | null>(null);
   useEffect(() => {
@@ -248,11 +266,28 @@ export function MealPlanner() {
 
   const base = today ? today.y * 10000 + today.m * 100 + today.d : 1;
 
-  // 菜系筛选后的聚餐列表（空串 = 全部）
-  const feastList = useMemo(
-    () => (cuisine ? FEAST_RANKED.filter((p) => p.cuisine === cuisine) : FEAST_RANKED),
-    [cuisine],
-  );
+  // 聚餐筛选：地区 + 菜系 + 关键词（店名 / 商圈 / 车站 / 地址 / 招牌菜）三重过滤
+  const feastList = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return FEAST_RANKED.filter((p) => {
+      if (district && p.district !== district) return false;
+      if (cuisine && p.cuisine !== cuisine) return false;
+      if (!q) return true;
+      const text = [p.name, p.category, p.cuisine, p.district, p.subArea, p.station, p.address, ...p.signature]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      return text.includes(q);
+    });
+  }, [district, cuisine, query]);
+
+  // 切换筛选条件后从头展示，避免停在「已经加载了很多」的状态
+  function applyFilter(next: { district?: string; cuisine?: string; query?: string }) {
+    if (next.district !== undefined) setDistrict(next.district);
+    if (next.cuisine !== undefined) setCuisine(next.cuisine);
+    if (next.query !== undefined) setQuery(next.query);
+    setShown(FEAST_PAGE);
+  }
 
   const plans = useMemo(() => {
     const month = today ? monthAfter(today, DAYS[dayIdx].offset) : null;
@@ -382,11 +417,11 @@ export function MealPlanner() {
             </>
           ) : (
             <>
-              聚餐模式：只去店里吃。范围 {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}，
-              门店统一按「适合 3~5 人」收录，一次按综合评价排名列出全部区内餐馆
+              聚餐模式：只去店里吃。范围 {FEAST ? FEAST.area : "深圳 · 全城"}，
+              门店统一按「适合 3~5 人」收录，一次按综合评价排名列出全部餐馆
               （口味 / 环境 / 服务 / 性价比 加权，附好评点、踩坑与性价比判断），
-              每家带详细地址（含商场楼层 / 铺位）与菜系分类，可按菜系筛选，花费按人均估。
-              门店与人均来自公开点评 / 工商登记 / 商场官网，点来源可核验，价格会变动。
+              每家带详细地址（含商场楼层 / 铺位）与菜系分类，可按地区 + 菜系筛选，也能直接搜店名 / 商圈 / 招牌菜，
+              花费按人均估。门店与人均来自公开点评 / 工商登记 / 商场官网，点来源可核验，价格会变动。
             </>
           )}
         </p>
@@ -490,38 +525,116 @@ export function MealPlanner() {
         </>
       )}
 
-      {/* 菜系筛选（聚餐）：门店统一按「适合 3~5 人」收录，所以不再选人数，改为按菜系过滤 */}
-      {scene === "feast" && FEAST_CUISINES.length > 0 && (
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          {[
-            { key: "", label: `全部 ${FEAST_RANKED.length}` },
-            ...FEAST_CUISINES.map((c) => ({
-              key: c,
-              label: `${c} ${FEAST_RANKED.filter((p) => p.cuisine === c).length}`,
-            })),
-          ].map((c) => {
-            const on = c.key === cuisine;
-            return (
-              <button
-                key={c.key || "all"}
-                onClick={() => setCuisine(c.key)}
-                style={{
-                  padding: "7px 12px",
-                  borderRadius: 999,
-                  cursor: "pointer",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  border: `1px solid ${on ? "var(--accent)" : "var(--border)"}`,
-                  background: on
-                    ? "color-mix(in srgb, var(--accent) 12%, var(--bg-card))"
-                    : "var(--bg-card)",
-                  color: on ? "var(--accent)" : "var(--text-secondary)",
-                }}
-              >
-                {c.label}
-              </button>
-            );
-          })}
+      {/* 聚餐筛选：地区下拉 + 菜系下拉 + 关键词搜索（门店统一按「适合 3~5 人」收录，不再选人数） */}
+      {scene === "feast" && (
+        <div
+          style={{
+            position: "sticky",
+            top: 76,
+            zIndex: 10,
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: 8,
+            padding: "10px 12px",
+            borderRadius: "var(--radius-lg)",
+            border: "1px solid var(--border)",
+            background: "var(--bg-glass)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
+        >
+          <select
+            value={district}
+            onChange={(e) => applyFilter({ district: e.target.value })}
+            aria-label="按地区筛选"
+            style={{
+              height: 34,
+              padding: "0 8px",
+              borderRadius: "var(--radius-md)",
+              border: `1px solid ${district ? "var(--accent)" : "var(--border)"}`,
+              background: "var(--bg-card)",
+              color: district ? "var(--accent)" : "var(--text-primary)",
+              font: "inherit",
+              fontSize: 13,
+              fontWeight: 600,
+              outline: "none",
+              cursor: "pointer",
+            }}
+          >
+            <option value="">全部地区（{FEAST_RANKED.length}）</option>
+            {FEAST_DISTRICTS.map((d) => (
+              <option key={d} value={d}>
+                {d}（{FEAST_RANKED.filter((p) => p.district === d).length}）
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={cuisine}
+            onChange={(e) => applyFilter({ cuisine: e.target.value })}
+            aria-label="按菜系筛选"
+            style={{
+              height: 34,
+              padding: "0 8px",
+              borderRadius: "var(--radius-md)",
+              border: `1px solid ${cuisine ? "var(--accent)" : "var(--border)"}`,
+              background: "var(--bg-card)",
+              color: cuisine ? "var(--accent)" : "var(--text-primary)",
+              font: "inherit",
+              fontSize: 13,
+              fontWeight: 600,
+              outline: "none",
+              cursor: "pointer",
+            }}
+          >
+            <option value="">全部菜系（{FEAST_RANKED.length}）</option>
+            {FEAST_CUISINES.map((c) => (
+              <option key={c} value={c}>
+                {c}（{FEAST_RANKED.filter((p) => p.cuisine === c).length}）
+              </option>
+            ))}
+          </select>
+
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => applyFilter({ query: e.target.value })}
+            placeholder="搜索店名 / 商圈 / 车站 / 招牌菜，如：早茶、潮汕、鸽"
+            aria-label="搜索聚餐餐馆"
+            style={{
+              flex: 1,
+              minWidth: 200,
+              height: 34,
+              padding: "0 12px",
+              borderRadius: "var(--radius-md)",
+              border: "1px solid var(--border)",
+              background: "var(--bg-card)",
+              color: "var(--text-primary)",
+              font: "inherit",
+              fontSize: 13,
+              outline: "none",
+            }}
+          />
+
+          {(district || cuisine || query) && (
+            <button
+              onClick={() => applyFilter({ district: "", cuisine: "", query: "" })}
+              style={{
+                height: 34,
+                padding: "0 12px",
+                borderRadius: "var(--radius-md)",
+                border: "1px solid var(--border)",
+                background: "var(--bg-card)",
+                color: "var(--text-secondary)",
+                fontSize: 13,
+                cursor: "pointer",
+                flexShrink: 0,
+              }}
+            >
+              ✕ 清空
+            </button>
+          )}
         </div>
       )}
 
@@ -993,8 +1106,16 @@ export function MealPlanner() {
             )}
           </div>
 
-          {/* 全部餐馆：按综合排名列出，不随机、不换批；可按菜系筛选 */}
-          {feastList.map((p) => {
+          {/* 全部餐馆：按综合排名列出，不随机、不换批；可按地区 + 菜系筛选、可搜索 */}
+          <div style={{ fontSize: 12, color: "var(--text-tertiary)", padding: "0 2px" }}>
+            命中 {feastList.length} 家
+            {district ? ` · ${district}` : ""}
+            {cuisine ? ` · ${cuisine}` : ""}
+            {query.trim() ? ` · 关键词「${query.trim()}」` : ""}
+            {feastList.length > shown ? `，已显示前 ${shown} 家` : ""}
+          </div>
+
+          {feastList.slice(0, shown).map((p) => {
             const lvColor = LEVEL_COLOR[p.level] ?? "#94a3b8";
             const top = p.rank !== undefined && TOP3.has(p.rank);
             const pScore = scoreOf(p);
@@ -1071,7 +1192,9 @@ export function MealPlanner() {
                 )}
                 <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: p.address ? 2 : 6 }}>
                   {p.cuisine ? `${p.cuisine} · ` : ""}
-                  {p.district} · {p.station} · {p.perText} · {p.fit}
+                  {p.district}
+                  {p.subArea ? ` · ${p.subArea}` : ""}
+                  {` · ${p.station} · ${p.perText} · ${p.fit}`}
                 </div>
                 {p.rating && (
                   <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>
@@ -1247,6 +1370,40 @@ export function MealPlanner() {
               </div>
             );
           })}
+
+          {feastList.length === 0 && (
+            <div
+              style={{
+                padding: 16,
+                borderRadius: "var(--radius-lg)",
+                border: "1px dashed var(--border)",
+                background: "var(--bg-card)",
+                fontSize: 13,
+                color: "var(--text-secondary)",
+                lineHeight: 1.7,
+              }}
+            >
+              这个组合暂时没有收录的店。可以换个地区 / 菜系，或清空关键词再试；没找到的店宁可不收录，也不编数据。
+            </div>
+          )}
+
+          {feastList.length > shown && (
+            <button
+              onClick={() => setShown((s) => s + FEAST_PAGE)}
+              style={{
+                height: 44,
+                borderRadius: "var(--radius-lg)",
+                border: "1px solid var(--border)",
+                background: "var(--bg-card)",
+                color: "var(--text-primary)",
+                fontSize: 14,
+                fontWeight: 700,
+                cursor: "pointer",
+              }}
+            >
+              ↓ 加载更多（还有 {feastList.length - shown} 家）
+            </button>
+          )}
 
           {/* 3~5 人的点菜结构（不随人数切换，门店统一按 3~5 人收录） */}
           <div
