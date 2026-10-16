@@ -18,13 +18,17 @@ type Meal = {
 
 type Soup = Meal;
 
-// 聚餐：只去店里吃，按「人均 × 人数」算花费
+// 聚餐：只去店里吃，门店统一按「适合 3~5 人」收录，花费按人均估
 type Place = {
   id: string;
   name: string;
   category: string;
   district: string;
   station: string;
+  // 详细地址（含商场楼层 / 铺位，可直接拿去导航）
+  address?: string;
+  // 菜系分组（用于筛选），如「潮汕菜」「火锅·烤肉」
+  cuisine?: string;
   perPerson: number;
   perText: string;
   level: number;
@@ -52,7 +56,8 @@ type FeastData = {
   // 排名口径说明（可选）
   rankNote?: string;
   updated?: string;
-  people: number[];
+  // 菜系分组（可选：缺省则不展示筛选栏）
+  cuisines?: string[];
   places: Place[];
 };
 
@@ -136,14 +141,18 @@ const SCENES = [
 ] as const;
 type SceneKey = (typeof SCENES)[number]["key"];
 
-// 聚餐数据（单一：只去店里吃），人数在数据里可配
+// 聚餐数据（单一：只去店里吃），门店统一按「适合 3~5 人」收录
 const FEAST = (PLANNER.feast ?? null) as FeastData | null;
-const FEAST_PEOPLE: number[] = FEAST && FEAST.people.length > 0 ? FEAST.people : [3, 4, 5];
 const LEVEL_LABEL: Record<number, string> = { 1: "平价", 2: "中档", 3: "稍贵", 4: "高档" };
 
 // 聚餐：一次性列全部餐馆，按综合排名（rank）升序；没填 rank 的排在末尾
 const FEAST_RANKED: Place[] = FEAST
   ? [...FEAST.places].sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999) || a.perPerson - b.perPerson)
+  : [];
+
+// 菜系分组：只保留数据里真实有门店的分组，保证每个筛选项点下去都有结果
+const FEAST_CUISINES: string[] = FEAST
+  ? (FEAST.cuisines ?? []).filter((c) => FEAST.places.some((p) => p.cuisine === c))
   : [];
 
 const LEVEL_COLOR: Record<number, string> = { 1: "#22c55e", 2: "#3b82f6", 3: "#f59e0b", 4: "#ef4444" };
@@ -228,8 +237,8 @@ export function MealPlanner() {
   const [setIdx, setSetIdx] = useState(0);
   const [dayIdx, setDayIdx] = useState(0);
   const [sceneIdx, setSceneIdx] = useState(0);
-  // 聚餐人数，默认取数据里的中间档（3/4/5 → 4）
-  const [people, setPeople] = useState(FEAST_PEOPLE[Math.min(1, FEAST_PEOPLE.length - 1)] ?? 3);
+  // 菜系筛选：空串 = 全部（聚餐门店统一按「适合 3~5 人」收录，不再选人数）
+  const [cuisine, setCuisine] = useState("");
   // 日期状态挂载后再置入，避免服务端/客户端跨时区 hydration 不一致
   const [today, setToday] = useState<Ymd | null>(null);
   useEffect(() => {
@@ -238,6 +247,12 @@ export function MealPlanner() {
   }, []);
 
   const base = today ? today.y * 10000 + today.m * 100 + today.d : 1;
+
+  // 菜系筛选后的聚餐列表（空串 = 全部）
+  const feastList = useMemo(
+    () => (cuisine ? FEAST_RANKED.filter((p) => p.cuisine === cuisine) : FEAST_RANKED),
+    [cuisine],
+  );
 
   const plans = useMemo(() => {
     const month = today ? monthAfter(today, DAYS[dayIdx].offset) : null;
@@ -368,9 +383,10 @@ export function MealPlanner() {
           ) : (
             <>
               聚餐模式：只去店里吃。范围 {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}，
-              {FEAST_PEOPLE[0]}~{FEAST_PEOPLE[FEAST_PEOPLE.length - 1]} 人，一次按综合评价排名列出全部区内餐馆
+              门店统一按「适合 3~5 人」收录，一次按综合评价排名列出全部区内餐馆
               （口味 / 环境 / 服务 / 性价比 加权，附好评点、踩坑与性价比判断），
-              按「人均 × 人数」估总花费。人均与门店来自公开点评 / 榜单，点来源可核验，价格会变动。
+              每家带详细地址（含商场楼层 / 铺位）与菜系分类，可按菜系筛选，花费按人均估。
+              门店与人均来自公开点评 / 工商登记 / 商场官网，点来源可核验，价格会变动。
             </>
           )}
         </p>
@@ -474,31 +490,35 @@ export function MealPlanner() {
         </>
       )}
 
-      {/* 聚餐人数 */}
-      {scene === "feast" && (
-        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <span style={{ fontSize: 13, color: "var(--text-tertiary)", flexShrink: 0 }}>人数</span>
-          {FEAST_PEOPLE.map((n) => {
-            const on = n === people;
+      {/* 菜系筛选（聚餐）：门店统一按「适合 3~5 人」收录，所以不再选人数，改为按菜系过滤 */}
+      {scene === "feast" && FEAST_CUISINES.length > 0 && (
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {[
+            { key: "", label: `全部 ${FEAST_RANKED.length}` },
+            ...FEAST_CUISINES.map((c) => ({
+              key: c,
+              label: `${c} ${FEAST_RANKED.filter((p) => p.cuisine === c).length}`,
+            })),
+          ].map((c) => {
+            const on = c.key === cuisine;
             return (
               <button
-                key={n}
-                onClick={() => setPeople(n)}
+                key={c.key || "all"}
+                onClick={() => setCuisine(c.key)}
                 style={{
-                  flex: 1,
-                  padding: "8px 10px",
-                  borderRadius: "var(--radius-lg)",
+                  padding: "7px 12px",
+                  borderRadius: 999,
                   cursor: "pointer",
-                  fontSize: 14,
-                  fontWeight: 800,
+                  fontSize: 13,
+                  fontWeight: 700,
                   border: `1px solid ${on ? "var(--accent)" : "var(--border)"}`,
                   background: on
                     ? "color-mix(in srgb, var(--accent) 12%, var(--bg-card))"
                     : "var(--bg-card)",
-                  color: on ? "var(--accent)" : "var(--text-primary)",
+                  color: on ? "var(--accent)" : "var(--text-secondary)",
                 }}
               >
-                {n} 人
+                {c.label}
               </button>
             );
           })}
@@ -934,7 +954,7 @@ export function MealPlanner() {
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
               <div>
                 <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
-                  {people} 人 · 去店里吃
+                  适合 3~5 人 · 去店里吃
                 </div>
                 <div style={{ fontSize: 21, fontWeight: 800, marginTop: 2 }}>
                   {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}
@@ -973,8 +993,8 @@ export function MealPlanner() {
             )}
           </div>
 
-          {/* 全部餐馆：按综合排名列出，不随机、不换批 */}
-          {FEAST_RANKED.map((p) => {
+          {/* 全部餐馆：按综合排名列出，不随机、不换批；可按菜系筛选 */}
+          {feastList.map((p) => {
             const lvColor = LEVEL_COLOR[p.level] ?? "#94a3b8";
             const top = p.rank !== undefined && TOP3.has(p.rank);
             const pScore = scoreOf(p);
@@ -1036,13 +1056,22 @@ export function MealPlanner() {
                       </span>
                     )}
                     <span style={{ fontSize: 15, fontWeight: 800 }}>
-                      {people} 人约 ¥{p.perPerson * people}
+                      人均 ¥{p.perPerson}
+                      <span style={{ fontSize: 11, fontWeight: 500, color: "var(--text-tertiary)", marginLeft: 2 }}>
+                        · 适合 3~5 人
+                      </span>
                     </span>
                   </div>
                 </div>
 
-                <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>
-                  📍 {p.district} · {p.station} · {p.perText} · {p.fit}
+                {p.address && (
+                  <div style={{ fontSize: 12, color: "var(--text-secondary)", marginTop: 6, lineHeight: 1.6 }}>
+                    📍 {p.address}
+                  </div>
+                )}
+                <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: p.address ? 2 : 6 }}>
+                  {p.cuisine ? `${p.cuisine} · ` : ""}
+                  {p.district} · {p.station} · {p.perText} · {p.fit}
                 </div>
                 {p.rating && (
                   <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>
@@ -1219,7 +1248,7 @@ export function MealPlanner() {
             );
           })}
 
-          {/* 人数对应的点菜结构 */}
+          {/* 3~5 人的点菜结构（不随人数切换，门店统一按 3~5 人收录） */}
           <div
             style={{
               padding: 16,
@@ -1228,12 +1257,12 @@ export function MealPlanner() {
               background: "var(--bg-card)",
             }}
           >
-            <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 10 }}>🧾 {people} 人点菜怎么配</div>
+            <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 10 }}>🧾 3~5 人点菜怎么配</div>
             {[
-              { label: "菜数", value: `${people} 道：凉菜 1 + 荤 ${Math.max(2, people - 2)} + 素 2` },
-              { label: "主食", value: people >= 5 ? "1~2 份大份，分着吃比每人一份省" : "1 份大份即可（或按人数份）" },
+              { label: "菜数", value: "3 人 5 道 / 4 人 6 道 / 5 人 7 道：凉菜 1 + 荤 2~4 + 素 2" },
+              { label: "主食", value: "1~2 份大份，分着吃比每人一份省（5 人建议点 2 份）" },
               { label: "汤", value: "1 锅，3~5 人一锅就够，不必按人头点" },
-              { label: "买单", value: "先按人均估：人均 × 人数，酒水通常另算且最容易超支" },
+              { label: "买单", value: "先按人均估：人均 × 人数；酒水通常另算，且最容易超支" },
               { label: "避坑", value: "晚市比午市贵；能订位就先订，多人到店排队最耗时" },
             ].map((row) => (
               <div key={row.label} style={{ display: "flex", gap: 8, padding: "6px 0", fontSize: 13 }}>
