@@ -33,12 +33,25 @@ type Place = {
   tips: string;
   source: string;
   sourceNote: string;
+  // 综合评价排名相关（可选：数据没填就不展示对应模块）
+  rank?: number;
+  score?: number;
+  subs?: { taste: number; vibe: number; service: number; value: number };
+  rating?: string;
+  ratingSrc?: string;
+  pros?: string[];
+  cons?: string[];
+  value?: string;
+  verdict?: string;
 };
 
 type FeastData = {
   label: string;
   area: string;
   note: string;
+  // 排名口径说明（可选）
+  rankNote?: string;
+  updated?: string;
   people: number[];
   places: Place[];
 };
@@ -128,16 +141,24 @@ const FEAST = (PLANNER.feast ?? null) as FeastData | null;
 const FEAST_PEOPLE: number[] = FEAST && FEAST.people.length > 0 ? FEAST.people : [3, 4, 5];
 const LEVEL_LABEL: Record<number, string> = { 1: "平价", 2: "中档", 3: "稍贵", 4: "高档" };
 
-// 聚餐一次性列全部餐馆，按价位档分组（不随机、不换批）
-const FEAST_GROUPS: { level: number; label: string; places: Place[] }[] = FEAST
-  ? Array.from(new Set(FEAST.places.map((p) => p.level)))
-      .sort((a, b) => a - b)
-      .map((lv) => ({
-        level: lv,
-        label: LEVEL_LABEL[lv] ?? `档位 ${lv}`,
-        places: FEAST.places.filter((p) => p.level === lv),
-      }))
+// 聚餐：一次性列全部餐馆，按综合排名（rank）升序；没填 rank 的排在末尾
+const FEAST_RANKED: Place[] = FEAST
+  ? [...FEAST.places].sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999) || a.perPerson - b.perPerson)
   : [];
+
+const LEVEL_COLOR: Record<number, string> = { 1: "#22c55e", 2: "#3b82f6", 3: "#f59e0b", 4: "#ef4444" };
+const TOP3 = new Set([1, 2, 3]);
+
+// 综合分：口味 40% + 环境 20% + 服务 20% + 性价比 20%，满分 100（仅用于横向比较）
+const SUB_WEIGHT = { taste: 0.4, vibe: 0.2, service: 0.2, value: 0.2 };
+
+function scoreOf(p: Place): number | undefined {
+  if (p.score !== undefined) return p.score;
+  if (!p.subs) return undefined;
+  const { taste, vibe, service, value } = p.subs;
+  const raw = taste * SUB_WEIGHT.taste + vibe * SUB_WEIGHT.vibe + service * SUB_WEIGHT.service + value * SUB_WEIGHT.value;
+  return Math.round((raw / 5) * 100);
+}
 
 // 用于推导「营养均衡」的关键词（不手写营养字段，按实际选中项推导）
 const NUTRI_KEYS = {
@@ -347,7 +368,8 @@ export function MealPlanner() {
           ) : (
             <>
               聚餐模式：只去店里吃。范围 {FEAST ? FEAST.area : "深圳 · 岗厦 → 大剧院"}，
-              {FEAST_PEOPLE[0]}~{FEAST_PEOPLE[FEAST_PEOPLE.length - 1]} 人，一次列出全部区内餐馆（按平价 / 中档 / 稍贵分组），
+              {FEAST_PEOPLE[0]}~{FEAST_PEOPLE[FEAST_PEOPLE.length - 1]} 人，一次按综合评价排名列出全部区内餐馆
+              （口味 / 环境 / 服务 / 性价比 加权，附好评点、踩坑与性价比判断），
               按「人均 × 人数」估总花费。人均与门店来自公开点评 / 榜单，点来源可核验，价格会变动。
             </>
           )}
@@ -944,100 +966,258 @@ export function MealPlanner() {
                 }}
               >
                 {FEAST.note}
+                {FEAST.rankNote && (
+                  <div style={{ marginTop: 8, color: "var(--text-tertiary)" }}>{FEAST.rankNote}</div>
+                )}
               </div>
             )}
           </div>
 
-          {/* 全部餐馆：一次性列出，按价位档分组，不随机、不换批 */}
-          {FEAST_GROUPS.map((g) => (
-            <div key={g.level} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span
-                  style={{
-                    width: 4,
-                    height: 16,
-                    borderRadius: 2,
-                    background: g.level === 1 ? "#22c55e" : g.level === 2 ? "#3b82f6" : "#f59e0b",
-                  }}
-                />
-                <span style={{ fontSize: 14, fontWeight: 800 }}>{g.label}</span>
-                <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{g.places.length} 家</span>
-              </div>
-              {g.places.map((p) => (
+          {/* 全部餐馆：按综合排名列出，不随机、不换批 */}
+          {FEAST_RANKED.map((p) => {
+            const lvColor = LEVEL_COLOR[p.level] ?? "#94a3b8";
+            const top = p.rank !== undefined && TOP3.has(p.rank);
+            const pScore = scoreOf(p);
+            return (
+              <div
+                key={p.id}
+                style={{
+                  padding: 16,
+                  borderRadius: "var(--radius-lg)",
+                  border: `1px solid ${top ? "color-mix(in srgb, var(--accent) 35%, var(--border))" : "var(--border)"}`,
+                  background: "var(--bg-card)",
+                  borderLeft: `4px solid ${lvColor}`,
+                }}
+              >
                 <div
-                  key={p.id}
                   style={{
-                    padding: 16,
-                    borderRadius: "var(--radius-lg)",
-                    border: "1px solid var(--border)",
-                    background: "var(--bg-card)",
-                    borderLeft: `4px solid ${g.level === 1 ? "#22c55e" : g.level === 2 ? "#3b82f6" : "#f59e0b"}`,
+                    display: "flex",
+                    alignItems: "baseline",
+                    justifyContent: "space-between",
+                    gap: 8,
+                    flexWrap: "wrap",
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "baseline",
-                      justifyContent: "space-between",
-                      gap: 8,
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
-                      <span style={{ fontSize: 17, fontWeight: 800 }}>{p.name}</span>
-                      <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{p.category}</span>
-                    </div>
-                    <div style={{ fontSize: 15, fontWeight: 800, color: "var(--accent)", flexShrink: 0 }}>
-                      {people} 人约 ¥{p.perPerson * people}
-                    </div>
-                  </div>
-                  <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>
-                    📍 {p.district} · {p.station} · {p.perText} · {p.fit}
-                  </div>
-                  {p.signature.length > 0 && (
-                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
-                      {p.signature.map((sig) => (
-                        <span
-                          key={sig}
-                          style={{
-                            fontSize: 12,
-                            padding: "3px 10px",
-                            borderRadius: 999,
-                            background: "var(--bg-secondary)",
-                            color: "var(--text-secondary)",
-                            border: "1px solid var(--border)",
-                          }}
-                        >
-                          {sig}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  {p.tips && (
-                    <div
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
+                    {p.rank !== undefined && (
+                      <span
+                        style={{
+                          fontSize: 13,
+                          fontWeight: 800,
+                          flexShrink: 0,
+                          color: top ? "var(--accent)" : "var(--text-tertiary)",
+                        }}
+                      >
+                        #{p.rank}
+                      </span>
+                    )}
+                    <span style={{ fontSize: 17, fontWeight: 800 }}>{p.name}</span>
+                    <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{p.category}</span>
+                    <span
                       style={{
-                        fontSize: 12,
-                        color: "var(--text-secondary)",
-                        lineHeight: 1.7,
-                        marginTop: 8,
-                        padding: "8px 10px",
-                        borderRadius: "var(--radius-sm)",
-                        background: "var(--bg-secondary)",
+                        fontSize: 11,
+                        padding: "2px 8px",
+                        borderRadius: 999,
+                        background: "var(--bg-card-hover)",
+                        color: lvColor,
+                        flexShrink: 0,
                       }}
                     >
-                      {p.tips}
-                    </div>
-                  )}
-                  <div style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 8 }}>
-                    来源：
+                      {LEVEL_LABEL[p.level] ?? "参考"}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexShrink: 0 }}>
+                    {pScore !== undefined && (
+                      <span style={{ fontSize: 17, fontWeight: 800, color: "var(--accent)" }}>
+                        {pScore}
+                        <span style={{ fontSize: 11, fontWeight: 500, color: "var(--text-tertiary)", marginLeft: 2 }}>
+                          分
+                        </span>
+                      </span>
+                    )}
+                    <span style={{ fontSize: 15, fontWeight: 800 }}>
+                      {people} 人约 ¥{p.perPerson * people}
+                    </span>
+                  </div>
+                </div>
+
+                <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>
+                  📍 {p.district} · {p.station} · {p.perText} · {p.fit}
+                </div>
+                {p.rating && (
+                  <div style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2 }}>
+                    ⭐ {p.rating}
+                    {p.ratingSrc ? ` · ${p.ratingSrc}` : ""}
+                  </div>
+                )}
+
+                {p.verdict && (
+                  <div
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 600,
+                      lineHeight: 1.65,
+                      marginTop: 8,
+                      padding: "8px 10px",
+                      borderRadius: "var(--radius-sm)",
+                      background: "color-mix(in srgb, var(--accent) 10%, var(--bg-card))",
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    {p.verdict}
+                  </div>
+                )}
+
+                {p.subs && (
+                  <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 8 }}>
+                    {[
+                      { k: "口味", v: p.subs.taste },
+                      { k: "环境", v: p.subs.vibe },
+                      { k: "服务", v: p.subs.service },
+                      { k: "性价比", v: p.subs.value },
+                    ].map((s) => (
+                      <span
+                        key={s.k}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 5,
+                          fontSize: 11,
+                          color: "var(--text-tertiary)",
+                        }}
+                      >
+                        {s.k}
+                        <span
+                          style={{
+                            display: "inline-block",
+                            width: 46,
+                            height: 5,
+                            borderRadius: 999,
+                            background: "var(--bg-secondary)",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <span
+                            style={{
+                              display: "block",
+                              width: `${(s.v / 5) * 100}%`,
+                              height: "100%",
+                              background: "var(--accent)",
+                            }}
+                          />
+                        </span>
+                        <span style={{ color: "var(--text-secondary)", fontWeight: 700 }}>{s.v}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {p.signature.length > 0 && (
+                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
+                    {p.signature.map((sig) => (
+                      <span
+                        key={sig}
+                        style={{
+                          fontSize: 12,
+                          padding: "3px 10px",
+                          borderRadius: 999,
+                          background: "var(--bg-secondary)",
+                          color: "var(--text-secondary)",
+                          border: "1px solid var(--border)",
+                        }}
+                      >
+                        {sig}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {p.pros && p.pros.length > 0 && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 5, marginTop: 10 }}>
+                    {p.pros.map((t) => (
+                      <div
+                        key={t}
+                        style={{
+                          display: "flex",
+                          gap: 6,
+                          fontSize: 12,
+                          lineHeight: 1.6,
+                          color: "var(--text-secondary)",
+                        }}
+                      >
+                        <span style={{ flexShrink: 0 }}>👍</span>
+                        <span>{t}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {p.cons && p.cons.length > 0 && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 5, marginTop: 6 }}>
+                    {p.cons.map((t) => (
+                      <div
+                        key={t}
+                        style={{
+                          display: "flex",
+                          gap: 6,
+                          fontSize: 12,
+                          lineHeight: 1.6,
+                          color: "var(--text-secondary)",
+                        }}
+                      >
+                        <span style={{ flexShrink: 0 }}>⚠️</span>
+                        <span>{t}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {p.value && (
+                  <div
+                    style={{
+                      fontSize: 12,
+                      lineHeight: 1.7,
+                      marginTop: 8,
+                      padding: "8px 10px",
+                      borderRadius: "var(--radius-sm)",
+                      background: "var(--bg-secondary)",
+                    }}
+                  >
+                    <span style={{ color: "var(--text-tertiary)" }}>💰 性价比：</span>
+                    <span style={{ color: "var(--text-secondary)" }}>{p.value}</span>
+                  </div>
+                )}
+
+                {p.tips && (
+                  <div
+                    style={{
+                      fontSize: 12,
+                      color: "var(--text-secondary)",
+                      lineHeight: 1.7,
+                      marginTop: 8,
+                      padding: "8px 10px",
+                      borderRadius: "var(--radius-sm)",
+                      background: "var(--bg-secondary)",
+                    }}
+                  >
+                    <span style={{ color: "var(--text-tertiary)" }}>🪑 怎么去：</span>
+                    {p.tips}
+                  </div>
+                )}
+
+                <div style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 8 }}>
+                  来源：
+                  {p.source ? (
                     <a href={p.source} target="_blank" rel="noreferrer noopener" style={{ color: "var(--accent)" }}>
                       {p.sourceNote}
                     </a>
-                  </div>
+                  ) : (
+                    <span>{p.sourceNote}</span>
+                  )}
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            );
+          })}
 
           {/* 人数对应的点菜结构 */}
           <div
