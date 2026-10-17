@@ -97,7 +97,9 @@ function checkLiving(file, d) {
         if (!isHttp(sc.url)) bad(file, `${sat} url 不是 http(s)：${sc.url}`);
         linked++;
       });
-      if (srcs.length > 0 && linked === 0) bad(file, `${at}.items[${j}] 所有 sources 都没有可点链接`);
+      if (srcs.length > 0 && linked === 0) {
+        warn(file, `${at}.items[${j}] 来源全是「作者经验」式文字说明、没有可点链接`);
+      }
     });
   });
 }

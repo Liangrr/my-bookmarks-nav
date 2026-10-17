@@ -40,7 +40,7 @@ interface LivingData {
   sections: LivingSection[];
 }
 
-// 全书数据约 1.8MB：直接 import 会整份打进浏览器，并把 696 条建议渲染成约 4MB 的 HTML。
+// 全书数据约 1.8MB：直接 import 会整份打进浏览器，并把 695 条建议渲染成约 4MB 的 HTML。
 // 改成挂载后异步取（见下方 useEffect），首屏先出外壳，正文数据到位再渲染。
 const EMPTY_SECTIONS: LivingSection[] = [];
 
@@ -567,20 +567,23 @@ function LivingCard({ item }: { item: LivingItem }) {
               userSelect: "none",
             }}
           >
-            来源（{item.sources.length} 条文献）
+            来源（{item.sources.length} 条）
           </summary>
           <ul style={{ margin: "8px 0 0", paddingLeft: 18, display: "flex", flexDirection: "column", gap: 4 }}>
             {item.sources.map((s, i) => (
               <li key={i} style={{ fontSize: 12, color: "var(--text-tertiary)", lineHeight: 1.6 }}>
-                {s.text && <span>{s.text}：</span>}
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "var(--accent)", wordBreak: "break-all" }}
-                >
-                  {s.url}
-                </a>
+                {s.text && <span>{s.text}{s.url ? "：" : ""}</span>}
+                {/* 只有引用文字、没有链接的（多为「作者经验」说明）就只显示文字，不渲染空链接 */}
+                {s.url && (
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "var(--accent)", wordBreak: "break-all" }}
+                  >
+                    {s.url}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
