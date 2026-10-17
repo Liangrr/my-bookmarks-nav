@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import livingData from "@/data/living-guide.json";
 import FilterBtn from "@/components/filter-btn";
 
 interface LivingSource {
@@ -41,7 +40,9 @@ interface LivingData {
   sections: LivingSection[];
 }
 
-const DATA = (livingData as LivingData).sections;
+// 全书数据约 1.8MB：直接 import 会整份打进浏览器，并把 696 条建议渲染成约 4MB 的 HTML。
+// 改成挂载后异步取（见下方 useEffect），首屏先出外壳，正文数据到位再渲染。
+const EMPTY_SECTIONS: LivingSection[] = [];
 
 const GRADES = ["A", "B", "C"] as const;
 const RATIOS = ["极高", "高", "一般"] as const;
@@ -60,13 +61,9 @@ const RATIO_COLOR: Record<string, { fg: string; bg: string }> = {
   一般: { fg: "#565a5f", bg: "rgba(142,150,170,.15)" },
 };
 
-const TOTAL_ITEMS = DATA.reduce((n, s) => n + s.items.length, 0);
-const GRADE_COUNT = DATA.reduce<Record<string, number>>((m, s) => {
-  for (const it of s.items) m[it.grade] = (m[it.grade] ?? 0) + 1;
-  return m;
-}, {});
-
 export function LivingGuide() {
+  const [sections, setSections] = useState<LivingSection[]>(EMPTY_SECTIONS);
+  const [loaded, setLoaded] = useState(false);
   const [query, setQuery] = useState("");
   const [grade, setGrade] = useState<string>("全部");
   const [ratio, setRatio] = useState<string>("全部");
@@ -74,8 +71,31 @@ export function LivingGuide() {
 
   const q = query.trim().toLowerCase();
 
+  // 正文数据异步加载：不阻塞首屏，也不把 1.8MB 数据塞进初始 JS
+  useEffect(() => {
+    let alive = true;
+    import("@/data/living-guide.json").then((m) => {
+      if (!alive) return;
+      setSections((m.default as LivingData).sections);
+      setLoaded(true);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  // 全书统计（节数 / 条数 / 各证据等级条数）
+  const stats = useMemo(() => {
+    const total = sections.reduce((n, s) => n + s.items.length, 0);
+    const byGrade = sections.reduce<Record<string, number>>((m, s) => {
+      for (const it of s.items) m[it.grade] = (m[it.grade] ?? 0) + 1;
+      return m;
+    }, {});
+    return { total, byGrade };
+  }, [sections]);
+
   const filtered = useMemo(() => {
-    return DATA.map((sec) => {
+    return sections.map((sec) => {
       const items = sec.items.filter((it) => {
         if (grade !== "全部" && it.grade !== grade) return false;
         if (ratio !== "全部" && it.ratio !== ratio) return false;
@@ -95,7 +115,7 @@ export function LivingGuide() {
       });
       return { sec, items };
     }).filter(({ items }) => items.length > 0);
-  }, [q, grade, ratio]);
+  }, [sections, q, grade, ratio]);
 
   const matchedCount = filtered.reduce((n, f) => n + f.items.length, 0);
 
@@ -124,7 +144,7 @@ export function LivingGuide() {
             lineHeight: 1.7,
           }}
         >
-          开源书《高性价比人生手册》全书 {DATA.length} 节 {TOTAL_ITEMS} 条建议：每条写清花掉什么、换回什么、证据多硬，
+          开源书《高性价比人生手册》全书 {sections.length} 节 {stats.total} 条建议：每条写清花掉什么、换回什么、证据多硬，
           只引期刊论文和官方文件。内容来自{" "}
           <a
             href="https://github.com/eternity4719/HowToLiveBetter"
@@ -145,9 +165,9 @@ export function LivingGuide() {
           }}
         >
           {[
-            `${DATA.length} 节`,
-            `${TOTAL_ITEMS} 条建议`,
-            ...GRADES.map((g) => `${g} 级 ${GRADE_COUNT[g] ?? 0} 条`),
+            `${sections.length} 节`,
+            `${stats.total} 条建议`,
+            ...GRADES.map((g) => `${g} 级 ${stats.byGrade[g] ?? 0} 条`),
           ].map((t) => (
             <span
               key={t}
@@ -250,7 +270,18 @@ export function LivingGuide() {
       </div>
 
       {/* 章节与卡片 */}
-      {filtered.length === 0 ? (
+      {!loaded ? (
+        <div
+          style={{
+            padding: "48px 16px",
+            textAlign: "center",
+            color: "var(--text-tertiary)",
+            fontSize: 14,
+          }}
+        >
+          正在加载正文…
+        </div>
+      ) : filtered.length === 0 ? (
         <div
           style={{
             padding: "48px 16px",
