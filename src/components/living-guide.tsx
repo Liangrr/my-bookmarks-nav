@@ -64,6 +64,8 @@ const RATIO_COLOR: Record<string, { fg: string; bg: string }> = {
 export function LivingGuide() {
   const [sections, setSections] = useState<LivingSection[]>(EMPTY_SECTIONS);
   const [loaded, setLoaded] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
   const [query, setQuery] = useState("");
   const [grade, setGrade] = useState<string>("全部");
   const [ratio, setRatio] = useState<string>("全部");
@@ -71,18 +73,26 @@ export function LivingGuide() {
 
   const q = query.trim().toLowerCase();
 
-  // 正文数据异步加载：不阻塞首屏，也不把 1.8MB 数据塞进初始 JS
+  // 正文数据异步加载：不阻塞首屏，也不把 1.8MB 数据塞进初始 JS。
+  // 必须接住失败：发版后旧 HTML 仍引用旧 hash 的 chunk 会 404，弱网也会断，
+  // 不兜底就会永远停在「正在加载正文…」。reloadKey 用于让用户手动重试。
   useEffect(() => {
     let alive = true;
-    import("@/data/living-guide.json").then((m) => {
-      if (!alive) return;
-      setSections((m.default as LivingData).sections);
-      setLoaded(true);
-    });
+    import("@/data/living-guide.json")
+      .then((m) => {
+        if (!alive) return;
+        setSections((m.default as LivingData).sections);
+        setLoaded(true);
+      })
+      .catch((err) => {
+        if (!alive) return;
+        console.error("[living] 正文数据加载失败", err);
+        setLoadError(true);
+      });
     return () => {
       alive = false;
     };
-  }, []);
+  }, [reloadKey]);
 
   // 全书统计（节数 / 条数 / 各证据等级条数）
   const stats = useMemo(() => {
@@ -270,7 +280,41 @@ export function LivingGuide() {
       </div>
 
       {/* 章节与卡片 */}
-      {!loaded ? (
+      {loadError ? (
+        <div
+          style={{
+            padding: "48px 16px",
+            textAlign: "center",
+            color: "var(--text-tertiary)",
+            fontSize: 14,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <span>正文数据加载失败，可能是网络中断，或页面版本已更新。</span>
+          <button
+            type="button"
+            onClick={() => {
+              setLoadError(false);
+              setReloadKey((k) => k + 1);
+            }}
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderRadius: 10,
+              padding: "6px 16px",
+              color: "var(--text-primary)",
+              fontSize: 13,
+              fontFamily: "inherit",
+              cursor: "pointer",
+            }}
+          >
+            重新加载
+          </button>
+        </div>
+      ) : !loaded ? (
         <div
           style={{
             padding: "48px 16px",
