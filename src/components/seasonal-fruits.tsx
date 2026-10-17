@@ -76,6 +76,7 @@ export function SeasonalFruits() {
 
   // 默认高亮「当季」
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 月份取自本地时间，需挂载后才落地以避免水合不一致
     setMonthFilter(currentMonth);
   }, []);
 

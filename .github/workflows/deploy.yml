@@ -26,9 +26,10 @@ jobs:
       - name: Validate data files
         run: node scripts/validate-data.mjs
 
+      - name: Unit tests
+        run: npm test
+
       - name: Lint
-        # 历史遗留 lint 问题尚未清完，先只输出不阻断部署
-        continue-on-error: true
         run: npx eslint src
 
   deploy:

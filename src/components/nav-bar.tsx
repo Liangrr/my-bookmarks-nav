@@ -3,11 +3,13 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
-import { getOrCreateProfile } from "@/lib/supabase/profile";
+import dynamic from "next/dynamic";
 import type { User } from "@supabase/supabase-js";
-import { AuthModal } from "./auth-modal";
-import { ProfileModal } from "./profile-modal";
+
+// Supabase 客户端与两个弹窗都改为按需加载：NavBar 在全局 layout 里，
+// 顶层 import 会把约 234KB 的 supabase 打进所有路由（含纯静态内容页）的共享 chunk。
+const AuthModal = dynamic(() => import("./auth-modal").then((m) => m.AuthModal), { ssr: false });
+const ProfileModal = dynamic(() => import("./profile-modal").then((m) => m.ProfileModal), { ssr: false });
 
 export function NavBar() {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
@@ -51,18 +53,29 @@ export function NavBar() {
   }, [accent]);
 
   useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    let alive = true;
+    let unsubscribe: (() => void) | undefined;
+    (async () => {
+      const { createClient } = await import("@/lib/supabase/client");
+      if (!alive) return;
+      const supabase = createClient();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!alive) return;
       applyUser(session?.user ?? null);
-    });
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      applyUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange((_event, session) => {
+        applyUser(session?.user ?? null);
+      });
+      unsubscribe = () => subscription.unsubscribe();
+    })();
+    return () => {
+      alive = false;
+      unsubscribe?.();
+    };
   }, [applyUser]);
 
   // 抽屉菜单：ESC 关闭 + 展开时锁定背景滚动
@@ -82,20 +95,32 @@ export function NavBar() {
   // 登录后拉取头像与昵称
   useEffect(() => {
     if (!user) {
+      // 退出登录后清掉随 user 变化的派生展示态，不是级联渲染
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 依 user 变化重置头像/昵称
       setAvatarUrl(null);
       setNickname("");
       return;
     }
-    const supabase = createClient();
-    getOrCreateProfile<{
-      avatar_url: string | null;
-      full_name: string | null;
-      is_admin: boolean | null;
-    }>(supabase, user.id).then((p) => {
+    let alive = true;
+    (async () => {
+      const [{ createClient }, { getOrCreateProfile }] = await Promise.all([
+        import("@/lib/supabase/client"),
+        import("@/lib/supabase/profile"),
+      ]);
+      if (!alive) return;
+      const p = await getOrCreateProfile<{
+        avatar_url: string | null;
+        full_name: string | null;
+        is_admin: boolean | null;
+      }>(createClient(), user.id);
+      if (!alive) return;
       setAvatarUrl(p?.avatar_url || null);
       setNickname(p?.full_name || "");
       setIsAdmin(p?.is_admin || false);
-    });
+    })();
+    return () => {
+      alive = false;
+    };
   }, [user]);
 
   const toggleTheme = () => {

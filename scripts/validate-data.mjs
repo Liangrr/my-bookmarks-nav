@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // 数据体检：在 CI 里跑，防止手改/脚本合并 JSON 时字段、枚举、取值范围、id 唯一性被破坏。
 // 用法：npm run validate:data（退出码非 0 表示有硬性问题，部署会被拦下）
+// 同时导出纯校验函数与 validateDataDir()，供单测 import 调用（import 时不会自动执行 CLI）。
 import { readFileSync, readdirSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { join } from "node:path";
 
 const DATA_DIR = fileURLToPath(new URL("../src/data/", import.meta.url));
@@ -10,15 +11,16 @@ const DATA_DIR = fileURLToPath(new URL("../src/data/", import.meta.url));
 const CUISINES = ["粤菜·早茶", "潮汕菜", "川湘·云贵", "火锅·烤肉", "烧烤·海鲜", "日料·韩食", "东南亚·西餐", "其他菜系"];
 const DISTRICTS = ["福田", "罗湖", "南山", "宝安", "龙华", "龙岗", "盐田", "光明", "坪山", "大鹏"];
 
-const problems = [];
+// 问题与警告由 check* 系列函数写入；validateDataDir() 每次运行前会清空，重复调用不会累积
+export const problems = [];
 // 警告不阻断部署：例如「缺 sources」属于历史遗留的数据完整度问题，删掉条目会丢内容，编来源又违反诚实红线，只提示不拦。
-const warnings = [];
+export const warnings = [];
 const bad = (file, msg) => problems.push(`${file}: ${msg}`);
 const warn = (file, msg) => warnings.push(`${file}: ${msg}`);
 const isHttp = (v) => typeof v === "string" && /^https?:\/\//.test(v);
 
 /** 兜底体检：递归找「带 id 的对象数组」，检查 id 是否缺失或重复 */
-function checkIds(file, node, path = "") {
+export function checkIds(file, node, path = "") {
   if (Array.isArray(node)) {
     const objs = node.filter((x) => x && typeof x === "object");
     if (objs.length === node.length && node.length > 0 && "id" in objs[0]) {
@@ -38,7 +40,7 @@ function checkIds(file, node, path = "") {
   }
 }
 
-function checkMealPlanner(file, d) {
+export function checkMealPlanner(file, d) {
   const feast = d.feast;
   if (!feast || !Array.isArray(feast.places)) return bad(file, "缺少 feast.places");
   const seenNames = new Set();
@@ -68,7 +70,7 @@ function checkMealPlanner(file, d) {
   if (ranks.join(",") !== ranks.map((_, i) => i + 1).join(",")) bad(file, "rank 不是 1..n 的连续编号");
 }
 
-function checkLiving(file, d) {
+export function checkLiving(file, d) {
   if (!Array.isArray(d.sections)) return bad(file, "缺少 sections");
   d.sections.forEach((s, i) => {
     const at = `sections[${i}](${s.title ?? "?"})`;
@@ -104,7 +106,7 @@ function checkLiving(file, d) {
   });
 }
 
-function checkFruits(file, d) {
+export function checkFruits(file, d) {
   if (!Array.isArray(d.fruits)) return bad(file, "缺少 fruits");
   d.fruits.forEach((f, i) => {
     const at = `fruits[${i}](${f.name ?? "?"})`;
@@ -119,51 +121,71 @@ function checkFruits(file, d) {
 
 const SPECIAL = { "meal-planner.json": checkMealPlanner, "living-guide.json": checkLiving, "seasonal-fruits.json": checkFruits };
 
-const files = readdirSync(DATA_DIR).filter((f) => f.endsWith(".json")).sort();
-let entities = 0;
-for (const file of files) {
-  let raw;
-  try {
-    raw = readFileSync(join(DATA_DIR, file), "utf8");
-  } catch (e) {
-    bad(file, `读取失败：${e.message}`);
-    continue;
+/**
+ * 跑一遍全量体检，返回结果但不打印（便于单测）。
+ * @returns {{ files: string[], entities: number, problems: string[], warnings: string[], statsLines: string[] }}
+ */
+export function validateDataDir(dir = DATA_DIR) {
+  problems.length = 0;
+  warnings.length = 0;
+  const files = readdirSync(dir).filter((f) => f.endsWith(".json")).sort();
+  let entities = 0;
+  for (const file of files) {
+    let raw;
+    try {
+      raw = readFileSync(join(dir, file), "utf8");
+    } catch (e) {
+      bad(file, `读取失败：${e.message}`);
+      continue;
+    }
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch (e) {
+      bad(file, `JSON 解析失败：${e.message}`);
+      continue;
+    }
+    checkIds(file, data);
+    if (SPECIAL[file]) SPECIAL[file](file, data);
   }
-  let data;
-  try {
-    data = JSON.parse(raw);
-  } catch (e) {
-    bad(file, `JSON 解析失败：${e.message}`);
-    continue;
+
+  // 汇总输出（每个文件的数据规模，便于人工核对；meal-planner 顶层是分组数组，单独统计）
+  const statsLines = [];
+  for (const file of files) {
+    const d = JSON.parse(readFileSync(join(dir, file), "utf8"));
+    if (file === "meal-planner.json") {
+      const places = d.feast?.places?.length ?? 0;
+      entities += places;
+      statsLines.push(`  ${file.padEnd(28)} 套餐 ${d.sets?.length ?? 0} 组 · 聚餐门店 ${places} 家`);
+    } else {
+      const n = Object.values(d).find((v) => Array.isArray(v))?.length ?? 0;
+      entities += n;
+      statsLines.push(`  ${file.padEnd(28)} 条目 ${n}`);
+    }
   }
-  checkIds(file, data);
-  if (SPECIAL[file]) SPECIAL[file](file, data);
+  return { files, entities, problems, warnings, statsLines };
 }
 
-// 汇总输出（每个文件的数据规模，便于人工核对；meal-planner 顶层是分组数组，单独统计）
-for (const file of files) {
-  const d = JSON.parse(readFileSync(join(DATA_DIR, file), "utf8"));
-  if (file === "meal-planner.json") {
-    const places = d.feast?.places?.length ?? 0;
-    entities += places;
-    console.log(`  ${file.padEnd(28)} 套餐 ${d.sets?.length ?? 0} 组 · 聚餐门店 ${places} 家`);
-  } else {
-    const n = Object.values(d).find((v) => Array.isArray(v))?.length ?? 0;
-    entities += n;
-    console.log(`  ${file.padEnd(28)} 条目 ${n}`);
+/** CLI 主流程：打印体检结果，有硬性问题时以非 0 退出码结束 */
+export function main() {
+  const { files, entities, problems, warnings, statsLines } = validateDataDir();
+  for (const line of statsLines) console.log(line);
+
+  if (warnings.length > 0) {
+    console.warn(`\n⚠ ${warnings.length} 条警告（不阻断部署，后续修数据时顺手处理）：`);
+    for (const w of warnings.slice(0, 10)) console.warn(`  - ${w}`);
+    if (warnings.length > 10) console.warn(`  … 其余 ${warnings.length - 10} 条省略`);
   }
+
+  if (problems.length > 0) {
+    console.error(`\n✗ 数据体检不通过，共 ${problems.length} 个问题：`);
+    for (const p of problems.slice(0, 40)) console.error(`  - ${p}`);
+    if (problems.length > 40) console.error(`  … 其余 ${problems.length - 40} 条省略`);
+    process.exit(1);
+  }
+  console.log(`\n✓ 数据体检通过：${files.length} 个数据文件，条目合计约 ${entities}`);
 }
 
-if (warnings.length > 0) {
-  console.warn(`\n⚠ ${warnings.length} 条警告（不阻断部署，后续修数据时顺手处理）：`);
-  for (const w of warnings.slice(0, 10)) console.warn(`  - ${w}`);
-  if (warnings.length > 10) console.warn(`  … 其余 ${warnings.length - 10} 条省略`);
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
 }
-
-if (problems.length > 0) {
-  console.error(`\n✗ 数据体检不通过，共 ${problems.length} 个问题：`);
-  for (const p of problems.slice(0, 40)) console.error(`  - ${p}`);
-  if (problems.length > 40) console.error(`  … 其余 ${problems.length - 40} 条省略`);
-  process.exit(1);
-}
-console.log(`\n✓ 数据体检通过：${files.length} 个数据文件，条目合计约 ${entities}`);

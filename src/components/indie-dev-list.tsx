@@ -1,17 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import data from "@/data/independent-developers.json";
+import { useEffect, useMemo, useState } from "react";
 
 type LinkItem = { text: string; url: string };
 type Item = { title: string; url: string; status: string; desc: string; links: LinkItem[] };
 type Author = { name: string; links: LinkItem[]; items: Item[] };
 type Group = { date: string; authors: Author[] };
 type Stats = { total: number; ok: number; dead: number; authors: number; dateGroups: number };
-
-const stats = data.stats as Stats;
-const groups = data.groups as Group[];
-const updatedAt = data.updatedAt as string;
+type IndieData = { stats: Stats; groups: Group[]; updatedAt: string; source: string };
 
 function matchItem(it: Item, authorName: string, q: string) {
   const s = q.toLowerCase();
@@ -22,8 +18,33 @@ function matchItem(it: Item, authorName: string, q: string) {
   );
 }
 
+// 数据约 185KB：直接 import 会整份进页面 chunk，并把全部条目渲染进 SSR HTML（约 480KB）。
+// 改成挂载后异步取（见下方 useEffect），首屏先出外壳。
+const EMPTY_GROUPS: Group[] = [];
+
 export default function IndieDevList() {
   const [q, setQ] = useState("");
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [groups, setGroups] = useState<Group[]>(EMPTY_GROUPS);
+  const [updatedAt, setUpdatedAt] = useState("");
+  const [source, setSource] = useState("");
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    import("@/data/independent-developers.json").then((m) => {
+      if (!alive) return;
+      const d = m.default as IndieData;
+      setStats(d.stats);
+      setGroups(d.groups);
+      setUpdatedAt(d.updatedAt);
+      setSource(d.source);
+      setLoaded(true);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   const filtered = useMemo(() => {
     if (!q.trim()) return groups;
@@ -35,12 +56,20 @@ export default function IndieDevList() {
           .filter((a) => a.items.length > 0),
       }))
       .filter((g) => g.authors.length > 0);
-  }, [q]);
+  }, [groups, q]);
 
   const hitCount = useMemo(() => {
-    if (!q.trim()) return stats.total;
+    if (!q.trim()) return stats?.total ?? 0;
     return filtered.reduce((n, g) => n + g.authors.reduce((m, a) => m + a.items.length, 0), 0);
-  }, [filtered, q]);
+  }, [filtered, q, stats]);
+
+  if (!loaded || !stats) {
+    return (
+      <div style={{ padding: "48px 16px", textAlign: "center", color: "var(--text-tertiary)", fontSize: 14 }}>
+        正在加载收录数据…
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -260,7 +289,7 @@ export default function IndieDevList() {
       >
         数据来源：{" "}
         <a
-          href={data.source}
+          href={source}
           target="_blank"
           rel="noreferrer"
           style={{ color: "var(--accent)", textDecoration: "none" }}

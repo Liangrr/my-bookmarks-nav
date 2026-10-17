@@ -47,7 +47,6 @@ async function eastmoneyGold() {
   const j = await res.json();
   const it = j?.data?.diff?.[0];
   if (!it?.f2) return null;
-  const prev = it.f4 ? it.f2 - it.f4 : it.f2;
   return { price: it.f2, chg: it.f4, pct: it.f3, name: "港伦敦金" };
 }
 

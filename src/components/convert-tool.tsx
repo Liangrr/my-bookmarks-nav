@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { pickSheetInput } from "@/lib/convert-sheet";
 
 /* ================= 工具定义 ================= */
 
@@ -194,43 +195,11 @@ async function runXlsxCsv(file: File, fmt: "csv" | "json"): Promise<{ blob: Blob
   return [{ blob: new Blob([JSON.stringify(json, null, 2)], { type: "application/json" }), name: `${baseName(file.name)}.json` }];
 }
 
-function parseCsv(text: string): string[][] {
-  const rows: string[][] = [];
-  let row: string[] = [];
-  let cur = "";
-  let inQ = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (inQ) {
-      if (c === '"') {
-        if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false;
-      } else cur += c;
-    } else if (c === '"') inQ = true;
-    else if (c === ",") { row.push(cur); cur = ""; }
-    else if (c === "\n" || c === "\r") {
-      if (c === "\r" && text[i + 1] === "\n") i++;
-      row.push(cur); cur = "";
-      if (row.some((x) => x !== "")) rows.push(row);
-      row = [];
-    } else cur += c;
-  }
-  row.push(cur);
-  if (row.some((x) => x !== "")) rows.push(row);
-  return rows;
-}
-
 async function runCsvXlsx(file: File): Promise<{ blob: Blob; name: string }[]> {
   const XLSX = await import("xlsx");
-  const text = await file.text();
-  let ws: any;
-  if (file.name.toLowerCase().endsWith(".json")) {
-    const data = JSON.parse(text) as unknown;
-    ws = Array.isArray(data)
-      ? XLSX.utils.json_to_sheet(data as Record<string, unknown>[])
-      : XLSX.utils.json_to_sheet([data as Record<string, unknown>]);
-  } else {
-    ws = XLSX.utils.aoa_to_sheet(parseCsv(text));
-  }
+  const input = pickSheetInput(file.name, await file.text());
+  const ws =
+    input.kind === "json" ? XLSX.utils.json_to_sheet(input.rows) : XLSX.utils.aoa_to_sheet(input.rows);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
   const arr = XLSX.write(wb, { bookType: "xlsx", type: "array" }) as ArrayBuffer;

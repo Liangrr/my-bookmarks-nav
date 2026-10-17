@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import diyData from "@/data/diy-guide.json";
-import FilterBtn from "@/components/filter-btn";
+import data from "@/data/diy-guide.json";
 
 interface Material {
   name: string;
@@ -39,7 +38,7 @@ interface DiyData {
   sections: DiySection[];
 }
 
-const DATA = (diyData as DiyData).sections;
+const DATA = (data as DiyData).sections;
 
 const DIFFICULTIES = ["简单", "中等", "进阶"] as const;
 const DURATIONS = ["快速", "数小时", "需等待"] as const;
@@ -94,7 +93,7 @@ export function DiyGuide() {
       });
       return { sec, items };
     }).filter(({ items }) => items.length > 0);
-  }, [q, difficulty, duration]);
+  }, [q, category, difficulty, duration]);
 
   const matchedCount = filtered.reduce((n, f) => n + f.items.length, 0);
 

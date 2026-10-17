@@ -76,14 +76,12 @@ export default function MarketPage() {
   const [fromCache, setFromCache] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const intlRef = useRef<Record<string, IntlQuote>>({});
-  const cnyRef = useRef<number | null>(null);
 
   const fetchQuotes = useCallback(async () => {
     try {
       const j = await fetch("/api/market/intl", { cache: "no-store" }).then((r) => r.json());
       if (!j?.ok || !j.data) throw new Error("intl proxy fail");
       intlRef.current = j.data;
-      cnyRef.current = j.usdCny ?? null;
       setIntl(j.data);
       setUsdCny(j.usdCny ?? null);
       setFromCache(false);
@@ -100,16 +98,19 @@ export default function MarketPage() {
 
   useEffect(() => {
     // 1) 先读缓存：命中则立即展示缓存数据与缓存时间
+    // localStorage 的旧值要在挂载后才能读到（SSR 拿不到），这里是「读外部存储后一次性落地」，
+    // 不是 effect 里 setState 触发的级联渲染，故豁免该规则。
+    /* eslint-disable react-hooks/set-state-in-effect */
     const cache = readCache();
     if (cache) {
       intlRef.current = cache.intl;
-      cnyRef.current = cache.usdCny ?? null;
       setIntl(cache.intl);
       setUsdCny(cache.usdCny ?? null);
       setLastUpdate(new Date(cache.ts));
       setFromCache(true);
       setLoading(false);
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
     // 2) 再拉最新数据，拿到后替换（同时更新时间与缓存）
     fetchQuotes();
     timerRef.current = setInterval(fetchQuotes, 300000);
@@ -178,7 +179,7 @@ export default function MarketPage() {
         {METALS.map((m) => {
           const i = intl[m.intl];
           const usdPrice = m.intl === "hf_HG" && i?.usdTon != null ? i.usdTon : i?.price;
-          const cny = cnyRef.current;
+          const cny = usdCny;
           // 人民币折算：美元价 ÷ 盎司克数（或 × 磅吨系数）× 汇率
           const cnyPrice = i && cny != null ? (usdPrice != null ? (usdPrice / m.cnyDiv) * m.cnyMult * cny : null) : null;
           const up = i ? i.pct >= 0 : false;
