@@ -80,9 +80,20 @@ ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
 ALTER TABLE bookmarks ENABLE ROW LEVEL SECURITY;
 
--- profiles: 所有人可读，用户只能改自己的
+-- profiles: 所有人可读；用户只能改自己的「资料列」，不能改 is_admin
 CREATE POLICY "Profiles are viewable by everyone" ON profiles FOR SELECT USING (true);
-CREATE POLICY "Users can update own profile" ON profiles FOR UPDATE USING (auth.uid() = id);
+
+-- ⚠️ 安全红线：FOR UPDATE 必须同时给 USING 与 WITH CHECK。
+-- 只写 USING 时新行不被校验，任何已登录用户都能把自己 profiles.is_admin 改成 true；
+-- 而 /admin 守卫（src/middleware.ts）与下方 admin 写策略都只看 is_admin ⇒ 等于自我提权。
+CREATE POLICY "Users can update own profile" ON profiles FOR UPDATE
+  USING (auth.uid() = id)
+  WITH CHECK (auth.uid() = id);
+
+-- 列级收口：客户端只允许改资料列；is_admin / id / created_at 只能由 service_role 或 SQL 手工设置。
+-- 缺了这段，即使补上 WITH CHECK，用户仍可改 is_admin（WITH CHECK 只校验行归属，不限制列）。
+REVOKE UPDATE ON public.profiles FROM anon, authenticated;
+GRANT UPDATE (username, full_name, avatar_url, bio, updated_at) ON public.profiles TO authenticated;
 
 -- categories: 所有人可读
 CREATE POLICY "Categories are viewable by everyone" ON categories FOR SELECT USING (true);
@@ -90,7 +101,7 @@ CREATE POLICY "Categories are viewable by everyone" ON categories FOR SELECT USI
 -- bookmarks: 所有人可读
 CREATE POLICY "Bookmarks are viewable by everyone" ON bookmarks FOR SELECT USING (true);
 
--- 管理员才能写（需要在 profiles 表把自己的 is_admin 设为 true）
+-- 管理员才能写（is_admin 只能由 service_role 或 SQL 手工设置，客户端无权修改）
 CREATE POLICY "Admins can insert categories" ON categories FOR INSERT WITH CHECK (
   EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND is_admin = true)
 );
