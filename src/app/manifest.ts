@@ -13,9 +13,11 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#0a0a0f",
     icons: [
       {
-        src: "/icon.png",
+        // 原为 522KiB 的 src/app/icon.png；改为 public 下的 webp（39KiB），
+        // 避免浏览器在解析 manifest 时把大图拉进首访关键路径。
+        src: "/icon-512.webp",
         sizes: "512x512",
-        type: "image/png",
+        type: "image/webp",
         purpose: "any",
       },
       {

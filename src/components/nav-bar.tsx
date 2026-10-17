@@ -164,7 +164,7 @@ export function NavBar() {
         >
           <div className="nav-logo-icon">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icon.png" alt="星轨" />
+            <img src="/logo-64.webp" alt="星轨" width={32} height={32} />
           </div>
           <span>星轨</span>
         </button>
@@ -325,7 +325,7 @@ export function NavBar() {
         <div className="drawer-head">
           <div className="nav-logo-icon">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icon.png" alt="星轨" />
+            <img src="/logo-64.webp" alt="星轨" width={32} height={32} />
           </div>
           <span>星轨</span>
         </div>
