@@ -7,6 +7,7 @@
 用法：python3 scripts/update-indie-dev.py
 输出：src/data/independent-developers.json（含 stats / groups，按 md 原始倒序：最新在前）
 """
+import base64
 import json
 import re
 import sys
@@ -16,6 +17,11 @@ from datetime import datetime, timezone
 RAW_URL = (
     "https://raw.githubusercontent.com/1c7/chinese-independent-developer/"
     "master/.github/pages/README-Programmer-Edition.md"
+)
+# raw 直连失败时的降级通道：GitHub Contents API（返回 base64 content）
+API_URL = (
+    "https://api.github.com/repos/1c7/chinese-independent-developer/"
+    "contents/.github/pages/README-Programmer-Edition.md"
 )
 OUT_PATH = "src/data/independent-developers.json"
 SRC_URL = "https://github.com/1c7/chinese-independent-developer/blob/master/.github/pages/README-Programmer-Edition.md"
@@ -31,9 +37,22 @@ DESC_CLEAN_RE = re.compile(r"^[^\u4e00-\u9fa5A-Za-z0-9]+")
 
 
 def fetch_md() -> str:
-    req = urllib.request.Request(RAW_URL, headers={"User-Agent": "bookmark-nav-site-updater/1.0"})
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return resp.read().decode("utf-8")
+    # 优先 raw 直连；失败（网络/SSL/超时）时降级到 GitHub Contents API
+    try:
+        req = urllib.request.Request(RAW_URL, headers={"User-Agent": "bookmark-nav-site-updater/1.0"})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return resp.read().decode("utf-8")
+    except Exception:
+        api_req = urllib.request.Request(
+            API_URL,
+            headers={
+                "User-Agent": "bookmark-nav-site-updater/1.0",
+                "Accept": "application/vnd.github+json",
+            },
+        )
+        with urllib.request.urlopen(api_req, timeout=60) as resp:
+            payload = json.loads(resp.read().decode("utf-8"))
+            return base64.b64decode(payload["content"]).decode("utf-8")
 
 
 def parse_author(raw: str):
