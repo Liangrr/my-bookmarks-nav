@@ -112,7 +112,7 @@ export default function Index() {
 
       <View
         className="link"
-        onClick={() => Taro.navigateTo({ url: "/pages/budget/index" })}
+        onClick={() => Taro.navigateTo({ url: "/subpackages/budget/index" })}
       >
         去看三餐预算（同源纯逻辑复用）
       </View>
