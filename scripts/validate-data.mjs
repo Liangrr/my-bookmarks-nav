@@ -6,7 +6,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { join } from "node:path";
 
-const DATA_DIR = fileURLToPath(new URL("../src/data/", import.meta.url));
+// 共享数据包是唯一真源（Web 与小程序共用），src/data 只留 chrome-bookmarks.json / zhuiju.ts 等不参与校验的历史文件
+const DATA_DIR = fileURLToPath(new URL("../packages/shared-data/src/", import.meta.url));
 
 const CUISINES = ["粤菜·早茶", "潮汕菜", "川湘·云贵", "火锅·烤肉", "烧烤·海鲜", "日料·韩食", "东南亚·西餐", "其他菜系"];
 const DISTRICTS = ["福田", "罗湖", "南山", "宝安", "龙华", "龙岗", "盐田", "光明", "坪山", "大鹏"];

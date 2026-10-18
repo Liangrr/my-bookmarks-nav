@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useReducer, useState, useSyncExternalStore } from "react";
-import data from "@/data/agent-learning-guide.json";
+import data from "@shared-data/agent-learning-guide.json";
 import FilterBtn from "@/components/filter-btn";
 
 /* ========== 类型 ========== */

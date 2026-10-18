@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import RAW from "../src/data/meal-planner.json";
-import { filterFeastPlaces, type FeastPlace } from "../src/lib/feast-filter";
+import RAW from "@shared-data/meal-planner.json";
+import { filterFeastPlaces, type FeastPlace } from "@shared-lib/feast-filter";
 
 type Place = FeastPlace;
 const PLACES = (RAW as unknown as { feast: { places: Place[] } }).feast.places;

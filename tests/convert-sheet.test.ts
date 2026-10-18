@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isJsonFile, parseCsv, pickSheetInput } from "../src/lib/convert-sheet";
+import { isJsonFile, parseCsv, pickSheetInput } from "@shared-lib/convert-sheet";
 
 describe("isJsonFile：按扩展名判定走哪个分支（忽略大小写）", () => {
   it("大写扩展名 x.JSON 也走 JSON 分支", () => {

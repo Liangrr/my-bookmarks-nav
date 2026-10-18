@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import RAW from "../src/data/meal-planner.json";
+import RAW from "@shared-data/meal-planner.json";
 import {
   cheapest,
   computeSavingPlan,
@@ -8,7 +8,7 @@ import {
   shouldSuggestSaving,
   type Budget,
   type MealSlots,
-} from "../src/lib/meal-budget";
+} from "@shared-lib/meal-budget";
 
 // 真实数据按最小必要类型读入（断言只用到 name / price）
 type Meal = { name: string; price: number };

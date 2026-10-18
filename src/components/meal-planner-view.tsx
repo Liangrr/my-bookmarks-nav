@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import DATA from "@/data/meal-planner.json";
-import FRUIT_DATA from "@/data/seasonal-fruits.json";
-import { cheapest, computeSavingPlan, fitBudget, shouldSuggestSaving } from "@/lib/meal-budget";
-import { filterFeastPlaces } from "@/lib/feast-filter";
+import DATA from "@shared-data/meal-planner.json";
+import FRUIT_DATA from "@shared-data/seasonal-fruits.json";
+import { cheapest, computeSavingPlan, fitBudget, shouldSuggestSaving } from "@shared-lib/meal-budget";
+import { filterFeastPlaces } from "@shared-lib/feast-filter";
 
 type Meal = {
   id: string;

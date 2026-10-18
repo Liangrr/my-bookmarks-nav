@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import fruitsData from "@/data/seasonal-fruits.json";
+import fruitsData from "@shared-data/seasonal-fruits.json";
 import FilterBtn from "@/components/filter-btn";
 
 interface Fruit {

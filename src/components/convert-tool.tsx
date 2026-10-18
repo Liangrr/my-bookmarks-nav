@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { pickSheetInput } from "@/lib/convert-sheet";
+import { pickSheetInput } from "@shared-lib/convert-sheet";
 
 /* ================= 工具定义 ================= */
 

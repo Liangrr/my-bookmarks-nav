@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import ailmentsData from "@/data/common-ailments.json";
+import ailmentsData from "@shared-data/common-ailments.json";
 
 interface Stage {
   phase: string;

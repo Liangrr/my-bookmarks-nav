@@ -1,0 +1,11 @@
+{
+  "name": "@asuria/shared-data",
+  "version": "0.1.0",
+  "private": true,
+  "description": "bookmark-nav-site 与小程序共用的静态数据与法定节假日表（纯数据，无运行时依赖）",
+  "main": "./src/china-holidays.ts",
+  "types": "./src/china-holidays.ts",
+  "exports": {
+    "./*": "./src/*"
+  }
+}

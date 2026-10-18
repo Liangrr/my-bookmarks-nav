@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import data from "@/data/diy-guide.json";
+import data from "@shared-data/diy-guide.json";
 
 interface Material {
   name: string;

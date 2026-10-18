@@ -36,7 +36,7 @@ export default function IndieDevList() {
   // 不兜底就会永远停在「正在加载收录数据…」。reloadKey 用于让用户手动重试。
   useEffect(() => {
     let alive = true;
-    import("@/data/independent-developers.json")
+    import("@shared-data/independent-developers.json")
       .then((m) => {
         if (!alive) return;
         const d = m.default as IndieData;

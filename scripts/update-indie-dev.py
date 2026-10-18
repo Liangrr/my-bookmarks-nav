@@ -5,7 +5,7 @@
 数据源：https://github.com/1c7/chinese-independent-developer
          .github/pages/README-Programmer-Edition.md
 用法：python3 scripts/update-indie-dev.py
-输出：src/data/independent-developers.json（含 stats / groups，按 md 原始倒序：最新在前）
+输出：packages/shared-data/src/independent-developers.json（含 stats / groups，按 md 原始倒序：最新在前）
 """
 import base64
 import json
@@ -23,7 +23,7 @@ API_URL = (
     "https://api.github.com/repos/1c7/chinese-independent-developer/"
     "contents/.github/pages/README-Programmer-Edition.md"
 )
-OUT_PATH = "src/data/independent-developers.json"
+OUT_PATH = "packages/shared-data/src/independent-developers.json"
 SRC_URL = "https://github.com/1c7/chinese-independent-developer/blob/master/.github/pages/README-Programmer-Edition.md"
 
 DATE_RE = re.compile(r"^###\s+(.+)$")

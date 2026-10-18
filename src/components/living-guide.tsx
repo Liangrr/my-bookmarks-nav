@@ -78,7 +78,7 @@ export function LivingGuide() {
   // 不兜底就会永远停在「正在加载正文…」。reloadKey 用于让用户手动重试。
   useEffect(() => {
     let alive = true;
-    import("@/data/living-guide.json")
+    import("@shared-data/living-guide.json")
       .then((m) => {
         if (!alive) return;
         setSections((m.default as LivingData).sections);

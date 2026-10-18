@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import emergencyData from "@/data/emergency-guide.json";
+import emergencyData from "@shared-data/emergency-guide.json";
 import FilterBtn from "@/components/filter-btn";
 
 interface ESource {

@@ -1,0 +1,12 @@
+{
+  "name": "@asuria/shared-lib",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web 与小程序共用的纯逻辑：预算兜底、聚餐筛选、表格/JSON 解析（无 DOM、无 React 依赖）",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  }
+}

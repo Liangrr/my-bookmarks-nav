@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import survivalData from "@/data/survival-guide.json";
+import survivalData from "@shared-data/survival-guide.json";
 import FilterBtn from "@/components/filter-btn";
 
 interface SurvivalSource {

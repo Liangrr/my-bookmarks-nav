@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { Solar } from "lunar-typescript";
-import { HOLIDAYS, WORKDAYS } from "@/data/china-holidays";
+import { HOLIDAYS, WORKDAYS } from "@shared-data/china-holidays";
 
 const WEEK_LABELS = ["一", "二", "三", "四", "五", "六", "日"];
 const WEEK_CN = ["日", "一", "二", "三", "四", "五", "六"];

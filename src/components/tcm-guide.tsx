@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import tcmData from "@/data/tcm-guide.json";
+import tcmData from "@shared-data/tcm-guide.json";
 import FilterBtn from "@/components/filter-btn";
 
 interface TcmItem {

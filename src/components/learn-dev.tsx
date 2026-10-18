@@ -1,5 +1,5 @@
 "use client";
-import data from "@/data/dev-learning-guide.json";
+import data from "@shared-data/dev-learning-guide.json";
 import { GuideShell, type GuideData } from "@/components/guide-shell";
 
 const DATA = data as GuideData;
