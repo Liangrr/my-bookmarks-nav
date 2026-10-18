@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+/apps/*/node_modules
+/apps/*/dist
+/apps/*/.temp
+/apps/*/.swc
 /.pnp
 .pnp.*
 .yarn/*

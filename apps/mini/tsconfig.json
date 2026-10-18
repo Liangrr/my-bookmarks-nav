@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "lib": ["ES2018", "DOM"],
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@shared-data/*": ["../../packages/shared-data/src/*"],
+      "@shared-lib/*": ["../../packages/shared-lib/src/*"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "types": ["@tarojs/taro", "webpack-env"]
+  },
+  "include": ["src", "config", "types"],
+  "exclude": ["node_modules", "dist"]
+}

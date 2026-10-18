@@ -1,0 +1,147 @@
+page {
+  background: #0f151f;
+  color: #e6edf7;
+  font-size: 28px;
+}
+
+.page {
+  padding: 24px 28px 60px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.sub {
+  margin-top: 10px;
+  font-size: 24px;
+  line-height: 36px;
+  color: #8b97a8;
+}
+
+.search {
+  margin-top: 24px;
+  padding: 16px 24px;
+  background: #1a2331;
+  border: 1px solid #263243;
+  border-radius: 16px;
+  font-size: 28px;
+  color: #e6edf7;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.chip {
+  margin: 0 12px 12px 0;
+  padding: 8px 22px;
+  border: 1px solid #263243;
+  border-radius: 999px;
+  font-size: 24px;
+  color: #8b97a8;
+}
+
+.chip-on {
+  border-color: #4ade80;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.12);
+}
+
+.card {
+  margin-top: 20px;
+  padding: 24px;
+  background: #1a2331;
+  border: 1px solid #263243;
+  border-radius: 20px;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 40px;
+  margin-right: 14px;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.tag {
+  margin-left: auto;
+  font-size: 22px;
+  color: #4ade80;
+}
+
+.line {
+  margin-top: 12px;
+  font-size: 25px;
+  line-height: 38px;
+  color: #b9c4d2;
+}
+
+.nutri {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.nutri-item {
+  width: 25%;
+  font-size: 22px;
+  color: #8b97a8;
+}
+
+.nutri-value {
+  font-size: 26px;
+  color: #e6edf7;
+}
+
+.empty {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 26px;
+  color: #8b97a8;
+}
+
+.total {
+  margin-top: 20px;
+  padding: 24px;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 20px;
+}
+
+.total-value {
+  font-size: 44px;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.warn {
+  margin-top: 16px;
+  padding: 20px 24px;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 16px;
+  font-size: 24px;
+  line-height: 36px;
+  color: #fbbf24;
+}
+
+.link {
+  margin-top: 28px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #263243;
+  border-radius: 16px;
+  font-size: 26px;
+  color: #8b97a8;
+}
