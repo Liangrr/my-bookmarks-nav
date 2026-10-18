@@ -1,14 +1,588 @@
 {
  "source": "https://github.com/1c7/chinese-independent-developer/blob/master/.github/pages/README-Programmer-Edition.md",
- "updatedAt": "2026-10-06 08:20:47 CST",
+ "updatedAt": "2026-10-18 08:21:51 CST",
  "stats": {
-  "total": 337,
-  "ok": 333,
+  "total": 364,
+  "ok": 360,
   "dead": 4,
-  "authors": 304,
-  "dateGroups": 212
+  "authors": 326,
+  "dateGroups": 222
  },
  "groups": [
+  {
+   "date": "2026 年 10 月 16 号添加",
+   "authors": [
+    {
+     "name": "CaseyCACA",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/CaseyCACA"
+      }
+     ],
+     "items": [
+      {
+       "title": "Codex Token Bar",
+       "url": "https://github.com/CaseyCACA/codex-token-bar",
+       "status": "ok",
+       "desc": "macOS 原生 Codex 用量监控工具，在菜单栏查看剩余额度、重置时间、会话 Token、缓存复用与上下文占用，支持跟随 Codex 桌面宠物移动的额度浮标；本地运行，无需额外 API Key，目前需从源码构建",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "Tseka Luk(无锡)",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/TsekaLuk"
+      }
+     ],
+     "items": [
+      {
+       "title": "Nebutra Sailor",
+       "url": "https://github.com/Nebutra/Nebutra-Sailor",
+       "status": "ok",
+       "desc": "源码公开的 SaaS 底座，`npx create-sailor@latest my-app` 一条命令生成 Next.js + Hono 网关、Better Auth 登录、Creem 与微信/支付宝收款、生成式 Postgres RLS 多租户的完整项目，空 .env 本地即可跑通，带 AGENTS.md 和 lint 护栏方便 Claude Code / Codex 接手；生成的项目为 MIT，主仓库 FSL-1.1-ALv2（两年后转 Apache-2.0）",
+       "links": [
+        {
+         "text": "更多介绍",
+         "url": "https://nebutra.com/sailor"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 15 号添加",
+   "authors": [
+    {
+     "name": "didi_dev",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/wd9337812"
+      }
+     ],
+     "items": [
+      {
+       "title": "BBAuto",
+       "url": "https://bbauto.top",
+       "status": "ok",
+       "desc": "面向联盟营销投放者的品牌词投放管理系统，连接品牌词研究、Google Ads 任务创建、访问换参与多联盟归因报表，支持 Agent/MCP 操作；需在自己的 VPS 部署并配置相关账户，按订阅使用，产品闭源",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "ls-open",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/ls-open"
+      }
+     ],
+     "items": [
+      {
+       "title": "claude-tuner",
+       "url": "https://github.com/ls-open/claude-tuner",
+       "status": "ok",
+       "desc": "专为 Claude Code 与 Claude Desktop (macOS) 打造的本地前缀缓存优化与工具精简网关，解决多轮对话缓存击穿（实测 DeepSeek 自动缓存命中率达 95%+）、并发工具顺序错位与 thinking 思考链丢失导致的 400 报错，附原生实时 WebUI 监控看板，零外部依赖，MIT 开源",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "coffeecoproject",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/coffeecoproject"
+      }
+     ],
+     "items": [
+      {
+       "title": "SmartCompact",
+       "url": "https://github.com/coffeecoproject/SmartCompact",
+       "status": "ok",
+       "desc": "让 Claude Code、Codex、pi 的长会话在做完一件事之后提前压缩上下文，60 个任务实测花费降 44%、代码验收不受影响，本地运行，MIT 开源",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "time410",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/lintt76"
+      }
+     ],
+     "items": [
+      {
+       "title": "Tikway",
+       "url": "https://tikway.ai/",
+       "status": "ok",
+       "desc": "面向开发者的多模型 AI API 接入服务，用统一 API Key 按 OpenAI、Anthropic、Gemini 协议配置请求地址，提供模型价格目录、中英文接入与排错教程和 Token 费用计算器，按使用量计费；第三方接入服务，非模型厂商官方",
+       "links": [
+        {
+         "text": "接入教程",
+         "url": "https://tikway.ai/guides"
+        }
+       ]
+      },
+      {
+       "title": "Tikway API Examples",
+       "url": "https://github.com/lintt76/tikway-examples",
+       "status": "ok",
+       "desc": "Python 标准库调用与 Node.js SSE 流式示例，处理中文跨分块、CRLF、多行 data、流内错误和提前断流，附离线 Token 费用估算工具，无第三方依赖，MIT 开源；真实模型调用按服务价格计费",
+       "links": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 14 号添加",
+   "authors": [
+    {
+     "name": "kuxiaowo",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/kuxiaowo"
+      }
+     ],
+     "items": [
+      {
+       "title": "WeChat ASR Bridge",
+       "url": "https://github.com/kuxiaowo/wechat-asr-bridge",
+       "status": "ok",
+       "desc": "把 Windows 微信语音识别接成兼容 OpenAI 的 ASR 接口，支持 WAV/MP3 和 JSON/文本输出；提供免安装窗口版，可选择音频并复制或保存识别结果；需安装并登录微信 4.1.13.65，音频经微信发送至微信服务端，属于版本限定的实验桥接器",
+       "links": [
+        {
+         "text": "下载与使用说明",
+         "url": "https://github.com/kuxiaowo/wechat-asr-bridge/releases/tag/v0.2.0"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "lenoooin",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/lenoooin"
+      }
+     ],
+     "items": [
+      {
+       "title": "Roblox GUI Maker",
+       "url": "https://robloxguimaker.dev/",
+       "status": "ok",
+       "desc": "一句话描述商店、HUD、背包或弹窗，生成最多 4 版 Roblox 游戏界面草图，附组件树和样式变量，桌面端和手机端同时预览，可用插件一键发送到 Roblox Studio；第一个 GUI 免费",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "sunflower225",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/sunflower225"
+      }
+     ],
+     "items": [
+      {
+       "title": "Optio",
+       "url": "https://jevai.website/zh",
+       "status": "ok",
+       "desc": "类型化决策 API，传入文本或 JSON 和最多 8 个问题，返回带概率的单选、评分或是/否答案，用于工单分诊、模型路由、内容审核和 Agent 工具调用前的风险检查；浏览器 Playground 可免注册试用，注册送 5 额度，之后一次性购买额度包（不订阅、不过期）；独立运营的 Jev 调用网关，与 TypeSafe 无隶属关系，非开源",
+       "links": [
+        {
+         "text": "文档",
+         "url": "https://jevai.website/docs"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 13 号添加",
+   "authors": [
+    {
+     "name": "hen9xin",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/hen9xin"
+      }
+     ],
+     "items": [
+      {
+       "title": "pan-transfer-bot",
+       "url": "https://github.com/hen9xin/pan-transfer-bot",
+       "status": "ok",
+       "desc": "夸克/百度网盘资源整理工具与 AI Agent Skill，粘贴分享链接即自动识别提取码、转存到自己网盘并按年/月/日归档、生成新分享链接，纯本地生成配套文案无需大模型 API；FastAPI + Web 界面，Docker 一键部署，附 SKILL.md 可供 Claude Code 调用，MIT 开源",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "cf12436",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/cf12436"
+      }
+     ],
+     "items": [
+      {
+       "title": "AI SaaS Go",
+       "url": "https://aisaasgo.org/",
+       "status": "ok",
+       "desc": "AI API 中转站，一个 Key 调用 OpenAI、Claude、Gemini、Grok 等模型，兼容 OpenAI Chat Completions 与 Anthropic Messages 协议，支持原生 SSE 流式响应、按量计费与提示缓存，站点另设在线生图入口",
+       "links": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 12 号添加",
+   "authors": [
+    {
+     "name": "DustarCode",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/DustarCode"
+      }
+     ],
+     "items": [
+      {
+       "title": "MakerEnd",
+       "url": "https://makerend.com/console",
+       "status": "ok",
+       "desc": "AI 模型 API 中转平台，一个 API Key 即可调用 GPT、Claude、Gemini、Grok 等对话模型与 Midjourney、Flux、Sora、Veo、可灵等图像视频模型，OpenAI 兼容接口，按量计费，支持支付宝 / 微信 / USDT 充值，注册或联系客服可领免费测试额度",
+       "links": [
+        {
+         "text": "价格列表",
+         "url": "https://makerend.com/pricing"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 11 号添加",
+   "authors": [
+    {
+     "name": "ls-open",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/ls-open"
+      }
+     ],
+     "items": [
+      {
+       "title": "md-to-word",
+       "url": "https://github.com/ls-open/md-to-word",
+       "status": "ok",
+       "desc": "专为学术论文与企业研报打造的 Markdown 转 Word 确定性排版引擎与 AI Agent Skill。坚持内容与排版解耦，实现带编号公式绝对居中靠右、学术三线表跨页重复表头、双节独立页码、GB/T 7714-2015 参考文献与三道自动化质量门禁；导出的 docx 固定时间戳保证 Git 字节级一致；原生适配 Claude Code / Cursor / Windsurf，可一句话全流程代办交付",
+       "links": [
+        {
+         "text": "源码仓库",
+         "url": "https://github.com/ls-open/md-to-word"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "GPTZZZ",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/gptzzz"
+      }
+     ],
+     "items": [
+      {
+       "title": "GPTZZZ",
+       "url": "https://gptzzz.ai/",
+       "status": "ok",
+       "desc": "AI API 中转站，一个账号、一份余额调用 GPT、Claude、Gemini、DeepSeek、Grok、Qwen、MiMo 共 48 个模型；OpenAI 兼容 Base URL 填 `https://gptzzz.ai/v1`（OpenAI 分组支持 Chat Completions 与 Responses，Codex CLI 可接），Claude 分组走 Claude Messages 接口 `/v1/messages`；支付宝充值 ¥1 = $1、单笔 ¥10 起、按量计费，未用完余额可退；个人运营的独立第三方服务，非模型厂商官方",
+       "links": [
+        {
+         "text": "接入文档",
+         "url": "https://gptzzz.ai/docs/"
+        }
+       ]
+      },
+      {
+       "title": "openai-compatible-checker",
+       "url": "https://github.com/gptzzz/openai-compatible-checker",
+       "status": "ok",
+       "desc": "OpenAI 兼容接口体检 CLI，一条命令检查任意中转站、自建网关或本地推理服务的模型列表、SSE 流式与 usage 块、工具调用、JSON 模式、Responses API（决定能否接 Codex）、图片输入、错误格式和首字延迟，输出脱敏的 JSON / Markdown 报告；单文件、只依赖 Python 标准库，也能作为 GitHub Action 定时跑；只检查协议兼容性，不证明模型真伪，MIT 开源",
+       "links": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 10 号添加",
+   "authors": [
+    {
+     "name": "MarchBeta2087",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/MarchBeta2087"
+      }
+     ],
+     "items": [
+      {
+       "title": "梦溪畅谈",
+       "url": "https://github.com/MarchBeta2087/mengxi-llm-chat",
+       "status": "ok",
+       "desc": "可自部署的 LLM 聊天 Web 应用，支持多模型与多 API Key 公私双轨管理调度、六维限流、插件系统、对话加密与盲索引搜索、审计日志与可定制界面",
+       "links": [
+        {
+         "text": "源码",
+         "url": "https://github.com/MarchBeta2087/mengxi-llm-chat"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "ylv01(深圳)",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/ylv01"
+      }
+     ],
+     "items": [
+      {
+       "title": "PromptHarbor",
+       "url": "https://github.com/ylv01/prompt-harbor",
+       "status": "ok",
+       "desc": "一句话描述任务，根据模型能力与社区反馈推荐最适合的模型。复杂项目可拆分任务并生成跨模型协作提示词，覆盖 Claude Opus 5.5、GPT-6.1 Sol 等",
+       "links": []
+      }
+     ]
+    },
+    {
+     "name": "huangy7(厦门)",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/huangy7"
+      }
+     ],
+     "items": [
+      {
+       "title": "outline-skill",
+       "url": "https://github.com/huangy7/outline-skill",
+       "status": "ok",
+       "desc": "专为 AI 编程智能体（Claude Code、Antigravity、Cursor 等）打造的 Outline 知识库 Agent Skill 与协同工具。遵循 agentskills.io 标准，赋予各类智能体原生读写、检索与智能格式化 Outline 文档的能力；内置排版护栏（自动去除冗余标题、生成标准 Callout 提示块），支持 MCP 与零依赖 Node.js 客户端双引擎架构，完全开源免费",
+       "links": [
+        {
+         "text": "源码仓库",
+         "url": "https://github.com/huangy7/outline-skill"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "shaguocgl",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/shaguocgl"
+      }
+     ],
+     "items": [
+      {
+       "title": "buffTerm",
+       "url": "https://github.com/shaguocgl/buff-term",
+       "status": "ok",
+       "desc": "AI Agent 加持的 SSH/SFTP 桌面管理工具，自然语言运维服务器；可对外暴露 MCP 服务供其他 AI 工具调用（macOS/Windows，MIT）",
+       "links": [
+        {
+         "text": "官网",
+         "url": "https://shaguocgl.github.io/buff-term-site/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 9 号添加",
+   "authors": [
+    {
+     "name": "MASAKA AI",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/masakaai"
+      }
+     ],
+     "items": [
+      {
+       "title": "Jet Browser",
+       "url": "https://github.com/masakaai/jet-browser",
+       "status": "ok",
+       "desc": "给 AI Agent 嵌入的轻量浏览器运行时，一个 Docker 容器运行一个 WPE WebKit 会话，通过有序 JSONL 执行原生鼠标键盘输入、DOM 检查与截图；不绑定模型、账号或托管控制面，Apache-2.0 开源，提供 Codex / Claude Code Skill 与 GitHub Action 验收",
+       "links": [
+        {
+         "text": "基准方法与原始数据",
+         "url": "https://github.com/masakaai/jet-browser/blob/main/docs/benchmarks.md"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "LinkAGI",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/16871233"
+      }
+     ],
+     "items": [
+      {
+       "title": "LinkAGI",
+       "url": "https://api.linktoagi.com/",
+       "status": "ok",
+       "desc": "面向开发者的 AI API 聚合服务，提供 OpenAI、Anthropic 与 Gemini 风格的接口；控制台可创建独立 API Key、查看模型价格和调用日志，支持人民币按量计费",
+       "links": [
+        {
+         "text": "使用文档",
+         "url": "https://docs.linktoagi.com/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 8 号添加",
+   "authors": [
+    {
+     "name": "ZhongQuinnKing",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/ZhongQuinnKing"
+      }
+     ],
+     "items": [
+      {
+       "title": "拾级 Shiji",
+       "url": "https://github.com/ZhongQuinnKing/shiji",
+       "status": "ok",
+       "desc": "装进 Claude、豆包等 AI 助手的成长顾问技能包，从高三填志愿到入职三年，152 篇中文文档覆盖高考、大学、考研、考公、求职、职场、论文、研究生、留学、学习、人际与生活、特殊通道十二条线，另有 8 个可直接填写的简历模板；把仓库拷进 skills 目录即用，代码 MIT、内容 CC BY-NC-ND 开源",
+       "links": []
+      },
+      {
+       "title": "采诗 Caishi",
+       "url": "https://github.com/ZhongQuinnKing/caishi",
+       "status": "ok",
+       "desc": "给 AI 用的中文互联网能力包，让 Claude Code 这类能跑命令行的助手直读抖音、小红书、B站、微博、知乎、公众号、头条等 33 个中文平台（满配 40），一条命令装好；不爬虫、不做批量，所有请求都走你自己已登录的浏览器会话，只读",
+       "links": []
+      },
+      {
+       "title": "夜诵 Yesong",
+       "url": "https://github.com/ZhongQuinnKing/yesong",
+       "status": "ok",
+       "desc": "离线信息哨兵，终端关了也替你值守，按你列的清单每 6 小时扫一次热榜、GitHub 动态、新项目雷达与任意网页变化，攒进收件箱，AI 下次上线自动读完；只读、不调用任何大模型，采集零 token 成本，macOS 一条命令装好开机自跑",
+       "links": []
+      },
+      {
+       "title": "玉尺 Yuchi",
+       "url": "https://github.com/ZhongQuinnKing/yuchi",
+       "status": "ok",
+       "desc": "给中文写作量呼吸的一把尺，文章、诗同等对待：文章看句长节奏、套话与虚词密度、结构推进，诗做逐字平仄标注、近体诗格律检查、818 个词牌给谱对谱，另附十四篇写作教材；命令行（零依赖）、网页、AI 技能包三入口即用，代码 MIT、内容 CC BY-NC-ND 开源",
+       "links": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 7 号添加",
+   "authors": [
+    {
+     "name": "Hongshuo Wang(北京)",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/hongshuo-wang"
+      }
+     ],
+     "items": [
+      {
+       "title": "Agent Usage",
+       "url": "https://github.com/hongshuo-wang/agent-usage-desktop/releases",
+       "status": "ok",
+       "desc": "免费开源的桌面应用，在本地查看 Claude Code、Codex 等 AI 编程工具的 Token 用量、估算费用和会话记录",
+       "links": [
+        {
+         "text": "更多介绍",
+         "url": "https://github.com/hongshuo-wang/agent-usage-desktop/blob/main/README.zh-CN.md"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026 年 10 月 6 号添加",
+   "authors": [
+    {
+     "name": "qybaihe",
+     "links": [
+      {
+       "text": "Github",
+       "url": "https://github.com/qybaihe"
+      }
+     ],
+     "items": [
+      {
+       "title": "mu",
+       "url": "https://github.com/qybaihe/mu",
+       "status": "ok",
+       "desc": "编程 Agent，带一个判定内核：30 多个决策点上的例行判断交给小而快的判定模型 Jev，比如长工具输出里哪些片段进上下文、被规则拦下的命令是不是用户要的、网页和 MCP 结果里有没有冲着模型来的指令，大模型只管干活，每次判断都记进本地账本；基于 pi 与 AionUi，命令行 `npm i -g mu-agent` 即用，桌面端支持 macOS / Windows / Linux，MIT 开源（桌面端 Apache-2.0）",
+       "links": [
+        {
+         "text": "中文说明",
+         "url": "https://github.com/qybaihe/mu/blob/main/docs/readme/README.zh-CN.md"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
   {
    "date": "2026 年 10 月 5 号添加",
    "authors": [
@@ -182,7 +756,7 @@
        "title": "onomeo",
        "url": "https://onomeo.com/zh",
        "status": "ok",
-       "desc": "兼容 OpenAI 的 AI 接口聚合站，一把密钥调用 DeepSeek、GLM、Gemini、Qwen 等 35 个免费模型，免费模型不扣额度（未付费账号每 5 小时 20 次），网页里也能直接对话和画图；Claude、GPT 等大模型需付费；目前是公测阶段，不保证所有功能都能正常使用，正在大量收集反馈，欢迎提",
+       "desc": "兼容 OpenAI 的 AI 接口聚合站，一把密钥调用 DeepSeek、GLM、Gemini、Qwen 等约 30 个免费模型，免费模型按次数计（每个账号每 5 小时 30 次），网页里也能直接对话和画图；Claude、GPT 等大模型按量付费（美元余额，5 美元起充）；目前是公测阶段，不保证所有功能都能正常使用，正在大量收集反馈，欢迎提",
        "links": []
       }
      ]
@@ -4280,29 +4854,6 @@
        "url": "https://github.com/sunxfancy/SSUI",
        "status": "ok",
        "desc": "基于安全 Python 脚本的 stable diffusion AI 绘图工具，可以根据脚本中函数的类型自动生成 UI 界面，能方便快捷地复现其他用户的工作流",
-       "links": []
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2025 年 4 月 22 号添加",
-   "authors": [
-    {
-     "name": "zhtyyx(上海)",
-     "links": [
-      {
-       "text": "Github",
-       "url": "https://github.com/zhtyyx"
-      }
-     ],
-     "items": [
-      {
-       "title": "ioe 库存管理系统",
-       "url": "https://github.com/zhtyyx/ioe",
-       "status": "ok",
-       "desc": "基于 Django 开发的综合性库存管理系统，专为零售商店、小型仓库和商品销售场所设计。系统提供了完整的商品管理、库存跟踪、销售记录、会员管理和数据分析功能，帮助企业高效管理库存和销售流程",
        "links": []
       }
      ]
