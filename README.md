@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 星轨 · bookmark-nav-site
 
-## Getting Started
+个人书签导航站，同时收纳一整套生活 / 学习手册页面（应季水果、三餐预算、日常小病、应急、中医、DIY、好好生活…）。
 
-First, run the development server:
+线上地址：<https://bookmark-nav-site.vercel.app>
+
+## 技术栈
+
+- **Web**：Next.js 16 + React 19 + Tailwind 4，Supabase 做数据与鉴权，Vercel 自动部署（GitHub Actions 触发）
+- **小程序**：Taro 4.3 + React 18（`apps/mini/`）
+- **共享**：`packages/shared-data`（数据 JSON + 法定节假日表）、`packages/shared-lib`（无依赖纯逻辑）
+- 一个仓库装三块代码，数据与纯逻辑单一真源，Web 与小程序共用
+
+## 本地开发
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev              # 起本地服务（默认 http://localhost:3000）
+npm run typecheck        # TypeScript 检查
+npm run validate:data    # 数据文件体检
+npm test                 # vitest 单测
+npm run lint             # ESLint
+npx next build --webpack # 生产构建（本机缺少 Turbopack 原生绑定，必须带 --webpack）
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+需要 `.env.local` 提供 `NEXT_PUBLIC_SUPABASE_URL` 与 `NEXT_PUBLIC_SUPABASE_ANON_KEY`。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+小程序端：
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cd apps/mini && npm run build:weapp   # 产物在 apps/mini/dist/，交微信开发者工具上传
+```
 
-## Learn More
+## 部署
 
-To learn more about Next.js, take a look at the following resources:
+推送到 `main` 后，[.github/workflows/deploy.yml](./.github/workflows/deploy.yml) 先跑 `verify`（类型检查 + 数据体检 + 单测 + lint），全绿才执行 `vercel --prod`。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 文档
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [docs/项目结构.md](./docs/项目结构.md) —— 各目录 / 文件的作用、数据流、体积约束与已知边界
+- [docs/开发规范.md](./docs/开发规范.md) —— 构建铁律、样式坑、行情数据源、部署流程等开发约定
