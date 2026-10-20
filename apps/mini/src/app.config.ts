@@ -6,6 +6,10 @@ export default defineAppConfig({
       root: "subpackages/budget",
       pages: ["index"],
     },
+    {
+      root: "subpackages/life",
+      pages: ["fruits/index", "feast/index", "diy/index"],
+    },
   ],
   tabBar: {
     color: "#8b97a8",

@@ -311,3 +311,58 @@ page {
   margin-top: 32px;
   text-align: center;
 }
+
+/* ===== 横向筛选条 / 分组切换 ===== */
+.chips-scroll {
+  margin-top: 16px;
+  white-space: nowrap;
+}
+
+.chips-scroll .chips {
+  flex-wrap: nowrap;
+}
+
+.chips-scroll .chip {
+  flex-shrink: 0;
+}
+
+.filter-label {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #8b97a8;
+}
+
+.sig {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.sig-item {
+  margin: 0 12px 10px 0;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 21px;
+  color: #b9c4d2;
+  background: #263243;
+}
+
+.line.meta {
+  color: #8b97a8;
+}
+
+.line.tip {
+  color: #fbbf24;
+}
+
+.line.src {
+  font-size: 20px;
+  color: #6b7789;
+}
+
+.sub-h {
+  margin-top: 16px;
+  font-size: 25px;
+  font-weight: 700;
+  color: #e6edf7;
+}

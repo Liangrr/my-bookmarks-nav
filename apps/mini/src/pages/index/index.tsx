@@ -26,9 +26,9 @@ const GROUPS: Group[] = [
     label: "工具生活",
     items: [
       { icon: "🍳", name: "三餐预算", desc: "按预算组合一日三餐", url: "/subpackages/budget/index", ready: true },
-      { icon: "🍎", name: "应季水果", desc: "当季水果与营养参考", ready: false },
-      { icon: "🍽️", name: "今天吃什么", desc: "深圳外食茶楼榜单", ready: false },
-      { icon: "🛠️", name: "DIY 手作", desc: "在家可做的菜谱教程", ready: false },
+      { icon: "🍎", name: "应季水果", desc: "当季水果与营养参考", url: "/subpackages/life/fruits/index", ready: true },
+      { icon: "🍽️", name: "今天吃什么", desc: "深圳外食茶楼榜单", url: "/subpackages/life/feast/index", ready: true },
+      { icon: "🛠️", name: "DIY 手作", desc: "在家可做的菜谱教程", url: "/subpackages/life/diy/index", ready: true },
       { icon: "📈", name: "实时行情", desc: "贵金属与汇率参考", ready: false },
       { icon: "🔄", name: "格式转换", desc: "文档/图片格式与压缩", ready: false },
     ],
