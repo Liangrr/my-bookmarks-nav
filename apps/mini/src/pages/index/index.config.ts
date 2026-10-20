@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: "当季水果",
+  navigationBarTitleText: "首页",
 });

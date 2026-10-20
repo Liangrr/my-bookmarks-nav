@@ -1,121 +1,97 @@
-import { useMemo, useState } from "react";
-import { Input, Text, View } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import Taro from "@tarojs/taro";
-import fruitsData from "@shared-data/seasonal-fruits.json";
 
-// 数据来自 packages/shared-data（与 Web 端同一份真源），此处只做展示与筛选
-type Fruit = {
-  id: string;
-  name: string;
+// 首页：PC 端全部模块的菜单聚合墙。
+// ready=true 的入口已落地（跳转分包/页面）；ready=false 为占位，点击提示建设中，逐期补全。
+type Entry = {
   icon: string;
-  taste: string;
-  origin: string;
-  sweetness: number;
-  kcal: number;
-  sugar: number;
-  fat: number;
-  fiber: number;
-  diet: string;
-  benefit: string;
-  months: number[];
+  name: string;
+  desc: string;
+  url?: string; // ready 时跳转；留空=建设中
+  ready: boolean;
 };
 
-const DATA = fruitsData as unknown as { intro: string; fruits: Fruit[] };
-const CURRENT_MONTH = new Date().getMonth() + 1;
-const MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-const SWEET_LABEL: Record<number, string> = {
-  1: "微甜",
-  2: "清甜",
-  3: "爽甜",
-  4: "甘甜",
-  5: "浓甜",
-};
+type Group = { label: string; items: Entry[] };
+
+// 菜单口径与 Web 端 nav-bar 抽屉分组保持一致
+const GROUPS: Group[] = [
+  {
+    label: "常用",
+    items: [
+      { icon: "🧭", name: "网站导航", desc: "精选常用网站收藏", ready: false },
+      { icon: "🤖", name: "智能体市场", desc: "主流 AI 智能体收录", ready: false },
+    ],
+  },
+  {
+    label: "工具生活",
+    items: [
+      { icon: "🍳", name: "三餐预算", desc: "按预算组合一日三餐", url: "/subpackages/budget/index", ready: true },
+      { icon: "🍎", name: "应季水果", desc: "当季水果与营养参考", ready: false },
+      { icon: "🍽️", name: "今天吃什么", desc: "深圳外食茶楼榜单", ready: false },
+      { icon: "🛠️", name: "DIY 手作", desc: "在家可做的菜谱教程", ready: false },
+      { icon: "📈", name: "实时行情", desc: "贵金属与汇率参考", ready: false },
+      { icon: "🔄", name: "格式转换", desc: "文档/图片格式与压缩", ready: false },
+    ],
+  },
+  {
+    label: "学习成长",
+    items: [
+      { icon: "🧠", name: "AI Agent 学习", desc: "智能体入门路线", ready: false },
+      { icon: "💡", name: "AI 项目机会", desc: "可落地的 AI 方向", ready: false },
+      { icon: "💻", name: "Web 开发学习", desc: "前端路线与资源", ready: false },
+      { icon: "📱", name: "Flutter 学习", desc: "跨端开发路线", ready: false },
+      { icon: "🚀", name: "独立开发者", desc: "独立开发者项目库", ready: false },
+    ],
+  },
+  {
+    label: "实用手册",
+    items: [
+      { icon: "🌱", name: "人生手册", desc: "生活方法论合集", ready: false },
+      { icon: "⛺", name: "野外求生手册", desc: "户外生存技能", ready: false },
+      { icon: "🍵", name: "中医养生手册", desc: "日常养生参考", ready: false },
+      { icon: "🚑", name: "急救知识手册", desc: "突发应急处置", ready: false },
+      { icon: "🤒", name: "日常小病治理", desc: "常见不适处理", ready: false },
+    ],
+  },
+];
+
+function onTap(entry: Entry) {
+  if (entry.ready && entry.url) {
+    Taro.navigateTo({ url: entry.url });
+    return;
+  }
+  Taro.showToast({ title: "建设中，后续版本上线", icon: "none" });
+}
 
 export default function Index() {
-  const [q, setQ] = useState("");
-  // 默认看当季（当前月份），0 表示不过滤
-  const [month, setMonth] = useState(CURRENT_MONTH);
-
-  const list = useMemo(() => {
-    const key = q.trim().toLowerCase();
-    return DATA.fruits.filter((f) => {
-      const hitMonth = month === 0 || f.months.includes(month);
-      const hitKey =
-        !key ||
-        f.name.toLowerCase().includes(key) ||
-        f.benefit.toLowerCase().includes(key) ||
-        f.origin.toLowerCase().includes(key);
-      return hitMonth && hitKey;
-    });
-  }, [q, month]);
-
   return (
-    <View className="page">
-      <View className="title">当季水果</View>
-      <View className="sub">{DATA.intro}</View>
+    <View className="page home">
+      <View className="title">星轨</View>
+      <View className="sub">精选网站导航 · 工具 · 手册，按分组查找；灰项为建设中，将逐期上线。</View>
 
-      <Input
-        className="search"
-        value={q}
-        onInput={(e) => setQ(e.detail.value)}
-        placeholder="搜索水果名、产地或功效"
-        placeholderClass="sub"
-      />
-
-      <View className="chips">
-        {MONTHS.map((m) => (
-          <View
-            key={m}
-            className={`chip${m === month ? " chip-on" : ""}`}
-            onClick={() => setMonth(m)}
-          >
-            {m === 0 ? "全部" : `${m}月`}
+      {GROUPS.map((g) => (
+        <View key={g.label} className="group">
+          <View className="group-label">{g.label}</View>
+          <View className="grid">
+            {g.items.map((it) => (
+              <View
+                key={it.name}
+                className={`tile${it.ready ? "" : " tile-soon"}`}
+                onClick={() => onTap(it)}
+              >
+                <Text className="tile-icon">{it.icon}</Text>
+                <View className="tile-body">
+                  <View className="tile-name">
+                    {it.name}
+                    {!it.ready ? <Text className="badge">soon</Text> : null}
+                  </View>
+                  <View className="tile-desc">{it.desc}</View>
+                </View>
+              </View>
+            ))}
           </View>
-        ))}
-      </View>
-
-      <View className="sub">
-        命中 {list.length} / {DATA.fruits.length} 种
-      </View>
-
-      {list.length === 0 ? (
-        <View className="empty">没有符合条件的当季水果</View>
-      ) : (
-        list.map((f) => (
-          <View key={f.id} className="card">
-            <View className="card-head">
-              {f.icon ? <Text className="icon">{f.icon}</Text> : null}
-              <Text className="name">{f.name}</Text>
-              <Text className="tag">{SWEET_LABEL[f.sweetness] ?? ""} · {f.diet}</Text>
-            </View>
-            <View className="line">{f.taste}</View>
-            <View className="line">{f.benefit}</View>
-            <View className="line">产地：{f.origin}</View>
-            <View className="line">上市月份：{f.months.map((m) => `${m}月`).join("、")}</View>
-            <View className="nutri">
-              <View className="nutri-item">
-                热量 <Text className="nutri-value">{f.kcal}</Text> kcal
-              </View>
-              <View className="nutri-item">
-                糖 <Text className="nutri-value">{f.sugar}</Text> g
-              </View>
-              <View className="nutri-item">
-                脂肪 <Text className="nutri-value">{f.fat}</Text> g
-              </View>
-              <View className="nutri-item">
-                纤维 <Text className="nutri-value">{f.fiber}</Text> g
-              </View>
-            </View>
-          </View>
-        ))
-      )}
-
-      <View
-        className="link"
-        onClick={() => Taro.navigateTo({ url: "/subpackages/budget/index" })}
-      >
-        去看三餐预算（同源纯逻辑复用）
-      </View>
+        </View>
+      ))}
     </View>
   );
 }
