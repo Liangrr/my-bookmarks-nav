@@ -315,15 +315,19 @@ page {
 /* ===== 横向筛选条 / 分组切换 ===== */
 .chips-scroll {
   margin-top: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
   white-space: nowrap;
 }
 
 .chips-scroll .chips {
   flex-wrap: nowrap;
+  margin-top: 0;
 }
 
 .chips-scroll .chip {
   flex-shrink: 0;
+  margin-bottom: 0;
 }
 
 .filter-label {
