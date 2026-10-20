@@ -20,7 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 主要工具页
     { url: `${BASE_URL}/nav`, lastModified, changeFrequency: "daily", priority: 0.8 },
     { url: `${BASE_URL}/market`, lastModified, changeFrequency: "hourly", priority: 0.8 },
-    { url: `${BASE_URL}/convert`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/agents`, lastModified, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/meals`, lastModified, changeFrequency: "weekly", priority: 0.8 },
 

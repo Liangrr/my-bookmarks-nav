@@ -30,7 +30,6 @@ const GROUPS: Group[] = [
       { icon: "🍽️", name: "今天吃什么", desc: "深圳外食茶楼榜单", url: "/subpackages/life/feast/index", ready: true },
       { icon: "🛠️", name: "DIY 手作", desc: "在家可做的菜谱教程", url: "/subpackages/life/diy/index", ready: true },
       { icon: "📈", name: "实时行情", desc: "贵金属与汇率参考", ready: false },
-      { icon: "🔄", name: "格式转换", desc: "文档/图片格式与压缩", ready: false },
     ],
   },
   {

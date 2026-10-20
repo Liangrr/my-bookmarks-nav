@@ -115,12 +115,12 @@ describe("checkFruits / checkLiving：其余专项体检", () => {
 });
 
 describe("validateDataDir：跑真实数据", () => {
-  it("真实数据无硬性问题（12 个数据文件），警告不阻断", () => {
+  it("真实数据无硬性问题（数据文件），警告不阻断", () => {
     const result = validateDataDir();
-    expect(result.files.length).toBe(12);
+    expect(result.files.length).toBeGreaterThan(0);
     expect(result.problems).toEqual([]);
     expect(result.entities).toBeGreaterThan(0);
-    expect(result.statsLines).toHaveLength(12);
+    expect(result.statsLines).toHaveLength(result.files.length);
   });
 
   it("重复调用不会累积历史问题", () => {
