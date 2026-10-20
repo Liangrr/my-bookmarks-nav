@@ -18,7 +18,7 @@ const GROUPS: Group[] = [
   {
     label: "常用",
     items: [
-      { icon: "🧭", name: "网站导航", desc: "精选常用网站收藏", ready: false },
+      { icon: "🧭", name: "网站导航", desc: "精选常用网站收藏", url: "/subpackages/nav/index", ready: true },
       { icon: "🤖", name: "智能体市场", desc: "主流 AI 智能体收录", ready: false },
     ],
   },

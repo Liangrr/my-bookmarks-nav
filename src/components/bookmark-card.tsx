@@ -10,9 +10,6 @@ interface BookmarkCardProps {
   category: string;
   categoryName: string;
   size?: "normal" | "large" | "wide" | "tall";
-  id?: number;
-  clickCount?: number;
-  onOpen?: (id: number) => void;
 }
 
 // 提取主域名
@@ -42,15 +39,12 @@ export function BookmarkCard({
   category,
   categoryName,
   size = "normal",
-  id,
-  clickCount,
-  onOpen,
 }: BookmarkCardProps) {
   const sizeClass = size !== "normal" ? `card-${size}` : "";
   const fullUrl = url.startsWith("http") ? url : `https://${url}`;
   const domain = getDomain(fullUrl);
 
-  // 图标三级兜底：数据库 icon（真实 favicon 地址）→ favicon.im 服务 → 文字图标
+  // 图标三级兜底：本地 icon（真实 favicon 地址）→ favicon.im 服务 → 文字图标
   // 纯 IP 域名直接用内联 SVG 地球图标
   const [srcIdx, setSrcIdx] = useState(0);
   const sources = isIpAddress(domain)
@@ -60,17 +54,12 @@ export function BookmarkCard({
   const fallbackIcon = icon && icon.startsWith("http") ? "" : icon || title.charAt(0).toUpperCase();
   const iconFailed = srcIdx >= sources.length;
 
-  const handleClick = () => {
-    if (id && onOpen) onOpen(id);
-  };
-
   return (
     <a
       href={fullUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={`bookmark-card cat-${category} ${sizeClass}`}
-      onClick={handleClick}
     >
       <div className="card-header">
         <div className="card-icon">
@@ -94,11 +83,6 @@ export function BookmarkCard({
           <div className="card-title" title={title}>{title}</div>
           <div className="card-url">{domain}</div>
         </div>
-        {typeof clickCount === "number" && clickCount > 0 && (
-          <span className="card-count" title="点击次数">
-            🔥{clickCount}
-          </span>
-        )}
       </div>
       <span className="card-tag">{categoryName}</span>
     </a>

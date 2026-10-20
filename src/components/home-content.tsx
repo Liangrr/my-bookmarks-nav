@@ -20,7 +20,6 @@ export interface Bookmark {
   icon: string | null;
   category_id: number | null;
   size: string;
-  click_count: number | null;
   sort_order: number;
 }
 
@@ -32,19 +31,6 @@ interface HomeContentProps {
 export default function HomeContent({ categories, bookmarks }: HomeContentProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<number | "all">("all");
-  // 点击后的乐观计数（本地即时更新，服务端异步累加）
-  const [counts, setCounts] = useState<Record<number, number>>({});
-
-  // 基础热度（来自数据库）
-  const baseCounts = useMemo(() => {
-    const m: Record<number, number> = {};
-    bookmarks.forEach((b) => {
-      m[b.id] = b.click_count ?? 0;
-    });
-    return m;
-  }, [bookmarks]);
-
-  const getCount = (id: number) => counts[id] ?? baseCounts[id] ?? 0;
 
   // 分类映射
   const categoryMap = useMemo(() => {
@@ -99,32 +85,6 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
     });
   }, [sortedBookmarks, activeCategory, searchQuery]);
 
-  // 热门排行：按点击次数取前 10
-  const hotList = useMemo(() => {
-    return [...bookmarks]
-      .sort((a, b) => getCount(b.id) - getCount(a.id))
-      .slice(0, 10);
-  }, [bookmarks, counts, baseCounts]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const hotTotal = hotList.length > 0 ? getCount(hotList[0].id) : 0;
-
-  // 点击书签：本地乐观 +1，异步调用计数 API
-  const handleOpen = (id: number) => {
-    setCounts((prev) => ({ ...prev, [id]: getCount(id) + 1 }));
-    fetch(`/api/bookmarks/${id}/click`, { method: "POST" }).catch(() => {
-      // 计数失败不影响跳转，静默处理
-    });
-  };
-
-  const hotDomain = (url: string) => {
-    try {
-      const u = new URL(url.startsWith("http") ? url : `https://${url}`);
-      return u.hostname.replace("www.", "");
-    } catch {
-      return url;
-    }
-  };
-
   return (
     <>
       <div className="container">
@@ -161,39 +121,6 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
           })}
         </div>
 
-        {/* 热门排行 */}
-        <section className="hot-section">
-          <div className="hot-header">
-            <span className="hot-title">🔥 热门排行</span>
-            <span className="hot-sub">按点击次数实时更新 · 点击量 {hotTotal}</span>
-          </div>
-          {hotList.length > 0 ? (
-            <div className="hot-strip">
-              {hotList.map((b, index) => (
-                <a
-                  key={b.id}
-                  href={b.url.startsWith("http") ? b.url : `https://${b.url}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hot-item"
-                  onClick={() => handleOpen(b.id)}
-                >
-                  <span className={`hot-rank ${index < 3 ? "hot-rank-top" : ""}`}>
-                    {index + 1}
-                  </span>
-                  <span className="hot-item-body">
-                    <span className="hot-item-title" title={b.title}>{b.title}</span>
-                    <span className="hot-item-domain">{hotDomain(b.url)}</span>
-                  </span>
-                  <span className="hot-item-count">🔥{getCount(b.id)}</span>
-                </a>
-              ))}
-            </div>
-          ) : (
-            <p className="hot-empty">点击任意书签后，这里会生成实时热门榜单</p>
-          )}
-        </section>
-
         {/* 统计 */}
         <div className="stats-bar">共 {filteredBookmarks.length} 个网站</div>
 
@@ -202,7 +129,6 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
           {filteredBookmarks.map((bookmark) => (
             <BookmarkCard
               key={bookmark.id}
-              id={bookmark.id}
               title={bookmark.title}
               url={bookmark.url}
               desc={bookmark.description || bookmark.title}
@@ -210,8 +136,6 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
               category={getCategorySlug(bookmark.category_id)}
               categoryName={getCategoryName(bookmark.category_id)}
               size={(bookmark.size as "normal" | "large" | "wide" | "tall") || "normal"}
-              clickCount={getCount(bookmark.id)}
-              onOpen={handleOpen}
             />
           ))}
         </div>

@@ -415,3 +415,40 @@ page {
 .card.danger .line {
   color: #fca5a5;
 }
+
+/* 网站导航卡片 */
+.nav-card .card-head {
+  align-items: center;
+}
+
+.nav-avatar {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #263243;
+  color: #4ade80;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
+}
+
+.nav-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #e6edf7;
+}
+
+.nav-domain {
+  font-size: 22px;
+  color: #8b97a8;
+  margin-top: 4px;
+}

@@ -22,6 +22,10 @@ export default defineAppConfig({
       root: "subpackages/living",
       pages: ["index"],
     },
+    {
+      root: "subpackages/nav",
+      pages: ["index"],
+    },
   ],
   tabBar: {
     color: "#8b97a8",
