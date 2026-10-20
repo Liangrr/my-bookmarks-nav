@@ -47,9 +47,9 @@ const GROUPS: Group[] = [
     label: "实用手册",
     items: [
       { icon: "🌱", name: "人生手册", desc: "生活方法论合集", ready: false },
-      { icon: "⛺", name: "野外求生手册", desc: "户外生存技能", ready: false },
-      { icon: "🍵", name: "中医养生手册", desc: "日常养生参考", ready: false },
-      { icon: "🚑", name: "急救知识手册", desc: "突发应急处置", ready: false },
+      { icon: "⛺", name: "野外求生手册", desc: "户外生存技能", url: "/subpackages/handbook/survival/index", ready: true },
+      { icon: "🍵", name: "中医养生手册", desc: "日常养生参考", url: "/subpackages/handbook/tcm/index", ready: true },
+      { icon: "🚑", name: "急救知识手册", desc: "突发应急处置", url: "/subpackages/handbook/emergency/index", ready: true },
       { icon: "🤒", name: "日常小病治理", desc: "常见不适处理", ready: false },
     ],
   },

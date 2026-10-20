@@ -10,6 +10,10 @@ export default defineAppConfig({
       root: "subpackages/life",
       pages: ["fruits/index", "feast/index", "diy/index"],
     },
+    {
+      root: "subpackages/handbook",
+      pages: ["survival/index", "tcm/index", "emergency/index"],
+    },
   ],
   tabBar: {
     color: "#8b97a8",
