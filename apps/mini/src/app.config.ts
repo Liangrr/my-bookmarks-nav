@@ -16,7 +16,7 @@ export default defineAppConfig({
     },
     {
       root: "subpackages/learning",
-      pages: ["ai-ideas/index"],
+      pages: ["ai-ideas/index", "agent/index"],
     },
   ],
   tabBar: {

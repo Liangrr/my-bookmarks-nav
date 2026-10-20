@@ -36,7 +36,7 @@ const GROUPS: Group[] = [
   {
     label: "学习成长",
     items: [
-      { icon: "🧠", name: "AI Agent 学习", desc: "智能体入门路线", ready: false },
+      { icon: "🧠", name: "AI Agent 学习", desc: "智能体入门路线", url: "/subpackages/learning/agent/index", ready: true },
       { icon: "💡", name: "AI 项目机会", desc: "可落地的 AI 方向", url: "/subpackages/learning/ai-ideas/index", ready: true },
       { icon: "💻", name: "Web 开发学习", desc: "前端路线与资源", ready: false },
       { icon: "📱", name: "Flutter 学习", desc: "跨端开发路线", ready: false },
