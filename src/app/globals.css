@@ -795,6 +795,58 @@ body {
 }
 
 /* ========== 统计栏 ========== */
+/* ========== 吸顶搜索区（仅导航页） ========== */
+.nav-sticky {
+  position: sticky;
+  top: 64px;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 12px 0 16px;
+  margin: 0 -32px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.nav-sticky .search-bar {
+  margin: 0 auto 16px;
+}
+
+.nav-sticky .category-tabs {
+  margin-bottom: 0;
+}
+
+/* 回到顶部按钮 */
+.back-top {
+  position: fixed;
+  right: 28px;
+  bottom: 32px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--border-hover);
+  background: var(--bg-glass);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform var(--transition), opacity var(--transition), background var(--transition);
+  z-index: 90;
+}
+
+.back-top:hover {
+  transform: translateY(-3px);
+  background: var(--bg-card-hover);
+}
+
+.back-top svg {
+  width: 20px;
+  height: 20px;
+}
+
 .stats-bar {
   text-align: center;
   margin-bottom: 24px;
@@ -835,6 +887,20 @@ body {
 
   .nav-bar {
     padding: 12px 16px;
+  }
+
+  .nav-sticky {
+    top: 56px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .back-top {
+    right: 16px;
+    bottom: 24px;
+    width: 42px;
+    height: 42px;
   }
 
   .search-input {

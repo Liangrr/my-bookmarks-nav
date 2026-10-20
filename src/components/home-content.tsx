@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { BookmarkCard } from "@/components/bookmark-card";
 
 export interface Category {
@@ -31,6 +31,18 @@ interface HomeContentProps {
 export default function HomeContent({ categories, bookmarks }: HomeContentProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<number | "all">("all");
+  const [showTop, setShowTop] = useState(false);
+
+  // 滚动超过阈值才显示「回到顶部」
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () =>
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
   // 分类映射
   const categoryMap = useMemo(() => {
@@ -88,37 +100,40 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
   return (
     <>
       <div className="container">
-        {/* 搜索栏 */}
-        <div className="search-bar">
-          <span className="search-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-          </span>
-          <input
-            type="text"
-            className="search-input"
-            placeholder="搜索网站名称或关键词..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+        {/* 吸顶：搜索栏 + 分类标签，滚动时常驻顶部 */}
+        <div className="nav-sticky">
+          {/* 搜索栏 */}
+          <div className="search-bar">
+            <span className="search-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </span>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="搜索网站名称或关键词..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
 
-        {/* 分类标签 */}
-        <div className="category-tabs">
-          {tabs.map((category) => {
-            const isActive = activeCategory === category.id;
-            return (
-              <button
-                key={category.id}
-                className={`tab ${isActive ? "active" : ""}`}
-                onClick={() => setActiveCategory(category.id)}
-              >
-                {category.name}
-              </button>
-            );
-          })}
+          {/* 分类标签 */}
+          <div className="category-tabs">
+            {tabs.map((category) => {
+              const isActive = activeCategory === category.id;
+              return (
+                <button
+                  key={category.id}
+                  className={`tab ${isActive ? "active" : ""}`}
+                  onClick={() => setActiveCategory(category.id)}
+                >
+                  {category.name}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* 统计 */}
@@ -149,6 +164,21 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
           </div>
         )}
       </div>
+
+      {/* 回到顶部 */}
+      {showTop && (
+        <button
+          type="button"
+          className="back-top"
+          onClick={scrollToTop}
+          aria-label="回到顶部"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 19V5" />
+            <path d="M5 12l7-7 7 7" />
+          </svg>
+        </button>
+      )}
 
       {/* 页脚 */}
       <footer className="footer">
