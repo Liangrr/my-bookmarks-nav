@@ -452,3 +452,44 @@ page {
   color: #8b97a8;
   margin-top: 4px;
 }
+
+/* 导航页：搜索框 + 分类条吸顶 */
+.nav-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #0f151f;
+  margin: 0 -28px;
+  padding: 8px 28px 12px;
+}
+
+.nav-sticky .search {
+  margin-top: 8px;
+}
+
+.nav-sticky .chips-scroll {
+  margin-bottom: 4px;
+}
+
+/* 回到顶部胶囊 */
+.back-top {
+  position: fixed;
+  right: 28px;
+  bottom: 60px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #1a2331;
+  border: 1px solid #4ade8066;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+}
+
+.back-top-arrow {
+  font-size: 40px;
+  color: #4ade80;
+  line-height: 1;
+}

@@ -35,6 +35,12 @@ function copyLink(url: string) {
 export default function Nav() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<number | "all">("all");
+  const [showTop, setShowTop] = useState(false);
+
+  // 页面滚动监听：超过一屏才显示回顶胶囊
+  Taro.usePageScroll(({ scrollTop }) => setShowTop(scrollTop > 400));
+
+  const goTop = () => Taro.pageScrollTo({ scrollTop: 0, duration: 300 });
 
   const catMap = useMemo(() => new Map(D.categories.map((c) => [c.id, c])), []);
 
@@ -58,24 +64,26 @@ export default function Nav() {
       <View className="title">网站导航</View>
       <View className="sub">{D.bookmarks.length} 个常用网站，点按卡片复制链接</View>
 
-      <Input
-        className="search"
-        value={q}
-        onInput={(e) => setQ(e.detail.value)}
-        placeholder="搜索网站名称、域名或关键词"
-        placeholderClass="sub"
-      />
+      <View className="nav-sticky">
+        <Input
+          className="search"
+          value={q}
+          onInput={(e) => setQ(e.detail.value)}
+          placeholder="搜索网站名称、域名或关键词"
+          placeholderClass="sub"
+        />
 
-      <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
-        <View className="chips">
-          <View className={`chip${cat === "all" ? " chip-on" : ""}`} onClick={() => setCat("all")}>全部</View>
-          {D.categories.map((c) => (
-            <View key={c.id} className={`chip${cat === c.id ? " chip-on" : ""}`} onClick={() => setCat(c.id)}>
-              {c.icon} {c.name}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+        <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
+          <View className="chips">
+            <View className={`chip${cat === "all" ? " chip-on" : ""}`} onClick={() => setCat("all")}>全部</View>
+            {D.categories.map((c) => (
+              <View key={c.id} className={`chip${cat === c.id ? " chip-on" : ""}`} onClick={() => setCat(c.id)}>
+                {c.icon} {c.name}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
 
       <View className="sub">命中 {list.length} / {D.bookmarks.length} 个</View>
 
@@ -99,6 +107,12 @@ export default function Nav() {
           );
         })
       )}
+
+      {showTop ? (
+        <View className="back-top" onClick={goTop}>
+          <Text className="back-top-arrow">↑</Text>
+        </View>
+      ) : null}
     </View>
   );
 }
