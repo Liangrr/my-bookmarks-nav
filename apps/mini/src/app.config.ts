@@ -14,6 +14,10 @@ export default defineAppConfig({
       root: "subpackages/handbook",
       pages: ["survival/index", "tcm/index", "emergency/index"],
     },
+    {
+      root: "subpackages/learning",
+      pages: ["ai-ideas/index"],
+    },
   ],
   tabBar: {
     color: "#8b97a8",
