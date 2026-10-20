@@ -447,6 +447,18 @@ export function NavBar() {
             <span>AI Agent 学习</span>
           </Link>
           <Link
+            href="/ai-ideas"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/ai-ideas" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18h6" />
+              <path d="M10 22h4" />
+              <path d="M12 2a7 7 0 0 0-4 12.7c.8.7 1 1.8 1 2.8h6c0-1 .2-2.1 1-2.8A7 7 0 0 0 12 2z" />
+            </svg>
+            <span>AI 项目机会</span>
+          </Link>
+          <Link
             href="/learn-dev"
             onClick={() => setMenuOpen(false)}
             className={`drawer-item ${pathname === "/learn-dev" ? "active" : ""}`}
