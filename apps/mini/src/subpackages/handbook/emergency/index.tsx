@@ -1,4 +1,4 @@
-import SectionBrowser, { type HandbookSection } from "../common";
+import SectionBrowser, { type HandbookSection } from "@/components/SectionBrowser";
 import data from "@shared-data/emergency-guide.json";
 
 const sections = (data as unknown as { sections: HandbookSection[] }).sections;

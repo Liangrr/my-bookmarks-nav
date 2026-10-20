@@ -12,11 +12,15 @@ export default defineAppConfig({
     },
     {
       root: "subpackages/handbook",
-      pages: ["survival/index", "tcm/index", "emergency/index"],
+      pages: ["survival/index", "tcm/index", "emergency/index", "ailments/index"],
     },
     {
       root: "subpackages/learning",
-      pages: ["ai-ideas/index", "agent/index"],
+      pages: ["ai-ideas/index", "agent/index", "dev/index", "flutter/index", "indie/index"],
+    },
+    {
+      root: "subpackages/living",
+      pages: ["index"],
     },
   ],
   tabBar: {
@@ -28,10 +32,14 @@ export default defineAppConfig({
       {
         pagePath: "pages/index/index",
         text: "首页",
+        iconPath: "assets/tab/home.png",
+        selectedIconPath: "assets/tab/home-active.png",
       },
       {
         pagePath: "pages/profile/index",
         text: "个人",
+        iconPath: "assets/tab/user.png",
+        selectedIconPath: "assets/tab/user-active.png",
       },
     ],
   },

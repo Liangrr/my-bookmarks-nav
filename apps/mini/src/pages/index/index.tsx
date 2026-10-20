@@ -38,19 +38,19 @@ const GROUPS: Group[] = [
     items: [
       { icon: "🧠", name: "AI Agent 学习", desc: "智能体入门路线", url: "/subpackages/learning/agent/index", ready: true },
       { icon: "💡", name: "AI 项目机会", desc: "可落地的 AI 方向", url: "/subpackages/learning/ai-ideas/index", ready: true },
-      { icon: "💻", name: "Web 开发学习", desc: "前端路线与资源", ready: false },
-      { icon: "📱", name: "Flutter 学习", desc: "跨端开发路线", ready: false },
-      { icon: "🚀", name: "独立开发者", desc: "独立开发者项目库", ready: false },
+      { icon: "💻", name: "Web 开发学习", desc: "前端路线与资源", url: "/subpackages/learning/dev/index", ready: true },
+      { icon: "📱", name: "Flutter 学习", desc: "跨端开发路线", url: "/subpackages/learning/flutter/index", ready: true },
+      { icon: "🚀", name: "独立开发者", desc: "独立开发者项目库", url: "/subpackages/learning/indie/index", ready: true },
     ],
   },
   {
     label: "实用手册",
     items: [
-      { icon: "🌱", name: "人生手册", desc: "生活方法论合集", ready: false },
+      { icon: "🌱", name: "人生手册", desc: "生活方法论合集", url: "/subpackages/living/index", ready: true },
       { icon: "⛺", name: "野外求生手册", desc: "户外生存技能", url: "/subpackages/handbook/survival/index", ready: true },
       { icon: "🍵", name: "中医养生手册", desc: "日常养生参考", url: "/subpackages/handbook/tcm/index", ready: true },
       { icon: "🚑", name: "急救知识手册", desc: "突发应急处置", url: "/subpackages/handbook/emergency/index", ready: true },
-      { icon: "🤒", name: "日常小病治理", desc: "常见不适处理", ready: false },
+      { icon: "🤒", name: "日常小病治理", desc: "常见不适处理", url: "/subpackages/handbook/ailments/index", ready: true },
     ],
   },
 ];

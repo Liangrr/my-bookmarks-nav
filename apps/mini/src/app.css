@@ -371,3 +371,43 @@ page {
   color: #4ade80;
   font-weight: 700;
 }
+
+.ok {
+  color: #4ade80;
+}
+
+.dead {
+  color: #6b7789;
+}
+
+.link {
+  color: #4ade80;
+}
+
+/* 小病辨证对比表 */
+.compare-row {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  border-bottom: 1px solid #263243;
+}
+
+.compare-k {
+  font-weight: 700;
+  color: #e6edf7;
+  margin-bottom: 6px;
+}
+
+.compare-col {
+  margin: 4px 0;
+  font-size: 23px;
+  color: #b9c4d2;
+}
+
+.card.danger {
+  border-color: #ef444455;
+}
+
+.card.danger .line {
+  color: #fca5a5;
+}

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Text, View, ScrollView } from "@tarojs/components";
 
-// 通用手册浏览器：4 个同构手册（sections[]{items[]}）共用，按字段映射渲染要点块。
+// 通用手册浏览器（主包组件，供 handbook / living 分包复用）：sections[]{items[]}，按字段渲染要点块。
 
 type Source = { text?: string; url?: string };
 type Block = { label: string; text: string };
@@ -18,6 +18,9 @@ function asStr(v: unknown): string {
   if (Array.isArray(v)) return v.join("、");
   return String(v);
 }
+
+// 顶部元信息 chips：评级 / 难度 / 紧迫度等
+const META_FIELDS = ["grade", "ratio", "level", "difficulty", "urgency", "priority"];
 
 // 字段 → 要点块标签；按数组顺序展示
 const BLOCK_FIELDS: { key: string; label: string }[] = [
@@ -39,9 +42,17 @@ function blocksOf(item: Record<string, unknown>): Block[] {
   for (const f of BLOCK_FIELDS) {
     const v = item[f.key];
     if (v == null || v === "") continue;
-    // 同标签（note/caution/不要做）只取第一个非空，避免重复
     if (out.some((b) => b.label === f.label)) continue;
     out.push({ label: f.label, text: asStr(v) });
+  }
+  return out;
+}
+
+function metaChips(item: Record<string, unknown>): string[] {
+  const out: string[] = [];
+  for (const k of META_FIELDS) {
+    const v = item[k];
+    if (v != null && v !== "") out.push(asStr(v));
   }
   return out;
 }
@@ -77,14 +88,18 @@ export default function SectionBrowser({ sections, title }: { sections: Handbook
       {section?.items.map((it, i) => {
         const blocks = blocksOf(it);
         const sources = sourcesOf(it);
+        const metas = metaChips(it);
         return (
           <View key={String(it.id ?? i)} className="card">
             <View className="card-head">
               <Text className="name">{asStr(it.title)}</Text>
             </View>
-            {Array.isArray(it.tags) && it.tags.length > 0 ? (
+            {metas.length > 0 || Array.isArray(it.tags) ? (
               <View className="sig">
-                {(it.tags as unknown[]).map((t, j) => <Text key={j} className="sig-item">{String(t)}</Text>)}
+                {metas.map((m, j) => <Text key={`m${j}`} className="sig-item">{m}</Text>)}
+                {Array.isArray(it.tags)
+                  ? (it.tags as unknown[]).map((t, j) => <Text key={`t${j}`} className="sig-item">{String(t)}</Text>)
+                  : null}
               </View>
             ) : null}
             {asStr(it.plain) ? <View className="line">{asStr(it.plain)}</View> : null}

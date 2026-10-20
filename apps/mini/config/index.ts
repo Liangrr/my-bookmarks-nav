@@ -23,7 +23,14 @@ export default defineConfig<"webpack5">(async (merge) => {
     plugins: [],
     defineConstants: {},
     copy: {
-      patterns: [],
+      // 大体积 JSON（人生手册 1.8MB）不进 webpack bundle，原样拷到分包目录，
+      // 页面运行时用 getFileSystemManager 读取，避免单分包超 2MB
+      patterns: [
+        {
+          from: path.resolve(sharedDataSrc, "living-guide.json"),
+          to: path.resolve(__dirname, "../dist/subpackages/living/assets/living.json"),
+        },
+      ],
       options: {},
     },
     framework: "react",
