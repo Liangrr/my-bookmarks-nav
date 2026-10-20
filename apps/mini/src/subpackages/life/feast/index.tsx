@@ -42,33 +42,35 @@ export default function Feast() {
         共 {PLACES.length} 家 · 更新 {FEAST.updated ?? "-"}；人均为参考值，标「未核实」以到店为准。
       </View>
 
-      <Input
-        className="search"
-        value={q}
-        onInput={(e) => setQ(e.detail.value)}
-        placeholder="搜店名 / 商圈 / 招牌菜 / 区域"
-        placeholderClass="sub"
-      />
+      <View className="filter-sticky">
+        <Input
+          className="search"
+          value={q}
+          onInput={(e) => setQ(e.detail.value)}
+          placeholder="搜店名 / 商圈 / 招牌菜 / 区域"
+          placeholderClass="sub"
+        />
 
-      <View className="filter-label">菜系</View>
-      <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
-        <View className="chips">
-          <View className={`chip${cuisine === "" ? " chip-on" : ""}`} onClick={() => setCuisine("")}>全部</View>
-          {CUISINES.map((c) => (
-            <View key={c} className={`chip${cuisine === c ? " chip-on" : ""}`} onClick={() => setCuisine(c)}>{c}</View>
-          ))}
-        </View>
-      </ScrollView>
+        <View className="filter-label">菜系</View>
+        <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
+          <View className="chips">
+            <View className={`chip${cuisine === "" ? " chip-on" : ""}`} onClick={() => setCuisine("")}>全部</View>
+            {CUISINES.map((c) => (
+              <View key={c} className={`chip${cuisine === c ? " chip-on" : ""}`} onClick={() => setCuisine(c)}>{c}</View>
+            ))}
+          </View>
+        </ScrollView>
 
-      <View className="filter-label">区域</View>
-      <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
-        <View className="chips">
-          <View className={`chip${district === "" ? " chip-on" : ""}`} onClick={() => setDistrict("")}>全部</View>
-          {DISTRICTS.map((d) => (
-            <View key={d} className={`chip${district === d ? " chip-on" : ""}`} onClick={() => setDistrict(d)}>{d}</View>
-          ))}
-        </View>
-      </ScrollView>
+        <View className="filter-label">区域</View>
+        <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
+          <View className="chips">
+            <View className={`chip${district === "" ? " chip-on" : ""}`} onClick={() => setDistrict("")}>全部</View>
+            {DISTRICTS.map((d) => (
+              <View key={d} className={`chip${district === d ? " chip-on" : ""}`} onClick={() => setDistrict(d)}>{d}</View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
 
       <View className="sub">命中 {list.length} 家</View>
 

@@ -41,17 +41,19 @@ export default function Ailments() {
       <View className="sub">{D.intro}</View>
       <View className="line tip">{D.disclaimer}</View>
 
-      <Input className="search" value={q} onInput={(e) => setQ(e.detail.value)} placeholder="搜病种，如：感冒、腹泻、牙痛" placeholderClass="sub" />
+      <View className="filter-sticky">
+        <Input className="search" value={q} onInput={(e) => setQ(e.detail.value)} placeholder="搜病种，如：感冒、腹泻、牙痛" placeholderClass="sub" />
 
-      <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
-        <View className="chips">
-          {list.map((x) => (
-            <View key={x.id} className={`chip${x.id === sel ? " chip-on" : ""}`} onClick={() => setSel(x.id)}>
-              {x.icon} {x.name}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+        <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
+          <View className="chips">
+            {list.map((x) => (
+              <View key={x.id} className={`chip${x.id === sel ? " chip-on" : ""}`} onClick={() => setSel(x.id)}>
+                {x.icon} {x.name}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
 
       {current ? (
         <View>

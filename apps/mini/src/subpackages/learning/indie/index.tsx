@@ -48,13 +48,15 @@ export default function Indie() {
         更新 {D.updatedAt} · 共 {D.stats.total} 个项目（存活 {D.stats.ok} / 失效 {D.stats.dead}）· {D.stats.authors} 位作者 · {D.stats.dateGroups} 个日期分组
       </View>
 
-      <Input
-        className="search"
-        value={q}
-        onInput={(e) => setQ(e.detail.value)}
-        placeholder="搜项目名 / 作者 / 描述"
-        placeholderClass="sub"
-      />
+      <View className="filter-sticky">
+        <Input
+          className="search"
+          value={q}
+          onInput={(e) => setQ(e.detail.value)}
+          placeholder="搜项目名 / 作者 / 描述"
+          placeholderClass="sub"
+        />
+      </View>
 
       {groups.map((g) => (
         <View key={g.date}>

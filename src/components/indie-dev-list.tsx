@@ -157,10 +157,15 @@ export default function IndieDevList() {
       {/* 搜索 */}
       <div
         style={{
+          position: "sticky",
+          top: 76,
+          zIndex: 10,
           display: "flex",
           alignItems: "center",
           gap: 10,
-          background: "var(--bg-card)",
+          background: "var(--bg-glass)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
           border: "1px solid var(--border)",
           borderRadius: 12,
           padding: "8px 14px",

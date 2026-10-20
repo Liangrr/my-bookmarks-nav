@@ -471,6 +471,24 @@ page {
   margin-bottom: 4px;
 }
 
+/* 通用：搜索框 + 分类条吸顶（各工具页复用） */
+.filter-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #0f151f;
+  margin: 0 -28px;
+  padding: 8px 28px 12px;
+}
+
+.filter-sticky .search {
+  margin-top: 8px;
+}
+
+.filter-sticky .chips-scroll {
+  margin-bottom: 4px;
+}
+
 /* 回到顶部胶囊 */
 .back-top {
   position: fixed;

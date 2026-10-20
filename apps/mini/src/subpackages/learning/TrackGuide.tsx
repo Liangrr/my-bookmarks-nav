@@ -31,15 +31,17 @@ export default function TrackGuide({
       <View className="title">{meta.title}</View>
       <View className="sub">{meta.desc}（更新 {meta.updated}）</View>
 
-      <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
-        <View className="chips">
-          {tracks.map((t) => (
-            <View key={t.id} className={`chip${t.id === tid ? " chip-on" : ""}`} onClick={() => setTid(t.id)}>
-              {t.title}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+      <View className="filter-sticky">
+        <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
+          <View className="chips">
+            {tracks.map((t) => (
+              <View key={t.id} className={`chip${t.id === tid ? " chip-on" : ""}`} onClick={() => setTid(t.id)}>
+                {t.title}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
 
       <View className="sub">{track.desc}</View>
 

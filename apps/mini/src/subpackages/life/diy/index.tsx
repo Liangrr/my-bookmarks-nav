@@ -33,15 +33,17 @@ export default function Diy() {
       <View className="title">DIY 手作</View>
       <View className="sub">{section.intro}</View>
 
-      <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
-        <View className="chips">
-          {DATA.sections.map((s) => (
-            <View key={s.id} className={`chip${s.id === secId ? " chip-on" : ""}`} onClick={() => setSecId(s.id)}>
-              {s.title}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+      <View className="filter-sticky">
+        <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
+          <View className="chips">
+            {DATA.sections.map((s) => (
+              <View key={s.id} className={`chip${s.id === secId ? " chip-on" : ""}`} onClick={() => setSecId(s.id)}>
+                {s.title}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
 
       {section.items.map((it) => (
         <View key={it.id} className="card">

@@ -25,15 +25,17 @@ export default function AgentLearn() {
       <View className="title">{META.title}</View>
       <View className="sub">{META.desc}（更新 {META.updated}）</View>
 
-      <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
-        <View className="chips">
-          {STAGES.map((s) => (
-            <View key={s.id} className={`chip${s.id === sid ? " chip-on" : ""}`} onClick={() => setSid(s.id)}>
-              {s.title}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+      <View className="filter-sticky">
+        <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
+          <View className="chips">
+            {STAGES.map((s) => (
+              <View key={s.id} className={`chip${s.id === sid ? " chip-on" : ""}`} onClick={() => setSid(s.id)}>
+                {s.title}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
 
       <View className="sub">{stage.desc}</View>
 

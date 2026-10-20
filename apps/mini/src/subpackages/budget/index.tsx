@@ -43,16 +43,18 @@ export default function BudgetPage() {
         日常目标 ¥{PLANNER.budget.dailyTarget}，硬上限 ¥{PLANNER.budget.dailyMax}/天。下面展示的是「按档取最贵 + 预算兜底」后的组合。
       </View>
 
-      <View className="chips">
-        {PLANNER.sets.map((s) => (
-          <View
-            key={s.id}
-            className={`chip${s.id === setId ? " chip-on" : ""}`}
-            onClick={() => setSetId(s.id)}
-          >
-            {s.icon} {s.label}
-          </View>
-        ))}
+      <View className="filter-sticky">
+        <View className="chips">
+          {PLANNER.sets.map((s) => (
+            <View
+              key={s.id}
+              className={`chip${s.id === setId ? " chip-on" : ""}`}
+              onClick={() => setSetId(s.id)}
+            >
+              {s.icon} {s.label}
+            </View>
+          ))}
+        </View>
       </View>
 
       {picks.map((p) => (

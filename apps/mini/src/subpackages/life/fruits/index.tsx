@@ -52,27 +52,29 @@ export default function Fruits() {
       <View className="title">应季水果</View>
       <View className="sub">{DATA.intro}</View>
 
-      <Input
-        className="search"
-        value={q}
-        onInput={(e) => setQ(e.detail.value)}
-        placeholder="搜索水果名、产地或功效"
-        placeholderClass="sub"
-      />
+      <View className="filter-sticky">
+        <Input
+          className="search"
+          value={q}
+          onInput={(e) => setQ(e.detail.value)}
+          placeholder="搜索水果名、产地或功效"
+          placeholderClass="sub"
+        />
 
-      <ScrollView scrollX className="chips-scroll" enhanced showScrollbar={false}>
-        <View className="chips">
-          {MONTHS.map((m) => (
-            <View
-              key={m}
-              className={`chip${m === month ? " chip-on" : ""}`}
-              onClick={() => setMonth(m)}
-            >
-              {m === 0 ? "全部" : `${m}月`}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+        <ScrollView scrollX className="chips-scroll" enhanced showScrollbar={false}>
+          <View className="chips">
+            {MONTHS.map((m) => (
+              <View
+                key={m}
+                className={`chip${m === month ? " chip-on" : ""}`}
+                onClick={() => setMonth(m)}
+              >
+                {m === 0 ? "全部" : `${m}月`}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
 
       <View className="sub">命中 {list.length} / {DATA.fruits.length} 种</View>
 

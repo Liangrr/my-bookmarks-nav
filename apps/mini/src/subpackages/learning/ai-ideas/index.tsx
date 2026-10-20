@@ -37,15 +37,17 @@ export default function AiIdeas() {
       <View className="title">{META.title}</View>
       <View className="sub">{META.desc}（更新 {META.updated}）</View>
 
-      <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
-        <View className="chips">
-          {CATS.map((c) => (
-            <View key={c.id} className={`chip${c.id === catId ? " chip-on" : ""}`} onClick={() => setCatId(c.id)}>
-              {c.title}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+      <View className="filter-sticky">
+        <ScrollView scrollX enhanced showScrollbar={false} className="chips-scroll">
+          <View className="chips">
+            {CATS.map((c) => (
+              <View key={c.id} className={`chip${c.id === catId ? " chip-on" : ""}`} onClick={() => setCatId(c.id)}>
+                {c.title}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
 
       <View className="sub">{cat.intro}</View>
 
