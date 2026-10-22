@@ -27,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/learn-agents`, lastModified, changeFrequency: "weekly", priority: 0.6 },
     { url: `${BASE_URL}/ai-ideas`, lastModified, changeFrequency: "weekly", priority: 0.6 },
     { url: `${BASE_URL}/learn-dev`, lastModified, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${BASE_URL}/learn-fullstack`, lastModified, changeFrequency: "weekly", priority: 0.6 },
     { url: `${BASE_URL}/flutter`, lastModified, changeFrequency: "weekly", priority: 0.6 },
     { url: `${BASE_URL}/living`, lastModified, changeFrequency: "weekly", priority: 0.6 },
     { url: `${BASE_URL}/tcm`, lastModified, changeFrequency: "weekly", priority: 0.6 },

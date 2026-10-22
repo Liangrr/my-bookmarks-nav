@@ -1,0 +1,1171 @@
+{
+  "meta": {
+    "title": "全栈内功修炼",
+    "updated": "2026-10-22",
+    "desc": "从计算机基础、Java 内功到 Python 流畅表达，三条轨道拆成可勾选的知识点清单，配官方资源与实战阶梯。内容为学习导航整理，非课程正文。"
+  },
+  "tracks": [
+    {
+      "id": "fundamentals",
+      "title": "计算机基础",
+      "desc": "操作系统、网络、数据库、Linux、算法、Docker、Git、安全、缓存——后端开发者的公共地基。",
+      "color": "#38bdf8",
+      "stages": [
+        {
+          "id": "os",
+          "num": 1,
+          "title": "操作系统",
+          "desc": "理解程序如何被系统调度、内存如何被分配。",
+          "tasks": [
+            {
+              "id": "os-basics",
+              "title": "操作系统基本特征与系统调用",
+              "plain": "操作系统是硬件与应用之间的管家：并发、共享、虚拟、异步；应用通过系统调用向内核请求服务。",
+              "links": [{ "text": "操作系统概览(Wikipedia)", "url": "https://en.wikipedia.org/wiki/Operating_system" }],
+              "output": "用自己的话画出用户态/内核态边界，列出 5 个常见系统调用。",
+              "tags": ["概念", "内核"]
+            },
+            {
+              "id": "os-proc-thread",
+              "title": "进程与线程、进程状态切换",
+              "plain": "进程是资源分配单位，线程是 CPU 调度单位；线程共享进程内存，进程间彼此隔离。",
+              "links": [],
+              "output": "画出新建→就绪→运行→阻塞→终止的状态流转图。",
+              "tags": ["进程", "线程"]
+            },
+            {
+              "id": "os-sched",
+              "title": "进程调度算法",
+              "plain": "FCFS、短作业优先、时间片轮转、优先级调度各自权衡公平与吞吐。",
+              "links": [],
+              "output": "对比时间片轮转与优先级调度的适用场景。",
+              "tags": ["调度"]
+            },
+            {
+              "id": "os-sync",
+              "title": "进程同步与经典问题",
+              "plain": "信号量、互斥锁解决临界区竞争；生产者-消费者、读者-写者、哲学家就餐是经典模板。",
+              "links": [],
+              "output": "用信号量写出生产者-消费者的伪代码。",
+              "tags": ["同步", "锁"]
+            },
+            {
+              "id": "os-ipc",
+              "title": "进程间通信 IPC",
+              "plain": "管道、消息队列、共享内存、信号、Socket 各有速度与隔离性取舍。",
+              "links": [],
+              "output": "对比共享内存与消息队列的性能和同步成本。",
+              "tags": ["IPC"]
+            },
+            {
+              "id": "os-deadlock",
+              "title": "死锁四条件与预防",
+              "plain": "互斥、占有且等待、不可剥夺、循环等待同时成立才死锁；破坏任一条件即可预防。",
+              "links": [],
+              "output": "列出四条件，并给出银行家算法的安全判定思路。",
+              "tags": ["死锁"]
+            },
+            {
+              "id": "os-stack-heap",
+              "title": "堆与栈存储内容",
+              "plain": "栈存局部变量与调用帧（自动回收），堆存动态对象（靠 GC/手动释放）。",
+              "links": [],
+              "output": "说明一个局部对象与其 new 出来的成员分别在哪。",
+              "tags": ["内存"]
+            }
+          ]
+        },
+        {
+          "id": "net",
+          "num": 2,
+          "title": "计算机网络",
+          "desc": "从 TCP 握手到 HTTP，讲清一次请求怎么走完。",
+          "tasks": [
+            {
+              "id": "net-models",
+              "title": "OSI 七层与 TCP/IP 四层模型",
+              "plain": "分层是为了解耦：物理/数据链路/网络/传输/会话/表示/应用，实际常用 TCP/IP 四层。",
+              "links": [{ "text": "TCP/IP 模型(Wikipedia)", "url": "https://en.wikipedia.org/wiki/Internet_protocol_suite" }],
+              "output": "把 HTTP、TCP、IP、网线分别对应到正确层级。",
+              "tags": ["分层"]
+            },
+            {
+              "id": "net-handshake",
+              "title": "TCP 三次握手与四次挥手",
+              "plain": "三次握手确认双方收发能力；四次挥手因全双工需分别关闭，避免半连接。",
+              "links": [],
+              "output": "画出 SYN/SYN-ACK/ACK 与 FIN 四次报文序列。",
+              "tags": ["TCP", "面试高频"]
+            },
+            {
+              "id": "net-tcp-udp",
+              "title": "TCP 与 UDP 区别",
+              "plain": "TCP 面向连接、可靠、有序、有流控；UDP 无连接、快但不保证，适合视频/直播。",
+              "links": [],
+              "output": "列举三个必须用 UDP 的场景。",
+              "tags": ["TCP", "UDP"]
+            },
+            {
+              "id": "net-flow-congest",
+              "title": "流量控制与拥塞控制",
+              "plain": "流量控制保护接收方，拥塞控制保护网络；滑动窗口、慢启动、拥塞避免是核心机制。",
+              "links": [],
+              "output": "解释滑动窗口如何避免接收方被压垮。",
+              "tags": ["TCP", "机制"]
+            },
+            {
+              "id": "net-http",
+              "title": "HTTP 报文、方法与状态码",
+              "plain": "请求行+请求头+空行+体；GET/POST/ PUT/DELETE 对应资源操作；2xx/3xx/4xx/5xx 分语义。",
+              "links": [{ "text": "MDN HTTP 概述", "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Overview" }],
+              "output": "用 curl 抓一次 GET 请求，标出状态码与关键响应头。",
+              "tags": ["HTTP"]
+            },
+            {
+              "id": "net-get-post",
+              "title": "GET 与 POST 区别",
+              "plain": "GET 参数在 URL、幂等、可缓存；POST 放在体、非幂等；本质都是 TCP，差异在语义与约定。",
+              "links": [],
+              "output": "列出 4 条真实区别并说明缓存影响。",
+              "tags": ["HTTP", "面试高频"]
+            },
+            {
+              "id": "net-visit",
+              "title": "从输入网址到页面呈现",
+              "plain": "DNS 解析→建立 TCP/TLS→发 HTTP 请求→服务端处理→响应→浏览器解析渲染。",
+              "links": [],
+              "output": "完整口述一次 URL 到白屏的链路，标出每一步协议。",
+              "tags": ["链路", "面试高频"]
+            },
+            {
+              "id": "net-longconn",
+              "title": "短连接/长连接与 HTTPS",
+              "plain": "HTTP keep-alive 复用 TCP；HTTPS = HTTP + TLS 加密握手与证书校验。",
+              "links": [{ "text": "MDN HTTPS", "url": "https://developer.mozilla.org/zh-CN/docs/Glossary/HTTPS" }],
+              "output": "说明 TLS 握手为何需要额外往返。",
+              "tags": ["HTTPS", "连接"]
+            }
+          ]
+        },
+        {
+          "id": "mysql",
+          "num": 3,
+          "title": "MySQL 数据库",
+          "desc": "事务、索引、优化——关系型数据库的核心。",
+          "tasks": [
+            {
+              "id": "mysql-acid",
+              "title": "事务与 ACID",
+              "plain": "原子性、一致性、隔离性、持久性是事务四条底线，由日志与锁共同保证。",
+              "links": [{ "text": "MySQL 事务(官方手册)", "url": "https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-model.html" }],
+              "output": "用转账例子说明原子性失败会怎样回滚。",
+              "tags": ["事务"]
+            },
+            {
+              "id": "mysql-isolation",
+              "title": "事务隔离级别与并发问题",
+              "plain": "读未提交→读已提交→可重复读→串行化，逐级解决脏读、不可重复读、幻读。",
+              "links": [],
+              "output": "列出四级别各自能挡住哪种读问题。",
+              "tags": ["隔离级别"]
+            },
+            {
+              "id": "mysql-index",
+              "title": "索引与 B+ 树",
+              "plain": "索引用 B+ 树把全表扫描变成路查找；为什么不用二叉/红黑树：树高与磁盘 IO。",
+              "links": [],
+              "output": "说明 B+ 树为何更适合磁盘索引（叶子链表、矮胖）。",
+              "tags": ["索引", "面试高频"]
+            },
+            {
+              "id": "mysql-composite",
+              "title": "联合索引与最左前缀",
+              "plain": "(a,b,c) 索引按 a→b→c 排序，查询必须从最左列连续命中才走索引。",
+              "links": [],
+              "output": "判断 WHERE b=? AND c=? 是否能用 (a,b,c) 索引。",
+              "tags": ["索引"]
+            },
+            {
+              "id": "mysql-engine",
+              "title": "存储引擎 InnoDB/MyISAM",
+              "plain": "InnoDB 支持事务、行锁、外键；MyISAM 读快但不支持事务，现默认 InnoDB。",
+              "links": [],
+              "output": "对比两者在事务与锁上的差异。",
+              "tags": ["引擎"]
+            },
+            {
+              "id": "mysql-optimize",
+              "title": "查询性能优化与分页",
+              "plain": "避免 SELECT *、给 WHERE/ORDER 建索引、深分页用游标替代 LIMIT offset。",
+              "links": [],
+              "output": "用 EXPLAIN 分析一条慢 SQL 的 type 与 Extra。",
+              "tags": ["优化", "EXPLAIN"]
+            },
+            {
+              "id": "mysql-shard",
+              "title": "分库分表与读写分离",
+              "plain": "数据量大到单库扛不住时按规则水平拆分，主库写、从库读，代价是分布式复杂度。",
+              "links": [],
+              "output": "说明水平拆分后跨表 JOIN 为什么变难。",
+              "tags": ["架构"]
+            }
+          ]
+        },
+        {
+          "id": "linux",
+          "num": 4,
+          "title": "Linux 运维基础",
+          "desc": "服务器日常操作的常用命令与文件模型。",
+          "tasks": [
+            {
+              "id": "linux-fs",
+              "title": "目录结构与 inode",
+              "plain": "一切皆文件；inode 存元数据，文件名只是目录项里的指针。",
+              "links": [],
+              "output": "解释硬链接与软链接的区别。",
+              "tags": ["文件系统"]
+            },
+            {
+              "id": "linux-perm",
+              "title": "文件权限 chmod/chown",
+              "plain": "r=4 w=2 x=1，ugo 三组位；755 代表所有者可读写执行、他人只读执行。",
+              "links": [],
+              "output": "把一个脚本改成可执行并理解 750 的含义。",
+              "tags": ["权限"]
+            },
+            {
+              "id": "linux-cmd",
+              "title": "CPU/内存/进程排查命令",
+              "plain": "top/ps/free/df/netstat 定位谁在吃资源；tail -f 跟日志。",
+              "links": [],
+              "output": "用一条命令找出占用 CPU 最高的进程。",
+              "tags": ["排查"]
+            },
+            {
+              "id": "linux-cron",
+              "title": "crontab 定时任务",
+              "plain": "分 时 日 月 周 五段表达式，按周期跑脚本；注意环境变量与日志重定向。",
+              "links": [],
+              "output": "写一个每天 3:15 跑备份的 cron。",
+              "tags": ["定时"]
+            },
+            {
+              "id": "linux-grep",
+              "title": "文本三剑客 grep/sed/awk",
+              "plain": "grep 找行、sed 替换、awk 切列；配合管道处理日志。",
+              "links": [],
+              "output": "用 grep 从日志里统计某错误出现次数。",
+              "tags": ["命令"]
+            }
+          ]
+        },
+        {
+          "id": "dsa",
+          "num": 5,
+          "title": "数据结构与算法",
+          "desc": "面试与工程都绕不开的基本功。",
+          "tasks": [
+            {
+              "id": "dsa-linear",
+              "title": "线性表、栈与队列",
+              "plain": "数组随机访问快、链表插入快；栈后进先出用于撤销/括号匹配，队列先进先出用于调度。",
+              "links": [],
+              "output": "用栈实现括号匹配校验。",
+              "tags": ["线性结构"]
+            },
+            {
+              "id": "dsa-tree",
+              "title": "二叉树与遍历",
+              "plain": "前/中/后序与层序遍历；BST 左小右大，可做二分查找。",
+              "links": [],
+              "output": "写出二叉树的递归前序与迭代层序遍历。",
+              "tags": ["树"]
+            },
+            {
+              "id": "dsa-sort",
+              "title": "排序算法与复杂度",
+              "plain": "快排平均 O(nlogn)、归并稳定、冒泡 O(n²)；掌握时间/空间/稳定性对比。",
+              "links": [{ "text": "排序算法可视化", "url": "https://visualgo.net/en/sorting" }],
+              "output": "手写快排并说明平均与最坏复杂度。",
+              "tags": ["排序", "面试高频"]
+            },
+            {
+              "id": "dsa-dp",
+              "title": "动态规划",
+              "plain": "把大问题拆成重叠子问题，存状态转移表；背包、爬楼、最长子序列是模板。",
+              "links": [],
+              "output": "用 DP 解爬楼梯并写出转移方程。",
+              "tags": ["动态规划"]
+            },
+            {
+              "id": "dsa-greedy",
+              "title": "贪心与回溯",
+              "plain": "贪心每步选当前最优（需证明）；回溯靠试错+剪枝遍历所有可能。",
+              "links": [],
+              "output": "用回溯解全排列。",
+              "tags": ["算法思想"]
+            },
+            {
+              "id": "dsa-hash",
+              "title": "哈希表与双指针",
+              "plain": "哈希把查找降到 O(1)；双指针在有序数组里求两数之和。",
+              "links": [],
+              "output": "用哈希表实现 O(n) 两数之和。",
+              "tags": ["哈希", "技巧"]
+            }
+          ]
+        },
+        {
+          "id": "docker",
+          "num": 6,
+          "title": "Docker 容器",
+          "desc": "把环境一起打包，解决“我本地能跑”。",
+          "tasks": [
+            {
+              "id": "docker-concept",
+              "title": "镜像/容器/仓库",
+              "plain": "镜像是只读模板，容器是运行实例，仓库存镜像；类比类与对象。",
+              "links": [{ "text": "Docker 官方文档", "url": "https://docs.docker.com/get-started/" }],
+              "output": "区分镜像、容器、Dockerfile、compose。",
+              "tags": ["概念"]
+            },
+            {
+              "id": "docker-lifecycle",
+              "title": "基本生命周期命令",
+              "plain": "pull/run/ps/exec/logs/stop/rm；-d 后台、-p 映射端口、-v 挂卷。",
+              "links": [],
+              "output": "用一条命令后台跑 nginx 并映射 8080。",
+              "tags": ["命令"]
+            },
+            {
+              "id": "docker-file",
+              "title": "写 Dockerfile",
+              "plain": "FROM→WORKDIR→COPY→RUN→CMD；多层缓存越小越好。",
+              "links": [],
+              "output": "为一个 Node/Python 小应用写 Dockerfile 并构建。",
+              "tags": ["镜像"]
+            },
+            {
+              "id": "docker-compose",
+              "title": "多服务编排 compose",
+              "plain": "用 yaml 一次性定义应用+依赖中间件，一条 up 起整套。",
+              "links": [],
+              "output": "用 compose 同时起 web 和数据库。",
+              "tags": ["编排"]
+            }
+          ]
+        },
+        {
+          "id": "git",
+          "num": 7,
+          "title": "Git 协作工作流",
+          "desc": "团队怎么分支、怎么合、怎么评审。",
+          "tasks": [
+            {
+              "id": "git-flow",
+              "title": "集中式/功能分支/GitFlow",
+              "plain": "功能分支最通用：main 稳定、feature 开发、PR 合回；GitFlow 适合发版节奏强的项目。",
+              "links": [{ "text": "Git 官方手册", "url": "https://git-scm.com/book/zh/v2" }],
+              "output": "画出 feature 分支从拉出到合并的流程。",
+              "tags": ["工作流"]
+            },
+            {
+              "id": "git-cmds",
+              "title": "常用命令与冲突解决",
+              "plain": "branch/checkout/add/commit/push/pull/rebase/merge；冲突在双方修改同一行时出现。",
+              "links": [],
+              "output": "用 rebase 把本地提交整理到远端最新之上。",
+              "tags": ["命令"]
+            },
+            {
+              "id": "git-pr",
+              "title": "Pull Request 评审",
+              "plain": "PR 是把变更交给别人 review 后再合并，附带 CI 检查。",
+              "links": [],
+              "output": "为一个改动开 PR 并写清改动与测试。",
+              "tags": ["协作"]
+            }
+          ]
+        },
+        {
+          "id": "security",
+          "num": 8,
+          "title": "网络安全基础",
+          "desc": "最常见的四种 Web 攻击与防御。",
+          "tasks": [
+            {
+              "id": "sec-xss",
+              "title": "XSS 跨站脚本",
+              "plain": "注入恶意脚本到页面被他人执行；防御靠转义输出与 CSP。",
+              "links": [],
+              "output": "说明存储型与反射型 XSS 的区别。",
+              "tags": ["攻击"]
+            },
+            {
+              "id": "sec-csrf",
+              "title": "CSRF 跨站请求伪造",
+              "plain": "借用户已登录的浏览器发伪造请求；防御靠 Token/Referer/SameSite。",
+              "links": [],
+              "output": "解释为什么 CSRF Token 能挡住伪造表单。",
+              "tags": ["攻击"]
+            },
+            {
+              "id": "sec-sqli",
+              "title": "SQL 注入",
+              "plain": "拼接 SQL 被注入语句；防御靠参数化查询（预编译），绝不拼字符串。",
+              "links": [],
+              "output": "给出一条危险拼接与一条参数化写法对比。",
+              "tags": ["攻击", "面试高频"]
+            },
+            {
+              "id": "sec-ddos",
+              "title": "DDoS 拒绝服务",
+              "plain": "用海量请求耗尽带宽/连接；靠 CDN、限流、WAF 缓解。",
+              "links": [],
+              "output": "区分 DDoS 与普通故障流量。",
+              "tags": ["攻击"]
+            }
+          ]
+        },
+        {
+          "id": "redis",
+          "num": 9,
+          "title": "Redis 缓存",
+          "desc": "高性能 KV 与常见缓存策略。",
+          "tasks": [
+            {
+              "id": "redis-types",
+              "title": "五种基本数据类型",
+              "plain": "String/List/Hash/Set/ZSet 各有场景：计数、队列、对象、去重、排行榜。",
+              "links": [{ "text": "Redis 官方文档", "url": "https://redis.io/docs/latest/" }],
+              "output": "为排行榜、购物车、投票分别选一种类型。",
+              "tags": ["数据结构"]
+            },
+            {
+              "id": "redis-persist",
+              "title": "RDB 与 AOF 持久化",
+              "plain": "RDB 快照快但可能丢最后一段；AOF 日志更安全但体积大。",
+              "links": [],
+              "output": "对比两种持久化的恢复速度与数据安全。",
+              "tags": ["持久化"]
+            },
+            {
+              "id": "redis-cacherisk",
+              "title": "缓存穿透/击穿/雪崩",
+              "plain": "穿透查不存在（布隆过滤器）、击穿热点过期（互斥锁）、雪崩同时过期（加随机）。",
+              "links": [],
+              "output": "用一句话讲清三种问题与对策。",
+              "tags": ["缓存问题"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "官方文档",
+          "items": [
+            { "title": "MDN Web 文档", "url": "https://developer.mozilla.org/zh-CN/", "desc": "HTTP/网络/前端权威参考" },
+            { "title": "MySQL 官方手册", "url": "https://dev.mysql.com/doc/refman/8.0/en/", "desc": "InnoDB/事务/索引一手资料" },
+            { "title": "Docker Docs", "url": "https://docs.docker.com/", "desc": "容器入门到 Compose" },
+            { "title": "Git 手册(中文)", "url": "https://git-scm.com/book/zh/v2", "desc": "分支与工作流经典教材" },
+            { "title": "Redis Docs", "url": "https://redis.io/docs/latest/", "desc": "命令与数据类型参考" }
+          ]
+        },
+        {
+          "category": "源码笔记",
+          "items": [
+            { "title": "frank-lam/fullstack-tutorial", "url": "https://github.com/frank-lam/fullstack-tutorial", "desc": "本清单整理自该仓库 notes 基础散篇" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "搭建一台 Linux 测试服务器", "learn": "目录/权限/进程排查/crontab" },
+        { "level": 2, "project": "用 Docker 跑起一个 Web + 数据库", "learn": "Dockerfile + compose 编排" },
+        { "level": 3, "project": "给一个慢 SQL 做 EXPLAIN 优化", "learn": "索引/隔离级别/查询优化" },
+        { "level": 4, "project": "在团队里用功能分支 + PR 流程协作", "learn": "Git 工作流与评审" }
+      ]
+    },
+    {
+      "id": "java",
+      "title": "Java 内功",
+      "desc": "从语法、集合、并发到 JVM 与设计模式，啃透后端面试核心。",
+      "color": "#f97316",
+      "stages": [
+        {
+          "id": "java-basic",
+          "num": 1,
+          "title": "Java 基础与面向对象",
+          "desc": "语法地基与 OOP 思想。",
+          "tasks": [
+            {
+              "id": "java-oo",
+              "title": "四大特性与多态",
+              "plain": "封装、继承、多态、抽象；多态靠父类引用指向子类实例，运行时决定调用谁。",
+              "links": [{ "text": "Oracle Java 教程", "url": "https://docs.oracle.com/javase/tutorial/java/concepts/index.html" }],
+              "output": "举一个项目里用多态替换 if-else 的例子。",
+              "tags": ["OOP"]
+            },
+            {
+              "id": "java-override",
+              "title": "重载与重写",
+              "plain": "重载编译期按参数区分（同名不同参）；重写运行期覆盖父类方法（同签名）。",
+              "links": [],
+              "output": "说明 @Override 的作用与返回值协变。",
+              "tags": ["OOP"]
+            },
+            {
+              "id": "java-reflect",
+              "title": "反射与注解",
+              "plain": "反射在运行期拿到类结构并调用；注解是元数据，靠反射读取，Spring 大量使用。",
+              "links": [],
+              "output": "用反射实例化一个类并调用其方法。",
+              "tags": ["反射", "注解"]
+            },
+            {
+              "id": "java-generic",
+              "title": "泛型与通配符",
+              "plain": "编译期类型检查、消除强转；? extends 上限、? super 下限。",
+              "links": [],
+              "output": "写一个泛型方法并解释类型擦除。",
+              "tags": ["泛型"]
+            },
+            {
+              "id": "java-string",
+              "title": "String 与常量池",
+              "plain": "String 不可变；堆与字符串常量池，== 比地址、equals 比内容。",
+              "links": [],
+              "output": "解释 new String(\"a\") 创建几个对象。",
+              "tags": ["String"]
+            },
+            {
+              "id": "java-copy",
+              "title": "深拷贝与浅拷贝",
+              "plain": "浅拷贝只复制引用，深拷贝连对象内部也复制；实现 Cloneable/序列化。",
+              "links": [],
+              "output": "给一个含引用成员的类实现深拷贝。",
+              "tags": ["拷贝"]
+            },
+            {
+              "id": "java-lambda",
+              "title": "Lambda 与函数式接口",
+              "plain": "Lambda 简化匿名实现；配合 Stream/CompletableFuture 使用。",
+              "links": [],
+              "output": "用 Lambda 改写一个 Comparator。",
+              "tags": ["语法"]
+            }
+          ]
+        },
+        {
+          "id": "java-collection",
+          "num": 2,
+          "title": "集合框架",
+          "desc": "ArrayList/LinkedList/HashMap/ConcurrentHashMap 源码级理解。",
+          "tasks": [
+            {
+              "id": "coll-map",
+              "title": "Collection 与 Map 体系",
+              "plain": "List/Set/Queue 走 Collection；Map 是键值对；工具类 Collections/Arrays。",
+              "links": [],
+              "output": "画出集合框架继承关系图。",
+              "tags": ["体系"]
+            },
+            {
+              "id": "coll-arraylist",
+              "title": "ArrayList 扩容与 Fail-Fast",
+              "plain": "默认容量 10、1.5 倍扩容；modCount 让遍历时并发修改快速失败抛异常。",
+              "links": [],
+              "output": "说明 ArrayList 为什么随机访问快。",
+              "tags": ["List"]
+            },
+            {
+              "id": "coll-linkedlist",
+              "title": "LinkedList 双向链表",
+              "plain": "增删头尾快但随机访问要遍历；与 ArrayList 按读写场景选。",
+              "links": [],
+              "output": "对比两者时间复杂度适用场景。",
+              "tags": ["List"]
+            },
+            {
+              "id": "coll-hashmap",
+              "title": "HashMap 结构与扩容",
+              "plain": "数组+链表+红黑树（JDK8 链表超 8 转树）；负载因子 0.75 触发扩容。",
+              "links": [],
+              "output": "解释哈希冲突如何被解决，为什么链表转红黑树。",
+              "tags": ["Map", "面试高频"]
+            },
+            {
+              "id": "coll-concurrent",
+              "title": "ConcurrentHashMap 线程安全",
+              "plain": "分段锁/CAS 保并发安全；替代 Hashtable 的全表锁。",
+              "links": [],
+              "output": "说明 ConcurrentHashMap 比 Hashtable 高效在哪。",
+              "tags": ["并发集合"]
+            }
+          ]
+        },
+        {
+          "id": "java-concurrent",
+          "num": 3,
+          "title": "并发编程",
+          "desc": "线程、锁、J.U.C 核心。",
+          "tasks": [
+            {
+              "id": "jc-thread",
+              "title": "线程状态与创建方式",
+              "plain": "New/Runnable/Blocked/Waiting/TimedWaiting/Terminated；Runnable/Callable/Thread 三种方式。",
+              "links": [],
+              "output": "对比 Runnable 与 Callable 的返回值与异常。",
+              "tags": ["线程"]
+            },
+            {
+              "id": "jc-sync",
+              "title": "synchronized 与 ReentrantLock",
+              "plain": "synchronized 自动释放、JVM 层面；ReentrantLock 手动锁、可中断/超时/公平。",
+              "links": [],
+              "output": "列出两者在可中断与公平性上的差异。",
+              "tags": ["锁"]
+            },
+            {
+              "id": "jc-cas",
+              "title": "CAS 与乐观锁/悲观锁",
+              "plain": "CAS 比较并交换无锁更新；乐观锁先假设无冲突（版本号），悲观锁直接加锁。",
+              "links": [],
+              "output": "说明 CAS 的 ABA 问题及解决（版本号）。",
+              "tags": ["锁", "面试高频"]
+            },
+            {
+              "id": "jc-wait-notify",
+              "title": "wait/notify 与 sleep 区别",
+              "plain": "wait 释放锁并挂起、需在同步块；sleep 不释放锁；await/signal 是 Lock 版。",
+              "links": [],
+              "output": "讲清 sleep 与 wait 是否释放锁。",
+              "tags": ["协作"]
+            },
+            {
+              "id": "jc-aqs",
+              "title": "AQS 与常用工具类",
+              "plain": "AQS 是 J.U.C 锁基础；CountdownLatch/CyclicBarrier/Semaphore 协调线程。",
+              "links": [],
+              "output": "用 CountdownLatch 等齐 N 个任务再汇总。",
+              "tags": ["JUC"]
+            },
+            {
+              "id": "jc-pool",
+              "title": "线程池核心参数",
+              "plain": "核心线程、最大线程、队列、拒绝策略；避免无限 new Thread。",
+              "links": [],
+              "output": "写一个固定线程池并说明任务排队逻辑。",
+              "tags": ["线程池"]
+            }
+          ]
+        },
+        {
+          "id": "java-io",
+          "num": 4,
+          "title": "Java IO",
+          "desc": "流模型、序列化、BIO/NIO/AIO。",
+          "tasks": [
+            {
+              "id": "io-stream",
+              "title": "字节流与字符流",
+              "plain": "InputStream/OutputStream 处理字节，Reader/Writer 处理字符（编码）。",
+              "links": [],
+              "output": "区分何时用字节流、何时用字符流。",
+              "tags": ["IO"]
+            },
+            {
+              "id": "io-serial",
+              "title": "序列化协议",
+              "plain": "实现 Serializable；Java 原生序列化笨重，常用 JSON/Protobuf。",
+              "links": [],
+              "output": "说明 serialVersionUID 的作用。",
+              "tags": ["序列化"]
+            },
+            {
+              "id": "io-model",
+              "title": "BIO/NIO/AIO",
+              "plain": "BIO 同步阻塞、NIO 多路复用非阻塞、AIO 异步；高并发选 NIO。",
+              "links": [],
+              "output": "对比三种 IO 模型的线程与阻塞方式。",
+              "tags": ["IO模型", "面试高频"]
+            },
+            {
+              "id": "io-socket",
+              "title": "Socket 通信",
+              "plain": "服务端 ServerSocket 监听，客户端 Socket 连接，读写流交换数据。",
+              "links": [],
+              "output": "写一对简单的 echo Socket 收发。",
+              "tags": ["网络"]
+            }
+          ]
+        },
+        {
+          "id": "java-jvm",
+          "num": 5,
+          "title": "JVM 虚拟机",
+          "desc": "内存区域、GC、类加载。",
+          "tasks": [
+            {
+              "id": "jvm-mem",
+              "title": "运行时数据区域",
+              "plain": "程序计数器/虚拟机栈/本地方法栈线程私有；堆与方法区共享。",
+              "links": [{ "text": "JVM 规范(Oracle)", "url": "https://docs.oracle.com/javase/specs/jvms/se8/html/" }],
+              "output": "列出哪些区域线程私有、哪些共享。",
+              "tags": ["内存"]
+            },
+            {
+              "id": "jvm-gc",
+              "title": "可达性分析与回收算法",
+              "plain": "引用计数有循环引用问题，用可达性分析；标记清除/整理/复制，分代收集。",
+              "links": [],
+              "output": "解释为什么新生代用复制、老年代用标记整理。",
+              "tags": ["GC"]
+            },
+            {
+              "id": "jvm-collector",
+              "title": "垃圾收集器 G1/CMS",
+              "plain": "CMS 低停顿并发收集；G1 分Region、可预测停顿，现代默认。",
+              "links": [],
+              "output": "对比 CMS 与 G1 的适用堆大小。",
+              "tags": ["GC"]
+            },
+            {
+              "id": "jvm-class",
+              "title": "类加载机制与双亲委派",
+              "plain": "加载→验证→准备→解析→初始化；双亲委派让核心类向上委托，防篡改。",
+              "links": [],
+              "output": "讲清双亲委派如何保证核心类不被替换。",
+              "tags": ["类加载", "面试高频"]
+            }
+          ]
+        },
+        {
+          "id": "java-pattern",
+          "num": 6,
+          "title": "设计模式",
+          "desc": "高频 8 个模式的意图与落地。",
+          "tasks": [
+            {
+              "id": "pt-singleton",
+              "title": "单例模式",
+              "plain": "全局唯一实例；饿汉/懒汉/双重检查/枚举，注意线程安全。",
+              "links": [],
+              "output": "写一个双重检查锁单例并说明 volatile。",
+              "tags": ["创建型"]
+            },
+            {
+              "id": "pt-factory",
+              "title": "工厂模式",
+              "plain": "把 new 交给工厂，解耦创建与使用。",
+              "links": [],
+              "output": "用简单工厂替代一堆 if-else 创建对象。",
+              "tags": ["创建型"]
+            },
+            {
+              "id": "pt-observer",
+              "title": "观察者模式",
+              "plain": "主题状态变化通知所有订阅者；事件机制的基础。",
+              "links": [],
+              "output": "用观察者实现一个订阅通知。",
+              "tags": ["行为型"]
+            },
+            {
+              "id": "pt-strategy",
+              "title": "策略模式",
+              "plain": "把可替换算法封装成独立类，运行时切换，消灭分支。",
+              "links": [],
+              "output": "用策略模式替换支付方式的 if-else。",
+              "tags": ["行为型", "高频"]
+            },
+            {
+              "id": "pt-adapter",
+              "title": "适配器模式",
+              "plain": "把不兼容接口转成目标接口，复用旧代码。",
+              "links": [],
+              "output": "给一个第三方库接口写适配器。",
+              "tags": ["结构型"]
+            },
+            {
+              "id": "pt-chain",
+              "title": "责任链模式",
+              "plain": "请求沿链传递直到被处理；过滤器/拦截器骨架。",
+              "links": [],
+              "output": "用责任链串起多级校验。",
+              "tags": ["行为型"]
+            }
+          ]
+        },
+        {
+          "id": "java-web",
+          "num": 7,
+          "title": "JavaWeb 与 Spring",
+          "desc": "Servlet、IOC、AOP、事务。",
+          "tasks": [
+            {
+              "id": "web-servlet",
+              "title": "Servlet 生命周期与转发重定向",
+              "plain": "init→service→destroy；forward 服务器内转发、redirect 客户端重定向。",
+              "links": [],
+              "output": "对比 forward 与 redirect 的地址栏与请求次数。",
+              "tags": ["Servlet"]
+            },
+            {
+              "id": "web-cookie",
+              "title": "Cookie 与 Session",
+              "plain": "Cookie 存客户端，Session 存服务端，靠 Cookie 里的 SessionId 关联。",
+              "links": [],
+              "output": "说明无状态 HTTP 如何靠 Session 维持登录。",
+              "tags": ["会话"]
+            },
+            {
+              "id": "spring-ioc",
+              "title": "Spring IOC 与依赖注入",
+              "plain": "容器管理对象生命周期与装配，DI 把依赖注入进来，解耦。",
+              "links": [{ "text": "Spring 官方文档", "url": "https://docs.spring.io/spring-framework/reference/" }],
+              "output": "解释 IOC 把对象创建权交给容器带来的好处。",
+              "tags": ["Spring"]
+            },
+            {
+              "id": "spring-aop",
+              "title": "AOP 与动态代理",
+              "plain": "横切逻辑（日志/事务/权限）织入；JDK 动态代理基于接口，CGLIB 基于继承。",
+              "links": [],
+              "output": "列举项目里 AOP 的三个真实用途。",
+              "tags": ["Spring", "面试高频"]
+            },
+            {
+              "id": "spring-tx",
+              "title": "Spring 事务管理",
+              "plain": "声明式 @Transactional 基于 AOP；注意自调用失效与传播行为。",
+              "links": [],
+              "output": "解释同类方法内调用 @Transactional 为什么不生效。",
+              "tags": ["Spring"]
+            }
+          ]
+        },
+        {
+          "id": "java-arch",
+          "num": 8,
+          "title": "系统架构入门",
+          "desc": "集群同步、缓存设计等宏观问题。",
+          "tasks": [
+            {
+              "id": "arch-cluster",
+              "title": "Tomcat 集群会话同步",
+              "plain": "多实例下会话共享靠粘性会话/共享存储/无状态化（JWT）。",
+              "links": [],
+              "output": "对比会话共享三种方案的取舍。",
+              "tags": ["集群"]
+            },
+            {
+              "id": "arch-bloom",
+              "title": "布隆过滤器",
+              "plain": "用位数组+多哈希判断“一定不存在”或“可能存在”，挡缓存穿透。",
+              "links": [],
+              "output": "解释布隆过滤器为什么有误判、无漏判。",
+              "tags": ["缓存"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "官方文档",
+          "items": [
+            { "title": "Oracle Java Tutorials", "url": "https://docs.oracle.com/javase/tutorial/", "desc": "官方入门到进阶" },
+            { "title": "Spring Framework Reference", "url": "https://docs.spring.io/spring-framework/reference/", "desc": "IOC/AOP/事务官方" },
+            { "title": "JVM 规范", "url": "https://docs.oracle.com/javase/specs/jvms/se8/html/", "desc": "内存与类加载权威" }
+          ]
+        },
+        {
+          "category": "源码笔记",
+          "items": [
+            { "title": "JavaArchitecture 目录", "url": "https://github.com/frank-lam/fullstack-tutorial/tree/master/notes/JavaArchitecture", "desc": "本轨道整理自该仓库 Java 体系笔记" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "写一个集合工具库", "learn": "泛型/集合/Equals 与 hashCode" },
+        { "level": 2, "project": "实现一个线程安全计数器", "learn": "synchronized/CAS/线程池" },
+        { "level": 3, "project": "用策略+工厂重构一段分支代码", "learn": "设计模式实战" },
+        { "level": 4, "project": "搭一个 Spring IOC/AOP 小 Demo", "learn": "IoC 装配与切面" }
+      ]
+    },
+    {
+      "id": "python",
+      "title": "Python 流畅表达",
+      "desc": "读《流畅的 Python》式笔记：对象模型、函数一等公民、类继承与并发。",
+      "color": "#4ade80",
+      "stages": [
+        {
+          "id": "py-basic",
+          "num": 1,
+          "title": "基础语法",
+          "desc": "环境、类型、控制流起步。",
+          "tasks": [
+            {
+              "id": "py-install",
+              "title": "环境与解释器",
+              "plain": "用 venv/conda 隔离环境，py 运行；pip 装包，requirements 锁版本。",
+              "links": [{ "text": "Python 官方教程", "url": "https://docs.python.org/zh-cn/3/tutorial/" }],
+              "output": "建一个 venv 并安装一个第三方包。",
+              "tags": ["环境"]
+            },
+            {
+              "id": "py-types",
+              "title": "内置类型与可变/不可变",
+              "plain": "list/dict/set 可变，tuple/str/int 不可变；赋值传引用是理解一切的前提。",
+              "links": [],
+              "output": "解释为什么修改函数内 list 会影响外部。",
+              "tags": ["类型"]
+            },
+            {
+              "id": "py-style",
+              "title": "Pythonic 写法",
+              "plain": "列表推导、enumerate、with、f-string；少写 C 风格循环。",
+              "links": [{ "text": "PEP 8", "url": "https://peps.python.org/pep-0008/" }],
+              "output": "用列表推导替代一个 for+append。",
+              "tags": ["风格"]
+            }
+          ]
+        },
+        {
+          "id": "py-object",
+          "num": 2,
+          "title": "对象、引用与垃圾回收",
+          "desc": "Python 一切皆对象，理解别名与可变。",
+          "tasks": [
+            {
+              "id": "py-ref",
+              "title": "引用、别名与可变性",
+              "plain": "变量是贴在对象上的标签，赋值不复制；is 比身份、== 比值。",
+              "links": [],
+              "output": "用 is 与 == 判断两个列表是否同一对象。",
+              "tags": ["对象模型"]
+            },
+            {
+              "id": "py-gc",
+              "title": "引用计数与垃圾回收",
+              "plain": "引用计数为主，循环引用靠分代 GC 兜底；del 只是解绑。",
+              "links": [],
+              "output": "说明循环引用为什么引用计数清不掉。",
+              "tags": ["GC"]
+            },
+            {
+              "id": "py-copy",
+              "title": "浅拷贝与深拷贝",
+              "plain": "copy.copy 复制外壳，copy.deepcopy 递归复制内层。",
+              "links": [],
+              "output": "对嵌套列表分别做浅/深拷贝并观察差异。",
+              "tags": ["拷贝"]
+            }
+          ]
+        },
+        {
+          "id": "py-seq",
+          "num": 3,
+          "title": "序列：数组、散列与切片",
+          "desc": "list/tuple/str/dict/set 的设计。",
+          "tasks": [
+            {
+              "id": "py-seqarr",
+              "title": "序列构成的数组",
+              "plain": "列表/元组/字符串都是可迭代序列，支持切片与解包。",
+              "links": [],
+              "output": "用切片实现反转与步长取子序列。",
+              "tags": ["序列"]
+            },
+            {
+              "id": "py-hash",
+              "title": "字典与集合",
+              "plain": "dict 哈希表 O(1) 查找；set 去重；键必须可哈希。",
+              "links": [],
+              "output": "用 set 给两个列表求交集。",
+              "tags": ["散列"]
+            },
+            {
+              "id": "py-text",
+              "title": "文本与字节序列",
+              "plain": "str 是 Unicode 文本，bytes 是字节；encode/decode 来回转。",
+              "links": [],
+              "output": "把一个中文 str 编码为 UTF-8 再解码。",
+              "tags": ["文本"]
+            }
+          ]
+        },
+        {
+          "id": "py-func",
+          "num": 4,
+          "title": "函数：一等公民",
+          "desc": "函数可当参数、可装饰、可闭包。",
+          "tasks": [
+            {
+              "id": "py-firstclass",
+              "title": "一等函数",
+              "plain": "函数能赋值给变量、当参数传、放进集合；用它替代设计模式。",
+              "links": [],
+              "output": "把函数作为参数传给 sort 的 key。",
+              "tags": ["函数"]
+            },
+            {
+              "id": "py-closure",
+              "title": "闭包与自由变量",
+              "plain": "内层函数记住外层变量；nonlocal 修改闭包变量。",
+              "links": [],
+              "output": "写一个计数器闭包工厂。",
+              "tags": ["闭包"]
+            },
+            {
+              "id": "py-decorator",
+              "title": "装饰器",
+              "plain": "@wrapped 包装函数，在不改源码前后置/横切逻辑；带参装饰器是三层。",
+              "links": [],
+              "output": "写一个计时装饰器统计函数耗时。",
+              "tags": ["装饰器", "高频"]
+            },
+            {
+              "id": "py-iter",
+              "title": "迭代器与生成器",
+              "plain": "迭代器惰性产出，生成器用 yield；省内存、可流式处理。",
+              "links": [],
+              "output": "用 yield 写一个斐波那契生成器。",
+              "tags": ["迭代"]
+            }
+          ]
+        },
+        {
+          "id": "py-class",
+          "num": 5,
+          "title": "类、继承与元编程",
+          "desc": "面向对象与动态特性。",
+          "tasks": [
+            {
+              "id": "py-inherit",
+              "title": "类与继承、MRO",
+              "plain": "多继承按方法解析顺序 MRO 找方法；super() 协作调用。",
+              "links": [],
+              "output": "用 super() 写菱形继承的初始化。",
+              "tags": ["类"]
+            },
+            {
+              "id": "py-abc",
+              "title": "抽象基类 ABC",
+              "plain": "abc 定义接口契约，子类必须实现抽象方法。",
+              "links": [],
+              "output": "用 ABC 定义一个可支付的抽象接口。",
+              "tags": ["抽象"]
+            },
+            {
+              "id": "py-desc",
+              "title": "属性描述符",
+              "plain": "__get__/__set__ 接管属性存取，实现校验类型。",
+              "links": [],
+              "output": "写一个类型校验描述符。",
+              "tags": ["高级"]
+            },
+            {
+              "id": "py-meta",
+              "title": "类元编程",
+              "plain": "type 是类的类；元类在类创建时介入，少用但理解机制。",
+              "links": [],
+              "output": "说明元类与装饰器在时机上的区别。",
+              "tags": ["元编程"]
+            },
+            {
+              "id": "py-operator",
+              "title": "运算符重载",
+              "plain": "__add__/__len__/__str__ 让自定义类支持 +、len()、打印。",
+              "links": [],
+              "output": "为向量类重载 __add__ 与 __repr__。",
+              "tags": ["类"]
+            }
+          ]
+        },
+        {
+          "id": "py-conc",
+          "num": 6,
+          "title": "并发：future、asyncio、协程",
+          "desc": "Python 三种并发路线。",
+          "tasks": [
+            {
+              "id": "py-future",
+              "title": "concurrent.futures 线程池",
+              "plain": "ThreadPoolExecutor 跑 IO 密集，GIL 在等待时释放。",
+              "links": [],
+              "output": "用线程池并发下载多个网页。",
+              "tags": ["并发"]
+            },
+            {
+              "id": "py-asyncio",
+              "title": "asyncio 协程",
+              "plain": "async/await 单线程事件循环，适合高并发 IO；不是多 CPU。",
+              "links": [{ "text": "asyncio 官方", "url": "https://docs.python.org/zh-cn/3/library/asyncio.html" }],
+              "output": "用 asyncio.gather 并发跑三个协程。",
+              "tags": ["协程"]
+            },
+            {
+              "id": "py-coroutine",
+              "title": "协程原理与上下文",
+              "plain": "协程在用户态切换、比线程轻；注意阻塞调用会卡住事件循环。",
+              "links": [],
+              "output": "解释为什么同步阻塞库不能直接放进 asyncio。",
+              "tags": ["协程"]
+            },
+            {
+              "id": "py-cm",
+              "title": "上下文管理器 with",
+              "plain": "__enter__/__exit__ 保证资源释放；替代 try/finally。",
+              "links": [],
+              "output": "写一个自定义上下文管理器管理文件。",
+              "tags": ["资源"]
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "category": "官方文档",
+          "items": [
+            { "title": "Python 官方教程(中文)", "url": "https://docs.python.org/zh-cn/3/tutorial/", "desc": "入门与标准库" },
+            { "title": "asyncio 参考", "url": "https://docs.python.org/zh-cn/3/library/asyncio.html", "desc": "协程与事件循环" },
+            { "title": "PEP 8 风格", "url": "https://peps.python.org/pep-0008/", "desc": "社区规范" }
+          ]
+        },
+        {
+          "category": "源码笔记",
+          "items": [
+            { "title": "流畅的Python 目录", "url": "https://github.com/frank-lam/fullstack-tutorial/tree/master/notes/Python/%E6%B5%81%E7%95%85%E7%9A%84Python", "desc": "本轨道整理自该仓库读书笔记" }
+          ]
+        }
+      ],
+      "ladder": [
+        { "level": 1, "project": "脚本处理一批文件", "learn": "推导/切片/字典集合" },
+        { "level": 2, "project": "写一个计时+日志装饰器", "learn": "闭包与装饰器" },
+        { "level": 3, "project": "用生成器流式读大文件", "learn": "迭代器与惰性" },
+        { "level": 4, "project": "asyncio 并发抓取多个页面", "learn": "协程与事件循环" }
+      ]
+    }
+  ],
+  "glossary": [
+    { "term": "进程", "plain": "资源分配单位，拥有独立内存空间；线程是其内部的执行单元。" },
+    { "term": "线程", "plain": "CPU 调度单位，共享所属进程的内存，切换比进程轻。" },
+    { "term": "死锁", "plain": "多线程互相持有并等待对方资源，永久卡住；需破坏四条件之一。" },
+    { "term": "TCP 三次握手", "plain": "SYN、SYN-ACK、ACK 三次交换，确认双方收发能力后建连。" },
+    { "term": "HTTP", "plain": "应用层无状态协议，基于请求-响应，用 Header 携带元信息。" },
+    { "term": "ACID", "plain": "事务的原子性、一致性、隔离性、持久性四条保证。" },
+    { "term": "B+ 树", "plain": "矮胖、叶子有序链表的索引结构，适合磁盘与范围查询。" },
+    { "term": "索引", "plain": "为加速查询建立的辅助数据结构，以空间换时间。" },
+    { "term": "BIO/NIO/AIO", "plain": "同步阻塞、同步非阻塞多路复用、异步三种 IO 模型。" },
+    { "term": "JVM", "plain": "Java 虚拟机，负责把字节码运行在内存区域并管理 GC。" },
+    { "term": "GC", "plain": "垃圾回收，自动回收不可达对象的内存。" },
+    { "term": "双亲委派", "plain": "类加载器先向上委托给父加载器，保证核心类不被替换。" },
+    { "term": "CAS", "plain": "比较并交换，无锁原子更新，靠期望值判断是否被改过。" },
+    { "term": "IOC", "plain": "控制反转，对象交由容器创建装配，依赖被注入进来。" },
+    { "term": "AOP", "plain": "面向切面，把日志/事务等横切逻辑织入，不侵入业务。" },
+    { "term": "设计模式", "plain": "面向对象设计中反复出现问题的可复用解法。" },
+    { "term": "装饰器", "plain": "包装函数以在不改源码前后置/增强行为的 Python 惯用法。" },
+    { "term": "生成器", "plain": "用 yield 惰性产出元素的迭代器，节省内存。" },
+    { "term": "协程", "plain": "用户态轻量级线程，在事件循环里切换，适合 IO 密集并发。" },
+    { "term": "Docker 镜像", "plain": "包含运行环境的只读模板，容器是它的运行实例。" }
+  ]
+}
