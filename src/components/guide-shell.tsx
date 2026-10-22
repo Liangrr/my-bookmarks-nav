@@ -53,6 +53,8 @@ export interface GuideTrack {
   title: string;
   desc: string;
   color: string;
+  /** 可选大类分组名，切换器按组聚合成小标题（不填则不分组） */
+  group?: string;
   stages: GuideStage[];
   resources: GuideResourceCat[];
   ladder: GuideLadder[];
@@ -141,6 +143,21 @@ export function GuideShell({
       .flatMap((s) => s.tasks)
       .filter((t) => trDone[t.id]).length;
   }
+
+  // 按可选 group 聚合成组（保持首次出现顺序）；无 group 的组名留空，不渲染小标题
+  const groups = useMemo(() => {
+    const order: string[] = [];
+    const map = new Map<string, typeof data.tracks>();
+    for (const tr of data.tracks) {
+      const g = tr.group ?? "";
+      if (!map.has(g)) {
+        map.set(g, []);
+        order.push(g);
+      }
+      map.get(g)!.push(tr);
+    }
+    return order.map((g) => ({ name: g, items: map.get(g)! }));
+  }, [data.tracks]);
 
   const done = readDone(mounted, PROGRESS_PREFIX, trackId);
   const doneCount = ALL_TASKS.filter((t) => done[t.id]).length;
@@ -250,93 +267,109 @@ export function GuideShell({
           ))}
         </div>
 
-        {/* 轨道切换器 */}
-        <div
-          role="tablist"
-          aria-label="学习轨道"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 10,
-            marginTop: 16,
-          }}
-        >
-          {data.tracks.map((tr) => {
-            const active = tr.id === trackId;
-            const total = tr.stages.flatMap((s) => s.tasks).length;
-            const tDone = trackDone[tr.id] ?? 0;
-            return (
-              <button
-                key={tr.id}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                onClick={() => switchTrack(tr.id)}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: 6,
-                  padding: "14px 16px",
-                  borderRadius: "var(--radius-lg)",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  textAlign: "left",
-                  background: active ? "var(--accent-glow)" : "var(--bg-card)",
-                  border: `1.5px solid ${active ? tr.color : "var(--border)"}`,
-                  boxShadow: active ? "0 0 0 3px var(--accent-glow)" : "none",
-                  transition: "var(--transition)",
-                }}
-              >
-                <span
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    fontSize: 15,
-                    fontWeight: 800,
-                    color: active ? "var(--accent-strong)" : "var(--text-primary)",
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      width: 8,
-                      height: 8,
-                      borderRadius: 999,
-                      background: tr.color,
-                      flexShrink: 0,
-                    }}
-                  />
-                  {tr.title}
-                  {active && (
-                    <span style={{ color: "var(--accent)", fontSize: 12 }}>✓</span>
-                  )}
-                </span>
-                <span
+        {/* 轨道切换器（按 group 分组） */}
+        <div role="tablist" aria-label="学习轨道" style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 14 }}>
+          {groups.map((g) => (
+            <div key={g.name || "__ungrouped__"} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {g.name && (
+                <div
                   style={{
                     fontSize: 12,
-                    color: "var(--text-secondary)",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {tr.desc}
-                </span>
-                <span
-                  style={{
-                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: 1,
                     color: "var(--text-tertiary)",
-                    border: "1px solid var(--border)",
-                    borderRadius: 999,
-                    padding: "2px 8px",
-                    background: "var(--bg-card)",
+                    textTransform: "uppercase",
                   }}
                 >
-                  {total} 任务 · 已学 {tDone}
-                </span>
-              </button>
-            );
-          })}
+                  {g.name}
+                </div>
+              )}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+                  gap: 10,
+                }}
+              >
+                {g.items.map((tr) => {
+                  const active = tr.id === trackId;
+                  const total = tr.stages.flatMap((s) => s.tasks).length;
+                  const tDone = trackDone[tr.id] ?? 0;
+                  return (
+                    <button
+                      key={tr.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      onClick={() => switchTrack(tr.id)}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        gap: 6,
+                        padding: "14px 16px",
+                        borderRadius: "var(--radius-lg)",
+                        cursor: "pointer",
+                        fontFamily: "inherit",
+                        textAlign: "left",
+                        background: active ? "var(--accent-glow)" : "var(--bg-card)",
+                        border: `1.5px solid ${active ? tr.color : "var(--border)"}`,
+                        boxShadow: active ? "0 0 0 3px var(--accent-glow)" : "none",
+                        transition: "var(--transition)",
+                      }}
+                    >
+                      <span
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          fontSize: 15,
+                          fontWeight: 800,
+                          color: active ? "var(--accent-strong)" : "var(--text-primary)",
+                        }}
+                      >
+                        <span
+                          aria-hidden="true"
+                          style={{
+                            width: 8,
+                            height: 8,
+                            borderRadius: 999,
+                            background: tr.color,
+                            flexShrink: 0,
+                          }}
+                        />
+                        {tr.title}
+                        {active && (
+                          <span style={{ color: "var(--accent)", fontSize: 12 }}>✓</span>
+                        )}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: 12,
+                          color: "var(--text-secondary)",
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        {tr.desc}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: 11,
+                          color: "var(--text-tertiary)",
+                          border: "1px solid var(--border)",
+                          borderRadius: 999,
+                          padding: "2px 8px",
+                          background: "var(--bg-card)",
+                        }}
+                      >
+                        {total} 任务 · 已学 {tDone}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* 当前轨道进度条 */}
