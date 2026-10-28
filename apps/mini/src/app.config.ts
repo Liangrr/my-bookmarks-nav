@@ -1,6 +1,13 @@
 export default defineAppConfig({
-  // 主包只放两个 tab 页：首页（菜单聚合）、个人；带大数据的页面放分包按需下载
-  pages: ["pages/index/index", "pages/profile/index"],
+  // 主包只放轻量页：首页（菜单聚合）、个人、待办三件套（登录 / 列表 / 编辑）；
+  // 带大数据的页面放分包按需下载
+  pages: [
+    "pages/index/index",
+    "pages/profile/index",
+    "pages/todos/index",
+    "pages/login/index",
+    "pages/todo-edit/index",
+  ],
   subPackages: [
     {
       root: "subpackages/budget",

@@ -367,6 +367,21 @@ export function NavBar() {
             </svg>
             <span>智能体市场</span>
           </Link>
+          <Link
+            href="/todos"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/todos" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 5h11" />
+              <path d="M9 12h11" />
+              <path d="M9 19h11" />
+              <path d="m3 5 1.6 1.6L7 4.2" />
+              <path d="m3 12 1.6 1.6L7 11.2" />
+              <path d="m3 19 1.6 1.6L7 18.2" />
+            </svg>
+            <span>待办事项</span>
+          </Link>
           <div className="drawer-group-label">工具生活</div>
           <Link
             href="/diy"

@@ -158,3 +158,54 @@ INSERT INTO categories (name, slug, color, icon, sort_order) VALUES
   ('AI工具箱', 'ai-tools', '#ec4899', '🤖', 4),
   ('科技资讯', 'tech-news', '#f59e0b', '📰', 5)
 ON CONFLICT (slug) DO NOTHING;
+
+-- ================================================
+-- 8. 待办事项表
+-- 逾期不落库：status 为 todo/doing 且 due_at < now() 时由前端动态算。
+-- ================================================
+CREATE TABLE IF NOT EXISTS todos (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,                                     -- 事件
+  detail TEXT,                                             -- 做什么
+  place TEXT,                                              -- 地点
+  starts_at TIMESTAMPTZ NOT NULL,                          -- 时间
+  due_at TIMESTAMPTZ,                                      -- 截止时间，逾期判定只看它
+  all_day BOOLEAN NOT NULL DEFAULT FALSE,                  -- 只定哪天、没定几点
+  duration_min INTEGER CHECK (duration_min IS NULL OR duration_min >= 0),
+  expect TEXT,                                             -- 预期结果
+  result TEXT,                                             -- 实际结果
+  outcome TEXT CHECK (outcome IS NULL OR outcome IN ('met', 'partial', 'missed')),
+  actual_min INTEGER CHECK (actual_min IS NULL OR actual_min >= 0),
+  priority SMALLINT NOT NULL DEFAULT 1 CHECK (priority IN (0, 1, 2)),   -- 2 高 / 1 中 / 0 低
+  status TEXT NOT NULL DEFAULT 'todo' CHECK (status IN ('todo', 'doing', 'done', 'dropped')),
+  tags TEXT[] NOT NULL DEFAULT '{}',
+  remind_at TIMESTAMPTZ,                                   -- 本期只在页面上标红，不发推送
+  completed_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  CONSTRAINT todos_title_not_blank CHECK (btrim(title) <> ''),
+  CONSTRAINT todos_due_not_before_start CHECK (due_at IS NULL OR due_at >= starts_at)
+);
+
+CREATE INDEX IF NOT EXISTS todos_user_starts_at_idx ON todos (user_id, starts_at DESC);
+CREATE INDEX IF NOT EXISTS todos_user_status_idx ON todos (user_id, status);
+
+DROP TRIGGER IF EXISTS update_todos_updated_at ON todos;
+CREATE TRIGGER update_todos_updated_at BEFORE UPDATE ON todos
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+ALTER TABLE todos ENABLE ROW LEVEL SECURITY;
+
+-- 每条策略都先 DROP 再建，保证整段脚本可以重复粘贴执行
+DROP POLICY IF EXISTS "Users can view own todos" ON todos;
+DROP POLICY IF EXISTS "Users can insert own todos" ON todos;
+DROP POLICY IF EXISTS "Users can update own todos" ON todos;
+DROP POLICY IF EXISTS "Users can delete own todos" ON todos;
+
+CREATE POLICY "Users can view own todos" ON todos FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can insert own todos" ON todos FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own todos" ON todos FOR UPDATE
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can delete own todos" ON todos FOR DELETE USING (auth.uid() = user_id);
