@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { NavBar } from "@/components/nav-bar";
+import { StarfieldBackground } from "@/components/starfield-background";
 
 const SITE_TITLE = "星轨 - 精选网站导航";
 const SITE_DESCRIPTION = "星轨 · 日常在用的优质网站，都在这里";
@@ -45,6 +46,7 @@ export default function RootLayout({
       </head>
       <body>
         <div className="bg-glow"></div>
+        <StarfieldBackground />
         <NavBar />
         {children}
       </body>

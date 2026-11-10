@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import Link from "next/link";
 import { BookmarkCard } from "@/components/bookmark-card";
+import { StarMap, canUseStarMap } from "@/components/star-map";
 
 export interface Category {
   id: number;
@@ -32,6 +34,8 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<number | "all">("all");
   const [showTop, setShowTop] = useState(false);
+  const [viewMode, setViewMode] = useState<"cards" | "map">("cards");
+  const [webglOK, setWebglOK] = useState(false);
 
   // 滚动超过阈值才显示「回到顶部」
   useEffect(() => {
@@ -39,6 +43,12 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // WebGL2 能力在水合后探测，避免服务端 / 客户端首屏不一致
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setWebglOK(canUseStarMap()));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   const scrollToTop = () =>
@@ -100,6 +110,59 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
   return (
     <>
       <div className="container">
+        {/* 特别企划：站内 3D 沉浸作品入口（样式用 inline 双保险，响应式方向交给 Tailwind） */}
+        <Link
+          href="/end-of-time"
+          aria-label="进入《时间的尽头》交互式 3D 作品"
+          className="eot-banner flex flex-col sm:flex-row items-start sm:items-center"
+          style={{
+            display: "flex",
+            gap: 24,
+            marginBottom: 32,
+            padding: "20px 24px",
+            minHeight: 132,
+            borderRadius: "var(--radius-lg)",
+            border: "1px solid rgba(232,196,138,.22)",
+            background: "linear-gradient(100deg, rgba(9,10,20,.94), rgba(24,18,38,.68)), url('/end-of-time/banner.webp') center / cover no-repeat",
+            textDecoration: "none",
+            color: "var(--text-primary)",
+            overflow: "hidden",
+            position: "relative",
+            boxShadow: "var(--shadow-card)",
+            transition: "var(--transition)",
+          }}
+        >
+          <div style={{ flex: "1 1 auto", minWidth: 0 }}>
+            <div style={{ fontSize: 10, letterSpacing: ".34em", color: "rgba(232,196,138,.8)", marginBottom: 10 }}>
+              星轨 · 特别企划 / INTERACTIVE ART
+            </div>
+            <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: ".12em", marginBottom: 8 }}>
+              时间的尽头
+              <span style={{ fontSize: 11, letterSpacing: ".2em", color: "var(--text-tertiary)", fontWeight: 400, marginLeft: 12 }}>
+                THE END OF TIME
+              </span>
+            </div>
+            <div style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7 }}>
+              一件可交互的 Three.js 3D 作品 · 拖拽旋转视角 / 滚轮拨动时间 / 点击掀起涟漪
+            </div>
+          </div>
+          <span
+            className="eot-banner-cta"
+            style={{
+              flex: "0 0 auto",
+              padding: "10px 18px",
+              borderRadius: 999,
+              border: "1px solid rgba(232,196,138,.45)",
+              color: "#f0dcb8",
+              fontSize: 12,
+              letterSpacing: ".16em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            进入体验 →
+          </span>
+        </Link>
+
         {/* 吸顶：搜索栏 + 分类标签，滚动时常驻顶部 */}
         <div className="nav-sticky">
           {/* 搜索栏 */}
@@ -136,32 +199,71 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
           </div>
         </div>
 
-        {/* 统计 */}
-        <div className="stats-bar">共 {filteredBookmarks.length} 个网站</div>
-
-        {/* Bento Grid 书签卡片 */}
-        <div className="bento-grid">
-          {filteredBookmarks.map((bookmark) => (
-            <BookmarkCard
-              key={bookmark.id}
-              title={bookmark.title}
-              url={bookmark.url}
-              desc={bookmark.description || bookmark.title}
-              icon={bookmark.icon || ""}
-              category={getCategorySlug(bookmark.category_id)}
-              categoryName={getCategoryName(bookmark.category_id)}
-              size={(bookmark.size as "normal" | "large" | "wide" | "tall") || "normal"}
-            />
-          ))}
+        {/* 统计 + 视图切换 */}
+        <div className="view-bar">
+          <div className="stats-bar">共 {filteredBookmarks.length} 个网站</div>
+          {webglOK && (
+            <div className="view-switch" role="group" aria-label="切换视图">
+              <button
+                type="button"
+                className={`view-btn ${viewMode === "cards" ? "active" : ""}`}
+                aria-pressed={viewMode === "cards"}
+                onClick={() => setViewMode("cards")}
+              >
+                卡片
+              </button>
+              <button
+                type="button"
+                className={`view-btn ${viewMode === "map" ? "active" : ""}`}
+                aria-pressed={viewMode === "map"}
+                onClick={() => setViewMode("map")}
+              >
+                星图
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* 无结果 */}
-        {filteredBookmarks.length === 0 && (
-          <div style={{ textAlign: "center", padding: "60px 20px", color: "var(--text-tertiary)" }}>
-            <div style={{ fontSize: "48px", marginBottom: "16px", opacity: 0.5 }}>🔍</div>
-            <p style={{ fontSize: "16px", fontWeight: 500 }}>没有找到匹配的网站</p>
-            <p style={{ fontSize: "14px", marginTop: "8px" }}>试试其他关键词吧</p>
-          </div>
+        {viewMode === "map" && webglOK ? (
+          <>
+            <div className="starmap-intro">
+              拖拽旋转星图 · 滚轮缩放 · 悬停查看站点 · 点击星点直达 · 点星座名切换分类
+            </div>
+            <StarMap
+              categories={categories}
+              bookmarks={bookmarks}
+              searchQuery={searchQuery}
+              activeCategory={activeCategory}
+              onCategory={setActiveCategory}
+            />
+          </>
+        ) : (
+          <>
+            {/* Bento Grid 书签卡片 */}
+            <div className="bento-grid">
+              {filteredBookmarks.map((bookmark) => (
+                <BookmarkCard
+                  key={bookmark.id}
+                  title={bookmark.title}
+                  url={bookmark.url}
+                  desc={bookmark.description || bookmark.title}
+                  icon={bookmark.icon || ""}
+                  category={getCategorySlug(bookmark.category_id)}
+                  categoryName={getCategoryName(bookmark.category_id)}
+                  size={(bookmark.size as "normal" | "large" | "wide" | "tall") || "normal"}
+                />
+              ))}
+            </div>
+
+            {/* 无结果 */}
+            {filteredBookmarks.length === 0 && (
+              <div style={{ textAlign: "center", padding: "60px 20px", color: "var(--text-tertiary)" }}>
+                <div style={{ fontSize: "48px", marginBottom: "16px", opacity: 0.5 }}>🔍</div>
+                <p style={{ fontSize: "16px", fontWeight: 500 }}>没有找到匹配的网站</p>
+                <p style={{ fontSize: "14px", marginTop: "8px" }}>试试其他关键词吧</p>
+              </div>
+            )}
+          </>
         )}
       </div>
 

@@ -34,6 +34,20 @@ cd apps/mini && npm run build:weapp   # 产物在 apps/mini/dist/，交微信开
 
 推送到 `main` 后，[.github/workflows/deploy.yml](./.github/workflows/deploy.yml) 先跑 `verify`（类型检查 + 数据体检 + 单测 + lint），全绿才执行 `vercel --prod`。
 
+## 静态沉浸作品
+
+《时间的尽头》是一件自包含的 Three.js 3D 交互作品。静态资源在 `public/end-of-time/`（three.module.js 已本地化，不参与构建、无需额外依赖），站内路由 `/end-of-time` 由 `src/components/end-of-time-view.tsx` 用同源 iframe 全屏承载；也可直接访问 `/end-of-time/index.html` 独立打开。无 WebGL2 时会显示降级提示。
+
+
+## 星野背景与星图导航
+
+站点自身的 3D 层（区别于《时间的尽头》这件独立作品）：
+
+- `public/starfield/starfield.js` — 全站固定背景，一个全屏 shader 平面绘制漂移星野 / 极光带 / 星云；颜色实时读取 `--accent`、`--accent-light`、`--bg-primary`，`MutationObserver` 监听 `<html>` 的 `data-accent` / `data-theme`，四套主题包与明暗模式自动换色。由 `src/components/starfield-background.tsx` 挂载，沉浸页自动卸载。
+- `public/starfield/starmap.js` — `/nav` 的「星图」视图，把 5 个分类映射为星座、229 个书签映射为星点；单个 `THREE.Points` + raycaster 拾取，与搜索框（匹配高亮）、分类 tab（镜头飞行）、主题包（星色）联动。由 `src/components/star-map.tsx` 挂载。
+- `public/vendor/three.module.js` 是共享的本地 three r160（与《时间的尽头》各留一份，保证作品可独立分发）。全部为原生 ES Module、零 npm 依赖、不参与打包；无 WebGL2 时自动回退原 CSS 光晕与卡片列表。
+- 性能：背景 30fps / DPR≤1.5×0.78，页面隐藏或星图模式开启时暂停；`prefers-reduced-motion` 静止；`localStorage` 设 `nav-starfield=off` 可关闭背景层。
+
 ## 文档
 
 - [docs/项目结构.md](./docs/项目结构.md) —— 各目录 / 文件的作用、数据流、体积约束与已知边界

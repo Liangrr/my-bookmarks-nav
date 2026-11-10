@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#05060d" />
+<link rel="icon" href="data:," />
+<title>时间的尽头 · THE END OF TIME</title>
+<link rel="stylesheet" href="./styles.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" />
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js" } }
+</script>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<div id="ui" aria-hidden="false">
+  <div class="frame">
+    <i class="corner tl"></i><i class="corner tr"></i>
+    <i class="corner bl"></i><i class="corner br"></i>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="sigil">◷</span>
+      <span class="brand-txt"><b>CHRONOS</b><em>终焉观测站 / OBSERVATORY № 00</em></span>
+    </div>
+    <div class="topright">
+      <span class="rec"><i></i>OBSERVING</span>
+      <span class="code" id="code">EOT—0000 / 88.000 Hz</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="kicker"><span class="rule"></span> 最后一秒之后 · CHAPTER ∞</div>
+    <h1>时间<span class="thin">的</span>尽头</h1>
+    <div class="en">T H E &nbsp; E N D &nbsp; O F &nbsp; T I M E</div>
+    <p class="verse">当最后一秒落下，万物开始向内坍塌。<br />光不再离开，影不再抵达。</p>
+  </section>
+
+  <aside class="meter">
+    <div class="meter-label">熵 / ENTROPY</div>
+    <div class="meter-track"><div class="meter-fill" id="entropy"></div></div>
+    <div class="meter-num" id="entropyNum">0.0000</div>
+    <div class="meter-sub">UNIVERSE STATE<br /><span id="stateTxt">COLLAPSING</span></div>
+  </aside>
+
+  <section class="clock">
+    <div class="clock-label">距 离 终 点 &nbsp;/&nbsp; TIME REMAINING</div>
+    <div class="clock-value" id="clock">T − 00:01:28.000</div>
+    <div class="clock-flow" id="flow">FLOW  +1.00× &nbsp;·&nbsp; FORWARD</div>
+  </section>
+
+  <footer class="bottombar">
+    <div class="hints">
+      <span><b>拖拽</b> 旋转视角</span><span class="sep">/</span>
+      <span><b>滚轮</b> 拨动时间</span><span class="sep">/</span>
+      <span><b>点击</b> 掀起涟漪</span><span class="sep">/</span>
+      <span><b>空格</b> 静止</span><span class="sep">/</span>
+      <span><b>R</b> 逆转</span><span class="sep">/</span>
+      <span><b>1 2 3</b> 机位</span><span class="sep">/</span>
+      <span><b>H</b> 隐匿</span>
+    </div>
+    <div class="actions">
+      <button id="btnPause" type="button">静 止</button>
+      <button id="btnReverse" type="button">逆 转</button>
+      <button id="btnAudio" type="button">声 音 <i class="off">OFF</i></button>
+    </div>
+  </footer>
+
+  <div class="side-note">ALL MOMENTS, SIMULTANEOUSLY</div>
+</div>
+
+<div id="cursor"></div>
+
+<div id="loader">
+  <div class="load-inner">
+    <div class="load-mark">◷</div>
+    <div class="load-title">正 在 抵 达 时 间 的 尽 头</div>
+    <div class="load-line"><i></i></div>
+    <div class="load-sub" id="loadSub">CALIBRATING THE LAST SECOND</div>
+  </div>
+</div>
+
+<div id="fatal" hidden></div>
+
+<script>
+  setTimeout(function () {
+    if (!window.__EOT_READY) {
+      var f = document.getElementById('fatal');
+      if (f && f.hidden) {
+        f.hidden = false;
+        f.innerHTML = '本作品需要 WebGL2 与 ES Module 支持。<br>' +
+          '请通过站点页面 <b>/end-of-time</b> 进入，或确认浏览器已开启硬件加速。<br>' +
+          '<a href="./index.html" target="_blank" rel="noopener" style="color:#e8c48a">在新窗口打开静态页 →</a>';
+      }
+    }
+  }, 9000);
+</script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

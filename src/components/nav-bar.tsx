@@ -469,6 +469,19 @@ export function NavBar() {
             </svg>
             <span>独立开发者</span>
           </Link>
+          <div className="drawer-group-label">沉浸体验</div>
+          <Link
+            href="/end-of-time"
+            onClick={() => setMenuOpen(false)}
+            className={`drawer-item ${pathname === "/end-of-time" ? "active" : ""}`}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3.5 2" />
+              <path d="M12 3v2M21 12h-2M12 21v-2M3 12h2" />
+            </svg>
+            <span>时间的尽头</span>
+          </Link>
           <div className="drawer-group-label">实用手册</div>
           <Link
             href="/living"

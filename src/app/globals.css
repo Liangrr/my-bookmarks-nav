@@ -1818,3 +1818,166 @@ body {
     padding: 18px;
   }
 }
+
+
+/* ========== 特别企划 · 时间的尽头入口卡片 ========== */
+.eot-banner:hover {
+  border-color: rgba(232, 196, 138, 0.55) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.eot-banner:hover .eot-banner-cta {
+  background: rgba(232, 196, 138, 0.12);
+}
+@media (max-width: 640px) {
+  .eot-banner {
+    padding: 16px 18px !important;
+    gap: 14px !important;
+  }
+  .eot-banner-cta { align-self: flex-start; }
+}
+
+
+/* ========== 沉浸页 · 时间的尽头（路由 /end-of-time） ========== */
+/* class 由 end-of-time-view.tsx 在挂载时加到 <html>、卸载时移除，
+   避免页面内 <style> 注入在客户端导航后残留，导致站点滚动被锁。 */
+html.eot-immersive .nav-bar,
+html.eot-immersive .bg-glow { display: none !important; }
+html.eot-immersive,
+html.eot-immersive body {
+  overflow: hidden;
+  background: #03040a !important;
+}
+
+
+/* ========== 星轨 · 活体星野背景（全站固定层） ========== */
+.starfield-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.starfield-layer canvas { display: block; }
+html.starfield-on .bg-glow { opacity: 0.38; }
+html.starfield-on .footer { position: relative; z-index: 1; }
+html.eot-immersive .starfield-layer { display: none; }
+
+/* ========== /nav · 星图导航 ========== */
+.view-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 40px;
+  margin-bottom: 24px;
+}
+.view-bar .stats-bar { margin-bottom: 0; }
+.view-switch {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+}
+.view-btn {
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 6px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+}
+.view-btn:hover { color: var(--text-primary); }
+.view-btn.active { background: var(--accent); color: #04121a; }
+.starmap-intro {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  margin: -8px 0 16px;
+}
+.starmap-shell { position: relative; }
+.starmap-host {
+  position: relative;
+  width: 100%;
+  height: min(64vh, 620px);
+  min-height: 380px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+html[data-theme="light"] .starmap-host { background: rgba(255, 255, 255, 0.30); }
+.starmap-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+.starmap-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  color: var(--text-primary);
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  pointer-events: auto;
+  transition: opacity 0.3s, border-color 0.2s;
+}
+.starmap-label:hover { border-color: var(--accent); }
+.starmap-label b { font-size: 12px; font-weight: 500; }
+.starmap-label span { font-size: 10px; color: var(--text-tertiary); }
+.starmap-tip {
+  position: absolute;
+  z-index: 3;
+  min-width: 160px;
+  max-width: 210px;
+  padding: 8px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.starmap-tip b { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+.starmap-tip span { font-size: 11px; color: var(--text-secondary); }
+.starmap-tip[hidden] { display: none; }
+.starmap-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+@media (max-width: 640px) {
+  .view-bar { flex-direction: column; gap: 12px; }
+  .view-switch { position: static; transform: none; }
+  .starmap-host { height: 460px; min-height: 360px; }
+  .starmap-label { padding: 4px 8px; }
+}

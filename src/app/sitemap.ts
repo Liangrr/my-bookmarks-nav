@@ -36,5 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // 其它
     { url: `${BASE_URL}/indie-dev`, lastModified, changeFrequency: "weekly", priority: 0.5 },
+    // 沉浸体验（Three.js 静态作品，经 /end-of-time 路由承载）
+    { url: `${BASE_URL}/end-of-time`, lastModified, changeFrequency: "monthly", priority: 0.5 },
   ];
 }
