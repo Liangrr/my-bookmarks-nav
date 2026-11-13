@@ -33,6 +33,14 @@ export default defineAppConfig({
       root: "subpackages/nav",
       pages: ["index"],
     },
+    {
+      root: "subpackages/game1024",
+      pages: ["index"],
+    },
+    {
+      root: "subpackages/games",
+      pages: ["hub/index", "xiangqi/index", "gomoku/index", "junqi/index", "junqi-flip/index"],
+    },
   ],
   tabBar: {
     color: "#8b97a8",

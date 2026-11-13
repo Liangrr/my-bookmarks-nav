@@ -38,5 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/indie-dev`, lastModified, changeFrequency: "weekly", priority: 0.5 },
     // 沉浸体验（Three.js 静态作品，经 /end-of-time 路由承载）
     { url: `${BASE_URL}/end-of-time`, lastModified, changeFrequency: "monthly", priority: 0.5 },
+    // 站内游戏中心：与小程序共用 @shared-lib 的棋类/合并纯逻辑
+    { url: `${BASE_URL}/game-1024`, lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/games`, lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/games/xiangqi`, lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/games/gomoku`, lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/games/junqi`, lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/games/junqi-flip`, lastModified, changeFrequency: "monthly", priority: 0.6 },
   ];
 }

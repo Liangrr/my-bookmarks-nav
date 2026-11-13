@@ -163,6 +163,28 @@ export default function HomeContent({ categories, bookmarks }: HomeContentProps)
           </span>
         </Link>
 
+        {/* 站内游戏中心：5 款小游戏，纯逻辑与小程序端共用 @shared-lib */}
+        <Link
+          href="/games"
+          className="g1024-entry"
+          style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16,
+            marginBottom: 24, padding: "14px 20px", borderRadius: "var(--radius-md)",
+            border: "1px solid var(--border)", background: "var(--bg-card)",
+            textDecoration: "none", color: "var(--text-primary)", transition: "var(--transition)",
+          }}
+        >
+          <span style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 0 }}>
+            <b style={{ fontSize: 14, letterSpacing: ".06em" }}>游戏中心 · 5 款站内小游戏</b>
+            <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>
+              1024 合并 / 中国象棋 / 五子棋 / 标准陆战棋 / 翻翻棋 · 人机对战、双人同屏、自动存档
+            </span>
+          </span>
+          <span style={{ flex: "0 0 auto", fontSize: 12, color: "var(--accent)", whiteSpace: "nowrap" }}>
+            开始玩 →
+          </span>
+        </Link>
+
         {/* 吸顶：搜索栏 + 分类标签，滚动时常驻顶部 */}
         <div className="nav-sticky">
           {/* 搜索栏 */}

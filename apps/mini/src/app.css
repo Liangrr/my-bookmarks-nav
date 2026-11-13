@@ -755,3 +755,280 @@ page {
 .field-inline .field-label {
   margin-bottom: 0;
 }
+
+/* ========== 1024 数字合并（subpackages/game1024） ========== */
+.g1024-page { padding-bottom: 40px; }
+.g1024-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 16px; margin-bottom: 20px;
+}
+.g1024-logo { font-size: 64px; line-height: 1; font-weight: 800; color: #ffb35c; }
+.g1024-scores { display: flex; gap: 10px; }
+.g1024-score {
+  min-width: 104px; padding: 10px 14px; border-radius: 14px;
+  background: #1a2331; border: 1px solid #263243; text-align: center;
+}
+.g1024-score-label { display: block; font-size: 20px; color: #8b97a8; }
+.g1024-score-num { display: block; font-size: 30px; font-weight: 700; color: #e6edf7; }
+.g1024-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.g1024-btn {
+  padding: 12px 20px; border-radius: 12px; font-size: 26px; color: #e6edf7;
+  background: #1a2331; border: 1px solid #263243;
+}
+.g1024-btn-primary { background: #4ade80; border-color: #4ade80; color: #0f151f; font-weight: 700; }
+.g1024-btn-off { opacity: .4; }
+.g1024-hud { display: flex; gap: 12px; margin-bottom: 16px; }
+.g1024-next {
+  width: 120px; flex: none; display: flex; flex-direction: column;
+  align-items: center; gap: 10px; padding: 12px;
+  background: #1a2331; border: 1px solid #263243; border-radius: 14px;
+}
+.g1024-hud-label { font-size: 20px; color: #8b97a8; }
+.g1024-mini {
+  width: 64px; height: 64px; border-radius: 12px; font-size: 30px;
+  font-weight: 700; color: #3b4560;
+  display: flex; align-items: center; justify-content: center;
+}
+.g1024-progress {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center;
+  gap: 12px; padding: 12px 16px;
+  background: #1a2331; border: 1px solid #263243; border-radius: 14px;
+}
+.g1024-progress-head { display: flex; justify-content: space-between; align-items: center; }
+.g1024-max { font-size: 30px; font-weight: 700; color: #e6edf7; }
+.g1024-bar { height: 12px; border-radius: 99px; background: #263243; overflow: hidden; }
+.g1024-bar-fill {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, #4ade80, #ffb35c, #ff6b5b);
+  transition: width .35s ease;
+}
+.g1024-ticks { display: flex; justify-content: space-between; }
+.g1024-tick { font-size: 18px; color: #6b7688; }
+.g1024-tick.on { color: #4ade80; font-weight: 700; }
+
+.g1024-board {
+  position: relative; display: flex; flex-wrap: wrap;
+  padding: 12px; border-radius: 20px; overflow: hidden;
+  background: #131a26; border: 1px solid #263243;
+}
+.g1024-slot { width: 25%; height: 166px; padding: 6px; box-sizing: border-box; }
+.g1024-empty { width: 100%; height: 100%; border-radius: 14px; background: #1a2331; }
+.g1024-tile {
+  width: 100%; height: 100%; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  background: #eef2f8; color: #3b4560;
+}
+.g1024-num { font-size: 48px; font-weight: 700; color: inherit; }
+.g1024-num.small { font-size: 34px; }
+.g1024-tile.g1024-pop { animation: g1024-pop 260ms ease-out; }
+@keyframes g1024-pop {
+  0% { transform: scale(.4); }
+  65% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.g1024-v2, .g1024-mini.g1024-v2 { background: #eef2f8; color: #3b4560; }
+.g1024-v4, .g1024-mini.g1024-v4 { background: #dce7f7; color: #35415e; }
+.g1024-v8 { background: #ffd394; color: #6b3c05; }
+.g1024-v16 { background: #ffb277; color: #5d2c05; }
+.g1024-v32 { background: #ff9068; color: #fff; }
+.g1024-v64 { background: #ff6d5a; color: #fff; }
+.g1024-v128 { background: #c39bff; color: #24103f; }
+.g1024-v256 { background: #8b9cff; color: #0d1740; }
+.g1024-v512 { background: #55d3c6; color: #063a37; }
+.g1024-v1024 { background: linear-gradient(135deg, #ffe38a, #ffb62e); color: #4a3200; }
+.g1024-v2048 { background: linear-gradient(135deg, #ff9ac0, #ff4d8d); color: #fff; }
+.g1024-super { background: linear-gradient(135deg, #7ce8ff, #5b7bff); color: #08122e; }
+
+.g1024-tip {
+  position: absolute; left: 50%; top: 20px; transform: translateX(-50%); z-index: 20;
+  padding: 10px 24px; border-radius: 99px; white-space: nowrap;
+  background: rgba(10, 14, 22, .92); border: 1px solid #4ade80;
+  color: #4ade80; font-size: 24px; font-weight: 700;
+}
+.g1024-mask {
+  position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(15, 21, 31, .93);
+}
+.g1024-mask-title { font-size: 40px; font-weight: 700; color: #e6edf7; }
+.g1024-mask-desc { margin-top: 12px; font-size: 24px; color: #8b97a8; text-align: center; }
+.g1024-mask-btns {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px;
+}
+.g1024-dpad { display: flex; justify-content: center; gap: 14px; margin-top: 24px; }
+.g1024-dir {
+  width: 96px; height: 80px; border-radius: 14px; font-size: 40px; color: #e6edf7;
+  background: #1a2331; border: 1px solid #263243;
+  display: flex; align-items: center; justify-content: center;
+}
+.g1024-howto { margin-top: 20px; text-align: center; font-size: 22px; color: #8b97a8; }
+
+/* ========== 游戏中心 / 棋类页面（/subpackages/games） ========== */
+.gm-hub-card {
+  display: flex; align-items: center; gap: 16px; margin-top: 16px; padding: 20px;
+  background: #1a2331; border: 1px solid #263243; border-radius: 16px;
+}
+.gm-hub-badge {
+  width: 88px; height: 88px; border-radius: 16px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(74, 222, 128, .12); border: 1px solid rgba(74, 222, 128, .3);
+}
+.gm-hub-badge-text { font-size: 30px; font-weight: 800; color: #4ade80; }
+.gm-hub-body { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.gm-hub-name { font-size: 28px; font-weight: 700; color: #e6edf7; }
+.gm-hub-desc { font-size: 20px; line-height: 30px; color: #8b97a8; }
+.gm-hub-go { font-size: 22px; color: #4ade80; flex-shrink: 0; }
+.gm-hub-foot { display: block; margin-top: 24px; font-size: 20px; line-height: 32px; color: #8b97a8; }
+
+.gm-page { padding-bottom: 40px; }
+.gm-head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.gm-back { font-size: 24px; color: #4ade80; margin-bottom: 6px; }
+.gm-title { font-size: 40px; font-weight: 700; color: #e6edf7; }
+.gm-sub { font-size: 22px; line-height: 32px; color: #8b97a8; }
+.gm-status {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-bottom: 14px; padding: 14px 18px; font-size: 24px; color: #e6edf7;
+  background: #1a2331; border: 1px solid #263243; border-radius: 14px;
+}
+.gm-think { font-size: 20px; color: #4ade80; }
+.gm-toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.gm-seg { display: flex; border: 1px solid #263243; border-radius: 99px; overflow: hidden; }
+.gm-seg-btn { padding: 10px 18px; font-size: 22px; color: #8b97a8; background: #1a2331; }
+.gm-seg-btn.on { background: #4ade80; color: #0f151f; font-weight: 700; }
+.gm-seg-btn.off { opacity: .4; }
+.gm-board-wrap { position: relative; }
+.gm-overlay {
+  position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: center; background: rgba(15, 21, 31, .9);
+}
+.gm-overlay-card {
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  padding: 32px 40px; background: #1a2331; border: 1px solid #263243; border-radius: 18px;
+}
+.gm-overlay-title { font-size: 34px; font-weight: 700; color: #e6edf7; }
+.gm-primary { padding: 12px 32px; border-radius: 99px; background: #4ade80; color: #0f151f; font-size: 24px; font-weight: 700; }
+.gm-aside { margin-top: 20px; padding: 18px 20px; background: #1a2331; border: 1px solid #263243; border-radius: 14px; }
+.gm-aside-title { display: block; margin-bottom: 12px; font-size: 24px; font-weight: 700; color: #e6edf7; }
+.gm-aside-line { display: block; font-size: 21px; line-height: 32px; color: #8b97a8; }
+.gm-notes { display: flex; flex-wrap: wrap; gap: 8px; }
+.gm-note { padding: 6px 14px; font-size: 21px; border-radius: 8px; background: #222e40; border: 1px solid #2c3b50; }
+.gm-note.red { color: #ff9a9a; }
+.gm-note.black { color: #c9d4e4; }
+.gm-muted { font-size: 21px; color: #8b97a8; }
+.gm-rules { margin-top: 22px; padding: 18px 20px; background: #1a2331; border: 1px solid #263243; border-radius: 14px; }
+.gm-rules-head { font-size: 24px; font-weight: 700; color: #e6edf7; }
+.gm-rules-body { margin-top: 14px; }
+.gm-rules-line { display: block; margin-bottom: 8px; font-size: 21px; line-height: 34px; color: #8b97a8; }
+
+/* 中国象棋 */
+.gm-xq-board {
+  position: relative; display: flex; width: 100%; height: 770px;
+  background: #dcb67e; border: 3px solid #8c6239; border-radius: 8px; overflow: hidden;
+}
+.gm-xq-col { flex: 1; display: flex; flex-direction: column; }
+.gm-xq-cell { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; }
+.gm-xq-hline { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #6b4622; }
+.gm-xq-vline { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #6b4622; }
+.gm-xq-piece {
+  position: relative; z-index: 2; width: 62px; height: 62px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; background: #f6e5c0; border: 2px solid;
+}
+.gm-xq-piece-text { font-size: 30px; font-weight: 800; }
+.gm-xq-piece.red { color: #b62b23; border-color: #a52d24; }
+.gm-xq-piece.black { color: #202b38; border-color: #2d3b4c; }
+.gm-xq-piece.sel { border-color: #4ade80; box-shadow: 0 0 0 4px rgba(74, 222, 128, .6); }
+.gm-xq-piece.last { box-shadow: 0 0 0 4px rgba(34, 211, 238, .7); }
+.gm-xq-dot { position: relative; z-index: 2; width: 18px; height: 18px; border-radius: 50%; background: #187a86; }
+.gm-xq-cap { position: absolute; z-index: 3; left: 4px; top: 4px; right: 4px; bottom: 4px; border: 4px solid rgba(220, 60, 50, .8); border-radius: 50%; }
+.gm-xq-river {
+  position: absolute; z-index: 3; left: 0; right: 0; top: 45%; height: 10%;
+  display: flex; align-items: center; justify-content: center; background: #dcb67e;
+}
+.gm-xq-river-text { font-size: 26px; font-weight: 700; letter-spacing: 8px; color: #7a5227; }
+
+/* 五子棋 */
+.gm-go-board {
+  position: relative; width: 100%; height: 694px;
+  background: #dcb67e; border-radius: 8px; overflow: hidden;
+}
+.gm-go-hline { position: absolute; left: 0; right: 0; height: 1px; background: rgba(76, 48, 20, .8); }
+.gm-go-vline { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(76, 48, 20, .8); }
+.gm-go-cells { position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: flex; flex-wrap: wrap; }
+.gm-go-cell { position: relative; width: 6.6667%; height: 6.6667%; }
+.gm-go-star { position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: #4a3018; }
+.gm-go-stone { position: absolute; left: 8%; top: 8%; width: 84%; height: 84%; border-radius: 50%; }
+.gm-go-stone.black { background: #141a24; box-shadow: inset -4px -4px 8px rgba(255, 255, 255, .12); }
+.gm-go-stone.white { background: #f2f5f8; box-shadow: inset -4px -4px 8px rgba(0, 0, 0, .12); }
+.gm-go-stone.last { border: 3px solid #e5484d; }
+.gm-go-stone.win { border: 4px solid #ffd166; }
+
+/* 陆战棋（标准军棋 5×12 棋盘 / 布阵 / 暗棋裁判） */
+.gm-jq2-board {
+  position: relative; margin: 0 auto; overflow: hidden; box-sizing: border-box;
+  border: 2px solid #3a4658; border-radius: 12px; background: #1a2331;
+}
+.gm-jq2-lines { position: absolute; left: 0; top: 0; }
+.gm-jq2-line { position: absolute; height: 2px; background: rgba(168, 188, 214, .45); transform-origin: 0 50%; }
+.gm-jq2-line.rail { height: 6px; background: rgba(226, 186, 116, .85); }
+.gm-jq2-camp {
+  position: absolute; width: 88px; height: 88px; border-radius: 50%; box-sizing: border-box;
+  border: 2px solid rgba(120, 178, 220, .6); background: rgba(70, 120, 160, .14);
+}
+.gm-jq2-hq {
+  position: absolute; width: 88px; height: 88px; border-radius: 12px; box-sizing: border-box;
+  border: 2px solid rgba(232, 186, 100, .65); background: rgba(196, 140, 60, .12);
+}
+.gm-jq2-front { position: absolute; height: 2px; background: rgba(220, 190, 140, .5); }
+.gm-jq2-mountain {
+  position: absolute; width: 132px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+}
+.gm-jq2-mountain text { font-size: 18px; color: #b09a72; }
+.gm-jq2-cell {
+  position: absolute; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center;
+}
+.gm-jq2-cell.editable { background: rgba(255, 255, 255, .02); }
+.gm-jq2-cell.hint { background: rgba(34, 211, 238, .12); box-shadow: inset 0 0 0 3px rgba(34, 211, 238, .7); }
+.gm-jq2-cell.last { background: rgba(255, 208, 120, .08); }
+.gm-jq2-cell.sel .gm-jq2-piece { border-color: #22d3ee; }
+.gm-jq2-piece {
+  width: 106px; height: 86px; border-radius: 10px; box-sizing: border-box;
+  border: 2px solid transparent; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.gm-jq2-name { font-size: 22px; font-weight: 700; line-height: 1.2; }
+.gm-jq2-sub { font-size: 16px; opacity: .75; }
+.gm-jq2-piece.red { color: #ffb0b0; background: rgba(188, 48, 48, .58); border-color: rgba(232, 92, 92, .7); }
+.gm-jq2-piece.black { color: #c3d5ef; background: rgba(52, 84, 142, .6); border-color: rgba(104, 146, 216, .65); }
+.gm-jq2-piece.hidden { color: #9db0cd; background: #22304d; border-color: rgba(110, 134, 172, .6); }
+.gm-jq2-piece.k-flag { color: #ffe6a2; background: rgba(206, 150, 36, .55); border-color: rgba(240, 194, 72, .75); }
+.gm-jq2-piece.k-mine { color: #e2c6ff; background: rgba(132, 72, 186, .55); border-color: rgba(178, 118, 232, .7); }
+.gm-jq2-piece.k-bomb { color: #ffc79a; background: rgba(204, 100, 34, .55); border-color: rgba(242, 146, 68, .72); }
+.gm-jq2-setup {
+  width: 660px; margin: 0 auto 16px; padding: 16px 20px; box-sizing: border-box;
+  border: 2px solid #263243; border-radius: 12px; background: #1a2331;
+}
+.gm-jq2-setup-tip { display: block; font-size: 20px; line-height: 1.6; color: #9aa9bc; }
+.gm-jq2-setup-actions { display: flex; gap: 12px; margin-top: 14px; }
+.gm-jq2-btn {
+  flex: 1; text-align: center; padding: 12px 0; border-radius: 8px;
+  border: 2px solid #3a4658; font-size: 22px; color: #dce6f2;
+}
+.gm-jq2-btn.primary { border-color: #22d3ee; color: #22d3ee; }
+.gm-jq2-btn.off { opacity: .45; }
+.gm-jq2-setup-err { display: block; margin-top: 10px; font-size: 18px; color: #ff9a9a; }
+.gm-jq2-tip { display: block; margin-top: 16px; text-align: center; font-size: 20px; line-height: 1.6; color: #8b97a8; }
+
+/* 陆战棋 · 翻翻棋（棋盘 / 棋子复用上面的 .gm-jq2-*） */
+.gm-jf-bar {
+  width: 660px; margin: 0 auto 16px; padding: 16px 20px; box-sizing: border-box;
+  border: 2px solid #263243; border-radius: 12px; background: #1a2331;
+}
+.gm-jf-tip { display: block; font-size: 20px; line-height: 1.6; color: #8b97a8; }
+.gm-jf-chips { display: flex; flex-direction: row; flex-wrap: wrap; margin-top: 10px; }
+.gm-jf-chip {
+  font-size: 18px; color: #a9b7ca; padding: 4px 12px; margin: 0 8px 8px 0;
+  border: 2px solid #2c3a4e; border-radius: 8px; background: rgba(255, 255, 255, .03);
+}
+.gm-jq2-cell.jf-own .gm-jq2-piece { border-color: rgba(255, 255, 255, .32); }

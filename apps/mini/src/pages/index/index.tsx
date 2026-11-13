@@ -24,6 +24,17 @@ const GROUPS: Group[] = [
     ],
   },
   {
+    label: "沉浸体验",
+    items: [
+      { icon: "🎮", name: "游戏中心", desc: "5 款站内小游戏合集", url: "/subpackages/games/hub/index", ready: true },
+      { icon: "🔢", name: "1024 合并", desc: "滑动相加，合到 1024", url: "/subpackages/game1024/index", ready: true },
+      { icon: "♟️", name: "中国象棋", desc: "完整走法 · 棋谱 · AI 对战", url: "/subpackages/games/xiangqi/index", ready: true },
+      { icon: "⚫", name: "五子棋", desc: "15 路连五判胜 · AI 对战", url: "/subpackages/games/gomoku/index", ready: true },
+      { icon: "🚩", name: "标准陆战棋", desc: "5×12 棋盘 / 25 子布阵 / 暗棋裁判", url: "/subpackages/games/junqi/index", ready: true },
+      { icon: "🔄", name: "翻翻棋", desc: "50 枚暗子 / 翻子定阵营 / 挖雷扛旗", url: "/subpackages/games/junqi-flip/index", ready: true },
+    ],
+  },
+  {
     label: "工具生活",
     items: [
       { icon: "🍳", name: "三餐预算", desc: "按预算组合一日三餐", url: "/subpackages/budget/index", ready: true },
