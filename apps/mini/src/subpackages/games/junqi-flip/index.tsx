@@ -1,6 +1,6 @@
 import { View, Text } from "@tarojs/components";
 import { useState } from "react";
-import { JQ_CELLS, jqCol, jqRow, sideName, type JqSide } from "@shared-lib/junqi";
+import { JQ_CAMP_SET, JQ_CELLS, jqCol, jqRow, sideName, type JqSide } from "@shared-lib/junqi";
 import {
   applyJunqiFlipAction,
   chooseJunqiFlipAction,
@@ -46,6 +46,7 @@ const RULES = [
   "每方 25 子：司令1 军长1 师长2 旅长2 团长2 营长2 连长3 排长3 工兵3 炸弹2 地雷3 军旗1；大吃小、同级同归于尽。",
   "定色阶段：双方轮流只能翻子；当连续两张翻出的棋子颜色相同时，最后翻子的一方执该色、对手执另一色，随即进入行棋阶段。不采用「与自己上次同色」「首翻归对方」等变体。",
   "行棋阶段每回合二选一：翻开一枚暗子，或移动 / 进攻一枚己方已翻开的棋子。暗子不可被攻击、不可越过；军旗与地雷不可移动。",
+  "开局节奏：50 枚暗子铺满非行营格，只有 10 个行营是空的。点暗子永远是「翻子」不是「进攻」；明子只能吃已翻开的敌方明子，或进入留空行营，所以开局一段时间以翻子为主属正常。「攻」角标＝可进攻的明子，「营」角标＝可进入的行营。",
   "移动：公路一步（含行营斜线）；铁路直线任意格、不可转直角弯；工兵可沿铁路任意转弯。行营中的棋子不可被攻击；大本营在翻棋里只是棋盘标记、不冻结棋子（与标准暗棋不同）。",
   "战斗：炸弹与任何棋子同归于尽（含地雷）；工兵挖雷存活、其它棋子撞雷阵亡而地雷保留；对方 3 颗地雷全清后才可碰军旗，任意棋子扛旗立即获胜。",
   "胜负：扛旗；轮到走棋一方无任何合法着法（含翻子）判负；连续 60 步无交战或双方均无合法着法判和。",
@@ -56,33 +57,47 @@ const RULES = [
 export default function JunqiFlipPage() {
   const g = useBoardGame(ADAPTER);
   const [selected, setSelected] = useState<number | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const { state, mode } = g;
   const activeSeat: JfSeat = mode === "ai" ? "player" : state.turn;
   const activeSide: JqSide | null = state.owner[activeSeat];
   const assign = state.phase === "assign";
   const targets = selected === null || assign ? [] : legalJunqiFlipTargets(state, selected, activeSeat);
   const targetSet = new Set(targets);
+  const attackSet = new Set(targets.filter((i) => !!state.board[i]));
+  const campSet = new Set(targets.filter((i) => !state.board[i] && JQ_CAMP_SET.has(i)));
+  const plainMoves = targets.length - attackSet.size - campSet.size;
+  const picked = selected === null ? null : junqiFlipVisible(state, selected);
+  const pickedName = picked && picked.hidden === false ? picked.piece.name : "棋子";
   const stats = junqiFlipStats(state);
   const mySide: JqSide | null = mode === "ai" ? state.owner.player : activeSide;
 
+  function clearSelection() { setSelected(null); setNotice(null); }
+
   function onCell(i: number) {
     if (!g.playerTurn || state.phase === "over") return;
+    setNotice(null);
     if (selected !== null && targetSet.has(i)) {
       g.commit({ type: "move", from: selected, to: i });
-      setSelected(null);
+      clearSelection();
       return;
     }
     const v = junqiFlipVisible(state, i);
     if (v?.hidden) {
       g.commit({ type: "flip", at: i });
-      setSelected(null);
+      clearSelection();
       return;
     }
     if (assign || !v || v.hidden || !activeSide || v.piece.side !== activeSide) {
-      setSelected(null);
+      clearSelection();
       return;
     }
-    setSelected(legalJunqiFlipTargets(state, i, activeSeat).length > 0 ? i : null);
+    if (legalJunqiFlipTargets(state, i, activeSeat).length === 0) {
+      clearSelection();
+      setNotice("这枚明子四周都是暗子或己方棋子：暗子按规则不能攻击、不能越过，请先点暗子翻开，或选挨着空行营的明子。");
+      return;
+    }
+    setSelected(i);
   }
 
   const cells = [];
@@ -92,6 +107,8 @@ export default function JunqiFlipPage() {
     const cls = [
       "gm-jq2-cell",
       targetSet.has(i) ? "hint" : "",
+      attackSet.has(i) ? "attack" : "",
+      campSet.has(i) ? "camp-hint" : "",
       selected === i ? "sel" : "",
       state.lastMove && (state.lastMove.from === i || state.lastMove.to === i) ? "last" : "",
       state.lastFlip === i ? "last" : "",
@@ -123,6 +140,8 @@ export default function JunqiFlipPage() {
             </Text>
           </View>
         )}
+        {attackSet.has(i) ? <Text className="gm-jq2-badge attack">攻</Text> : null}
+        {campSet.has(i) ? <Text className="gm-jq2-badge camp">营</Text> : null}
       </View>,
     );
   }
@@ -141,13 +160,13 @@ export default function JunqiFlipPage() {
       status={status}
       rules={RULES}
       mode={g.mode}
-      onMode={(m) => { g.setMode(m); setSelected(null); }}
+      onMode={(m) => { g.setMode(m); clearSelection(); }}
       level={g.level}
       onLevel={g.setLevel}
       levels={[1, 2]}
       canUndo={g.canUndo}
-      onUndo={() => { g.undo(); setSelected(null); }}
-      onRestart={() => { g.restart(); setSelected(null); }}
+      onUndo={() => { g.undo(); clearSelection(); }}
+      onRestart={() => { g.restart(); clearSelection(); }}
       aiThinking={g.aiThinking}
       overText={state.phase === "over" ? junqiFlipStatusText(state, mode === "ai" ? "player" : null) : ""}
       aside={
@@ -169,10 +188,12 @@ export default function JunqiFlipPage() {
       }
     >
       <View className="gm-jf-bar">
-        <Text className="gm-jf-tip">
-          {assign
+        <Text className={`gm-jf-tip${notice ? " notice" : ""}`}>
+          {notice ?? (assign
             ? "定色阶段：双方轮流翻子 · 连续翻出两张同色时，最后翻子者执该色"
-            : "每回合二选一：点暗子翻开，或点己方明子 → 高亮可走格 → 点格子移动 / 进攻"}
+            : selected === null
+              ? "每回合二选一：点暗子=翻子（不是进攻）；点己方明子 →「营」可入行营 ·「攻」可进攻敌方明子"
+              : `已选 ${pickedName}：可走 ${plainMoves} 格 · 可入营 ${campSet.size} 格 · 可进攻 ${attackSet.size} 格${attackSet.size > 0 ? " · 点带「攻」角标的明子交战" : " · 周围暗子不可攻击或越过，请先翻子"}`)}
         </Text>
         <View className="gm-jf-chips">
           <Text className="gm-jf-chip">阵营 {assign ? "未定" : `${mode === "ai" ? "你" : "玩家1"}执${sideName(state.owner.player!)}`}</Text>
@@ -188,7 +209,7 @@ export default function JunqiFlipPage() {
         {cells}
       </View>
       <Text className="gm-jq2-tip">
-        翻翻棋不分阵地：棋子散落在整张棋盘，前线 / 大本营只是棋盘标记 · 暗子不可攻击，翻开后才成为己方或对方子力
+        翻翻棋不分阵地：前线 / 大本营只是标记 · 暗子只能翻、不能打也不能越过；明子只能吃已翻开的敌方明子，或进入留空行营。开局 50 格全是暗子，前期以翻子为主属正常节奏。
       </Text>
     </GameFrame>
   );

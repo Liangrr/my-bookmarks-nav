@@ -4,6 +4,7 @@ import {
   applyJunqiAction,
   chooseJunqiAction,
   createJunqiGame,
+  JQ_CAMP_SET,
   JQ_CELLS,
   JQ_SETUP_SET,
   jqCol,
@@ -47,6 +48,7 @@ const RULES = [
   "每方 25 子：司令1 军长1 师长2 旅长2 团长2 营长2 连长3 排长3 工兵3 炸弹2 地雷3 军旗1；大吃小、同级同归于尽。",
   "布阵：行营留空；军旗必须放大本营；地雷只在最后两线；炸弹不在锋线。点两格互换，也可一键随机布阵。",
   "行棋：公路一步（含行营斜线）；铁路直线任意格、中间不得有子、不能转直角弯；工兵是唯一可沿铁路任意转弯的棋子。行营中的棋子不可被攻击；进入大本营的棋子永久冻结；军旗、地雷不可移动。",
+  "开局节奏：双方 25 子摆满 25 个落点，除 10 个行营外没有空格，多数棋子开局只能先进相邻行营；前线只有左 / 中 / 右 3 条通道能接触敌方，需先把子力推到前线才会交战。带「攻」角标的格子＝可进攻的敌方棋子，「营」＝可进入的行营。",
   "裁判吃子：炸弹与任何棋子同归于尽（含军旗，炸旗即扛旗成功）；工兵挖雷存活、炸弹与地雷同归于尽、其它棋子碰地雷阵亡而地雷保留；司令阵亡亮开军旗。",
   "胜负：军旗被扛、轮到走棋一方无棋可走判负；连续 70 步无吃子判和。",
   "人机为暗棋，程序裁判只公布交战结果、不透露对方军衔，AI 也只按未知子力估算；双人模式为明棋。",
@@ -57,6 +59,7 @@ export default function JunqiPage() {
   const g = useBoardGame(ADAPTER);
   const [selected, setSelected] = useState<number | null>(null);
   const [swapFirst, setSwapFirst] = useState<number | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const { state, mode } = g;
   const dark = mode === "ai";
   const viewer: JqSide = "red";
@@ -65,14 +68,21 @@ export default function JunqiPage() {
   const errors = setup ? junqiSetupErrors(state) : [];
   const targets = selected === null || setup ? [] : legalJunqiTargets(state, selected, activeSide);
   const targetSet = new Set(targets);
+  const attackSet = new Set(targets.filter((i) => !!state.board[i]));
+  const campSet = new Set(targets.filter((i) => !state.board[i] && JQ_CAMP_SET.has(i)));
+  const plainMoves = targets.length - attackSet.size - campSet.size;
+  const picked = selected === null ? null : junqiVisible(state, selected, viewer, dark);
+  const pickedName = picked && !picked.hidden ? picked.piece.name : "棋子";
 
   function resetSelection() {
     setSelected(null);
     setSwapFirst(null);
+    setNotice(null);
   }
 
   function onCell(i: number) {
     if (!g.playerTurn || state.phase === "over") return;
+    setNotice(null);
     if (setup) {
       if (!JQ_SETUP_SET.red.has(i)) return;
       if (swapFirst === null) { setSwapFirst(i); return; }
@@ -88,6 +98,9 @@ export default function JunqiPage() {
     const v = junqiVisible(state, i, viewer, dark);
     const canPick = !!v && !v.hidden && v.piece.side === activeSide &&
       legalJunqiTargets(state, i, activeSide).length > 0;
+    if (!canPick && v && !v.hidden && v.piece.side === activeSide) {
+      setNotice("这枚棋子当前没有合法落点：周围被己方棋子挡住，或在大本营 / 行营内。先挪开周围的子，或改走锋线上的棋子。");
+    }
     setSelected(canPick ? i : null);
   }
 
@@ -97,6 +110,8 @@ export default function JunqiPage() {
     const cls = [
       "gm-jq2-cell",
       targetSet.has(i) ? "hint" : "",
+      attackSet.has(i) ? "attack" : "",
+      campSet.has(i) ? "camp-hint" : "",
       selected === i || swapFirst === i ? "sel" : "",
       state.lastMove && (state.lastMove.from === i || state.lastMove.to === i) ? "last" : "",
       setup && JQ_SETUP_SET.red.has(i) ? "editable" : "",
@@ -126,6 +141,8 @@ export default function JunqiPage() {
             </Text>
           </View>
         )}
+        {attackSet.has(i) ? <Text className="gm-jq2-badge attack">攻</Text> : null}
+        {campSet.has(i) ? <Text className="gm-jq2-badge camp">营</Text> : null}
       </View>,
     );
   }
@@ -184,10 +201,12 @@ export default function JunqiPage() {
         <JunqiBoardLines />
         {cells}
       </View>
-      <Text className="gm-jq2-tip">
-        {setup
+      <Text className={`gm-jq2-tip${notice ? " notice" : ""}`}>
+        {notice ?? (setup
           ? "上方黑方秘密布阵 · 下方红方可自由调整（行营留空）"
-          : "点己方棋子 → 高亮可走格 → 点格子移动或进攻 · 公路一步，铁路直行，工兵可转弯"}
+          : selected === null
+            ? "点己方棋子 → 圆点=可走空格 ·「营」=可入行营 ·「攻」=可进攻的敌方棋子"
+            : `已选 ${pickedName}：可走 ${plainMoves} 格 · 可入营 ${campSet.size} 格 · 可进攻 ${attackSet.size} 格${attackSet.size > 0 ? " · 点带「攻」角标的敌子由裁判结算" : " · 该子暂接触不到敌方，需先推进"}`)}
       </Text>
     </GameFrame>
   );

@@ -990,6 +990,17 @@ page {
 }
 .gm-jq2-cell.editable { background: rgba(255, 255, 255, .02); }
 .gm-jq2-cell.hint { background: rgba(34, 211, 238, .12); box-shadow: inset 0 0 0 3px rgba(34, 211, 238, .7); }
+/* 可进攻 / 可入营：与普通空格高亮区分 */
+.gm-jq2-cell.attack { background: rgba(248, 113, 113, .16); box-shadow: inset 0 0 0 3px rgba(248, 113, 113, .9); }
+.gm-jq2-cell.camp-hint { background: rgba(250, 204, 21, .14); box-shadow: inset 0 0 0 3px rgba(250, 204, 21, .85); }
+.gm-jq2-badge {
+  position: absolute; top: 2px; right: 2px; z-index: 5; display: block;
+  width: 26px; height: 26px; line-height: 26px; text-align: center;
+  border-radius: 5px; font-size: 17px; font-weight: 700; color: #fff;
+}
+.gm-jq2-badge.attack { background: #c0392b; }
+.gm-jq2-badge.camp { background: #1d6f8c; }
+.gm-jq2-tip.notice, .gm-jf-tip.notice { color: #f0b45a; font-weight: 600; }
 .gm-jq2-cell.last { background: rgba(255, 208, 120, .08); }
 .gm-jq2-cell.sel .gm-jq2-piece { border-color: #22d3ee; }
 .gm-jq2-piece {
